@@ -11,7 +11,7 @@ public class ctrlDepartamentos {
         if (!codigo.equals("") && !nombreDepartamento.equals("")) {
             String codDepartamento = "";
             while (true) {
-                codDepartamento = generarCodigos("dep");
+                codDepartamento = generarCodigos("DEP");
                 if (!verificarCodigoDepa(codDepartamento)) {
                     break;
                 }
@@ -28,8 +28,20 @@ public class ctrlDepartamentos {
         Departamentos regresar = null;
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
-            if (d.getCodigo().equals(Codigo)) {
+            if (d.getCodDepartamento().equals(Codigo)) {
                 regresar = new Departamentos(Codigo, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento());
+            }
+        }
+        return regresar;
+    }
+
+    public static int getPosicionDepartamentos(String Codigo) {
+        int regresar = -1;
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamentos d = departamentos.get(i);
+            if (d.getCodDepartamento().equals(Codigo)) {
+                regresar = i;
+                break;
             }
         }
         return regresar;
@@ -39,7 +51,7 @@ public class ctrlDepartamentos {
         String cod = codigo;
         for (int i = 0; i <= 5; i++) {
             Random rand = new Random();
-            int digito = rand.nextInt();
+            int digito = rand.nextInt(10);
             cod += digito;
         }
         return cod;
@@ -48,18 +60,42 @@ public class ctrlDepartamentos {
     public static boolean verificarCodigoDepa(String codigo) {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
-            if (d.getCodigo().equals(codigo)) {
+            if (d.getCodDepartamento().equals(codigo)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static void agregarMunicipios(String codigoDepar, Municipios muni) {
-        Departamentos departa = getDepartamentoCodigo(codigoDepar);
-        if (departa != null) {
-            departa.getMunicipios().add(muni);
+    public static boolean verificarCodigoMun(String codigo) {
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamentos d = departamentos.get(i);
+            if (d.getMunicipios().equals(codigo)) {
+                return true;
+            }
         }
+        return false;
+    }
 
+    public static boolean agregarMunicipios(String codigoDepar, String nombreMunicipio) {
+        Departamentos departa = getDepartamentoCodigo(codigoDepar);
+        int posicion = getPosicionDepartamentos(codigoDepar);
+        String codigoMunicipio = "";
+        while (true) {
+            codigoMunicipio = generarCodigos("MUN");
+            if (!verificarCodigoMun(codigoMunicipio)) {
+                break;
+            }
+        }
+        if (!verificarCodigoDepa(codigoDepar)) {
+            departamentos.get(posicion).getMunicipios().add(new Municipios(codigoDepar, nombreMunicipio, codigoMunicipio));
+            return true;
+        }
+        return false;
+    }
+    
+
+    public static ArrayList<Departamentos> getAllD() {
+        return departamentos;
     }
 }

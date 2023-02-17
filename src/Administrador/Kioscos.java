@@ -2,21 +2,21 @@ package Administrador;
 
 public class Kioscos extends Regiones {
 
-    private int codigoKioco;
+    private String codigoKioco;
     private String nombreKiosco;
 
-    public Kioscos(String codigo, String nombre, double precioEstandar, double precioEspecial, int codigoKioco,
+    public Kioscos(String codigo, String nombre, double precioEstandar, double precioEspecial, String codigoKioco,
             String nombreKiosco) {
         super(codigo, nombre, precioEstandar, precioEspecial);
         this.setCodigoKioco(codigoKioco);
         this.setNombreKiosco(nombreKiosco);
     }
-
-    public int getCodigoKioco() {
+    
+    public String getCodigoKioco() {
         return codigoKioco;
     }
 
-    public void setCodigoKioco(int codigoKioco) {
+    public void setCodigoKioco(String codigoKioco) {
         this.codigoKioco = codigoKioco;
     }
 
@@ -26,5 +26,10 @@ public class Kioscos extends Regiones {
 
     public void setNombreKiosco(String nombreKiosco) {
         this.nombreKiosco = nombreKiosco;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getNombreKiosco();
     }
 }

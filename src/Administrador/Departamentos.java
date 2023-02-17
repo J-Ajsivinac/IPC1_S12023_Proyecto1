@@ -15,7 +15,7 @@ public class Departamentos extends Regiones {
         this.setNombreDepartamento(nombreDepa);
         this.municipios = new ArrayList<>();
     }
-
+    
     public String getCodDepartamento() {
         return codDepartamento;
     }
@@ -38,5 +38,10 @@ public class Departamentos extends Regiones {
 
     public void setMunicipios(ArrayList<Municipios> municipios) {
         this.municipios = municipios;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getNombreDepartamento();
     }
 }

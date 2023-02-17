@@ -20,7 +20,7 @@ public class Usuario {
     private ArrayList<Tarjeta> tarjetas;
     private ArrayList<DatosFacturacion> DatosFacturacion;
 
-    public Usuario(int idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, int rol, String fotografia, ArrayList<Tarjeta> tarjetas, ArrayList<DatosFacturacion> DatosFacturacion) {
+    public Usuario(int idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, int rol, String fotografia) {
         this.setIdUsuario(idUsuario);
         this.setCorreo(correo);
         this.setNombre(nombre);
@@ -38,10 +38,12 @@ public class Usuario {
         this.DatosFacturacion = new ArrayList<>();
     }
 
-    Usuario(int idUsuario, String nombre, String apellido) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Usuario(int idUsuario, String nombre, String Apellido){
+        this.setIdUsuario(idUsuario);
+        this.setNombre(nombre);
+        this.setApellido(Apellido);
     }
-
+    
     public int getIdUsuario() {
         return idUsuario;
     }

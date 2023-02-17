@@ -15,6 +15,11 @@ public class Regiones {
         this.setPrecioEspecial(precioEspecial);
     }
 
+    public Regiones(String codigo, String nombre) {
+        this.setCodigo(codigo);
+        this.setNombre(nombre);
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -45,5 +50,9 @@ public class Regiones {
 
     public void setPrecioEspecial(double precioEspecial) {
         this.precioEspecial = precioEspecial;
+    }
+    @Override
+    public String toString() {
+        return this.getNombre();
     }
 }
