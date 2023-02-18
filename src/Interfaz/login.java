@@ -28,6 +28,7 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        panelRound1 = new Elementos.PanelRound();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -39,7 +40,7 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jPanel7 = new javax.swing.JPanel();
-        btnIngresar = new javax.swing.JButton();
+        buttonRound1 = new Elementos.ButtonRound();
         jPanel8 = new javax.swing.JPanel();
         btnCrear = new javax.swing.JLabel();
 
@@ -47,9 +48,12 @@ public class login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        jPanel2.setLayout(null);
+        panelRound1.setRoundBottomLeft(20);
+        panelRound1.setRoundBottomRight(20);
+        panelRound1.setRoundTopLeft(20);
+        panelRound1.setRoundTopRight(20);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -66,6 +70,8 @@ public class login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel2.setText("Correo Electrónico");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        txtMail.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jPanel5.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
 
         jPanel4.add(jPanel5);
@@ -75,26 +81,27 @@ public class login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel3.setText("Contraseña");
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        txtPassword.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
 
         jPanel4.add(jPanel6);
 
-        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 12));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnIngresar.setText("Ingresar");
-        btnIngresar.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
-            }
-        });
-        jPanel7.add(btnIngresar);
+        buttonRound1.setBorder(null);
+        buttonRound1.setText("Ingresar");
+        buttonRound1.setBorderColor(new java.awt.Color(255, 255, 255));
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        buttonRound1.setRadius(20);
+        jPanel7.add(buttonRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 150, 30));
 
         jPanel4.add(jPanel7);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(0, 50, 520, 200);
 
+        btnCrear.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         btnCrear.setText("Crear una Cuenta");
         btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -104,22 +111,39 @@ public class login extends javax.swing.JFrame {
         jPanel8.add(btnCrear);
 
         jPanel2.add(jPanel8);
-        jPanel8.setBounds(0, 250, 520, 26);
+        jPanel8.setBounds(0, 250, 520, 27);
+
+        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
+        panelRound1.setLayout(panelRound1Layout);
+        panelRound1Layout.setHorizontalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
@@ -127,24 +151,15 @@ public class login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
-        iniciarSesion();
-    }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         // TODO add your handling code here:
@@ -157,7 +172,10 @@ public class login extends javax.swing.JFrame {
         String correo = txtMail.getText();
         String contrasena = String.valueOf(txtPassword.getPassword());
         int opcion = ctrlUsuarios.iniciarSesion(correo, contrasena);
-        if(opcion == 1){
+        
+        if(opcion == 0){
+            
+        } else if(opcion == 1){
             //acceder como Administrador
             Admin a = new Admin();
             a.setVisible(true);
@@ -165,6 +183,8 @@ public class login extends javax.swing.JFrame {
         }else{
             //Acceder como Cliente
             UsuarioCliente uc = new UsuarioCliente();
+            Usuario usarioEnviar = ctrlUsuarios.getUsuarioID(correo);
+            uc.setUsuario(usarioEnviar);
             uc.setVisible(true);
             this.dispose();
         }
@@ -218,7 +238,7 @@ public static void main(String args[]) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCrear;
-    private javax.swing.JButton btnIngresar;
+    private Elementos.ButtonRound buttonRound1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -230,6 +250,7 @@ public static void main(String args[]) {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private Elementos.PanelRound panelRound1;
     private javax.swing.JTextField txtMail;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables

@@ -252,7 +252,7 @@ public class Admin extends javax.swing.JFrame {
     public void menuClick(JPanel panel){
         ad.setVisible(false);
         dm.setVisible(false);
-        
+        adK.setVisible(false);
         panel.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

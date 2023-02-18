@@ -90,21 +90,7 @@ public class ctrlUsuarios {
         return regresar;
     }
 
-    public static void agregarTarjeta(int idUsuario, Tarjeta t) {
-        Usuario u = getUsuarioID(idUsuario);
-        if (t != null) {
-            u.getTarjetas().add(t);
-        }
 
-    }
-
-    public static void agregarDatosFacturación(int idUsuario, DatosFacturacion d) {
-        Usuario u = getUsuarioID(idUsuario);
-        if (d != null) {
-            u.getDatosFacturacion().add(d);
-        }
-
-    }
 
     public static int iniciarSesion(String correo, String password) {
         int regresar = 0;
@@ -123,6 +109,7 @@ public class ctrlUsuarios {
                         regresar = 2;
                     } else {
                         JOptionPane.showMessageDialog(null, "contraseña incorrecta");
+                        regresar = 0;
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario o Contaseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
@@ -132,5 +119,39 @@ public class ctrlUsuarios {
             JOptionPane.showMessageDialog(null, "Ingrese Datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return regresar;
+    }
+
+    public static int getPosicionDepartamentos(String Codigo) {
+        int regresar = -1;
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario d = usuarios.get(i);
+            if (d.getCorreo().equals(Codigo)) {
+                regresar = i;
+                break;
+            }
+        }
+        return regresar;
+    }
+
+    public static boolean agregaTarjeta(String correo, String nombreTarjeta, String numeroT, String FechaV) {
+        Usuario departa = getUsuarioID(correo);
+        int posicion = getPosicionDepartamentos(correo);
+
+        if (verifiarUsuarios(correo)) {
+            usuarios.get(posicion).getTarjetas().add(new Tarjeta(nombreTarjeta, numeroT, FechaV));
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean agregarDatosFacturacion(String correo,String nombre, String direccion, String nit) {
+        Usuario departa = getUsuarioID(correo);
+        int posicion = getPosicionDepartamentos(correo);
+
+        if (verifiarUsuarios(correo)) {
+            usuarios.get(posicion).getDatosFacturacion().add(new DatosFacturacion(nombre, direccion, nit));
+            return true;
+        }
+        return false;
     }
 }

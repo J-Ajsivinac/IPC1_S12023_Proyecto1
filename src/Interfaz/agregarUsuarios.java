@@ -4,18 +4,24 @@ import Administrador.Kioscos;
 import Administrador.ctrlKioscos;
 import Usuario.ctrlUsuarios;
 import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author mesoi
  */
 public class agregarUsuarios extends javax.swing.JFrame {
+
     public ArrayList<Kioscos> kiosco;
+    public String ruta;
     private static String[] nombrePaises = {"Alemania", "Argentina", "Belice", "Brasil", "Canadá", "China",
         "El Salvador", "España", "Guatemala", "Honduras", "Japón", "México", "Portugal", "Uruguay"};
 
@@ -30,6 +36,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         kiosco = ctrlKioscos.getAllKioscos();
         cargarKioscos();
     }
+
     public void cargarKioscos() {
         for (int i = 0; i < kiosco.size(); i++) {
             if (kiosco.get(i) != null) {
@@ -40,6 +47,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +59,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblimagen = new javax.swing.JPanel();
+        panelImagen = new javax.swing.JPanel();
+        lblimagen = new javax.swing.JLabel();
         btnSubir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -101,22 +110,33 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel1.setText("Registrar Usuarios");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 14, 150, -1));
 
-        lblimagen.setBackground(new java.awt.Color(204, 204, 204));
+        panelImagen.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout lblimagenLayout = new javax.swing.GroupLayout(lblimagen);
-        lblimagen.setLayout(lblimagenLayout);
-        lblimagenLayout.setHorizontalGroup(
-            lblimagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelImagenLayout = new javax.swing.GroupLayout(panelImagen);
+        panelImagen.setLayout(panelImagenLayout);
+        panelImagenLayout.setHorizontalGroup(
+            panelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImagenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblimagen, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        lblimagenLayout.setVerticalGroup(
-            lblimagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+        panelImagenLayout.setVerticalGroup(
+            panelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelImagenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblimagen, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel1.add(lblimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jPanel1.add(panelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         btnSubir.setText("Subir");
+        btnSubir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSubir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 80, -1));
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 2));
@@ -499,22 +519,42 @@ public class agregarUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         Pattern vCorreo = Pattern.compile("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$");
         Matcher m = vCorreo.matcher(txtCorreo.getText());
-        if(!m.find()){
+        if (!m.find()) {
             lblCorreo.setText("Ingrese un correo valido");
-        }else{
+        } else {
             lblCorreo.setText("");
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
     private void boxRolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRolItemStateChanged
         // TODO add your handling code here:
-        if(boxRol.getSelectedIndex()==2){
+        if (boxRol.getSelectedIndex() == 2) {
             boxKiosco.setEnabled(true);
-        }else{
+        } else {
             boxKiosco.setEnabled(false);
         }
     }//GEN-LAST:event_boxRolItemStateChanged
+
+    private void btnSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirActionPerformed
+        // TODO add your handling code here:
+        ruta = "";
+        JFileChooser archivos = new JFileChooser();
+        FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
+        archivos.setFileFilter(filtrado);
+
+        int respuesta = archivos.showOpenDialog(this);
+        if (respuesta == archivos.APPROVE_OPTION) {
+            ruta = archivos.getSelectedFile().getPath();
+            Image imagen = new ImageIcon(ruta).getImage();
+            ImageIcon Icono = new ImageIcon(
+            imagen.getScaledInstance(lblimagen.getWidth(), lblimagen.getHeight(), Image.SCALE_AREA_AVERAGING));
+            lblimagen.setIcon(Icono);
+        }
+    }//GEN-LAST:event_btnSubirActionPerformed
     public void agregarUsuario() {
+        
+        Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
+        
         String correo = txtCorreo.getText();
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
@@ -522,7 +562,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
         String verificar = String.valueOf(txtValidar.getPassword());
         String dpi = txtDPI.getText();
         int rol = boxRol.getSelectedIndex() + 1;
-        String kiosko = boxKiosco.getSelectedItem().toString();
         String img = "s";
         String fecha = txtFecha.getText();
         String nacionalidad = boxNacionalidad.getSelectedItem().toString();
@@ -629,11 +668,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel lblDpi;
     private javax.swing.JLabel lblIniciarS;
     private javax.swing.JLabel lblTelefono;
-    private javax.swing.JPanel lblimagen;
+    private javax.swing.JLabel lblimagen;
     private javax.swing.JLabel lblop1;
     private javax.swing.JLabel lblop2;
     private javax.swing.JLabel lblop3;
     private javax.swing.JLabel lblop4;
+    private javax.swing.JPanel panelImagen;
     private javax.swing.JTextField txtAlias;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JPasswordField txtContra;

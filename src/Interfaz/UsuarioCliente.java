@@ -1,16 +1,36 @@
 package Interfaz;
 
+import Componentes.*;
+import Usuario.Usuario;
+import javax.swing.JPanel;
+
 /**
  *
  * @author mesoi
  */
 public class UsuarioCliente extends javax.swing.JFrame {
-
+    public UsuarioTarjeta usert;
+    public UsuarioDatosFacturacion userDatos;
+    private Usuario usuarioC;
     /**
      * Creates new form UsuarioCliente
      */
     public UsuarioCliente() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        usert = new UsuarioTarjeta();
+        userDatos = new UsuarioDatosFacturacion();
+        menuContenido.add(usert);
+        menuContenido.add(userDatos);
+        menuClick(usert);
+        
+    }
+    
+    public void setUsuario(Usuario u){
+        this.usuarioC = u;
+        lblNombreUsuario.setText(u.getNombre());
+        usert.test(usuarioC);
+        userDatos.test(usuarioC);
     }
 
     /**
@@ -25,72 +45,73 @@ public class UsuarioCliente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblNombreUsuario = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        panelRegiones = new javax.swing.JPanel();
+        panelTarjetas = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        panelDepartamentos = new javax.swing.JPanel();
+        panelDatosF = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        panelKiosco = new javax.swing.JPanel();
+        panelCotizacion = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        panelEnvios = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        menuContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
-        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel2.setText("Joab Ajsivinac");
-        jPanel4.add(jLabel2);
+        lblNombreUsuario.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        lblNombreUsuario.setText(" ");
+        jPanel4.add(lblNombreUsuario);
 
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel3.setText("Administrado");
+        jLabel3.setText("Cliente");
         jPanel5.add(jLabel3);
 
-        panelRegiones.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelTarjetas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRegionesMouseClicked(evt);
+                panelTarjetasMouseClicked(evt);
             }
         });
-        panelRegiones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelTarjetas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel4.setText("Regiones y Precios");
-        panelRegiones.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel4.setText("Registrar Tarjeta");
+        panelTarjetas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        panelDepartamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelDatosF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelDepartamentosMouseClicked(evt);
+                panelDatosFMouseClicked(evt);
             }
         });
-        panelDepartamentos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelDatosF.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel5.setText("Departamentos y Municipios");
-        panelDepartamentos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel5.setText("Registrar datos de Facturación");
+        panelDatosF.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        panelKiosco.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelCotizacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelKioscoMouseClicked(evt);
+                panelCotizacionMouseClicked(evt);
             }
         });
-        panelKiosco.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelCotizacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel6.setText("Kioscos");
-        panelKiosco.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel6.setText("Cotización y Compra");
+        panelCotizacion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel7.setText("Reportes");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel7.setText("Ver Envios solicitados");
+        panelEnvios.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,10 +130,10 @@ public class UsuarioCliente extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-            .addComponent(panelRegiones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelKiosco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelDatosF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+            .addComponent(panelTarjetas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelCotizacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelEnvios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -129,16 +150,27 @@ public class UsuarioCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(panelRegiones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelTarjetas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelDatosF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addComponent(panelEnvios, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
+        );
+
+        javax.swing.GroupLayout menuContenidoLayout = new javax.swing.GroupLayout(menuContenido);
+        menuContenido.setLayout(menuContenidoLayout);
+        menuContenidoLayout.setHorizontalGroup(
+            menuContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+        menuContenidoLayout.setVerticalGroup(
+            menuContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 514, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,30 +179,36 @@ public class UsuarioCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 760, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void panelRegionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseClicked
+    private void panelTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTarjetasMouseClicked
         // TODO add your handling code here:
        // menuClick(ad);
-    }//GEN-LAST:event_panelRegionesMouseClicked
+    }//GEN-LAST:event_panelTarjetasMouseClicked
 
-    private void panelDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDepartamentosMouseClicked
+    private void panelDatosFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosFMouseClicked
         // TODO add your handling code here:
-        //menuClick(dm);
-    }//GEN-LAST:event_panelDepartamentosMouseClicked
+        menuClick(userDatos);
+    }//GEN-LAST:event_panelDatosFMouseClicked
 
-    private void panelKioscoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelKioscoMouseClicked
+    private void panelCotizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCotizacionMouseClicked
         // TODO add your handling code here:
         //menuClick(adK);
-    }//GEN-LAST:event_panelKioscoMouseClicked
+    }//GEN-LAST:event_panelCotizacionMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
         // TODO add your handling code here:
@@ -213,11 +251,15 @@ public class UsuarioCliente extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void menuClick(JPanel panel){
+        usert.setVisible(false);
+        panel.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCerrarSesion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -227,9 +269,11 @@ public class UsuarioCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel panelDepartamentos;
-    private javax.swing.JPanel panelKiosco;
-    private javax.swing.JPanel panelRegiones;
+    private javax.swing.JLabel lblNombreUsuario;
+    private javax.swing.JPanel menuContenido;
+    private javax.swing.JPanel panelCotizacion;
+    private javax.swing.JPanel panelDatosF;
+    private javax.swing.JPanel panelEnvios;
+    private javax.swing.JPanel panelTarjetas;
     // End of variables declaration//GEN-END:variables
 }
