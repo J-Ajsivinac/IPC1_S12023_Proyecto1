@@ -2,6 +2,7 @@ package Interfaz;
 
 import Usuario.Usuario;
 import Usuario.ctrlUsuarios;
+import java.awt.Insets;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,47 +47,64 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(34, 38, 43));
 
+        panelRound1.setBackground(new java.awt.Color(45, 48, 53));
         panelRound1.setRoundBottomLeft(20);
         panelRound1.setRoundBottomRight(20);
         panelRound1.setRoundTopLeft(20);
         panelRound1.setRoundTopRight(20);
 
+        jPanel2.setBackground(new java.awt.Color(45, 48, 53));
         jPanel2.setLayout(null);
 
+        jPanel3.setBackground(new java.awt.Color(45, 48, 53));
+
         jLabel1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("INICIAR SESIÓN");
         jPanel3.add(jLabel1);
 
         jPanel2.add(jPanel3);
         jPanel3.setBounds(0, 10, 520, 30);
 
+        jPanel4.setBackground(new java.awt.Color(45, 48, 53));
         jPanel4.setLayout(new java.awt.GridLayout(3, 0));
 
+        jPanel5.setBackground(new java.awt.Color(45, 48, 53));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Correo Electrónico");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        txtMail.setBackground(new java.awt.Color(31, 34, 40));
         txtMail.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtMail.setForeground(new java.awt.Color(255, 255, 255));
+        txtMail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtMail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(31, 34, 40), 4));
         jPanel5.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
 
         jPanel4.add(jPanel5);
 
+        jPanel6.setBackground(new java.awt.Color(45, 48, 53));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña");
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        txtPassword.setBackground(new java.awt.Color(31, 34, 40));
         txtPassword.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
+        txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(31, 34, 40), 4));
         jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
 
         jPanel4.add(jPanel6);
 
+        jPanel7.setBackground(new java.awt.Color(45, 48, 53));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonRound1.setBorder(null);
@@ -94,6 +112,11 @@ public class login extends javax.swing.JFrame {
         buttonRound1.setBorderColor(new java.awt.Color(255, 255, 255));
         buttonRound1.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         buttonRound1.setRadius(20);
+        buttonRound1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRound1ActionPerformed(evt);
+            }
+        });
         jPanel7.add(buttonRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 150, 30));
 
         jPanel4.add(jPanel7);
@@ -101,8 +124,14 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(jPanel4);
         jPanel4.setBounds(0, 50, 520, 200);
 
+        jPanel8.setBackground(new java.awt.Color(45, 48, 53));
+
         btnCrear.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        btnCrear.setForeground(new java.awt.Color(255, 255, 255));
+        btnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCrear.setText("Crear una Cuenta");
+        btnCrear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCrear.setPreferredSize(new java.awt.Dimension(135, 25));
         btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCrearMouseClicked(evt);
@@ -111,7 +140,7 @@ public class login extends javax.swing.JFrame {
         jPanel8.add(btnCrear);
 
         jPanel2.add(jPanel8);
-        jPanel8.setBounds(0, 250, 520, 27);
+        jPanel8.setBounds(0, 250, 520, 35);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -167,6 +196,11 @@ public class login extends javax.swing.JFrame {
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCrearMouseClicked
+
+    private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
+        // TODO add your handling code here:
+        iniciarSesion();
+    }//GEN-LAST:event_buttonRound1ActionPerformed
 
     public void iniciarSesion() {
         String correo = txtMail.getText();

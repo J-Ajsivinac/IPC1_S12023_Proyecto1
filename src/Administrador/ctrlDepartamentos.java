@@ -2,6 +2,7 @@ package Administrador;
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 public class ctrlDepartamentos {
 
@@ -16,10 +17,15 @@ public class ctrlDepartamentos {
                     break;
                 }
             }
-            Regiones r = ctrlRegiones.getRegionCodigo(codigo);
-            departamentos.add(new Departamentos(codigo, r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
-                    codDepartamento, nombreDepartamento));
-            return true;
+            if (!verificarNombreDepa(nombreDepartamento)) {
+                Regiones r = ctrlRegiones.getRegionCodigo(codigo);
+                departamentos.add(new Departamentos(codigo, r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
+                        codDepartamento, nombreDepartamento));
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "El departamento ya existe");
+            }
+
         }
         return false;
     }
@@ -67,11 +73,41 @@ public class ctrlDepartamentos {
         return false;
     }
 
-    public static boolean verificarCodigoMun(String codigo) {
+    public static boolean verificarNombreDepa(String nombre) {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
-            if (d.getMunicipios().equals(codigo)) {
+            if (d.getNombreDepartamento().equals(nombre)) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean verificarcodigoMuni(String codigo) {
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamentos d = departamentos.get(i);
+             if (d.getMunicipios().size() != 0) {
+                for (int j = 0; j < d.getMunicipios().size(); j++) {
+                    if (d.getMunicipios().get(j).getCodigoMunicipio().equals(codigo)) {
+                        return true;
+                    }
+                }
+            }
+           
+        }
+        return false;
+    }
+
+    public static boolean verificarNombreMuni(String nombre) {
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamentos d = departamentos.get(i);
+           
+             if (d.getMunicipios().size() != 0) {
+                for (int j = 0; j < d.getMunicipios().size(); j++) {
+                    if (d.getMunicipios().get(j).getNombreMunicipio().equals(nombre)) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -83,19 +119,37 @@ public class ctrlDepartamentos {
         String codigoMunicipio = "";
         while (true) {
             codigoMunicipio = generarCodigos("MUN");
-            if (!verificarCodigoMun(codigoMunicipio)) {
+            if (!verificarcodigoMuni(codigoMunicipio)) {
                 break;
             }
         }
-        if (!verificarCodigoDepa(codigoDepar)) {
+        if (!verificarNombreMuni(nombreMunicipio)) {
             departamentos.get(posicion).getMunicipios().add(new Municipios(codigoDepar, nombreMunicipio, codigoMunicipio));
             return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El Municipio ya existe");
         }
         return false;
     }
-    
 
     public static ArrayList<Departamentos> getAllD() {
         return departamentos;
     }
+
+    public static ArrayList<Municipios> getMuniDepartamento(String codigoDepar) {
+        ArrayList<Municipios> mRegresar = new ArrayList<Municipios>();
+
+        for (int j = 0; j < departamentos.size(); j++) {
+            Departamentos d = departamentos.get(j);
+            if (d.getCodDepartamento().equals(codigoDepar)) {
+                for (int k = 0; k < d.getMunicipios().size(); k++) {
+                    mRegresar.add(new Municipios(codigoDepar, d.getMunicipios().get(k).getNombreMunicipio(), d.getMunicipios().get(k).getCodigoMunicipio()));
+                }
+                break;
+            }
+        }
+
+        return mRegresar;
+    }
+
 }

@@ -9,6 +9,7 @@ public class Guia {
     private String tamanoPaquete;
     private int numeropaquetes;
     private String fechaEnvio;
+    private double multiplicadorServicio;
     private double total;
 
     public Guia(String codPaquete, String origen, String destino, String tipoPago, String tamanoPaquete,
@@ -22,6 +23,13 @@ public class Guia {
         this.setNumeropaquetes(numeropaquetes);
         this.setFechaEnvio(fechaEnvio);
         this.setTotal(total);
+    }
+
+    public Guia(String origen, String destino, String tamanoPaquete, int numeropaquetes) {
+        this.setOrigen(origen);
+        this.setDestino(destino);
+        this.setTamanoPaquete(tamanoPaquete);
+        this.setNumeropaquetes(numeropaquetes);
     }
 
     public String getCodPaquete() {
@@ -87,4 +95,13 @@ public class Guia {
     public void setTotal(double total) {
         this.total = total;
     }
+
+    public double getMultiplicadorServicio() {
+        return multiplicadorServicio;
+    }
+
+    public void setMultiplicadorServicio(double multiplicadorServicio) {
+        this.multiplicadorServicio = multiplicadorServicio;
+    }
+
 }

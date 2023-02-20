@@ -40,4 +40,9 @@ public class Tarjeta {
     public String getNumeroTarjeta() {
         return "XXXXXXXX" + tarjetaNumero.substring(tarjetaNumero.length() - 4);
     }
+    
+     @Override
+    public String toString() {
+        return "XXXXXXXX" + this.getNumeroTarjeta().substring(this.getNumeroTarjeta().length() - 4);
+    }
 }

@@ -17,7 +17,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
      */
     public UsuarioDatosFacturacion() {
         initComponents();
-        this.setBounds(0, 0, 720, 514);
+        this.setBounds(0, 0, 724, 520);
     }
 
     public void test(Usuario user1) {
@@ -123,7 +123,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +132,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(80, 80, 80)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

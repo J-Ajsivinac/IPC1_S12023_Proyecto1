@@ -17,7 +17,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
      */
     public UsuarioTarjeta() {
         initComponents();
-        this.setBounds(0, 0, 720, 514);
+        this.setBounds(0, 0, 724, 520);
 
     }
 
@@ -68,7 +68,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
 
         jLabel5.setText("Fecha de Vencimiento");
 
-        btnIngresarTarjeta.setText("Añadir Tarketa");
+        btnIngresarTarjeta.setText("Añadir Tarjeta");
         btnIngresarTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarTarjetaActionPerformed(evt);
@@ -161,7 +161,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -44,5 +44,22 @@ public class ctrlRegiones {
         }
         return regresar;
     }
-   
+
+    public static double getMultiplicador(String codRegion, int tipo) {
+        double regresar = 0;
+
+        for (int i = 0; i < regiones.size(); i++) {
+            Regiones reg = regiones.get(i);
+            if (reg.getCodigo().equals(codRegion)) {
+               if(tipo == 0){
+                   regresar = reg.getPrecioEstandar();
+               }else if(tipo == 1){
+                   regresar = reg.getPrecioEspecial();
+               }
+            }
+        }
+
+        return regresar;
+    }
+
 }

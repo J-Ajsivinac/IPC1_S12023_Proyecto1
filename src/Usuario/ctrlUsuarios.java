@@ -121,21 +121,20 @@ public class ctrlUsuarios {
         return regresar;
     }
 
-    public static int getPosicionDepartamentos(String Codigo) {
+    public static int getPosicionUsuario(String Codigo) {
         int regresar = -1;
         for (int i = 0; i < usuarios.size(); i++) {
             Usuario d = usuarios.get(i);
             if (d.getCorreo().equals(Codigo)) {
                 regresar = i;
-                break;
+                return regresar;
             }
         }
         return regresar;
     }
 
     public static boolean agregaTarjeta(String correo, String nombreTarjeta, String numeroT, String FechaV) {
-        Usuario departa = getUsuarioID(correo);
-        int posicion = getPosicionDepartamentos(correo);
+        int posicion = getPosicionUsuario(correo);
 
         if (verifiarUsuarios(correo)) {
             usuarios.get(posicion).getTarjetas().add(new Tarjeta(nombreTarjeta, numeroT, FechaV));
@@ -146,7 +145,7 @@ public class ctrlUsuarios {
 
     public static boolean agregarDatosFacturacion(String correo,String nombre, String direccion, String nit) {
         Usuario departa = getUsuarioID(correo);
-        int posicion = getPosicionDepartamentos(correo);
+        int posicion = getPosicionUsuario(correo);
 
         if (verifiarUsuarios(correo)) {
             usuarios.get(posicion).getDatosFacturacion().add(new DatosFacturacion(nombre, direccion, nit));
@@ -154,4 +153,21 @@ public class ctrlUsuarios {
         }
         return false;
     }
+    
+     public static ArrayList<Tarjeta> getAllTarjetas(String correo) {
+        ArrayList<Tarjeta> mRegresar = new ArrayList<Tarjeta>();
+
+        for (int j = 0; j < usuarios.size(); j++) {
+            Usuario d = usuarios.get(j);
+            if (d.getCorreo().equals(correo)) {
+                for (int k = 0; k < d.getTarjetas().size(); k++) {
+                    mRegresar.add(new Tarjeta(d.getTarjetas().get(k).getTarjetanombre(), d.getTarjetas().get(k).getNumeroTarjeta(), d.getTarjetas().get(k).getTarjetaVencimiento()));
+                }
+                break;
+            }
+        }
+
+        return mRegresar;
+    }
+
 }

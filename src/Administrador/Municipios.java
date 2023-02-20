@@ -3,11 +3,11 @@ package Administrador;
 public class Municipios {
     private String codigoMunicipio;
     private String codigoDepartamento;
-    private String nombreDepartamento;
+    private String nombreMunicipio;
 
-    public Municipios(String codigoDepartamento, String nombreDepartamento, String codigoMun) {
+    public Municipios(String codigoDepartamento, String nombreMunicipio, String codigoMun) {
         this.setCodigoDepartamento(codigoDepartamento);
-        this.setNombreDepartamento(nombreDepartamento);
+        this.setNombreMunicipio(nombreMunicipio);
         this.setCodigoMunicipio(codigoMun);
     }
 
@@ -28,12 +28,17 @@ public class Municipios {
         this.codigoDepartamento = codigoDepartamento;
     }
 
-    public String getNombreDepartamento() {
-        return nombreDepartamento;
+    public String getNombreMunicipio() {
+        return nombreMunicipio;
     }
 
-    public void setNombreDepartamento(String nombreDepartamento) {
-        this.nombreDepartamento = nombreDepartamento;
+    public void setNombreMunicipio(String nombreDepartamento) {
+        this.nombreMunicipio = nombreDepartamento;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getNombreMunicipio();
     }
     
 }

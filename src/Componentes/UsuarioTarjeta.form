@@ -33,7 +33,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="80" max="32767" attributes="0"/>
+              <EmptySpace pref="86" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -170,7 +170,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnIngresarTarjeta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="A&#xf1;adir Tarketa"/>
+                <Property name="text" type="java.lang.String" value="A&#xf1;adir Tarjeta"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarTarjetaActionPerformed"/>

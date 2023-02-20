@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class UsuarioCliente extends javax.swing.JFrame {
     public UsuarioTarjeta usert;
     public UsuarioDatosFacturacion userDatos;
+    public UsuarioCotizacionCompra userCotiz;
     private Usuario usuarioC;
     /**
      * Creates new form UsuarioCliente
@@ -20,8 +21,10 @@ public class UsuarioCliente extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         usert = new UsuarioTarjeta();
         userDatos = new UsuarioDatosFacturacion();
+        userCotiz = new UsuarioCotizacionCompra();
         menuContenido.add(usert);
         menuContenido.add(userDatos);
+        menuContenido.add(userCotiz);
         menuClick(usert);
         
     }
@@ -31,6 +34,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
         lblNombreUsuario.setText(u.getNombre());
         usert.test(usuarioC);
         userDatos.test(usuarioC);
+        userCotiz.test(usuarioC);
     }
 
     /**
@@ -157,7 +161,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
                 .addComponent(panelCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelEnvios, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -166,11 +170,11 @@ public class UsuarioCliente extends javax.swing.JFrame {
         menuContenido.setLayout(menuContenidoLayout);
         menuContenidoLayout.setHorizontalGroup(
             menuContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 724, Short.MAX_VALUE)
         );
         menuContenidoLayout.setVerticalGroup(
             menuContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,15 +185,15 @@ public class UsuarioCliente extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -197,7 +201,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
     private void panelTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTarjetasMouseClicked
         // TODO add your handling code here:
-       // menuClick(ad);
+       menuClick(usert);
     }//GEN-LAST:event_panelTarjetasMouseClicked
 
     private void panelDatosFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosFMouseClicked
@@ -207,7 +211,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
     private void panelCotizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCotizacionMouseClicked
         // TODO add your handling code here:
-        //menuClick(adK);
+        menuClick(userCotiz);
     }//GEN-LAST:event_panelCotizacionMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
@@ -254,6 +258,8 @@ public class UsuarioCliente extends javax.swing.JFrame {
     
     public void menuClick(JPanel panel){
         usert.setVisible(false);
+        userDatos.setVisible(false);
+        userCotiz.setVisible(false);
         panel.setVisible(true);
     }
 

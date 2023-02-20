@@ -1,6 +1,7 @@
 package Componentes;
 
 import Administrador.Departamentos;
+import Administrador.Municipios;
 import Administrador.Regiones;
 import Administrador.ctrlDepartamentos;
 import Administrador.ctrlRegiones;
@@ -164,6 +165,12 @@ public class DepMun extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setText("Ingresar Municipio");
 
+        boxDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxDepartamentoActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Departamento");
 
         jLabel7.setText("Nombre del Municipio");
@@ -260,6 +267,10 @@ public class DepMun extends javax.swing.JPanel {
         String nombreDep = txtNombreMunicipio.getText();
         ingresarMunicipio(departa.getCodDepartamento(), nombreDep);
     }//GEN-LAST:event_btnRegistrarMunicipioActionPerformed
+
+    private void boxDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxDepartamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxDepartamentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
