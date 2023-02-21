@@ -148,8 +148,18 @@ public class ctrlDepartamentos {
                 break;
             }
         }
-
         return mRegresar;
     }
-
+    
+    public static String getRegionbyCodigo(String codDepartamento){
+        String regresar="";
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamentos d = departamentos.get(i);
+            if (d.getCodDepartamento().equals(codDepartamento)) {
+                regresar = d.getCodigo();
+                return regresar;
+            }
+        }
+        return regresar;
+    }
 }

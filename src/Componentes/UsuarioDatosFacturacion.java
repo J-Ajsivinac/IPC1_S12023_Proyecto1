@@ -24,11 +24,12 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         this.user = user1;
     }
 
-    public void ingresarTarjeta(String nombreDF, String direccionDF, String nitDF) {
+    public void ingresarDatosF(String nombreDF, String direccionDF, String nitDF) {
         String correoEnviar = user.getCorreo();
         if (!(nombreDF.equals("") && direccionDF.equals("") && nitDF.equals(""))) {
             if (ctrlUsuarios.agregarDatosFacturacion(correoEnviar, nombreDF, direccionDF, nitDF)) {
                 JOptionPane.showMessageDialog(null, "Tarjeta ingresado Correctamente");
+                
             }
 
         }
@@ -141,7 +142,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         String nombreEnviar = txtNombreCompleto.getText();
         String direccionEnviar = txtDireccion.getText();
         String nitEnviar = txtNit.getText();
-        ingresarTarjeta(nombreEnviar, direccionEnviar, nitEnviar);
+        ingresarDatosF(nombreEnviar, direccionEnviar, nitEnviar);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

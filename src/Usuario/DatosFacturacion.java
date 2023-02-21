@@ -36,4 +36,9 @@ public class DatosFacturacion {
     public void setNit(String nit) {
         this.nit = nit;
     }
+    
+    @Override
+    public String toString() {
+        return this.nit;
+    }
 }

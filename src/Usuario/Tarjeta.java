@@ -41,7 +41,7 @@ public class Tarjeta {
         return "XXXXXXXX" + tarjetaNumero.substring(tarjetaNumero.length() - 4);
     }
     
-     @Override
+    @Override
     public String toString() {
         return "XXXXXXXX" + this.getNumeroTarjeta().substring(this.getNumeroTarjeta().length() - 4);
     }

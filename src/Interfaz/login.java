@@ -130,6 +130,7 @@ public class login extends javax.swing.JFrame {
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
         btnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCrear.setText("Crear una Cuenta");
+        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCrear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCrear.setPreferredSize(new java.awt.Dimension(135, 25));
         btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -53,8 +53,10 @@ public class ctrlRegiones {
             if (reg.getCodigo().equals(codRegion)) {
                if(tipo == 0){
                    regresar = reg.getPrecioEstandar();
+                    return regresar;
                }else if(tipo == 1){
                    regresar = reg.getPrecioEspecial();
+                    return regresar;
                }
             }
         }

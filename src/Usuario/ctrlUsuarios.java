@@ -90,8 +90,6 @@ public class ctrlUsuarios {
         return regresar;
     }
 
-
-
     public static int iniciarSesion(String correo, String password) {
         int regresar = 0;
         if (!(correo.equals("") && password.equals(""))) {
@@ -143,7 +141,7 @@ public class ctrlUsuarios {
         return false;
     }
 
-    public static boolean agregarDatosFacturacion(String correo,String nombre, String direccion, String nit) {
+    public static boolean agregarDatosFacturacion(String correo, String nombre, String direccion, String nit) {
         Usuario departa = getUsuarioID(correo);
         int posicion = getPosicionUsuario(correo);
 
@@ -153,8 +151,8 @@ public class ctrlUsuarios {
         }
         return false;
     }
-    
-     public static ArrayList<Tarjeta> getAllTarjetas(String correo) {
+
+    public static ArrayList<Tarjeta> getAllTarjetas(String correo) {
         ArrayList<Tarjeta> mRegresar = new ArrayList<Tarjeta>();
 
         for (int j = 0; j < usuarios.size(); j++) {
@@ -162,6 +160,22 @@ public class ctrlUsuarios {
             if (d.getCorreo().equals(correo)) {
                 for (int k = 0; k < d.getTarjetas().size(); k++) {
                     mRegresar.add(new Tarjeta(d.getTarjetas().get(k).getTarjetanombre(), d.getTarjetas().get(k).getNumeroTarjeta(), d.getTarjetas().get(k).getTarjetaVencimiento()));
+                }
+                break;
+            }
+        }
+
+        return mRegresar;
+    }
+
+    public static ArrayList<DatosFacturacion> getAllDFacturacion(String correo) {
+        ArrayList<DatosFacturacion> mRegresar = new ArrayList<DatosFacturacion>();
+
+        for (int j = 0; j < usuarios.size(); j++) {
+            Usuario d = usuarios.get(j);
+            if (d.getCorreo().equals(correo)) {
+                for (int k = 0; k < d.getDatosFacturacion().size(); k++) {
+                    mRegresar.add(new DatosFacturacion(d.getDatosFacturacion().get(k).getNombreCompletoF(), d.getDatosFacturacion().get(k).getDireccionF(), d.getDatosFacturacion().get(k).getNit()));
                 }
                 break;
             }

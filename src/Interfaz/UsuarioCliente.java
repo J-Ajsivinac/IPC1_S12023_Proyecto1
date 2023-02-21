@@ -212,6 +212,8 @@ public class UsuarioCliente extends javax.swing.JFrame {
     private void panelCotizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCotizacionMouseClicked
         // TODO add your handling code here:
         menuClick(userCotiz);
+        userCotiz.cargarDatosFacturacion();
+        userCotiz.listarTarjetas();
     }//GEN-LAST:event_panelCotizacionMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
