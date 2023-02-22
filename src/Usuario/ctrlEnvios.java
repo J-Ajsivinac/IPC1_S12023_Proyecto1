@@ -26,7 +26,7 @@ public class ctrlEnvios {
                     totalEnvio);
             Guia guiaIngresar = agregarGuia(codPaquete, ori, destinatario, tipoServicio, tamaño, numerPaquetes, dtf.format(now), totalEnvio);
             envios.add(new Envios(correo, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, tipoPago, facturaingresar, guiaIngresar));
-            System.out.println("Supuestamente se gurado");
+            System.out.println(codPaquete);
             return true;
         }
         return false;
@@ -66,13 +66,17 @@ public class ctrlEnvios {
         return false;
     }
 
-    public static void verEnvios(String correo) {
+    public static ArrayList<Envios> verEnvios(String correo) {
+        
+        ArrayList<Envios> regresar = new ArrayList<>();
         //Envios regresar = null;
         for (int i = 0; i < envios.size(); i++) {
             Envios e = envios.get(i);
             if (e.getIdUsuario().equals(correo)) {
-                System.out.println(e.getFactura().getNumFactura()+e.getDestinatario());
+               regresar.add(new Envios(correo, e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), 0, e.getFactura(), e.getGuia()));
             }
         }
+        
+        return regresar;
     }
 }

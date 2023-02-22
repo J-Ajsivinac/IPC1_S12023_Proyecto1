@@ -13,6 +13,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
     public UsuarioDatosFacturacion userDatos;
     public UsuarioCotizacionCompra userCotiz;
     private Usuario usuarioC;
+    public UsuarioVerEnvios usuarioVer;
     /**
      * Creates new form UsuarioCliente
      */
@@ -22,19 +23,22 @@ public class UsuarioCliente extends javax.swing.JFrame {
         usert = new UsuarioTarjeta();
         userDatos = new UsuarioDatosFacturacion();
         userCotiz = new UsuarioCotizacionCompra();
+        usuarioVer = new UsuarioVerEnvios();
         menuContenido.add(usert);
         menuContenido.add(userDatos);
         menuContenido.add(userCotiz);
+        menuContenido.add(usuarioVer);
         menuClick(usert);
         
     }
     
     public void setUsuario(Usuario u){
         this.usuarioC = u;
-        lblNombreUsuario.setText(u.getNombre());
+        lblNombreUsuario.setText(usuarioC.getNombre());
         usert.test(usuarioC);
         userDatos.test(usuarioC);
         userCotiz.test(usuarioC);
+        usuarioVer.test(usuarioC);
     }
 
     /**
@@ -111,6 +115,11 @@ public class UsuarioCliente extends javax.swing.JFrame {
         jLabel6.setText("Cotización y Compra");
         panelCotizacion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        panelEnvios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelEnviosMouseClicked(evt);
+            }
+        });
         panelEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
@@ -223,6 +232,12 @@ public class UsuarioCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
+    private void panelEnviosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEnviosMouseClicked
+        // TODO add your handling code here:
+        menuClick(usuarioVer);
+        usuarioVer.cargarDatos();
+    }//GEN-LAST:event_panelEnviosMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -262,6 +277,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
         usert.setVisible(false);
         userDatos.setVisible(false);
         userCotiz.setVisible(false);
+        usuarioVer.setVisible(false);
         panel.setVisible(true);
     }
 
