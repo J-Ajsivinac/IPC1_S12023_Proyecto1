@@ -47,18 +47,20 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(34, 38, 43));
+        jPanel1.setBackground(new java.awt.Color(26, 29, 39));
 
-        panelRound1.setBackground(new java.awt.Color(45, 48, 53));
+        panelRound1.setBackground(new java.awt.Color(34, 37, 47));
         panelRound1.setRoundBottomLeft(20);
         panelRound1.setRoundBottomRight(20);
         panelRound1.setRoundTopLeft(20);
         panelRound1.setRoundTopRight(20);
 
         jPanel2.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel2.setOpaque(false);
         jPanel2.setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel3.setOpaque(false);
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,9 +71,11 @@ public class login extends javax.swing.JFrame {
         jPanel3.setBounds(0, 10, 520, 30);
 
         jPanel4.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.GridLayout(3, 0));
 
         jPanel5.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel5.setOpaque(false);
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
@@ -89,6 +93,7 @@ public class login extends javax.swing.JFrame {
         jPanel4.add(jPanel5);
 
         jPanel6.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel6.setOpaque(false);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
@@ -105,13 +110,17 @@ public class login extends javax.swing.JFrame {
         jPanel4.add(jPanel6);
 
         jPanel7.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonRound1.setBorder(null);
+        buttonRound1.setForeground(new java.awt.Color(66, 133, 254));
         buttonRound1.setText("Ingresar");
         buttonRound1.setBorderColor(new java.awt.Color(255, 255, 255));
-        buttonRound1.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        buttonRound1.setRadius(20);
+        buttonRound1.setColorClick(new java.awt.Color(222, 226, 254));
+        buttonRound1.setColorOver(new java.awt.Color(222, 226, 254));
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        buttonRound1.setRadius(15);
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRound1ActionPerformed(evt);
@@ -125,8 +134,9 @@ public class login extends javax.swing.JFrame {
         jPanel4.setBounds(0, 50, 520, 200);
 
         jPanel8.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel8.setOpaque(false);
 
-        btnCrear.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        btnCrear.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
         btnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCrear.setText("Crear una Cuenta");

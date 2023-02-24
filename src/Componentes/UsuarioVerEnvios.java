@@ -24,11 +24,16 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
      */
     public UsuarioVerEnvios() {
         initComponents();
-
+        this.setBounds(0, 0, 724, 520);
+        
+        modelo = (DefaultTableModel) table.getModel();
+        //cargarDatos();
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                System.out.println("Edit row : " + row);
+                //System.out.println("Edit row : " + row);
+                String dato = String.valueOf(modelo.getValueAt(row, 0));
+                System.out.println(dato);
             }
 
             @Override
@@ -45,11 +50,9 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 System.out.println("View row : " + row);
             }
         };
-        this.setBounds(0, 0, 724, 520);
+        
         table.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         table.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
-        modelo = (DefaultTableModel) table.getModel();
-        //cargarDatos();
 
     }
 
