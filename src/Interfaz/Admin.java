@@ -13,6 +13,7 @@ public class Admin extends javax.swing.JFrame {
     private DepMun dm;
     private AdminiKioscos adK;
     private AdminReporteRegion adRRegion;
+    private AdminReporteUsuario adRUsuario;
     public boolean activado;
 
     /**
@@ -25,10 +26,12 @@ public class Admin extends javax.swing.JFrame {
         dm = new DepMun();
         adK = new AdminiKioscos();
         adRRegion = new AdminReporteRegion();
+        adRUsuario = new AdminReporteUsuario();
         panelMainContainer.add(ad);
         panelMainContainer.add(dm);
         panelMainContainer.add(adK);
         panelMainContainer.add(adRRegion);
+        panelMainContainer.add(adRUsuario);
         menuClick(ad);
         panelRIngresos.setVisible(activado);
         panelRRegion.setVisible(activado);
@@ -178,6 +181,12 @@ public class Admin extends javax.swing.JFrame {
         );
 
         jPanel3.add(panelRRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 226, -1));
+
+        panelRUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRUsuarioMouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel10.setText("Por Usuario");
@@ -362,6 +371,11 @@ public class Admin extends javax.swing.JFrame {
         menuClick(adRRegion);
     }//GEN-LAST:event_panelRRegionMouseClicked
 
+    private void panelRUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRUsuarioMouseClicked
+        // TODO add your handling code here:
+        menuClick(adRUsuario);
+    }//GEN-LAST:event_panelRUsuarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -403,6 +417,7 @@ public class Admin extends javax.swing.JFrame {
         dm.setVisible(false);
         adK.setVisible(false);
         adRRegion.setVisible(false);
+        adRUsuario.setVisible(false);
         panel.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

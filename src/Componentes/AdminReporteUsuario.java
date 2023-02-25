@@ -1,60 +1,53 @@
 package Componentes;
 
 import Administrador.Regiones;
-import Administrador.ctrlRegiones;
-import Usuario.Envios;
-import Usuario.ctrlEnvios;
-import java.awt.Color;
+import Usuario.Usuario;
+import Usuario.ctrlUsuarios;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mesoi
  */
-public class AdminReporteRegion extends javax.swing.JPanel {
-
+public class AdminReporteUsuario extends javax.swing.JPanel {
     private DefaultTableModel modelo;
-    private ArrayList<Regiones> totalRegiones;
-    //private ArrayList<Envios> totalEnvios;
-
+    private ArrayList<Usuario> totalUsuarios;
     /**
-     * Creates new form AdminReporteRegion
+     * Creates new form AdminReporteUsuario
      */
-    public AdminReporteRegion() {
+    public AdminReporteUsuario() {
         initComponents();
         this.setBounds(0, 0, 710, 500);
-        modelo = (DefaultTableModel) tableA.getModel();
-        totalRegiones = (ArrayList<Regiones>) ctrlRegiones.getTodasRegiones().clone();
+        modelo = (DefaultTableModel) tableRU.getModel();
+        totalUsuarios = (ArrayList<Usuario>) ctrlUsuarios.getTodUsuarios().clone();
         ordenarRegiones();
-        
     }
-
+    
     public void ordenarRegiones() {
-        if (totalRegiones.size() > 0) {
-            Collections.sort(totalRegiones, new Comparator<Regiones>() {
+        if (totalUsuarios.size() > 0) {
+            Collections.sort(totalUsuarios, new Comparator<Usuario>() {
                 @Override
-                public int compare(Regiones p1, Regiones p2) {
+                public int compare(Usuario p1, Usuario p2) {
                     // Aqui esta el truco, ahora comparamos p2 con p1 y no al reves como antes
                     return new Integer(p2.getContadorEnvios()).compareTo(new Integer(p1.getContadorEnvios()));
                 }
             });
 
-            for (int i = 0; i < totalRegiones.size(); i++) {
-                if (totalRegiones.get(i).getContadorEnvios() != 0) {
-                    Object datos[] = new Object[3];
+            for (int i = 0; i < totalUsuarios.size(); i++) {
+                if (totalUsuarios.get(i).getContadorEnvios() != 0) {
+                    Object datos[] = new Object[4];
                     datos[0] = i+1;
-                    datos[1] = totalRegiones.get(i).getNombre();
-                    datos[2] = totalRegiones.get(i).getContadorEnvios();
+                    datos[1] = totalUsuarios.get(i).getNombre();
+                    datos[2] = totalUsuarios.get(i).getApellido();
+                    datos[3] = totalUsuarios.get(i).getContadorEnvios();
                     modelo.addRow(datos);
                 }
             }
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,28 +59,26 @@ public class AdminReporteRegion extends javax.swing.JPanel {
 
         panelRound1 = new Elementos.PanelRound();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableA = new Elementos.CutomTable.TableDark();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableRU = new Elementos.CutomTable.TableDark();
 
-        panelRound1.setBackground(new java.awt.Color(73, 76, 79));
-        panelRound1.setRoundBottomLeft(15);
-        panelRound1.setRoundBottomRight(15);
-        panelRound1.setRoundTopLeft(15);
-        panelRound1.setRoundTopRight(15);
+        panelRound1.setBackground(new java.awt.Color(60, 59, 77));
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel1.setText("Lista de Regiones con más Envios");
+        jLabel1.setText("Reporte de usuarios con más paquetes Enviados");
 
-        tableA.setBackground(new java.awt.Color(0, 0, 0));
-        tableA.setModel(new javax.swing.table.DefaultTableModel(
+        tableRU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No.", "Region", "Numero de Envios"
+                "No.", "Nombre", "Apellido", "No. De paquetes"
             }
         ));
-        jScrollPane2.setViewportView(tableA);
+        jScrollPane1.setViewportView(tableRU);
+        if (tableRU.getColumnModel().getColumnCount() > 0) {
+            tableRU.getColumnModel().getColumn(0).setPreferredWidth(10);
+        }
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -99,7 +90,7 @@ public class AdminReporteRegion extends javax.swing.JPanel {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelRound1Layout.setVerticalGroup(
@@ -107,9 +98,9 @@ public class AdminReporteRegion extends javax.swing.JPanel {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -123,18 +114,18 @@ public class AdminReporteRegion extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private Elementos.PanelRound panelRound1;
-    private Elementos.CutomTable.TableDark tableA;
+    private Elementos.CutomTable.TableDark tableRU;
     // End of variables declaration//GEN-END:variables
 }

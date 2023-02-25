@@ -30,7 +30,7 @@ public class ctrlEnvios {
             envios.add(new Envios(correo, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, tipoPago, facturaingresar, guiaIngresar));
             System.out.println(codPaquete);
             ctrlRegiones.addContador(codRegion);
-            ctrlUsuarios.addContadorUser(correo);
+            ctrlUsuarios.addContadorUser(correo,numerPaquetes);
             return true;
         }
         return false;

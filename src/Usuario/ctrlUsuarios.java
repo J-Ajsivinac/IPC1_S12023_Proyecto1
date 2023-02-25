@@ -26,7 +26,7 @@ public class ctrlUsuarios {
         if (!ctrlUsuarios.verifiarUsuarios(correo)) {
             if (verificarPassword(contrasena)) {
                 usuarios.add(new Usuario(contadorUsuarios, correo, nombre, apellido, contrasena, dpi, fnacimiento,
-                        genero, nacionalidad, alias, telefono, rol, foto,0));
+                        genero, nacionalidad, alias, telefono, rol, foto, 0));
                 contadorUsuarios++;
                 System.out.println("password: " + contrasena + "usuario_" + correo);
                 return true;
@@ -73,7 +73,7 @@ public class ctrlUsuarios {
             if (u.getCorreo().equals(correo)) {
                 regresar = new Usuario(u.getIdUsuario(), u.getCorreo(), u.getNombre(), u.getApellido(), u.getContrasena(),
                         u.getDpi(), u.getFechaNacimiento(), u.getGenero(), u.getNacionalidad(), u.getAlias(),
-                        u.getTelefono(), u.getRol(), u.getFotografia(),u.getContadorEnvios());
+                        u.getTelefono(), u.getRol(), u.getFotografia(), u.getContadorEnvios());
             }
         }
         return regresar;
@@ -183,14 +183,17 @@ public class ctrlUsuarios {
 
         return mRegresar;
     }
-    
-     public static void addContadorUser(String correo){
+
+    public static void addContadorUser(String correo, int cantPa) {
         for (int i = 0; i < usuarios.size(); i++) {
             Usuario reg = usuarios.get(i);
             if (reg.getCorreo().equals(correo)) {
-                usuarios.get(i).setContadorEnvios(usuarios.get(i).getContadorEnvios()+1);
+                usuarios.get(i).setContadorEnvios(usuarios.get(i).getContadorEnvios() + cantPa);
             }
         }
     }
 
+    public static ArrayList<Usuario> getTodUsuarios() {
+        return usuarios;
+    }
 }

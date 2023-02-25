@@ -14,15 +14,17 @@ import javax.swing.border.Border;
  */
 public class login extends javax.swing.JFrame {
 
+
     /**
      * Creates new form login
      */
     public login() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
-        
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.white);
         txtMail.setBorder(bottomBorder);
+        btnCrear.requestFocusInWindow();
+
     }
 
     /**
@@ -47,7 +49,7 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jPanel7 = new javax.swing.JPanel();
-        buttonRound1 = new Elementos.ButtonRound();
+        btnIngresar = new Elementos.ButtonRound();
         jPanel8 = new javax.swing.JPanel();
         btnCrear = new javax.swing.JLabel();
 
@@ -94,6 +96,22 @@ public class login extends javax.swing.JFrame {
         txtMail.setForeground(new java.awt.Color(255, 255, 255));
         txtMail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtMail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(31, 34, 40), 4));
+        txtMail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtMailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMailFocusLost(evt);
+            }
+        });
+        txtMail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtMailMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtMailMouseExited(evt);
+            }
+        });
         jPanel5.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
 
         jPanel4.add(jPanel5);
@@ -119,20 +137,20 @@ public class login extends javax.swing.JFrame {
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonRound1.setBorder(null);
-        buttonRound1.setForeground(new java.awt.Color(66, 133, 254));
-        buttonRound1.setText("Ingresar");
-        buttonRound1.setBorderColor(new java.awt.Color(255, 255, 255));
-        buttonRound1.setColorClick(new java.awt.Color(222, 226, 254));
-        buttonRound1.setColorOver(new java.awt.Color(222, 226, 254));
-        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        buttonRound1.setRadius(15);
-        buttonRound1.addActionListener(new java.awt.event.ActionListener() {
+        btnIngresar.setBorder(null);
+        btnIngresar.setForeground(new java.awt.Color(66, 133, 254));
+        btnIngresar.setText("Ingresar");
+        btnIngresar.setBorderColor(new java.awt.Color(255, 255, 255));
+        btnIngresar.setColorClick(new java.awt.Color(222, 226, 254));
+        btnIngresar.setColorOver(new java.awt.Color(222, 226, 254));
+        btnIngresar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        btnIngresar.setRadius(15);
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRound1ActionPerformed(evt);
+                btnIngresarActionPerformed(evt);
             }
         });
-        jPanel7.add(buttonRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 150, 30));
+        jPanel7.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 150, 30));
 
         jPanel4.add(jPanel7);
 
@@ -214,10 +232,33 @@ public class login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCrearMouseClicked
 
-    private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         iniciarSesion();
-    }//GEN-LAST:event_buttonRound1ActionPerformed
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtMailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMailMouseClicked
+        // TODO add your handling code here:
+        //Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.red);
+
+        //txtMail.setBorder(bottomBorder);
+    }//GEN-LAST:event_txtMailMouseClicked
+
+    private void txtMailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMailMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMailMouseExited
+
+    private void txtMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusGained
+        // TODO add your handling code here:
+            Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.red);
+            txtMail.setBorder(bottomBorder);
+    }//GEN-LAST:event_txtMailFocusGained
+
+    private void txtMailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusLost
+        // TODO add your handling code here:
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.white);
+        txtMail.setBorder(bottomBorder);
+    }//GEN-LAST:event_txtMailFocusLost
 
     public void iniciarSesion() {
         String correo = txtMail.getText();
@@ -286,7 +327,7 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCrear;
-    private Elementos.ButtonRound buttonRound1;
+    private Elementos.ButtonRound btnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
