@@ -1,9 +1,11 @@
 package Usuario;
 
+import Administrador.ctrlRegiones;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.HashMap;
 
 public class ctrlEnvios {
 
@@ -27,6 +29,8 @@ public class ctrlEnvios {
             Guia guiaIngresar = agregarGuia(codPaquete, ori, destinatario, tipoServicio, tamaño, numerPaquetes, dtf.format(now), totalEnvio);
             envios.add(new Envios(correo, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, tipoPago, facturaingresar, guiaIngresar));
             System.out.println(codPaquete);
+            ctrlRegiones.addContador(codRegion);
+            ctrlUsuarios.addContadorUser(correo);
             return true;
         }
         return false;
@@ -67,16 +71,30 @@ public class ctrlEnvios {
     }
 
     public static ArrayList<Envios> verEnvios(String correo) {
-        
+
         ArrayList<Envios> regresar = new ArrayList<>();
         //Envios regresar = null;
         for (int i = 0; i < envios.size(); i++) {
             Envios e = envios.get(i);
             if (e.getIdUsuario().equals(correo)) {
-               regresar.add(new Envios(correo, e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), 0, e.getFactura(), e.getGuia()));
+                regresar.add(new Envios(correo, e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), 0, e.getFactura(), e.getGuia()));
             }
         }
-        
+
         return regresar;
     }
+
+    public static ArrayList<Envios> getReportesByCod(String codRegion) {
+        ArrayList<Envios> regresar = new ArrayList<>();
+        //Envios regresar = null;
+        for (int i = 0; i < envios.size(); i++) {
+            Envios e = envios.get(i);
+            if (e.getCodRegion().equals(codRegion)) {
+                regresar.add(new Envios(e.getIdUsuario(), e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), 0, e.getFactura(), e.getGuia()));
+            }
+        }
+
+        return regresar;
+    }
+
 }

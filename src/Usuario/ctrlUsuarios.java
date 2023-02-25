@@ -26,7 +26,7 @@ public class ctrlUsuarios {
         if (!ctrlUsuarios.verifiarUsuarios(correo)) {
             if (verificarPassword(contrasena)) {
                 usuarios.add(new Usuario(contadorUsuarios, correo, nombre, apellido, contrasena, dpi, fnacimiento,
-                        genero, nacionalidad, alias, telefono, rol, foto));
+                        genero, nacionalidad, alias, telefono, rol, foto,0));
                 contadorUsuarios++;
                 System.out.println("password: " + contrasena + "usuario_" + correo);
                 return true;
@@ -60,7 +60,7 @@ public class ctrlUsuarios {
             if (u.getIdUsuario() == idUsuario) {
                 regresar = new Usuario(idUsuario, u.getCorreo(), u.getNombre(), u.getApellido(), u.getContrasena(),
                         u.getDpi(), u.getFechaNacimiento(), u.getGenero(), u.getNacionalidad(), u.getAlias(),
-                        u.getTelefono(), u.getRol(), u.getFotografia());
+                        u.getTelefono(), u.getRol(), u.getFotografia(), u.getContadorEnvios());
             }
         }
         return regresar;
@@ -73,7 +73,7 @@ public class ctrlUsuarios {
             if (u.getCorreo().equals(correo)) {
                 regresar = new Usuario(u.getIdUsuario(), u.getCorreo(), u.getNombre(), u.getApellido(), u.getContrasena(),
                         u.getDpi(), u.getFechaNacimiento(), u.getGenero(), u.getNacionalidad(), u.getAlias(),
-                        u.getTelefono(), u.getRol(), u.getFotografia());
+                        u.getTelefono(), u.getRol(), u.getFotografia(),u.getContadorEnvios());
             }
         }
         return regresar;
@@ -182,6 +182,15 @@ public class ctrlUsuarios {
         }
 
         return mRegresar;
+    }
+    
+     public static void addContadorUser(String correo){
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario reg = usuarios.get(i);
+            if (reg.getCorreo().equals(correo)) {
+                usuarios.get(i).setContadorEnvios(usuarios.get(i).getContadorEnvios()+1);
+            }
+        }
     }
 
 }

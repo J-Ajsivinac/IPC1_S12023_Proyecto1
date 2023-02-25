@@ -2,8 +2,11 @@ package Interfaz;
 
 import Usuario.Usuario;
 import Usuario.ctrlUsuarios;
+import java.awt.Color;
 import java.awt.Insets;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -17,6 +20,9 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
+        
+        txtMail.setBorder(bottomBorder);
     }
 
     /**
@@ -83,7 +89,7 @@ public class login extends javax.swing.JFrame {
         jLabel2.setText("Correo Electrónico");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        txtMail.setBackground(new java.awt.Color(31, 34, 40));
+        txtMail.setBackground(new java.awt.Color(34, 37, 47));
         txtMail.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtMail.setForeground(new java.awt.Color(255, 255, 255));
         txtMail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -217,15 +223,15 @@ public class login extends javax.swing.JFrame {
         String correo = txtMail.getText();
         String contrasena = String.valueOf(txtPassword.getPassword());
         int opcion = ctrlUsuarios.iniciarSesion(correo, contrasena);
-        
-        if(opcion == 0){
-            
-        } else if(opcion == 1){
+
+        if (opcion == 0) {
+
+        } else if (opcion == 1) {
             //acceder como Administrador
             Admin a = new Admin();
             a.setVisible(true);
             this.dispose();
-        }else{
+        } else {
             //Acceder como Cliente
             UsuarioCliente uc = new UsuarioCliente();
             Usuario usarioEnviar = ctrlUsuarios.getUsuarioID(correo);
@@ -234,10 +240,11 @@ public class login extends javax.swing.JFrame {
             this.dispose();
         }
     }
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -249,27 +256,23 @@ public static void main(String args[]) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class  
+            java.util.logging.Logger.getLogger(login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

@@ -40,12 +40,29 @@ public class PanelAction extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cmdFactura = new Elementos.CutomTable.ActionButton();
-        cmdGuia = new Elementos.CutomTable.ActionButton();
+        cmdGuia = new Elementos.ButtonRound();
+        cmdFactura = new Elementos.ButtonRound();
 
-        cmdFactura.setText("actionButton1");
+        cmdGuia.setBackground(new java.awt.Color(108, 224, 150));
+        cmdGuia.setBorder(null);
+        cmdGuia.setForeground(new java.awt.Color(255, 255, 255));
+        cmdGuia.setText("Guía");
+        cmdGuia.setBorderColor(new java.awt.Color(108, 224, 150));
+        cmdGuia.setColor(new java.awt.Color(108, 224, 150));
+        cmdGuia.setColorClick(new java.awt.Color(31, 162, 89));
+        cmdGuia.setColorOver(new java.awt.Color(40, 189, 94));
+        cmdGuia.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        cmdGuia.setRadius(10);
 
-        cmdGuia.setText("actionButton2");
+        cmdFactura.setBorder(null);
+        cmdFactura.setForeground(new java.awt.Color(255, 255, 255));
+        cmdFactura.setText("Factura");
+        cmdFactura.setBorderColor(new java.awt.Color(132, 181, 253));
+        cmdFactura.setColor(new java.awt.Color(129, 181, 253));
+        cmdFactura.setColorClick(new java.awt.Color(3, 96, 226));
+        cmdFactura.setColorOver(new java.awt.Color(28, 121, 252));
+        cmdFactura.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        cmdFactura.setRadius(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,24 +71,24 @@ public class PanelAction extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmdGuia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmdGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Elementos.CutomTable.ActionButton cmdFactura;
-    private Elementos.CutomTable.ActionButton cmdGuia;
+    private Elementos.ButtonRound cmdFactura;
+    private Elementos.ButtonRound cmdGuia;
     // End of variables declaration//GEN-END:variables
 }

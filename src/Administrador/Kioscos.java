@@ -7,7 +7,7 @@ public class Kioscos extends Regiones {
 
     public Kioscos(String codigo, String nombre, double precioEstandar, double precioEspecial, String codigoKioco,
             String nombreKiosco) {
-        super(codigo, nombre, precioEstandar, precioEspecial);
+        super(codigo, nombre, precioEstandar, precioEspecial,0);
         this.setCodigoKioco(codigoKioco);
         this.setNombreKiosco(nombreKiosco);
     }

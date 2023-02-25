@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class UsuarioVerEnvios extends javax.swing.JPanel {
 
-    DefaultTableModel modelo;
+    private DefaultTableModel modelo;
     private Usuario user;
 
     /**
@@ -25,7 +25,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
     public UsuarioVerEnvios() {
         initComponents();
         this.setBounds(0, 0, 724, 520);
-        
+
         modelo = (DefaultTableModel) table.getModel();
         //cargarDatos();
         TableActionEvent event = new TableActionEvent() {
@@ -50,7 +50,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 System.out.println("View row : " + row);
             }
         };
-        
+
         table.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         table.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
 
@@ -62,6 +62,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
     }
 
     public void cargarDatos() {
+        modelo.setRowCount(0);
         if (user != null) {
             ArrayList<Envios> envios = ctrlEnvios.verEnvios(user.getCorreo());
             for (Envios envio : envios) {

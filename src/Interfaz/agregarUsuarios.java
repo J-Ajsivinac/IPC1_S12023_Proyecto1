@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.basic.BasicComboBoxUI;
@@ -48,7 +49,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jSeparator2.setBackground(new Color(0, 0, 0, 1));
         jSeparator3.setBackground(new Color(0, 0, 0, 1));
         boxKiosco.setVisible(false);
-
+        
     }
 
     public void cargarKioscos() {

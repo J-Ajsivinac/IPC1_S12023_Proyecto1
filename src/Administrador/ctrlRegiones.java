@@ -6,9 +6,9 @@ public class ctrlRegiones {
 
     public static ArrayList<Regiones> regiones = new ArrayList<Regiones>();
 
-    public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial) {
+    public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial, int contador) {
         if (!codigo.equals("") && !nombre.equals("") && precioEstandar > 0 && precioEspecial > 0) {
-            regiones.add(new Regiones(codigo, nombre, precioEstandar, precioEspecial));
+            regiones.add(new Regiones(codigo, nombre, precioEstandar, precioEspecial, contador));
             return true;
         }
         return false;
@@ -39,7 +39,7 @@ public class ctrlRegiones {
         for (int i = 0; i < regiones.size(); i++) {
             Regiones reg = regiones.get(i);
             if (reg.getCodigo().equals(codigo)) {
-                regresar = new Regiones(codigo, reg.getNombre(), reg.getPrecioEstandar(), reg.getPrecioEspecial());
+                regresar = new Regiones(codigo, reg.getNombre(), reg.getPrecioEstandar(), reg.getPrecioEspecial(),reg.getContadorEnvios());
             }
         }
         return regresar;
@@ -62,6 +62,15 @@ public class ctrlRegiones {
         }
 
         return regresar;
+    }
+    
+    public static void addContador(String codRegion){
+        for (int i = 0; i < regiones.size(); i++) {
+            Regiones reg = regiones.get(i);
+            if (reg.getCodigo().equals(codRegion)) {
+                regiones.get(i).setContadorEnvios(regiones.get(i).getContadorEnvios()+1);
+            }
+        }
     }
 
 }

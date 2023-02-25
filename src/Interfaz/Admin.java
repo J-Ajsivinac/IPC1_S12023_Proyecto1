@@ -8,9 +8,13 @@ import javax.swing.JPanel;
  * @author mesoi
  */
 public class Admin extends javax.swing.JFrame {
+
     private AdminRegiones ad;
     private DepMun dm;
     private AdminiKioscos adK;
+    private AdminReporteRegion adRRegion;
+    public boolean activado;
+
     /**
      * Creates new form Admin
      */
@@ -20,10 +24,32 @@ public class Admin extends javax.swing.JFrame {
         ad = new AdminRegiones();
         dm = new DepMun();
         adK = new AdminiKioscos();
+        adRRegion = new AdminReporteRegion();
         panelMainContainer.add(ad);
         panelMainContainer.add(dm);
         panelMainContainer.add(adK);
+        panelMainContainer.add(adRRegion);
         menuClick(ad);
+        panelRIngresos.setVisible(activado);
+        panelRRegion.setVisible(activado);
+        panelRTotal.setVisible(activado);
+        panelRUsuario.setVisible(activado);
+    }
+
+    public void menuReportes() {
+        if (activado == true) {
+            activado = false;
+            panelRIngresos.setVisible(activado);
+            panelRRegion.setVisible(activado);
+            panelRTotal.setVisible(activado);
+            panelRUsuario.setVisible(activado);
+        } else {
+            activado = true;
+            panelRIngresos.setVisible(activado);
+            panelRRegion.setVisible(activado);
+            panelRTotal.setVisible(activado);
+            panelRUsuario.setVisible(activado);
+        }
     }
 
     /**
@@ -50,6 +76,15 @@ public class Admin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        panelRRegion = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        panelRUsuario = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        panelRIngresos = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        panelRTotal = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         panelMainContainer = new javax.swing.JPanel();
@@ -103,11 +138,112 @@ public class Admin extends javax.swing.JFrame {
         jLabel6.setText("Kioscos");
         panelKiosco.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel9MouseClicked(evt);
+            }
+        });
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel7.setText("Reportes");
+        jLabel7.setText("> Reportes");
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelRRegion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRRegionMouseClicked(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel9.setText("Por Región");
+
+        javax.swing.GroupLayout panelRRegionLayout = new javax.swing.GroupLayout(panelRRegion);
+        panelRRegion.setLayout(panelRRegionLayout);
+        panelRRegionLayout.setHorizontalGroup(
+            panelRRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRRegionLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelRRegionLayout.setVerticalGroup(
+            panelRRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRRegionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(panelRRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 226, -1));
+
+        jLabel10.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel10.setText("Por Usuario");
+
+        javax.swing.GroupLayout panelRUsuarioLayout = new javax.swing.GroupLayout(panelRUsuario);
+        panelRUsuario.setLayout(panelRUsuarioLayout);
+        panelRUsuarioLayout.setHorizontalGroup(
+            panelRUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRUsuarioLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelRUsuarioLayout.setVerticalGroup(
+            panelRUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(panelRUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 41, 226, -1));
+
+        jLabel11.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel11.setText("Ingresos Totales");
+
+        javax.swing.GroupLayout panelRIngresosLayout = new javax.swing.GroupLayout(panelRIngresos);
+        panelRIngresos.setLayout(panelRIngresosLayout);
+        panelRIngresosLayout.setHorizontalGroup(
+            panelRIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRIngresosLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel11)
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        panelRIngresosLayout.setVerticalGroup(
+            panelRIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRIngresosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(panelRIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 76, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel12.setText("Total de Paquetes");
+
+        javax.swing.GroupLayout panelRTotalLayout = new javax.swing.GroupLayout(panelRTotal);
+        panelRTotal.setLayout(panelRTotalLayout);
+        panelRTotalLayout.setHorizontalGroup(
+            panelRTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRTotalLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel12)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+        panelRTotalLayout.setVerticalGroup(
+            panelRTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRTotalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(panelRTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 111, -1, -1));
 
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -128,24 +264,25 @@ public class Admin extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
             .addComponent(panelRegiones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelKiosco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-            .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-            .addComponent(btnCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+            .addComponent(panelKiosco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelRegiones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,9 +290,11 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(panelKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addGap(3, 3, 3)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 540));
@@ -213,6 +352,16 @@ public class Admin extends javax.swing.JFrame {
         menuClick(adK);
     }//GEN-LAST:event_panelKioscoMouseClicked
 
+    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+        // TODO add your handling code here:
+        menuReportes();
+    }//GEN-LAST:event_jPanel9MouseClicked
+
+    private void panelRRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRRegionMouseClicked
+        // TODO add your handling code here:
+        menuClick(adRRegion);
+    }//GEN-LAST:event_panelRRegionMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -244,20 +393,24 @@ public class Admin extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Admin().setVisible(true);
-                
+
             }
         });
     }
-    
-    public void menuClick(JPanel panel){
+
+    public void menuClick(JPanel panel) {
         ad.setVisible(false);
         dm.setVisible(false);
         adK.setVisible(false);
+        adRRegion.setVisible(false);
         panel.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCerrarSesion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -265,14 +418,20 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel panelDepartamentos;
     private javax.swing.JPanel panelKiosco;
     private javax.swing.JPanel panelMainContainer;
+    private javax.swing.JPanel panelRIngresos;
+    private javax.swing.JPanel panelRRegion;
+    private javax.swing.JPanel panelRTotal;
+    private javax.swing.JPanel panelRUsuario;
     private javax.swing.JPanel panelRegiones;
     // End of variables declaration//GEN-END:variables
 }
