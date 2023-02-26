@@ -3,10 +3,12 @@ package Componentes;
 import Administrador.Regiones;
 import Administrador.ctrlRegiones;
 import Componentes.CRUD.AdminAgregarRegiones;
+import Componentes.CRUD.AdminModificarRegion;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -18,6 +20,7 @@ public class AdminRegiones extends javax.swing.JPanel {
 
     public ArrayList<Regiones> regio;
     private AdminAgregarRegiones aAR;
+    private AdminModificarRegion aMR;
 
     /**
      * Creates new form Regiones
@@ -26,16 +29,25 @@ public class AdminRegiones extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 710, 500);
         aAR = new AdminAgregarRegiones();
+        aMR = new AdminModificarRegion();
         regio = ctrlRegiones.getTodasRegiones();
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
         Border bottomBorder1 = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
         panelBackground.setBorder(bottomBorder);
         panelAgregar.setBorder(bottomBorder1);
-        
+       
         panelCrud.add(aAR);
+        panelCrud.add(aMR);
+        menuClick(aAR);
        // cargarDatos();
     }
+    
+     public void menuClick(JPanel panel) {
+        aAR.setVisible(false);
+        aMR.setVisible(false);
 
+        panel.setVisible(true);
+    }
    
 
     public void actualizarDatos(String codigo, int posicion, double precioEstandar, double precioEspecial) {
@@ -79,12 +91,12 @@ public class AdminRegiones extends javax.swing.JPanel {
     private void initComponents() {
 
         panelRound3 = new Elementos.PanelRound();
-        panelCrud = new javax.swing.JPanel();
         panelBackground = new javax.swing.JPanel();
         panelAgregar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        panelModificar = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        panelCrud = new javax.swing.JPanel();
 
         panelRound3.setBackground(new java.awt.Color(69, 74, 78));
         panelRound3.setRoundBottomLeft(15);
@@ -92,11 +104,14 @@ public class AdminRegiones extends javax.swing.JPanel {
         panelRound3.setRoundTopLeft(15);
         panelRound3.setRoundTopRight(15);
 
-        panelCrud.setBackground(new java.awt.Color(255, 51, 153));
-        panelCrud.setOpaque(false);
-
         panelBackground.setOpaque(false);
         panelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAgregarMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setText("Agregar");
@@ -104,11 +119,20 @@ public class AdminRegiones extends javax.swing.JPanel {
 
         panelBackground.add(panelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 121, -1));
 
+        panelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelModificarMouseClicked(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setText("Modificar");
-        jPanel5.add(jLabel5);
+        panelModificar.add(jLabel5);
 
-        panelBackground.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 121, -1));
+        panelBackground.add(panelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 121, -1));
+
+        panelCrud.setBackground(new java.awt.Color(255, 51, 153));
+        panelCrud.setOpaque(false);
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -126,7 +150,7 @@ public class AdminRegiones extends javax.swing.JPanel {
                 .addGap(9, 9, 9)
                 .addComponent(panelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(panelCrud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelCrud, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -142,14 +166,27 @@ public class AdminRegiones extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
+        // TODO add your handling code here:
+        menuClick(aMR);
+        aMR.cargarRegiones();
+        aMR.cargarBoxRegiones();
+    }//GEN-LAST:event_panelModificarMouseClicked
+
+    private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
+        // TODO add your handling code here:
+        menuClick(aAR);
+        aAR.cargarRegiones();
+    }//GEN-LAST:event_panelAgregarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel panelAgregar;
     private javax.swing.JPanel panelBackground;
     private javax.swing.JPanel panelCrud;
+    private javax.swing.JPanel panelModificar;
     private Elementos.PanelRound panelRound3;
     // End of variables declaration//GEN-END:variables
 }
