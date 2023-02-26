@@ -14,10 +14,10 @@ public class ctrlRegiones {
                 return true;
             }
 
-        }else{
-            JOptionPane.showMessageDialog(null, "Llene todos los campos", "Error",  JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         return false;
     }
 
@@ -88,6 +88,16 @@ public class ctrlRegiones {
             }
         }
         return false;
+    }
+
+    public static boolean eliminarRegion(String codR, int index) {
+        boolean regresar = false;
+        if(verificarCodigoRegion(codR)){
+            regiones.remove(index);
+            regresar = true;
+            return regresar;
+        }
+        return regresar;
     }
 
 }

@@ -30,6 +30,7 @@ public class DepMun extends javax.swing.JPanel {
     }
 
     public void cargarRegiones() {
+        boxRegion.removeAllItems();
         for (int i = 0; i < regio.size(); i++) {
             if (regio.get(i) != null) {
                 String codeR = regio.get(i).getCodigo();

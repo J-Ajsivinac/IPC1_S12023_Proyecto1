@@ -99,10 +99,6 @@ public class AdminRegiones extends javax.swing.JPanel {
         panelCrud = new javax.swing.JPanel();
 
         panelRound3.setBackground(new java.awt.Color(69, 74, 78));
-        panelRound3.setRoundBottomLeft(15);
-        panelRound3.setRoundBottomRight(15);
-        panelRound3.setRoundTopLeft(15);
-        panelRound3.setRoundTopRight(15);
 
         panelBackground.setOpaque(false);
         panelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,6 +167,7 @@ public class AdminRegiones extends javax.swing.JPanel {
         menuClick(aMR);
         aMR.cargarRegiones();
         aMR.cargarBoxRegiones();
+        aMR.mostrarPrecios(1);
     }//GEN-LAST:event_panelModificarMouseClicked
 
     private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked

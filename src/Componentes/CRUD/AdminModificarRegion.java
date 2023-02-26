@@ -31,11 +31,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         TableActionEvent event = new TableActionEvent() {
             @Override
-            public void onEdit(int row) {
-                //System.out.println("Edit row : " + row);
-                String dato = String.valueOf(modelo.getValueAt(row, 0));
-                System.out.println(dato);
-            }
+            public void onEdit(int row) { }
 
             @Override
             public void onDelete(int row) {
@@ -43,28 +39,34 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                     tabla2.getCellEditor().stopCellEditing();
                 }
                 DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
-
-                model.removeRow(row);
+                String codigo = String.valueOf(modelo.getValueAt(row, 0));
+                if(ctrlRegiones.eliminarRegion(codigo, row)){
+                     model.removeRow(row);
+                     JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+                     cargarBoxRegiones();
+                     cargarRegiones();
+                }
+               
             }
 
             @Override
-            public void onView(int row) {
-                System.out.println("View row : " + row);
-            }
+            public void onView(int row) { }
         };
 
         tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event));
         cargarRegiones();
+        
     }
 
     public void cargarBoxRegiones() {
+        boxRegion.removeAllItems();
         regio = ctrlRegiones.getTodasRegiones();
         for (int i = 0; i < regio.size(); i++) {
             if (regio.get(i) != null) {
                 String codeR = regio.get(i).getCodigo();
                 String nombreRegion = regio.get(i).getNombre();
-                boxRegion.addItem(new Regiones(codeR, nombreRegion));
+                boxRegion.addItem(new Regiones(codeR, nombreRegion, regio.get(i).getPrecioEstandar(), regio.get(i).getPrecioEspecial()));
             }
 
         }
@@ -79,6 +81,20 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             datos[1] = Region.getNombre();
             modelo.addRow(datos);
         }
+    }
+
+    public void mostrarPrecios(int opcion) {
+        regio = ctrlRegiones.getTodasRegiones();
+        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
+        if (regio != null && regItem != null) {
+            int opciones = opcion;
+            if (opciones == 1) {
+                lblPrecioActual.setText(regItem.getPrecioEstandar() + "");
+            } else if (opciones == 2) {
+                lblPrecioActual.setText(regItem.getPrecioEspecial() + "");
+            }
+        }
+
     }
 
     /**
@@ -142,7 +158,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jLabel7.setText("Precio Actual:");
 
-        lblPrecioActual.setText("jLabel8");
+        lblPrecioActual.setText(" ");
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -177,8 +193,8 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                         .addComponent(lblPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(56, 56, 56))
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(267, 267, 267)
-                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(255, 255, 255)
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
@@ -191,10 +207,11 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addComponent(lblPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPrecioActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,14 +230,14 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tabla2.setRowHeight(45);
+        tabla2.setRowHeight(55);
         jScrollPane2.setViewportView(tabla2);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
@@ -275,9 +292,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
     private void boxPrecioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxPrecioItemStateChanged
         // TODO add your handling code here:
-        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
-        int opciones = boxPrecio.getSelectedIndex() + 1;
-        lblPrecioActual.setText(regItem.getPrecioEspecial()+"");
+        mostrarPrecios(boxPrecio.getSelectedIndex() + 1);
     }//GEN-LAST:event_boxPrecioItemStateChanged
 
 
