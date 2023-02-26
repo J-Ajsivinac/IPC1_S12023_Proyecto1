@@ -6,7 +6,9 @@ import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -14,15 +16,19 @@ import javax.swing.border.Border;
  */
 public class login extends javax.swing.JFrame {
 
-
     /**
      * Creates new form login
      */
     public login() {
+        UIManager.put("TextField.caretForeground", new ColorUIResource(255, 255, 255));
+        UIManager.put("ComboBox.selectionBackground", new ColorUIResource(57, 60, 72));
+        UIManager.put("ComboBox.selectionForeground", new ColorUIResource(255, 255, 255));
         initComponents();
         this.setLocationRelativeTo(null);
-        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.white);
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
         txtMail.setBorder(bottomBorder);
+        txtPassword.setBorder(bottomBorder);
+        txtPassword.setCaretColor(Color.WHITE);
         btnCrear.requestFocusInWindow();
 
     }
@@ -52,18 +58,19 @@ public class login extends javax.swing.JFrame {
         btnIngresar = new Elementos.ButtonRound();
         jPanel8 = new javax.swing.JPanel();
         btnCrear = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(26, 29, 39));
+        jPanel1.setBackground(new java.awt.Color(19, 19, 26));
 
-        panelRound1.setBackground(new java.awt.Color(34, 37, 47));
+        panelRound1.setBackground(new java.awt.Color(28, 28, 36));
         panelRound1.setRoundBottomLeft(20);
         panelRound1.setRoundBottomRight(20);
         panelRound1.setRoundTopLeft(20);
         panelRound1.setRoundTopRight(20);
 
-        jPanel2.setBackground(new java.awt.Color(45, 48, 53));
+        jPanel2.setBackground(new java.awt.Color(39, 43, 46));
         jPanel2.setOpaque(false);
         jPanel2.setLayout(null);
 
@@ -87,15 +94,15 @@ public class login extends javax.swing.JFrame {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(210, 220, 222));
         jLabel2.setText("Correo Electrónico");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        txtMail.setBackground(new java.awt.Color(34, 37, 47));
+        txtMail.setBackground(new java.awt.Color(40, 41, 52));
         txtMail.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtMail.setForeground(new java.awt.Color(255, 255, 255));
         txtMail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtMail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(31, 34, 40), 4));
+        txtMail.setBorder(null);
         txtMail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtMailFocusGained(evt);
@@ -121,14 +128,22 @@ public class login extends javax.swing.JFrame {
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(210, 220, 222));
         jLabel3.setText("Contraseña");
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        txtPassword.setBackground(new java.awt.Color(31, 34, 40));
+        txtPassword.setBackground(new java.awt.Color(40, 41, 52));
         txtPassword.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(31, 34, 40), 4));
+        txtPassword.setBorder(null);
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusLost(evt);
+            }
+        });
         jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
 
         jPanel4.add(jPanel6);
@@ -199,16 +214,22 @@ public class login extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addContainerGap(86, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(201, 201, 201))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(41, 41, 41)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,6 +258,24 @@ public class login extends javax.swing.JFrame {
         iniciarSesion();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+    private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
+        // TODO add your handling code here:
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
+        txtPassword.setBackground(new Color(40,41,52));
+        txtPassword.setBorder(bottomBorder);
+    }//GEN-LAST:event_txtPasswordFocusLost
+
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        // TODO add your handling code here:
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
+        txtPassword.setBackground(new Color(50,51,64));
+        txtPassword.setBorder(bottomBorder);
+    }//GEN-LAST:event_txtPasswordFocusGained
+
+    private void txtMailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMailMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMailMouseExited
+
     private void txtMailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMailMouseClicked
         // TODO add your handling code here:
         //Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.red);
@@ -244,21 +283,19 @@ public class login extends javax.swing.JFrame {
         //txtMail.setBorder(bottomBorder);
     }//GEN-LAST:event_txtMailMouseClicked
 
-    private void txtMailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMailMouseExited
+    private void txtMailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMailMouseExited
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
+        txtMail.setBackground(new Color(40,41,52));
+        txtMail.setBorder(bottomBorder);
+    }//GEN-LAST:event_txtMailFocusLost
 
     private void txtMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusGained
         // TODO add your handling code here:
-            Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.red);
-            txtMail.setBorder(bottomBorder);
-    }//GEN-LAST:event_txtMailFocusGained
-
-    private void txtMailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusLost
-        // TODO add your handling code here:
-        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.white);
+        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
+        txtMail.setBackground(new Color(50,51,64));
         txtMail.setBorder(bottomBorder);
-    }//GEN-LAST:event_txtMailFocusLost
+    }//GEN-LAST:event_txtMailFocusGained
 
     public void iniciarSesion() {
         String correo = txtMail.getText();
@@ -328,6 +365,7 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCrear;
     private Elementos.ButtonRound btnIngresar;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -36,9 +36,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
      * Creates new form agregarUsuarios
      */
     public agregarUsuarios() {
-        UIManager.put("TextField.caretForeground", new ColorUIResource(255, 255, 255));
-        UIManager.put("ComboBox.selectionBackground", new ColorUIResource(57, 60, 72));
-         UIManager.put("ComboBox.selectionForeground", new ColorUIResource(255, 255, 255));
+        
         initComponents();
         this.setLocationRelativeTo(null);
         agregarBoxes();

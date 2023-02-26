@@ -1,6 +1,7 @@
 package Administrador;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ctrlRegiones {
 
@@ -8,9 +9,15 @@ public class ctrlRegiones {
 
     public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial, int contador) {
         if (!codigo.equals("") && !nombre.equals("") && precioEstandar > 0 && precioEspecial > 0) {
-            regiones.add(new Regiones(codigo, nombre, precioEstandar, precioEspecial, contador));
-            return true;
+            if (!verificarCodigoRegion(codigo)) {
+                regiones.add(new Regiones(codigo, nombre, precioEstandar, precioEspecial, contador));
+                return true;
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Llene todos los campos", "Error",  JOptionPane.ERROR_MESSAGE);
         }
+        
         return false;
     }
 
@@ -39,7 +46,7 @@ public class ctrlRegiones {
         for (int i = 0; i < regiones.size(); i++) {
             Regiones reg = regiones.get(i);
             if (reg.getCodigo().equals(codigo)) {
-                regresar = new Regiones(codigo, reg.getNombre(), reg.getPrecioEstandar(), reg.getPrecioEspecial(),reg.getContadorEnvios());
+                regresar = new Regiones(codigo, reg.getNombre(), reg.getPrecioEstandar(), reg.getPrecioEspecial(), reg.getContadorEnvios());
             }
         }
         return regresar;
@@ -51,26 +58,36 @@ public class ctrlRegiones {
         for (int i = 0; i < regiones.size(); i++) {
             Regiones reg = regiones.get(i);
             if (reg.getCodigo().equals(codRegion)) {
-               if(tipo == 0){
-                   regresar = reg.getPrecioEstandar();
+                if (tipo == 0) {
+                    regresar = reg.getPrecioEstandar();
                     return regresar;
-               }else if(tipo == 1){
-                   regresar = reg.getPrecioEspecial();
+                } else if (tipo == 1) {
+                    regresar = reg.getPrecioEspecial();
                     return regresar;
-               }
+                }
             }
         }
 
         return regresar;
     }
-    
-    public static void addContador(String codRegion){
+
+    public static void addContador(String codRegion) {
         for (int i = 0; i < regiones.size(); i++) {
             Regiones reg = regiones.get(i);
             if (reg.getCodigo().equals(codRegion)) {
-                regiones.get(i).setContadorEnvios(regiones.get(i).getContadorEnvios()+1);
+                regiones.get(i).setContadorEnvios(regiones.get(i).getContadorEnvios() + 1);
             }
         }
+    }
+
+    public static boolean verificarCodigoRegion(String codigo) {
+        for (int i = 0; i < regiones.size(); i++) {
+            Regiones d = regiones.get(i);
+            if (d.getCodigo().equals(codigo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -314,14 +314,14 @@ public class Admin extends javax.swing.JFrame {
         panelMainContainer.setLayout(panelMainContainerLayout);
         panelMainContainerLayout.setHorizontalGroup(
             panelMainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
         panelMainContainerLayout.setVerticalGroup(
             panelMainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelMainContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 710, 500));
+        jPanel1.add(panelMainContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 720, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -342,6 +342,9 @@ public class Admin extends javax.swing.JFrame {
     private void panelDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDepartamentosMouseClicked
         // TODO add your handling code here:
         menuClick(dm);
+        dm.cargarRegiones();
+        dm.cargarDepartamentos();
+        
     }//GEN-LAST:event_panelDepartamentosMouseClicked
 
     private void panelRegionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseClicked
