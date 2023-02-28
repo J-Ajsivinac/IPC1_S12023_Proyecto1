@@ -20,7 +20,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
      */
     public AdminAgregarRegiones() {
         initComponents();
-        this.setBounds(0, 0, 698, 422);
+        this.setBounds(0, 0, 700, 455);
         modelo = (DefaultTableModel) tabla1.getModel();
         
         cargarRegiones();
@@ -40,7 +40,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
     }
     
     public void agregarRegion(){
-        if (ctrlRegiones.nuevaRegion(txtCodigo.getText().toString(), txtNombreR.getText().toString(), Integer.parseInt(txtPrecioEst.getText()), Integer.parseInt(txtPrecioEspe.getText()), 0)) {
+        if (ctrlRegiones.nuevaRegion(txtCodigo.getText().toString(), txtNombreR.getText().toString(), Double.parseDouble(txtPrecioEst.getText()),  Double.parseDouble(txtPrecioEspe.getText()), 0)) {
             JOptionPane.showMessageDialog(null, "Region ingresada con exito");
             cargarRegiones();
         }
@@ -186,7 +186,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
@@ -227,8 +227,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

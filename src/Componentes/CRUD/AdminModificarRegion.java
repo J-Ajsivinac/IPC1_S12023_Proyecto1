@@ -7,8 +7,11 @@ import Elementos.CutomTable.TableActionCellEditorEliminar;
 import Elementos.CutomTable.TableActionCellRender;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +23,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
     private ArrayList<Regiones> totalRegiones;
     private DefaultTableModel modelo;
     private ArrayList<Regiones> regio;
+    private boolean cambioValor = false;
 
     /**
      * Creates new form AdminModificarRegion
@@ -31,7 +35,8 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         TableActionEvent event = new TableActionEvent() {
             @Override
-            public void onEdit(int row) { }
+            public void onEdit(int row) {
+            }
 
             @Override
             public void onDelete(int row) {
@@ -40,23 +45,26 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 }
                 DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
                 String codigo = String.valueOf(modelo.getValueAt(row, 0));
-                if(ctrlRegiones.eliminarRegion(codigo, row)){
-                     model.removeRow(row);
-                     JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
-                     cargarBoxRegiones();
-                     cargarRegiones();
+                if (ctrlRegiones.eliminarRegion(codigo, row)) {
+                    model.removeRow(row);
+                    JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+                    cargarBoxRegiones();
+                    cargarRegiones();
                 }
-               
+
             }
 
             @Override
-            public void onView(int row) { }
+            public void onView(int row) {
+            }
         };
-
+        Border unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK);
+        panelSuperior.setBorder(unselect);
         tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event));
         cargarRegiones();
-        
+        mostrarDatos();
+
     }
 
     public void cargarBoxRegiones() {
@@ -83,15 +91,24 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         }
     }
 
-    public void mostrarPrecios(int opcion) {
+    public void mostrarDatos() {
         regio = ctrlRegiones.getTodasRegiones();
         Regiones regItem = (Regiones) boxRegion.getSelectedItem();
+        int opcion = boxPrecio.getSelectedIndex()+1;
+        
         if (regio != null && regItem != null) {
-            int opciones = opcion;
-            if (opciones == 1) {
+            if (opcion == 1) {
+                txtNuevoPrecio.setEditable(true);
+                txtNuevoNombre.setEditable(false);
                 lblPrecioActual.setText(regItem.getPrecioEstandar() + "");
-            } else if (opciones == 2) {
+            } else if (opcion == 2) {
+                txtNuevoPrecio.setEditable(true);
+                txtNuevoNombre.setEditable(false);
                 lblPrecioActual.setText(regItem.getPrecioEspecial() + "");
+            } else if (opcion == 3) {
+                txtNuevoPrecio.setEditable(false);
+                txtNuevoNombre.setEditable(true);
+                lblPrecioActual.setText(regItem.getNombre() + "");
             }
         }
 
@@ -110,14 +127,17 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panelRound2 = new Elementos.PanelRound();
+        jLabel5 = new javax.swing.JLabel();
+        txtNuevoPrecio = new javax.swing.JTextField();
+        buttonRound1 = new Elementos.ButtonRound();
+        panelSuperior = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         boxRegion = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         boxPrecio = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        txtNuevoPrecio = new javax.swing.JTextField();
+        lblAdvertencia = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        buttonRound1 = new Elementos.ButtonRound();
+        txtNuevoNombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         lblPrecioActual = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -133,20 +153,18 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         jLabel2.setText("Eliminar");
 
-        jLabel3.setText("Región");
-
-        jLabel4.setText("Precio");
-
-        boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial" }));
-        boxPrecio.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                boxPrecioItemStateChanged(evt);
-            }
-        });
+        panelRound2.setRoundBottomLeft(15);
+        panelRound2.setRoundBottomRight(15);
+        panelRound2.setRoundTopLeft(15);
+        panelRound2.setRoundTopRight(15);
 
         jLabel5.setText("Nuevo Precio");
 
-        jLabel6.setText("jLabel6");
+        txtNuevoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNuevoPrecioKeyPressed(evt);
+            }
+        });
 
         buttonRound1.setText("Actualizar");
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
@@ -155,8 +173,49 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             }
         });
 
+        panelSuperior.setOpaque(false);
+
+        jLabel3.setText("Región");
+
+        jLabel4.setText("Cambiar:");
+
+        boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial", "Nombre" }));
+        boxPrecio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxPrecioItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelSuperiorLayout = new javax.swing.GroupLayout(panelSuperior);
+        panelSuperior.setLayout(panelSuperiorLayout);
+        panelSuperiorLayout.setHorizontalGroup(
+            panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSuperiorLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelSuperiorLayout.setVerticalGroup(
+            panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSuperiorLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9))
+        );
+
+        jLabel6.setText("Nuevo Nombre");
+
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jLabel7.setText("Precio Actual:");
+        jLabel7.setText("Valor Actual:");
 
         lblPrecioActual.setText(" ");
 
@@ -167,58 +226,47 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(17, 17, 17)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblPrecioActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addComponent(txtNuevoPrecio)
-                                .addGap(40, 40, 40)))))
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblAdvertencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtNuevoPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56))
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(257, 257, 257)
+                        .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPrecioActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel7)))
+                .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 20, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(lblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         tabla2.setModel(new javax.swing.table.DefaultTableModel(
@@ -249,9 +297,9 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane2)
-                    .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 643, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,11 +308,11 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -275,7 +323,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -283,17 +331,37 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         // TODO add your handling code here:
         Regiones regItem = (Regiones) boxRegion.getSelectedItem();
         int opciones = boxPrecio.getSelectedIndex() + 1;
-        int nuevoPrecio = Integer.parseInt(txtNuevoPrecio.getText());
-        if (ctrlRegiones.cambiarPrecios(regItem.getCodigo(), opciones, nuevoPrecio)) {
-            JOptionPane.showMessageDialog(null, "Se cambiaron el precio correctamente");
+        double nuevoPrecio =0;
+        if (opciones == 1 || opciones == 2) {
+            nuevoPrecio = Double.parseDouble(txtNuevoPrecio.getText());
+        }
+        if (ctrlRegiones.cambiarPrecios(regItem.getCodigo(), opciones, nuevoPrecio, txtNuevoNombre.getText().toString())) {
+            JOptionPane.showMessageDialog(null, "Se cambiaron los datos correctamente");
             cargarBoxRegiones();
+            cargarRegiones();
+            mostrarDatos();
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al cambiar los datos");
         }
     }//GEN-LAST:event_buttonRound1ActionPerformed
 
     private void boxPrecioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxPrecioItemStateChanged
         // TODO add your handling code here:
-        mostrarPrecios(boxPrecio.getSelectedIndex() + 1);
+        mostrarDatos();
     }//GEN-LAST:event_boxPrecioItemStateChanged
+
+    private void txtNuevoPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoPrecioKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtNuevoPrecio.setEditable(false);
+            lblAdvertencia.setText("Solo numeros");
+        } else {
+            txtNuevoPrecio.setEditable(true);
+            lblAdvertencia.setText("");
+        }
+
+    }//GEN-LAST:event_txtNuevoPrecioKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -308,10 +376,13 @@ public class AdminModificarRegion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblAdvertencia;
     private javax.swing.JLabel lblPrecioActual;
     private Elementos.PanelRound panelRound1;
     private Elementos.PanelRound panelRound2;
+    private javax.swing.JPanel panelSuperior;
     private Elementos.CutomTable.TableDark tabla2;
+    private javax.swing.JTextField txtNuevoNombre;
     private javax.swing.JTextField txtNuevoPrecio;
     // End of variables declaration//GEN-END:variables
 }

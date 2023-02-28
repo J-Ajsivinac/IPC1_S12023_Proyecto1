@@ -21,65 +21,36 @@ public class AdminRegiones extends javax.swing.JPanel {
     public ArrayList<Regiones> regio;
     private AdminAgregarRegiones aAR;
     private AdminModificarRegion aMR;
+    private Border unselect, selected;
 
     /**
      * Creates new form Regiones
      */
     public AdminRegiones() {
         initComponents();
-        this.setBounds(0, 0, 710, 500);
+        this.setBounds(0, 0, 720, 520);
         aAR = new AdminAgregarRegiones();
         aMR = new AdminModificarRegion();
         regio = ctrlRegiones.getTodasRegiones();
-        Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-        Border bottomBorder1 = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
-        panelBackground.setBorder(bottomBorder);
-        panelAgregar.setBorder(bottomBorder1);
-       
+        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
+        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
+        panelBackground.setBorder(unselect);
         panelCrud.add(aAR);
         panelCrud.add(aMR);
-        menuClick(aAR);
+        menuClick(aAR,panelAgregar);
        // cargarDatos();
     }
     
-     public void menuClick(JPanel panel) {
+     public void menuClick(JPanel panel,JPanel btn) {
         aAR.setVisible(false);
         aMR.setVisible(false);
-
+        panelAgregar.setBorder(unselect);
+        panelModificar.setBorder(unselect);
+        btn.setBorder(selected);
         panel.setVisible(true);
     }
    
 
-    public void actualizarDatos(String codigo, int posicion, double precioEstandar, double precioEspecial) {
-        boolean cambios = false;
-        if (regio.get(posicion).getPrecioEstandar() != precioEstandar) {
-            int opcion = 1;
-            if (ctrlRegiones.cambiarPrecios(codigo, opcion, precioEstandar)) {
-                cambios = true;
-            }
-        } else if (regio.get(posicion).getPrecioEspecial() != precioEspecial) {
-            int opcion = 2;
-            if (ctrlRegiones.cambiarPrecios(codigo, opcion, precioEspecial)) {
-                cambios = true;
-            }
-        }
-
-        if (cambios) {
-            JOptionPane.showMessageDialog(null, "Cambios exitosos");
-        }
-       // cargarDatos();
-    }
-
-    public void enviarActaulizaciones(String codigo, int posicion, JTextField estandard, JTextField especial) {
-        if (!(estandard.getText().equals("") || especial.getText().equals(""))) {
-            double precioEndard = Double.parseDouble(estandard.getText());
-            double precioEspe = Double.parseDouble(especial.getText());
-            actualizarDatos(codigo, posicion, precioEndard, precioEspe);
-        }else{
-            JOptionPane.showMessageDialog(null, "Campo Vacio");
-        }
-
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,16 +96,27 @@ public class AdminRegiones extends javax.swing.JPanel {
         jLabel5.setText("Modificar");
         panelModificar.add(jLabel5);
 
-        panelBackground.add(panelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 121, -1));
+        panelBackground.add(panelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 121, -1));
 
         panelCrud.setBackground(new java.awt.Color(255, 51, 153));
         panelCrud.setOpaque(false);
+
+        javax.swing.GroupLayout panelCrudLayout = new javax.swing.GroupLayout(panelCrud);
+        panelCrud.setLayout(panelCrudLayout);
+        panelCrudLayout.setHorizontalGroup(
+            panelCrudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+        panelCrudLayout.setVerticalGroup(
+            panelCrudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 455, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelCrud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,8 +127,8 @@ public class AdminRegiones extends javax.swing.JPanel {
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(panelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(panelCrud, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -158,21 +140,21 @@ public class AdminRegiones extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
-        menuClick(aMR);
+        menuClick(aMR,panelModificar);
         aMR.cargarRegiones();
         aMR.cargarBoxRegiones();
-        aMR.mostrarPrecios(1);
+        aMR.mostrarDatos();
     }//GEN-LAST:event_panelModificarMouseClicked
 
     private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
         // TODO add your handling code here:
-        menuClick(aAR);
+        menuClick(aAR,panelAgregar);
         aAR.cargarRegiones();
     }//GEN-LAST:event_panelAgregarMouseClicked
 

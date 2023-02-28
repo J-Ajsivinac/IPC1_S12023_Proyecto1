@@ -7,7 +7,7 @@ public class Departamentos extends Regiones {
     private String codDepartamento;
     private String nombreDepartamento;
     private ArrayList<Municipios> municipios;
-
+    
     public Departamentos(String codigo, String nombre, double precioEstandar, double precioEspecial, String codDepartamento,
             String nombreDepa) {
         super(codigo, nombre, precioEstandar, precioEspecial);

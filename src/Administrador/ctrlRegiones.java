@@ -21,7 +21,7 @@ public class ctrlRegiones {
         return false;
     }
 
-    public static boolean cambiarPrecios(String codigo, int opcion, double nuevoPrecio) {
+    public static boolean cambiarPrecios(String codigo, int opcion, double nuevoPrecio, String nuevoNombre) {
         for (int i = 0; i < regiones.size(); i++) {
             Regiones reg = regiones.get(i);
             if (reg.getCodigo().equals(codigo)) {
@@ -31,6 +31,11 @@ public class ctrlRegiones {
                 } else if (opcion == 2) {
                     reg.setPrecioEspecial(nuevoPrecio);
                     return true;
+                } else if (opcion == 3) {
+                    if (!nuevoNombre.equals("")) {
+                        reg.setNombre(nuevoNombre);
+                        return true;
+                    }
                 }
             }
         }
@@ -92,7 +97,7 @@ public class ctrlRegiones {
 
     public static boolean eliminarRegion(String codR, int index) {
         boolean regresar = false;
-        if(verificarCodigoRegion(codR)){
+        if (verificarCodigoRegion(codR)) {
             regiones.remove(index);
             regresar = true;
             return regresar;

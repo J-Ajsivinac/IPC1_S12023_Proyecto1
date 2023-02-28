@@ -25,6 +25,7 @@ public class login extends javax.swing.JFrame {
         UIManager.put("ComboBox.selectionForeground", new ColorUIResource(255, 255, 255));
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
         txtMail.setBorder(bottomBorder);
         txtPassword.setBorder(bottomBorder);

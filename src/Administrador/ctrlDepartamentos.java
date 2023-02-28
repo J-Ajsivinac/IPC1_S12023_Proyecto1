@@ -35,7 +35,7 @@ public class ctrlDepartamentos {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
             if (d.getCodDepartamento().equals(Codigo)) {
-                regresar = new Departamentos(Codigo, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento());
+                regresar = new Departamentos(d.getCodigo(), d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento());
             }
         }
         return regresar;
@@ -86,14 +86,14 @@ public class ctrlDepartamentos {
     public static boolean verificarcodigoMuni(String codigo) {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
-             if (d.getMunicipios().size() != 0) {
+            if (d.getMunicipios().size() != 0) {
                 for (int j = 0; j < d.getMunicipios().size(); j++) {
                     if (d.getMunicipios().get(j).getCodigoMunicipio().equals(codigo)) {
                         return true;
                     }
                 }
             }
-           
+
         }
         return false;
     }
@@ -101,8 +101,8 @@ public class ctrlDepartamentos {
     public static boolean verificarNombreMuni(String nombre) {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
-           
-             if (d.getMunicipios().size() != 0) {
+
+            if (d.getMunicipios().size() != 0) {
                 for (int j = 0; j < d.getMunicipios().size(); j++) {
                     if (d.getMunicipios().get(j).getNombreMunicipio().equals(nombre)) {
                         return true;
@@ -132,6 +132,19 @@ public class ctrlDepartamentos {
         return false;
     }
 
+    public static boolean modificarNombre(String codDepartamento, String nuevoNombre) {
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamentos dep = departamentos.get(i);
+            if (dep.getCodDepartamento().equals(codDepartamento)) {
+                dep.setNombreDepartamento(nuevoNombre);
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
     public static ArrayList<Departamentos> getAllD() {
         return departamentos;
     }
@@ -150,9 +163,21 @@ public class ctrlDepartamentos {
         }
         return mRegresar;
     }
-    
-    public static String getRegionbyCodigo(String codDepartamento){
-        String regresar="";
+
+    public static ArrayList<Municipios> getAllMunicipios() {
+        ArrayList<Municipios> mRegresar = new ArrayList<Municipios>();
+
+        for (int j = 0; j < departamentos.size(); j++) {
+            Departamentos d = departamentos.get(j);
+            for (int k = 0; k < d.getMunicipios().size(); k++) {
+                mRegresar.add(new Municipios(d.getCodDepartamento(), d.getMunicipios().get(k).getNombreMunicipio(), d.getMunicipios().get(k).getCodigoMunicipio()));
+            }
+        }
+        return mRegresar;
+    }
+
+    public static String getRegionbyCodigo(String codDepartamento) {
+        String regresar = "";
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
             if (d.getCodDepartamento().equals(codDepartamento)) {
@@ -162,4 +187,16 @@ public class ctrlDepartamentos {
         }
         return regresar;
     }
+
+    public static ArrayList<Departamentos> getAllDepartamentosByCod(String codigRegion) {
+        ArrayList<Departamentos> mRegresar = new ArrayList<Departamentos>();
+        for (int j = 0; j < departamentos.size(); j++) {
+            Departamentos d = departamentos.get(j);
+            if (d.getCodigo().equals(codigRegion)) {
+                mRegresar.add(new Departamentos(codigRegion, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento()));
+            }
+        }
+        return mRegresar;
+    }
+
 }
