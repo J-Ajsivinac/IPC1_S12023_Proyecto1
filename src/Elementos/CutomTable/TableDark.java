@@ -87,6 +87,7 @@ public class TableDark extends JTable {
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
+            
             if (isCellSelected(row, column)) {
                 if (row % 2 == 0) {
                     com.setBackground(new Color(33, 103, 153));

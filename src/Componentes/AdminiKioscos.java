@@ -3,8 +3,14 @@ package Componentes;
 import Administrador.Regiones;
 import Administrador.ctrlKioscos;
 import Administrador.ctrlRegiones;
+import Componentes.CRUD.AdminAgregarKioscos;
+import Componentes.CRUD.AdminModificarKioscos;
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  *
@@ -13,35 +19,36 @@ import javax.swing.JOptionPane;
 public class AdminiKioscos extends javax.swing.JPanel {
 
     public ArrayList<Regiones> regio;
-
+    public AdminAgregarKioscos aAK;
+    private AdminModificarKioscos aMK;
+     private Border unselect, selected;
     /**
      * Creates new form AdminiKioscos
      */
     public AdminiKioscos() {
         initComponents();
         this.setBounds(0, 0, 710, 500);
+        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
+        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
+        panelBackground.setBorder(unselect);
+        aAK = new AdminAgregarKioscos();
+        aMK = new AdminModificarKioscos();
         regio = ctrlRegiones.getTodasRegiones();
-        cargarRegiones();
-    }
-
-    public void cargarRegiones() {
-        for (int i = 0; i < regio.size(); i++) {
-            if (regio.get(i) != null) {
-                String codeR = regio.get(i).getCodigo();
-                String nombreRegion = regio.get(i).getNombre();
-                boxRegion.addItem(new Regiones(codeR, nombreRegion));
-            }
-
-        }
+        panelCrud.add(aAK);
+        panelCrud.add(aMK);
+        menuClick(aAK, panelAgregar);
     }
     
-     public void ingresarKiosco(String codigo,String codK ,String nombreDepartament) {
-        if (!(codigo.equals("") && nombreDepartament.equals(""))) {
-            if (ctrlKioscos.nuevoKiosco(codigo, codK, nombreDepartament)) {
-                JOptionPane.showMessageDialog(null, "Kiosco ingresado Correctamente");
-            }
-        }
+      public void menuClick(JPanel panel,JPanel btn) {
+        aAK.setVisible(false);
+        aMK.setVisible(false);
+        panelAgregar.setBorder(unselect);
+        panelModificar.setBorder(unselect);
+        btn.setBorder(selected);
+        panel.setVisible(true);
     }
+    
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,138 +58,107 @@ public class AdminiKioscos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        boxRegion = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        panelRound3 = new Elementos.PanelRound();
+        panelBackground = new javax.swing.JPanel();
+        panelAgregar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtNombreKiosco = new javax.swing.JTextField();
-        btnRegistrarKiosco = new javax.swing.JButton();
+        panelModificar = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtCodKiosco = new javax.swing.JTextField();
+        panelCrud = new javax.swing.JPanel();
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel1.setText("Kioscos");
+        panelRound3.setBackground(new java.awt.Color(69, 74, 78));
 
-        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel2.setText("Ingresar Kioscos");
+        panelBackground.setOpaque(false);
+        panelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        boxRegion.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                boxRegionItemStateChanged(evt);
+        panelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAgregarMouseClicked(evt);
             }
         });
 
-        jLabel3.setText("Región");
+        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel4.setText("Agregar");
+        panelAgregar.add(jLabel4);
 
-        jLabel4.setText("Nombre del Kiosco");
+        panelBackground.add(panelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 121, -1));
 
-        btnRegistrarKiosco.setText("Registrar Kiosco");
-        btnRegistrarKiosco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarKioscoActionPerformed(evt);
+        panelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelModificarMouseClicked(evt);
             }
         });
 
-        jLabel5.setText("Codigo de Kiosco");
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel5.setText("Modificar");
+        panelModificar.add(jLabel5);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombreKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(25, 25, 25))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(288, 288, 288)
-                .addComponent(btnRegistrarKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        panelBackground.add(panelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 121, -1));
+
+        panelCrud.setBackground(new java.awt.Color(255, 51, 153));
+        panelCrud.setOpaque(false);
+
+        javax.swing.GroupLayout panelCrudLayout = new javax.swing.GroupLayout(panelCrud);
+        panelCrud.setLayout(panelCrudLayout);
+        panelCrudLayout.setHorizontalGroup(
+            panelCrudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 698, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelCrudLayout.setVerticalGroup(
+            panelCrudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 455, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
+        panelRound3.setLayout(panelRound3Layout);
+        panelRound3Layout.setHorizontalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+            .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addComponent(panelCrud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelRound3Layout.setVerticalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(panelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombreKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCodKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistrarKiosco)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addComponent(panelCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
+            .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarKioscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarKioscoActionPerformed
+    private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
         // TODO add your handling code here:
-        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
-        String nombreDep = txtNombreKiosco.getText();
-        String codK = txtCodKiosco.getText();
-        ingresarKiosco(regItem.getCodigo(), codK, nombreDep);
-        //ingresarDepartamentos(regItem.getCodigo(), nombreDep);
-    }//GEN-LAST:event_btnRegistrarKioscoActionPerformed
+        menuClick(aAK,panelAgregar);
+    }//GEN-LAST:event_panelAgregarMouseClicked
 
-    private void boxRegionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionItemStateChanged
+    private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
-        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
-        //System.out.println("CODIGO: " + regItem.getCodigo());
-    }//GEN-LAST:event_boxRegionItemStateChanged
+        menuClick(aMK,panelModificar);
+    }//GEN-LAST:event_panelModificarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Object> boxRegion;
-    private javax.swing.JButton btnRegistrarKiosco;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtCodKiosco;
-    private javax.swing.JTextField txtNombreKiosco;
+    private javax.swing.JPanel panelAgregar;
+    private javax.swing.JPanel panelBackground;
+    private javax.swing.JPanel panelCrud;
+    private javax.swing.JPanel panelModificar;
+    private Elementos.PanelRound panelRound3;
     // End of variables declaration//GEN-END:variables
 }

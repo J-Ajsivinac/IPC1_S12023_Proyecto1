@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/e73cd8025f.js" crossorigin="anonymous"></script>
-    <title>Cotización</title>
+    <title>Guia</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
@@ -18,8 +18,7 @@
         }
 
         .content {
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 5px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -56,20 +55,19 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            height: 100px;
+            height: 90px;
         }
 
         .content .card .superior .datos{
             width: 40%;
             display: flex;
-            font-size: 18px;
             flex-direction: column;
             align-items: end;
-            font-weight: bold;
         }
 
         .content .card .superior img {
             width: 10%;
+            color: #8febaa;
         }
 
         .content .card .centro {
@@ -78,7 +76,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            height: 210px;
+            height: 255px;
             border-radius: 16px;
             background-color: #fff;
             box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
@@ -87,19 +85,19 @@
 
         .content .card .centro .datosGuia {
             width: 100%;
-            height: 96%;
+            height: 90%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            
+
 
         }
 
         .content .card .centro .datosGuia .contendedorD {
             padding-left: 2%;
             padding-right: 2%;
-            height: 25%;
+            height: 20%;
             width: 100%;
 
             display: flex;
@@ -114,6 +112,7 @@
 
         .content .card .centro .datosGuia .contendedorD span i {
             width: 20px;
+            text-align: center;
         }
 
         .content .card .centro .datosGuia .contendedorD .conten-origen {
@@ -128,7 +127,7 @@
         
         .content .card .centro .datosGuia .contendedorD .conten-origen #dOrigen,#dDestino {
             font-weight: bold;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .content .card .centro .datosGuia .contendedorD .conten-origen #dDireccionOrigen,#dDireccionDestino {
@@ -136,54 +135,46 @@
             font-size: 15px;
         }
 
-        .content .contenBarras .contenedorCodigo img {
-            width: 90%;
-            height: 90px;
-
-        }
-
         .content .card .inferior {
-            margin-top: 18px;
-            width: 95%;
+            margin-top: 10px;
+            width: 94.5%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            height: 60px;
+            height: 50px;
         }
 
-        .content .card .inferior .cPrecios{
-            width: 45%;
-            border-radius: 16px;
-            background-color: #fff;
-            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
-            display: flex;
-            flex-direction: row;
-            height: 97%;
-            padding-left: 15px;
-            padding-right: 15px;
-            align-items: center;
-        }
-
-        .content .card .inferior .cPrecios i{
-            width: 40px;
-            text-align: center;
-            font-size: 4vh;
-        }
-
-        .content .card .inferior .cPrecios .contenedor-precios{
-            height: 100%;
-            width: 100%;
+        .content .contenBarras {
+            margin-top: 10px;
+            box-sizing: border-box;
+            border: 0;
+            padding: 0;
+            padding-top: 5px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: cener;
+            min-width: 600px;
+            transition: .5s;
+            width: 50%;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
         }
 
-        .content .card .inferior .cPrecios .contenedor-precios span{
-            text-align: left;
-            width: 100%;
-            padding-left: 10%;
+        .content .contenBarras .contenedorCodigo {
+            width: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content .contenBarras .contenedorCodigo img {
+            width: 90%;
+            height: 90px;
+
         }
     </style>
 </head>
@@ -198,13 +189,17 @@
 
                 <div class="datos">
                     <div id="codigoPaquete">
-                        Cotización
+                        #000000000
+                    </div>
+                    <div id="fecha">
+                        21/02/2023
                     </div>
                 </div>
             </div>
             <div class="centro">
                 <div class="datosGuia">
                     <div class="contendedorD">
+
                         <span>
                             <i class="fa-solid fa-location-dot"></i>
                             <span class="texto">Origen</span>
@@ -243,6 +238,15 @@
                     </div>
                     <div class="contendedorD">
                         <span>
+                            <i class="fa-solid fa-coins"></i>
+                            <span class="texto">Tipo de Pago</span>
+                        </span>
+                        <span id="dTipoPago">
+                            cuentas
+                        </span>
+                    </div>
+                    <div class="contendedorD">
+                        <span>
                             <i class="fa-sharp fa-solid fa-box"></i>
                             <span class="texto">Tamaño de Paquetes</span>
                         </span>
@@ -253,20 +257,20 @@
                 </div>
             </div>
             <div class="inferior">
-                    <div class="cPrecios contenedor-Estandar">
-                        <i class="fa-solid fa-truck"></i>
-                        <div class="contenedor-precios">
-                            <span>Precio Estandar</span>
-                            <span id="dPrecioEst" style="color: #6f6f71;">Q50.00</span>
-                        </div>
-                    </div>
-                    <div class="cPrecios contenedor-Especial">
-                        <i class="fa-solid fa-truck-fast"></i>
-                        <div class="contenedor-precios">
-                            <span>Precio Especial</span>
-                            <span id="dPrecioEspe" style="color: #6f6f71;">Q50.00</span>
-                        </div>
-                    </div>
+                <div class="contenedorTarjeta">
+                    <span>Tarjeta: </span>
+                    <span id="dTarjeta">XXXXXXXXXXXXX2555</span>
+                </div>
+                <div class="contenedorTotas">
+                    <span>Total: </span>
+                    <span id="dTotal">100</span>
+                </div>
+            </div>
+        </div>
+        <div class="contenBarras">
+            <div class="contenedorCodigo">
+                <img src="https://images.ctfassets.net/gc4s9mi2asix/2IEJcg3Vsw9McOFrmOoyLN/5bcb1aef5d07c57c6ed39315fcf88c75/socket-mobile-pairing-code.jpeg"
+                    alt=""  >
             </div>
         </div>
     </div>
