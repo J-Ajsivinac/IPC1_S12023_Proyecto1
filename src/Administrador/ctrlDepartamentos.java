@@ -132,15 +132,53 @@ public class ctrlDepartamentos {
         return false;
     }
 
-    public static boolean modificarNombre(String codDepartamento, String nuevoNombre) {
+    public static boolean modificarNombreDep(String codDepartamento, String nuevoNombre) {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos dep = departamentos.get(i);
             if (dep.getCodDepartamento().equals(codDepartamento)) {
                 dep.setNombreDepartamento(nuevoNombre);
                 return true;
-            }else{
-                return false;
             }
+        }
+        return false;
+    }
+
+    public static boolean modificarNombreMun(String codDepartamento, String codMunicipio, String nuevoNombre) {
+        ArrayList<Municipios> muni1 = getMuniDepartamento(codDepartamento);
+
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamentos dep = departamentos.get(i);
+            for (int j = 0; j < muni1.size(); j++) {
+                Municipios mun = dep.getMunicipios().get(j);
+                if (mun.getCodigoMunicipio().equals(codMunicipio)) {
+                    mun.setNombreMunicipio(nuevoNombre);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean eliminarDepartamento(String codDep) {
+        if (verificarCodigoDepa(codDep)) {
+            int posicion = getPosicionDepartamentos(codDep);
+            departamentos.remove(posicion);
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean eliminarMunicipio(String codigDepar,String codigoMun) {
+        if (verificarCodigoDepa(codigDepar)) {
+            int posicion = getPosicionDepartamentos(codigDepar);
+            ArrayList<Municipios> mun =getMuniDepartamento(codigDepar);
+            for (int i = 0; i < mun.size(); i++) {
+                if(mun.get(i).getCodigoMunicipio().equals(codigoMun)){
+                    departamentos.get(posicion).getMunicipios().remove(i);
+                    return true;
+                }
+            }   
         }
         return false;
     }

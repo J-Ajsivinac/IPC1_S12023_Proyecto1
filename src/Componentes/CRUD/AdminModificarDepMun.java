@@ -1,12 +1,17 @@
 package Componentes.CRUD;
 
 import Administrador.Departamentos;
+import Administrador.Municipios;
 import Administrador.Regiones;
 import Administrador.ctrlDepartamentos;
 import Administrador.ctrlRegiones;
+import Elementos.CutomTable.TableActionCellEditorEliminar;
+import Elementos.CutomTable.TableActionCellRenderEliminar;
+import Elementos.CutomTable.TableActionEvent;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +20,9 @@ import javax.swing.JOptionPane;
 public class AdminModificarDepMun extends javax.swing.JPanel {
 
     public ArrayList<Regiones> regio;
+    private ArrayList<Departamentos> totalDepartamentos;
+    private DefaultTableModel modelo;
+    private DefaultTableModel modelo2;
 
     /**
      * Creates new form AdminModificarDepMun
@@ -22,8 +30,72 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
     public AdminModificarDepMun() {
         initComponents();
         this.setBounds(0, 0, 700, 455);
+        modelo = (DefaultTableModel) tabla1.getModel();
+        modelo2 = (DefaultTableModel) tabla2.getModel();
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+            }
+
+            @Override
+            public void onDelete(int row) {
+
+                if (tabla1.isEditing()) {
+                    tabla1.getCellEditor().stopCellEditing();
+                }
+                DefaultTableModel model = (DefaultTableModel) tabla1.getModel();
+                String codigo = String.valueOf(model.getValueAt(row, 0));
+                if (ctrlDepartamentos.eliminarDepartamento(codigo)) {
+                    model.removeRow(row);
+                    JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+                    //cargarBoxRegiones();
+                    //cargarRegiones();
+                }
+
+            }
+
+            @Override
+            public void onView(int row) {
+            }
+        };
+        //Segunda Tabla
+        TableActionEvent event2 = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if (tabla2.isEditing()) {
+                    tabla2.getCellEditor().stopCellEditing();
+                }
+                Departamentos depItem = (Departamentos) boxDeparE.getSelectedItem();
+                if (depItem != null) {
+                    DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
+                    String codigoDepartamento = depItem.getCodigo();
+                    String codigo = String.valueOf(model.getValueAt(row, 0));
+                    if (ctrlDepartamentos.eliminarMunicipio(codigoDepartamento,codigo)) {
+                        model.removeRow(row);
+                        JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+                    }
+                }
+
+            }
+
+            @Override
+            public void onView(int row) {
+            }
+        };
+        tabla1.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
+        tabla1.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event));
+
+        tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
+        tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event2));
         //regio = ctrlRegiones.getTodasRegiones();
         cargarB();
+
+        cargarTabla1();
+        cargarTabla2();
 
     }
 
@@ -38,7 +110,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
         String codDepartamento = dep.getCodDepartamento();
         String nNombre = txtNuevoDepartamento.getText();
-        if (ctrlDepartamentos.modificarNombre(codDepartamento, nNombre)) {
+        if (ctrlDepartamentos.modificarNombreDep(codDepartamento, nNombre)) {
             JOptionPane.showMessageDialog(null, "Nombre Actualizado");
             cargarB();
             //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
@@ -64,7 +136,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         //boxMunicipios.addItem("Municipios");
         // 
         limpiarBoxes(actualizar);
-        ArrayList<Departamentos> departamento = ctrlDepartamentos.getAllDepartamentosByCod(codDepartamento);
+        ArrayList<Departamentos> departamento = (ArrayList<Departamentos>) ctrlDepartamentos.getAllDepartamentosByCod(codDepartamento).clone();
         for (int i = 0; i < departamento.size(); i++) {
             if (departamento.get(i) != null) {
                 String codeD = departamento.get(i).getCodDepartamento();
@@ -76,6 +148,74 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
     public void limpiarBoxes(JComboBox eliminar) {
         eliminar.removeAllItems();
+    }
+
+    public void cargarTabla1() {
+        modelo.setRowCount(0);
+        //boxRegionEliminar
+        Regiones depRegion = (Regiones) boxRegionEliminar.getSelectedItem();
+        if (depRegion != null) {
+            ArrayList<Departamentos> totalDepartamentos = (ArrayList<Departamentos>) ctrlDepartamentos.getAllDepartamentosByCod(depRegion.getCodigo()).clone();
+            for (Departamentos dep : totalDepartamentos) {
+                Object datos[] = new Object[2];
+                datos[0] = dep.getCodDepartamento();
+                datos[1] = dep.getNombreDepartamento();
+                modelo.addRow(datos);
+            }
+        }
+    }
+
+    //
+    public void cargarMunicipios(JComboBox actualizar) {
+        //boxMunicipios.addItem("Municipios");
+        limpiarBoxes(actualizar);
+        Departamentos depItem = (Departamentos) boxDepartamentosM.getSelectedItem();
+        if (depItem != null) {
+            //limpiarBoxes(boxMuniUpdate);
+            String codDepartamento = depItem.getCodDepartamento();
+            limpiarBoxes(actualizar);
+            ArrayList<Municipios> muni = ctrlDepartamentos.getMuniDepartamento(codDepartamento);
+            for (int i = 0; i < muni.size(); i++) {
+                if (muni.get(i) != null) {
+                    String codeR = muni.get(i).getCodigoMunicipio();
+                    String nombreMuni = muni.get(i).getNombreMunicipio();
+                    actualizar.addItem(new Municipios(codDepartamento, nombreMuni, codeR));
+
+                }
+            }
+        }
+
+    }
+
+    public void actualizarMunicipio() {
+        //Departamentos dep = (Departamentos) boxRegionMuni.getSelectedItem();
+        Municipios mun = (Municipios) boxMuniUpdate.getSelectedItem();
+        //String codDepartamento = dep.getCodDepartamento();
+        String nNombre = txtNuevoMunicipio.getText();
+        if (ctrlDepartamentos.modificarNombreMun(mun.getCodigoDepartamento().toString(), mun.getCodigoMunicipio().toString(), nNombre)) {
+            JOptionPane.showMessageDialog(null, "Nombre Actualizado");
+            //cargarB();
+            cargarMunicipios(boxMuniUpdate);
+            //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
+        } else {
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+    }
+
+    public void cargarTabla2() {
+        modelo2.setRowCount(0);
+        //boxRegionEliminar
+        Departamentos depSelected = (Departamentos) boxDeparE.getSelectedItem();
+        if (depSelected != null) {
+            // ArrayList<Departamentos> totalDepartamentos = (ArrayList<Departamentos>) ctrlDepartamentos.getAllDepartamentosByCod(depSelected.getCodigo()).clone();
+            ArrayList<Municipios> totalMunicipios = ctrlDepartamentos.getMuniDepartamento(depSelected.getCodDepartamento());
+            for (Municipios dep : totalMunicipios) {
+                Object datos[] = new Object[2];
+                datos[0] = dep.getCodigoMunicipio();
+                datos[1] = dep.getNombreMunicipio();
+                modelo2.addRow(datos);
+            }
+        }
     }
 
     /**
@@ -215,9 +355,16 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabla1.setRowHeight(45);
         jScrollPane2.setViewportView(tabla1);
 
         jLabel18.setText("Region");
+
+        boxRegionEliminar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxRegionEliminarItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -234,7 +381,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblDepartamentoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblDepartamentoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNuevoDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(257, 257, 257)
                         .addComponent(btnEditarDep, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,11 +398,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(boxRegionEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtNuevoDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +442,19 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
         jLabel11.setText("Región");
 
+        boxRegionMuni.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxRegionMuniItemStateChanged(evt);
+            }
+        });
+
         jLabel12.setText("Departamento");
+
+        boxDepartamentosM.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxDepartamentosMItemStateChanged(evt);
+            }
+        });
 
         jLabel13.setText("Municipio");
 
@@ -338,6 +494,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jLabel16.setText("Nuevo Nombre");
 
         btnEditarMuni.setText("Modificar");
+        btnEditarMuni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarMuniActionPerformed(evt);
+            }
+        });
 
         txtMunicipioActual.setText("jLabel5");
 
@@ -369,7 +530,19 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
         jLabel19.setText("Region");
 
+        boxRegionDepE.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxRegionDepEItemStateChanged(evt);
+            }
+        });
+
         jLabel20.setText("Departamento");
+
+        boxDeparE.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxDeparEItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -453,7 +626,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel9)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 624, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -509,6 +682,46 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         // TODO add your handling code here:
         ActualizarDepartamento();
     }//GEN-LAST:event_btnEditarDepActionPerformed
+
+    private void boxRegionEliminarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionEliminarItemStateChanged
+        // TODO add your handling code here:
+        cargarTabla1();
+    }//GEN-LAST:event_boxRegionEliminarItemStateChanged
+
+    private void boxRegionMuniItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionMuniItemStateChanged
+        // TODO add your handling code here:
+        Regiones depItem = (Regiones) boxRegionMuni.getSelectedItem();
+        if (depItem != null) {
+            String codDepartamento = depItem.getCodigo();
+            cargarDepartamentos(boxDepartamentosM, codDepartamento);
+        }
+    }//GEN-LAST:event_boxRegionMuniItemStateChanged
+
+    private void boxDepartamentosMItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxDepartamentosMItemStateChanged
+        // TODO add your handling code here:
+        cargarMunicipios(boxMuniUpdate);
+
+
+    }//GEN-LAST:event_boxDepartamentosMItemStateChanged
+
+    private void btnEditarMuniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMuniActionPerformed
+        // TODO add your handling code here:
+        actualizarMunicipio();
+    }//GEN-LAST:event_btnEditarMuniActionPerformed
+
+    private void boxRegionDepEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionDepEItemStateChanged
+        // TODO add your handling code here:
+        Regiones depItem = (Regiones) boxRegionDepE.getSelectedItem();
+        if (depItem != null) {
+            String codDepartamento = depItem.getCodigo();
+            cargarDepartamentos(boxDeparE, codDepartamento);
+        }
+    }//GEN-LAST:event_boxRegionDepEItemStateChanged
+
+    private void boxDeparEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxDeparEItemStateChanged
+        // TODO add your handling code here:
+        cargarTabla2();
+    }//GEN-LAST:event_boxDeparEItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
