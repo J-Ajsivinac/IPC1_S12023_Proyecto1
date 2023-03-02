@@ -9,6 +9,7 @@ import Administrador.ctrlRegiones;
 import Elementos.CutomTable.TableActionCellEditorEliminar;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -57,6 +58,8 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             public void onView(int row) {
             }
         };
+        tabla1.setFillsViewportHeight(true);
+        tabla1.setBackground(Color.BLUE);
         tabla1.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla1.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event));
         cargarB();

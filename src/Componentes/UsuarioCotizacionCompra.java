@@ -58,7 +58,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         size.add(radioPeque);
         size.add(radioMediano);
         size.add(RadioGrande);
-
+        sizePaquete = "Pequeño";
         ButtonGroup price = new ButtonGroup();
         price.add(radioEstandar);
         price.add(radioEspecial);
@@ -177,12 +177,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             precio = "Estandar";
             if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total1, tipoServicio, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
+                System.out.println(guardarCotizacion.getTamanoPaquete());
             }
         } else if (tipoServicio == 1) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
             precio = "Especial";
             if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total2, tipoServicio, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
+                System.out.println(guardarCotizacion.getTamanoPaquete());
             }
         }
 
@@ -415,6 +417,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jLabel9.setText("1lb - 10lb");
         panelPeque.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
+        radioPeque.setSelected(true);
         radioPeque.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 radioPequeItemStateChanged(evt);
@@ -871,27 +874,28 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                             .addComponent(panelRound12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel2Layout.createSequentialGroup()
-                                .addGap(217, 217, 217)
-                                .addComponent(btnrRealizar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
-                            .addGroup(panel2Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
+                                .addContainerGap()
                                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
                                     .addGroup(panel2Layout.createSequentialGroup()
-                                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(btnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(btnDGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(217, 217, 217)
+                                        .addComponent(btnrRealizar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2)
+                                    .addGroup(panel2Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel17)
+                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(34, 34, 34)
+                                                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                .addGap(91, 91, 91)
+                                .addComponent(btnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(69, 69, 69)
+                                .addComponent(btnDGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panel2Layout.setVerticalGroup(

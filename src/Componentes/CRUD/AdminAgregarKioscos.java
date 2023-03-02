@@ -4,8 +4,10 @@ import Administrador.Kioscos;
 import Administrador.Regiones;
 import Administrador.ctrlKioscos;
 import Administrador.ctrlRegiones;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +23,7 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
      * Creates new form AdminAgregarKioscos
      */
     public AdminAgregarKioscos() {
+        
         initComponents();
         this.setBounds(0, 0, 700, 455);
         modelo = (DefaultTableModel) tabla1.getModel();
@@ -83,6 +86,8 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla1 = new Elementos.CutomTable.TableDark();
+
+        panelRound1.setBackground(new java.awt.Color(71, 74, 76));
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel1.setText("Agregar Kioscos");
@@ -165,6 +170,7 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        tabla1.setBackground(new java.awt.Color(255, 0, 51));
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

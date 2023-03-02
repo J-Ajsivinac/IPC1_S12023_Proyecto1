@@ -31,7 +31,6 @@ public class login extends javax.swing.JFrame {
         txtPassword.setBorder(bottomBorder);
         txtPassword.setCaretColor(Color.WHITE);
         btnCrear.requestFocusInWindow();
-
     }
 
     /**
@@ -262,14 +261,14 @@ public class login extends javax.swing.JFrame {
     private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-        txtPassword.setBackground(new Color(40,41,52));
+        txtPassword.setBackground(new Color(40, 41, 52));
         txtPassword.setBorder(bottomBorder);
     }//GEN-LAST:event_txtPasswordFocusLost
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
-        txtPassword.setBackground(new Color(50,51,64));
+        txtPassword.setBackground(new Color(50, 51, 64));
         txtPassword.setBorder(bottomBorder);
     }//GEN-LAST:event_txtPasswordFocusGained
 
@@ -287,14 +286,14 @@ public class login extends javax.swing.JFrame {
     private void txtMailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusLost
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-        txtMail.setBackground(new Color(40,41,52));
+        txtMail.setBackground(new Color(40, 41, 52));
         txtMail.setBorder(bottomBorder);
     }//GEN-LAST:event_txtMailFocusLost
 
     private void txtMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusGained
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
-        txtMail.setBackground(new Color(50,51,64));
+        txtMail.setBackground(new Color(50, 51, 64));
         txtMail.setBorder(bottomBorder);
     }//GEN-LAST:event_txtMailFocusGained
 

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class TableDark extends JTable {
@@ -51,6 +52,7 @@ public class TableDark extends JTable {
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
         scroll.getViewport().setBackground(new Color(30, 30, 30));
         scroll.setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 2));
+        scroll.getViewport().setBackground(Color.BLUE);
     }
 
     private class TableDarkHeader extends DefaultTableCellRenderer {
@@ -87,7 +89,9 @@ public class TableDark extends JTable {
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
-            
+            if(row == 0){
+                
+            }
             if (isCellSelected(row, column)) {
                 if (row % 2 == 0) {
                     com.setBackground(new Color(33, 103, 153));

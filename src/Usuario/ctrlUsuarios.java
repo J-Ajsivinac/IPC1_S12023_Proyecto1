@@ -193,6 +193,15 @@ public class ctrlUsuarios {
         }
     }
 
+    public static Factura getFacturaByCode(String correo, String Guia) {
+        Factura regresar = null;
+        Envios en = ctrlEnvios.getEnvioByGuia(correo, Guia);
+        if(en != null){
+            regresar = en.getFactura();
+        }
+        return regresar;
+    }
+
     public static ArrayList<Usuario> getTodUsuarios() {
         return usuarios;
     }

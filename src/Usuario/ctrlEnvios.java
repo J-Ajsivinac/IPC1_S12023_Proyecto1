@@ -43,9 +43,9 @@ public class ctrlEnvios {
         return newF;
     }
 
-    public static Guia agregarGuia(String codPaquete, String origen, String destino, String tipoPago, String tamaño,
+    public static Guia agregarGuia(String codPaquete, String origen, String destino, String tipoPago, String tamano,
             int numeropaquetes, String fecha, double total) {
-        Guia newG = new Guia(codPaquete, origen, destino, tipoPago, codPaquete, numeropaquetes, fecha, total);
+        Guia newG = new Guia(codPaquete, origen, destino, tipoPago, tamano, numeropaquetes, fecha, total);
         return newG;
     }
 
@@ -94,6 +94,18 @@ public class ctrlEnvios {
             }
         }
 
+        return regresar;
+    }
+    
+    public static Envios getEnvioByGuia(String correoUsuario, String codGuia){
+        Envios regresar = null;
+        if(ctrlUsuarios.verifiarUsuarios(correoUsuario)){
+            for (Envios envio : envios) {
+                if(envio.getGuia().getCodPaquete().equals(codGuia)){
+                    regresar = envio;
+                }
+            }
+        }
         return regresar;
     }
 
