@@ -15,6 +15,7 @@ public class Admin extends javax.swing.JFrame {
     private AdminiKioscos adK;
     private AdminReporteRegion adRRegion;
     private AdminReporteUsuario adRUsuario;
+    private AdminReporteTotales adRTotales;
     public boolean activado;
 
     /**
@@ -28,11 +29,13 @@ public class Admin extends javax.swing.JFrame {
         adK = new AdminiKioscos();
         adRRegion = new AdminReporteRegion();
         adRUsuario = new AdminReporteUsuario();
+        adRTotales= new AdminReporteTotales();
         panelMainContainer.add(ad);
         panelMainContainer.add(dm);
         panelMainContainer.add(adK);
         panelMainContainer.add(adRRegion);
         panelMainContainer.add(adRUsuario);
+        panelMainContainer.add(adRTotales);
         menuClick(ad);
         panelRIngresos.setVisible(activado);
         panelRRegion.setVisible(activado);
@@ -211,6 +214,12 @@ public class Admin extends javax.swing.JFrame {
 
         jPanel3.add(panelRUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 41, 226, -1));
 
+        panelRIngresos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRIngresosMouseClicked(evt);
+            }
+        });
+
         jLabel11.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel11.setText("Ingresos Totales");
 
@@ -367,6 +376,11 @@ public class Admin extends javax.swing.JFrame {
         menuClick(adRUsuario);
     }//GEN-LAST:event_panelRUsuarioMouseClicked
 
+    private void panelRIngresosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRIngresosMouseClicked
+        // TODO add your handling code here:
+        menuClick(adRTotales);
+    }//GEN-LAST:event_panelRIngresosMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -409,6 +423,7 @@ public class Admin extends javax.swing.JFrame {
         adK.setVisible(false);
         adRRegion.setVisible(false);
         adRUsuario.setVisible(false);
+        adRTotales.setVisible(false);
         panel.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

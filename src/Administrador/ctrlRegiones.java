@@ -5,12 +5,14 @@ import javax.swing.JOptionPane;
 
 public class ctrlRegiones {
 
-    public static ArrayList<Regiones> regiones = new ArrayList<Regiones>();
-
+    private static ArrayList<Regiones> regiones = new ArrayList<Regiones>();
+    public static ArrayList<Regiones> historial = new ArrayList<Regiones>();
+    
     public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial, int contador) {
         if (!codigo.equals("") && !nombre.equals("") && precioEstandar > 0 && precioEspecial > 0) {
             if (!verificarCodigoRegion(codigo)) {
                 regiones.add(new Regiones(codigo, nombre, precioEstandar, precioEspecial, contador));
+                historial = (ArrayList<Regiones>) regiones.clone();
                 return true;
             }
 
@@ -44,6 +46,10 @@ public class ctrlRegiones {
 
     public static ArrayList<Regiones> getTodasRegiones() {
         return regiones;
+    }
+    
+    public static ArrayList<Regiones> getTodHistorial() {
+        return historial;
     }
 
     public static Regiones getRegionCodigo(String codigo) {
@@ -83,6 +89,7 @@ public class ctrlRegiones {
                 regiones.get(i).setContadorEnvios(regiones.get(i).getContadorEnvios() + 1);
             }
         }
+        copiarHistorial();
     }
 
     public static boolean verificarCodigoRegion(String codigo) {
@@ -99,10 +106,16 @@ public class ctrlRegiones {
         boolean regresar = false;
         if (verificarCodigoRegion(codR)) {
             regiones.remove(index);
+            ArrayList<Departamentos> depEliminar = ctrlDepartamentos.getAllDepartamentosByCod(codR);
+            depEliminar.clear();
             regresar = true;
             return regresar;
         }
         return regresar;
+    }
+    
+    public static void copiarHistorial(){
+        historial = (ArrayList<Regiones>) regiones.clone();
     }
 
 }

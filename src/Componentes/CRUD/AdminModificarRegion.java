@@ -337,6 +337,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         }
         if (ctrlRegiones.cambiarPrecios(regItem.getCodigo(), opciones, nuevoPrecio, txtNuevoNombre.getText().toString())) {
             JOptionPane.showMessageDialog(null, "Se cambiaron los datos correctamente");
+            ctrlRegiones.copiarHistorial();
             cargarBoxRegiones();
             cargarRegiones();
             mostrarDatos();

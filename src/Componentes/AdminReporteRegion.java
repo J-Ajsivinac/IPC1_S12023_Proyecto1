@@ -28,7 +28,7 @@ public class AdminReporteRegion extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 710, 500);
         modelo = (DefaultTableModel) tableA.getModel();
-        totalRegiones = (ArrayList<Regiones>) ctrlRegiones.getTodasRegiones().clone();
+        totalRegiones = (ArrayList<Regiones>) ctrlRegiones.getTodHistorial().clone();
         ordenarRegiones();
         
     }

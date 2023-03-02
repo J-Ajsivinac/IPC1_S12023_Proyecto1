@@ -108,5 +108,9 @@ public class ctrlEnvios {
         }
         return regresar;
     }
+    
+    public static ArrayList<Envios> getAllEnvios(){
+        return envios;
+    }
 
 }

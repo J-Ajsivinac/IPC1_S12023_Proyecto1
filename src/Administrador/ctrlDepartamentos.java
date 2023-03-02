@@ -6,8 +6,9 @@ import javax.swing.JOptionPane;
 
 public class ctrlDepartamentos {
 
-    public static ArrayList<Departamentos> departamentos = new ArrayList<Departamentos>();
-
+    private static ArrayList<Departamentos> departamentos = new ArrayList<Departamentos>();
+    public static ArrayList<Departamentos> historialDep = new ArrayList<Departamentos>();
+    
     public static boolean nuevoDepartamento(String codigo, String nombreDepartamento) {
         if (!codigo.equals("") && !nombreDepartamento.equals("")) {
             String codDepartamento = "";
@@ -21,6 +22,7 @@ public class ctrlDepartamentos {
                 Regiones r = ctrlRegiones.getRegionCodigo(codigo);
                 departamentos.add(new Departamentos(codigo, r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
                         codDepartamento, nombreDepartamento));
+                copiarHistorialDep();
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "El departamento ya existe");
@@ -125,6 +127,7 @@ public class ctrlDepartamentos {
         }
         if (!verificarNombreMuni(nombreMunicipio)) {
             departamentos.get(posicion).getMunicipios().add(new Municipios(codigoDepar, nombreMunicipio, codigoMunicipio));
+            copiarHistorialDep();
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "El Municipio ya existe");
@@ -237,5 +240,8 @@ public class ctrlDepartamentos {
         return mRegresar;
     }
     
+    public static void copiarHistorialDep(){
+        historialDep = (ArrayList<Departamentos>) departamentos.clone();
+    }
 
 }

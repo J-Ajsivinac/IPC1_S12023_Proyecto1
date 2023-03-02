@@ -112,6 +112,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         String nNombre = txtNuevoDepartamento.getText();
         if (ctrlDepartamentos.modificarNombreDep(codDepartamento, nNombre)) {
             JOptionPane.showMessageDialog(null, "Nombre Actualizado");
+            ctrlDepartamentos.copiarHistorialDep();
             cargarB();
             //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
         } else {
@@ -195,6 +196,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         if (ctrlDepartamentos.modificarNombreMun(mun.getCodigoDepartamento().toString(), mun.getCodigoMunicipio().toString(), nNombre)) {
             JOptionPane.showMessageDialog(null, "Nombre Actualizado");
             //cargarB();
+            ctrlDepartamentos.copiarHistorialDep();
             cargarMunicipios(boxMuniUpdate);
             //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
         } else {
