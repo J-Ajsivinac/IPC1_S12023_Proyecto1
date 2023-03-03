@@ -10,7 +10,7 @@ public class Envios {
     private Guia Guia;
 
     public Envios(String correo, String codRegion, String codPaquete, String tipoServicio, String destinatario,
-            double totalEnvio, int tipoPago, Factura factura, Guia guia) {
+            double totalEnvio, Factura factura, Guia guia) {
         super();
         this.setIdUsuario(correo);
         this.setCodRegion(codRegion);

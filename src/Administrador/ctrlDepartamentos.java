@@ -172,6 +172,15 @@ public class ctrlDepartamentos {
         return false;
     }
     
+    public static void eliminarTDepartamentos(String codRegion){
+         for (int j = 0; j < departamentos.size(); j++) {
+            Departamentos d = departamentos.get(j);
+            if (d.getCodigo().equals(codRegion)) {
+                departamentos.remove(j);
+            }
+        }
+    }
+    
     public static boolean eliminarMunicipio(String codigDepar,String codigoMun) {
         if (verificarCodigoDepa(codigDepar)) {
             int posicion = getPosicionDepartamentos(codigDepar);

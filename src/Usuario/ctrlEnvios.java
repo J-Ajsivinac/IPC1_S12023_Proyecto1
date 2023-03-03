@@ -13,7 +13,7 @@ public class ctrlEnvios {
     public static int contadorFacuras = 1;
 
     public static boolean agregarEnvio(String correo, String codRegion, String tipoServicio, String destinatario,
-            double totalEnvio, int tipoPago, String ori, String nit, int numerPaquetes, String tamaño) {
+            double totalEnvio, String tipoPago, String ori, String nit, int numerPaquetes, String tamaño) {
         if (!correo.equals("") && !codRegion.equals("") && !destinatario.equals("")) {
             String codPaquete = "";
             while (true) {
@@ -24,10 +24,10 @@ public class ctrlEnvios {
             }
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDateTime now = LocalDateTime.now();
-            Factura facturaingresar = agregarFactura(codPaquete, ori, destinatario, nit, tipoServicio, numerPaquetes,
+            Factura facturaingresar = agregarFactura(codPaquete, ori, destinatario, nit, tipoPago, numerPaquetes,
                     totalEnvio);
             Guia guiaIngresar = agregarGuia(codPaquete, ori, destinatario, tipoServicio, tamaño, numerPaquetes, dtf.format(now), totalEnvio);
-            envios.add(new Envios(correo, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, tipoPago, facturaingresar, guiaIngresar));
+            envios.add(new Envios(correo, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, facturaingresar, guiaIngresar));
             System.out.println(codPaquete);
             ctrlRegiones.addContador(codRegion);
             ctrlUsuarios.addContadorUser(correo,numerPaquetes);
@@ -77,11 +77,15 @@ public class ctrlEnvios {
         for (int i = 0; i < envios.size(); i++) {
             Envios e = envios.get(i);
             if (e.getIdUsuario().equals(correo)) {
-                regresar.add(new Envios(correo, e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), 0, e.getFactura(), e.getGuia()));
+                regresar.add(new Envios(correo, e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), e.getFactura(), e.getGuia()));
             }
         }
 
         return regresar;
+    }
+    
+    public static Envios verUltimoEnvios() {
+        return envios.get(envios.size()-1);
     }
 
     public static ArrayList<Envios> getReportesByCod(String codRegion) {
@@ -90,7 +94,7 @@ public class ctrlEnvios {
         for (int i = 0; i < envios.size(); i++) {
             Envios e = envios.get(i);
             if (e.getCodRegion().equals(codRegion)) {
-                regresar.add(new Envios(e.getIdUsuario(), e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), 0, e.getFactura(), e.getGuia()));
+                regresar.add(new Envios(e.getIdUsuario(), e.getCodRegion(), e.getGuia().getCodPaquete(), e.getTipoServicio(), e.getDestinatario(), e.getFactura().getTotal(), e.getFactura(), e.getGuia()));
             }
         }
 

@@ -106,8 +106,7 @@ public class ctrlRegiones {
         boolean regresar = false;
         if (verificarCodigoRegion(codR)) {
             regiones.remove(index);
-            ArrayList<Departamentos> depEliminar = ctrlDepartamentos.getAllDepartamentosByCod(codR);
-            depEliminar.clear();
+            ctrlDepartamentos.eliminarTDepartamentos(codR);
             regresar = true;
             return regresar;
         }

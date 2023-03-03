@@ -7,6 +7,7 @@ import Administrador.ctrlRegiones;
 import Elementos.ScrollBarCustom;
 import Usuario.DatosFacturacion;
 import Usuario.Envios;
+import Usuario.Factura;
 import Usuario.Guia;
 import Usuario.Tarjeta;
 import Usuario.Usuario;
@@ -15,14 +16,17 @@ import Usuario.ctrlUsuarios;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -42,6 +46,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     double total1;
     double total2;
     int opcionPago;
+    String tipoP;
+    boolean realizoEnvio = false;
     private ArrayList<Tarjeta> tarj = new ArrayList<Tarjeta>();
     private Usuario user;
 
@@ -59,10 +65,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         size.add(radioMediano);
         size.add(RadioGrande);
         sizePaquete = "Pequeño";
+
         ButtonGroup price = new ButtonGroup();
         price.add(radioEstandar);
         price.add(radioEspecial);
-
+        opcionPago = 1;
         ButtonGroup tipoPago = new ButtonGroup();
         tipoPago.add(radioContra);
         tipoPago.add(radioCuenta);
@@ -79,7 +86,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     }
 
     public void cargarCombos(JComboBox caja) {
-        caja.addItem(new Departamentos("", "", 0.0, 0.0, "", "Departamento"));
+        caja.addItem(new Departamentos("", "", 0.0, 0.0, "", "Departamentos"));
         //boxDepartamentos.addItem("Departamento");
         for (int i = 0; i < depa.size(); i++) {
             if (depa.get(i) != null) {
@@ -92,6 +99,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     public void cargarMunicipios(String codDepartamento, JComboBox actualizar) {
         //boxMunicipios.addItem("Municipios");
+        actualizar.addItem(new Municipios("", "Municipios", ""));
         ArrayList<Municipios> muni = ctrlDepartamentos.getMuniDepartamento(codDepartamento);
         for (int i = 0; i < muni.size(); i++) {
             if (muni.get(i) != null) {
@@ -108,7 +116,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     }
 
     public void saveCotizacion() {
-        if (!txtNumeroPaquetes.getText().equals("")) {
+        System.out.println(boxMunicipios.getSelectedIndex());
+        if (!txtNumeroPaquetes.getText().equals("") && !txtDireccionDestino.getText().equals("") && !txtDireccionOrigen.getText().equals("") && boxDepartamentos.getSelectedIndex() != 0
+                && boxMunicipios.getSelectedIndex() != 0 && boxDepartamentosD.getSelectedIndex() != 0 && boxMunicipiosD.getSelectedIndex() != 0) {
             Departamentos depItemO = (Departamentos) boxDepartamentos.getSelectedItem();
             Municipios munItemO = (Municipios) boxMunicipios.getSelectedItem();
 
@@ -117,8 +127,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
             int numeroPaquetes = Integer.parseInt(txtNumeroPaquetes.getText());
             //String sizePaquete = size
-            String origen = depItemO.getCodigo() + "," + munItemO.getNombreMunicipio();
-            String destino = depItemD.getCodigo() + "," + munItemD.getNombreMunicipio();
+            String origen = depItemO.getCodigo() + "," + munItemO.getNombreMunicipio() + "," + txtDireccionOrigen.getText();
+            String destino = depItemD.getCodigo() + "," + munItemD.getNombreMunicipio() + "," + txtDireccionDestino.getText();
 
             guardarCotizacion = new Guia(origen, destino, sizePaquete, numeroPaquetes);
             double multi1 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 0);
@@ -127,12 +137,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
             total1 = multi1 * 1 * numeroPaquetes;
             total2 = multi2 * 1 * numeroPaquetes;
-            BigDecimal bd = new BigDecimal(total1).setScale(2,RoundingMode.HALF_UP);
+            BigDecimal bd = new BigDecimal(total1).setScale(2, RoundingMode.HALF_UP);
             total1 = bd.doubleValue();
-            BigDecimal bd2 = new BigDecimal(total2).setScale(2,RoundingMode.HALF_UP);
+            BigDecimal bd2 = new BigDecimal(total2).setScale(2, RoundingMode.HALF_UP);
             total2 = bd2.doubleValue();
             txtTotalEstandar.setText("Total " + total1);
             txtTotalEspecial.setText("Total " + total2);
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene todos los datos");
         }
 
     }
@@ -172,22 +184,183 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         String[] origenDatos = guardarCotizacion.getOrigen().split(",");
         String codigoRegioOringe = origenDatos[0];
         DatosFacturacion facturaItem = (DatosFacturacion) boxFacturacion.getSelectedItem();
+        String tPago = "";
+        if (opcionPago == 1) {
+            tPago = "contra entrega";
+        } else if (opcionPago == 2) {
+            tPago = "con tarjeta";
+            String cvv;
+            boolean val = false;
+            while (!val) {
+                cvv = JOptionPane.showInputDialog(null, "Ingrese el CVV");
+                if (cvv != null) {
+                    val = validarCVV(cvv);
+                }else{
+                    return;
+                }
+            }
+        }
+
         if (tipoServicio == 0) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total1);
             precio = "Estandar";
-            if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total1, tipoServicio, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+            if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
+                realizoEnvio=true;
                 System.out.println(guardarCotizacion.getTamanoPaquete());
             }
         } else if (tipoServicio == 1) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
             precio = "Especial";
-            if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total2, tipoServicio, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+            if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
+                realizoEnvio=true;
                 System.out.println(guardarCotizacion.getTamanoPaquete());
             }
         }
 
+    }
+
+    public void descargarFactura() {
+        Envios envios = ctrlEnvios.verUltimoEnvios();
+
+        JFileChooser guardarComo = new JFileChooser();
+        int userSelection = 0;
+        try {
+            guardarComo.setDialogTitle("Guardar archivo");
+            userSelection = guardarComo.showSaveDialog(null);
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directorio = new File(guardarComo.getSelectedFile().toString());
+            if (!directorio.isFile() && !directorio.isDirectory()) {
+                String htmFilePath = "/htmls/factura.html";
+                InputStream inputStream = getClass().getResourceAsStream(htmFilePath);
+                //File input = new File("src\\htmls\\factura.html");
+
+                String htmlContent = "";
+                try {
+                    htmlContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                } catch (IOException ex) {
+                    Logger.getLogger(UsuarioVerEnvios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                Document doc = Jsoup.parse(htmlContent);
+                Element codigoPaquete = doc.getElementById("codigoPaquete");
+                Element NumeroFacura = doc.getElementById("fecha");
+                Element dOrigen = doc.getElementById("dOrigen");
+                Element dDestino = doc.getElementById("dDestino");
+                Element dNumeroPaquetes = doc.getElementById("dNumeroPaquetes");
+                Element dTipoPago = doc.getElementById("dTipoPago");
+                Element dSize = doc.getElementById("dSize");
+                Element dNumero = doc.getElementById("dNumero");
+                Element dTotal = doc.getElementById("dTotal");
+                Factura factura = envios.getFactura();
+
+                codigoPaquete.text("#" + factura.getNumFactura());
+                NumeroFacura.text(factura.getCodPaquete());
+                dOrigen.text(envios.getGuia().getOrigen());
+
+                String[] datosD = factura.getDestino().split(",");
+
+                dDestino.text(factura.getDestino());
+                dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
+                dTipoPago.text(factura.getTipoPago());
+                dSize.text(envios.getGuia().getTamanoPaquete() + "");
+                dNumero.text(factura.getNumeropaquetes() + "");
+                dTotal.text(factura.getTotal() + "");
+
+                String htmlModificado = doc.outerHtml();
+                FileWriter writer;
+
+                try {
+                    writer = new FileWriter(guardarComo.getSelectedFile() + ".html");
+                    writer.write(htmlModificado);
+                    JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente");
+                    writer.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(UsuarioVerEnvios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta");
+            }
+        }
+        //System.out.println(guardarComo.getSelectedFile().getName());
+    }
+
+    public void descargarGuia() {
+        Envios envios = ctrlEnvios.verUltimoEnvios();
+
+        JFileChooser guardarComo = new JFileChooser();
+        int userSelection = 0;
+        try {
+            guardarComo.setDialogTitle("Guardar archivo");
+            userSelection = guardarComo.showSaveDialog(null);
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directorio = new File(guardarComo.getSelectedFile().toString());
+            if (!directorio.isFile() && !directorio.isDirectory()) {
+                String htmFilePath = "/htmls/guia.html";
+                InputStream inputStream = getClass().getResourceAsStream(htmFilePath);
+                //File input = new File("src\\htmls\\factura.html");
+
+                String htmlContent = "";
+                try {
+                    htmlContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                } catch (IOException ex) {
+                    Logger.getLogger(UsuarioVerEnvios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                Document doc = Jsoup.parse(htmlContent);
+
+                Element codigoPaquete = doc.getElementById("codigoPaquete");
+                Element NumeroFacura = doc.getElementById("fecha");
+                Element dOrigen = doc.getElementById("dOrigen");
+                Element dDestino = doc.getElementById("dDestino");
+                Element dNumeroPaquetes = doc.getElementById("dNumeroPaquetes");
+                Element dTipoPago = doc.getElementById("dTipoPago");
+                Element dTamano = doc.getElementById("dTamano");
+                Element dTarjeta = doc.getElementById("dTarjeta");
+                Element dTituloTarjeta = doc.getElementById("dTituloTarjeta");
+                Element dTotal = doc.getElementById("dTotal");
+
+                Factura factura = envios.getFactura();
+
+                codigoPaquete.text("#" + factura.getNumFactura());
+                NumeroFacura.text(factura.getCodPaquete());
+                dOrigen.text(envios.getGuia().getOrigen());
+                dDestino.text(factura.getDestino());
+                dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
+                dTipoPago.text(factura.getTipoPago());
+                dTamano.text(envios.getGuia().getTamanoPaquete() + "");
+                dTarjeta.text("");
+                dTituloTarjeta.text("");
+                dTotal.text(factura.getTotal() + "");
+
+                String htmlModificado = doc.outerHtml();
+                FileWriter writer;
+
+                try {
+                    writer = new FileWriter(guardarComo.getSelectedFile() + ".html");
+                    writer.write(htmlModificado);
+                    JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente");
+                    writer.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(UsuarioVerEnvios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta");
+            }
+        }
+    }
+
+    public boolean validarCVV(String cvv) {
+        return cvv.matches("[0-9]*") && cvv.length() == 3;
     }
 
     /**
@@ -436,6 +609,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
+        radioEstandar.setSelected(true);
         radioEstandar.setText("Servicio Estandar");
 
         txtTotalEstandar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -705,6 +879,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jScrollPane1.setViewportView(areaDetalles);
 
         btnDGuia.setText("Descargar Guía");
+        btnDGuia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDGuiaActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("Tipo de Pago");
 
@@ -1049,6 +1228,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void btnrRealizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrRealizarActionPerformed
         // TODO add your handling code here:
+
         if (guardarCotizacion != null) {
             registrarEnvios();
         }
@@ -1085,6 +1265,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private void panelRound3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound3MouseClicked
         // TODO add your handling code here:
         radioCuenta.setSelected(true);
+
         boxTarjetas.setEnabled(true);
     }//GEN-LAST:event_panelRound3MouseClicked
 
@@ -1096,27 +1277,46 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
         // TODO add your handling code here:
-        ctrlEnvios.verEnvios(user.getCorreo());
+        if(realizoEnvio){
+            descargarFactura();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha realizado ningun envio aún");
+        }
     }//GEN-LAST:event_btnFacturaActionPerformed
 
     private void btnGuardarCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCotizacionActionPerformed
         // TODO add your handling code here:
-        //String raiz = System.getProperty("user.dir");
-        //System.out.println(raiz);
-        File input = new File("src\\htmls\\cotizacion.html");
-        Document doc = null;
-        try {
-            doc = Jsoup.parse(input, "UTF-8");
-        } catch (IOException ex) {
-            Logger.getLogger(UsuarioCotizacionCompra.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Element dCorta = doc.getElementById("dOrigen");
-        Element dLarga = doc.getElementById("dDireccionOrigen");
-        Element numPaq = doc.getElementById("dNumeroPaquetes");
-        Element tamPaq = doc.getElementById("dTamano");
-        Element precioEst = doc.getElementById("dPrecioEst");
-        Element precioEspe = doc.getElementById("dPrecioEspe");
         if (guardarCotizacion != null) {
+
+            JFileChooser guardarComo = new JFileChooser();
+            int userSelection = 0;
+
+            try {
+                guardarComo.setDialogTitle("Guardar archivo");
+                userSelection = guardarComo.showSaveDialog(null);
+            } catch (Exception e) {
+                System.out.print(e);
+            }
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File directorio = new File(guardarComo.getSelectedFile().toString());
+                if (!directorio.isFile() && !directorio.isDirectory()) {
+
+                }
+            }
+            File input = new File("src\\htmls\\cotizacion.html");
+            Document doc = null;
+            try {
+                doc = Jsoup.parse(input, "UTF-8");
+            } catch (IOException ex) {
+                Logger.getLogger(UsuarioCotizacionCompra.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Element dCorta = doc.getElementById("dOrigen");
+            Element dLarga = doc.getElementById("dDireccionOrigen");
+            Element numPaq = doc.getElementById("dNumeroPaquetes");
+            Element tamPaq = doc.getElementById("dTamano");
+            Element precioEst = doc.getElementById("dPrecioEst");
+            Element precioEspe = doc.getElementById("dPrecioEspe");
             dCorta.text(guardarCotizacion.getOrigen());
             dLarga.text("Aqui va la direccion no lo tengo regis");
             numPaq.text(guardarCotizacion.getNumeropaquetes() + "");
@@ -1126,8 +1326,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             String htmlModificado = doc.outerHtml();
             FileWriter writer;
             try {
-                writer = new FileWriter("C:\\Users\\mesoi\\Documents\\1U^NI6VxExD@D\\2023\\1. Primer Semestre\\IPC 1\\Pseudocodigos\\archivo.html");
+                writer = new FileWriter(guardarComo.getSelectedFile() + ".html");
                 writer.write(htmlModificado);
+                JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente");
                 writer.close();
             } catch (IOException ex) {
                 Logger.getLogger(UsuarioCotizacionCompra.class.getName()).log(Level.SEVERE, null, ex);
@@ -1136,6 +1337,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnGuardarCotizacionActionPerformed
+
+    private void btnDGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDGuiaActionPerformed
+        // TODO add your handling code here:
+        if(realizoEnvio){
+            descargarGuia();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha realizado ningun envio aún");
+        }
+    }//GEN-LAST:event_btnDGuiaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

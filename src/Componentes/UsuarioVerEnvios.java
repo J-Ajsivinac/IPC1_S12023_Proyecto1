@@ -9,6 +9,7 @@ import Usuario.Factura;
 import Usuario.Usuario;
 import Usuario.ctrlEnvios;
 import Usuario.ctrlUsuarios;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,7 +43,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 724, 520);
 
-        modelo = (DefaultTableModel) table.getModel();
+        modelo = (DefaultTableModel) table1.getModel();
         //cargarDatos();
         TableActionEvent event = new TableActionEvent() {
             @Override
@@ -52,8 +55,8 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
             @Override
             public void onDelete(int row) {
-                if (table.isEditing()) {
-                    table.getCellEditor().stopCellEditing();
+                if (table1.isEditing()) {
+                    table1.getCellEditor().stopCellEditing();
                 }
 
             }
@@ -65,8 +68,8 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
             }
         };
 
-        table.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
-        table.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
+        table1.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
+        table1.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
 
     }
 
@@ -115,6 +118,9 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 codigoPaquete.text("#" + factura.getNumFactura());
                 NumeroFacura.text(factura.getCodPaquete());
                 dOrigen.text(envios.getGuia().getOrigen());
+
+                String[] datosD = factura.getDestino().split(",");
+
                 dDestino.text(factura.getDestino());
                 dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
                 dTipoPago.text(factura.getTipoPago());
@@ -167,7 +173,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 }
 
                 Document doc = Jsoup.parse(htmlContent);
-                
+
                 Element codigoPaquete = doc.getElementById("codigoPaquete");
                 Element NumeroFacura = doc.getElementById("fecha");
                 Element dOrigen = doc.getElementById("dOrigen");
@@ -215,11 +221,16 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         if (user != null) {
             ArrayList<Envios> envios = ctrlEnvios.verEnvios(user.getCorreo());
             for (Envios envio : envios) {
-                Object datos[] = new Object[4];
+                Object datos[] = new Object[5];
                 datos[0] = envio.getGuia().getCodPaquete();
                 datos[1] = envio.getTipoServicio();
-                datos[2] = envio.getDestinatario();
-                datos[3] = envio.getFactura().getTipoPago();
+
+                String[] datosD = envio.getFactura().getDestino().split(",");
+                String mostrarDestinatario ="<html>"+ datosD[0] + "<br> " + datosD[1] + "<br> " + datosD[2]+"</html>";
+
+                datos[2] = datosD[2];
+                datos[3] = envio.getFactura().getTotal();
+                datos[4] = envio.getFactura().getTipoPago();
                 modelo.addRow(datos);
             }
         }
@@ -237,19 +248,21 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
         panelRound1 = new Elementos.PanelRound();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table1 = new Elementos.CutomTable.TableDark();
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel1.setText("Ver Envios");
 
-        table.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo del Paqute", "Tipo de Servicio", "Destinatario", "Total de Envío", "Tipo de Pago", "Descargar"
+                "Codigo del Paquete", "Tipo de Servicio", "Destinatario", "Total", "Tipo de Pago", "Descargar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -260,15 +273,14 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        table.setRowHeight(80);
-        table.setSelectionBackground(new java.awt.Color(75, 103, 236));
-        jScrollPane1.setViewportView(table);
-        if (table.getColumnModel().getColumnCount() > 0) {
-            table.getColumnModel().getColumn(0).setPreferredWidth(40);
-            table.getColumnModel().getColumn(1).setPreferredWidth(50);
-            table.getColumnModel().getColumn(2).setPreferredWidth(70);
-            table.getColumnModel().getColumn(3).setPreferredWidth(40);
-            table.getColumnModel().getColumn(4).setPreferredWidth(11);
+        table1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        table1.setRowHeight(92);
+        jScrollPane2.setViewportView(table1);
+        if (table1.getColumnModel().getColumnCount() > 0) {
+            table1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            table1.getColumnModel().getColumn(1).setPreferredWidth(46);
+            table1.getColumnModel().getColumn(3).setPreferredWidth(23);
+            table1.getColumnModel().getColumn(4).setPreferredWidth(32);
         }
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
@@ -276,22 +288,18 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addContainerGap(631, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -305,18 +313,18 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private Elementos.PanelRound panelRound1;
-    private javax.swing.JTable table;
+    private Elementos.CutomTable.TableDark table1;
     // End of variables declaration//GEN-END:variables
 }
