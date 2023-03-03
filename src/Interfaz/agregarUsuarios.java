@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -27,6 +28,14 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
  */
 public class agregarUsuarios extends javax.swing.JFrame {
 
+    Border unselectedborder;
+    Border selectedborder;
+    Border errorBorde;
+    Border correctoBorde;
+    Color selectedTxt;
+    Color unselectedTxt;
+    Color error;
+    Color correcto;
     public ArrayList<Kioscos> kiosco;
     public String ruta;
     private static String[] nombrePaises = {"Alemania", "Argentina", "Belice", "Brasil", "Canadá", "China",
@@ -36,18 +45,39 @@ public class agregarUsuarios extends javax.swing.JFrame {
      * Creates new form agregarUsuarios
      */
     public agregarUsuarios() {
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
         agregarBoxes();
         boxKiosco.setEnabled(false);
         kiosco = ctrlKioscos.getAllKioscos();
         cargarKioscos();
-        jSeparator1.setBackground(new Color(0, 0, 0, 1));
-        jSeparator2.setBackground(new Color(0, 0, 0, 1));
-        jSeparator3.setBackground(new Color(0, 0, 0, 1));
+        selectedTxt = new Color(50, 51, 64);
+        unselectedTxt = new Color(40, 41, 52);
+        error = new Color(255, 75, 76);
+        correcto = new Color(143, 235, 170);
+        unselectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
+        selectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
+        errorBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, error);
+        correctoBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, correcto);
+
         boxKiosco.setVisible(false);
-        
+        setBordes();
+
+    }
+
+    public void setBordes() {
+        txtAlias.setBorder(unselectedborder);
+        txtApellido.setBorder(unselectedborder);
+        txtContra.setBorder(unselectedborder);
+        txtCorreo.setBorder(unselectedborder);
+        txtDPI.setBorder(unselectedborder);
+        txtFecha.setBorder(unselectedborder);
+        //txtKiosco.setBorder(unselectedborder);
+        txtNombre.setBorder(unselectedborder);
+        txtTelefono.setBorder(unselectedborder);
+        txtValidar.setBorder(unselectedborder);
+
     }
 
     public void cargarKioscos() {
@@ -58,6 +88,16 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 boxKiosco.addItem(new Kioscos(kiosco.get(i).getCodigo(), kiosco.get(i).getNombre(), kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), codeK, nombreKiosco));
             }
 
+        }
+    }
+
+    public void selected(JTextField cambiar, int tipo) {
+        if (tipo == 0) {
+            cambiar.setBackground(new Color(50, 51, 64));
+            cambiar.setBorder(selectedborder);
+        } else {
+            cambiar.setBackground(new Color(40, 41, 52));
+            cambiar.setBorder(unselectedborder);
         }
     }
 
@@ -94,9 +134,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
         boxKiosco = new javax.swing.JComboBox<>();
         txtContra = new javax.swing.JPasswordField();
         txtValidar = new javax.swing.JPasswordField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
@@ -122,7 +159,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(26, 29, 39));
+        jPanel1.setBackground(new java.awt.Color(19, 19, 26));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
@@ -130,7 +167,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel1.setText("Registrar Usuarios");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 14, 150, -1));
 
-        panelRound1.setBackground(new java.awt.Color(34, 37, 47));
+        panelRound1.setBackground(new java.awt.Color(28, 28, 36));
         panelRound1.setRoundTopLeft(15);
         panelRound1.setRoundTopRight(15);
 
@@ -138,86 +175,95 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jPanel3.setLayout(new java.awt.GridLayout(1, 2));
 
         jPanel4.setOpaque(false);
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Correo Electronico");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
-        txtCorreo.setBackground(new java.awt.Color(34, 37, 47));
+        txtCorreo.setBackground(new java.awt.Color(40, 41, 52));
         txtCorreo.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
         txtCorreo.setBorder(null);
         txtCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCorreo.setOpaque(false);
+        txtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCorreoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCorreoFocusLost(evt);
+            }
+        });
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyReleased(evt);
             }
         });
-        jPanel4.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 29, 340, 32));
 
         lblCorreo.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 330, 20));
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 93, 65, -1));
 
-        txtNombre.setBackground(new java.awt.Color(34, 37, 47));
+        txtNombre.setBackground(new java.awt.Color(40, 41, 52));
         txtNombre.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNombre.setBorder(null);
-        jPanel4.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 116, 150, 33));
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Apellido");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 93, 65, -1));
 
-        txtApellido.setBackground(new java.awt.Color(34, 37, 47));
+        txtApellido.setBackground(new java.awt.Color(40, 41, 52));
         txtApellido.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtApellido.setForeground(new java.awt.Color(255, 255, 255));
         txtApellido.setBorder(null);
-        jPanel4.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 116, 160, 30));
+        txtApellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtApellidoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtApellidoFocusLost(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Contraseña");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 167, 92, -1));
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Valida Contraseña");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 167, 125, -1));
 
         lblop1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         lblop1.setForeground(new java.awt.Color(255, 75, 76));
         lblop1.setText("Letras Mayúsculas");
-        jPanel4.add(lblop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 238, 161, 23));
 
         lblop2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         lblop2.setForeground(new java.awt.Color(255, 75, 76));
         lblop2.setText("Letras Minúsculas");
-        jPanel4.add(lblop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 238, 165, 23));
 
         lblop3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         lblop3.setForeground(new java.awt.Color(255, 75, 76));
         lblop3.setText("Números");
-        jPanel4.add(lblop3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 267, 161, 23));
 
         lblop4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         lblop4.setForeground(new java.awt.Color(255, 75, 76));
         lblop4.setText("Caracteres Especiales");
-        jPanel4.add(lblop4, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 267, 161, 23));
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Rol");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 302, 41, -1));
 
         boxRol.setBackground(new java.awt.Color(34, 37, 47));
         boxRol.setForeground(new java.awt.Color(255, 255, 255));
@@ -228,38 +274,145 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 boxRolItemStateChanged(evt);
             }
         });
-        jPanel4.add(boxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 325, 161, 34));
 
         txtKiosco.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtKiosco.setForeground(new java.awt.Color(255, 255, 255));
         txtKiosco.setText("Kiosco");
-        jPanel4.add(txtKiosco, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 302, 49, -1));
 
         boxKiosco.setBackground(new java.awt.Color(34, 37, 47));
-        jPanel4.add(boxKiosco, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 325, 165, 34));
+        boxKiosco.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxKiosco.setForeground(new java.awt.Color(255, 255, 255));
 
-        txtContra.setBackground(new java.awt.Color(34, 37, 47));
+        txtContra.setBackground(new java.awt.Color(40, 41, 52));
         txtContra.setForeground(new java.awt.Color(255, 255, 255));
+        txtContra.setBorder(null);
+        txtContra.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtContraFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtContraFocusLost(evt);
+            }
+        });
         txtContra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtContraKeyReleased(evt);
             }
         });
-        jPanel4.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 190, 161, 33));
 
-        txtValidar.setBackground(new java.awt.Color(34, 37, 47));
+        txtValidar.setBackground(new java.awt.Color(40, 41, 52));
         txtValidar.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.add(txtValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 190, 165, 30));
+        txtValidar.setBorder(null);
+        txtValidar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtValidarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValidarFocusLost(evt);
+            }
+        });
 
-        jSeparator1.setBackground(new java.awt.Color(63, 70, 84));
-        jSeparator1.setForeground(new java.awt.Color(68, 75, 87));
-        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 350, 8));
-
-        jSeparator2.setForeground(new java.awt.Color(68, 75, 87));
-        jPanel4.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 160, -1));
-
-        jSeparator3.setForeground(new java.awt.Color(68, 75, 87));
-        jPanel4.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 160, 10));
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblop1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblop2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblop3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblop4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152)
+                        .addComponent(txtKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(boxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(boxKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel2)
+                .addGap(6, 6, 6)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblop1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblop2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblop3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblop4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(txtKiosco))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(boxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         jPanel3.add(jPanel4);
 
@@ -269,9 +422,18 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Fecha de Nacimiento");
 
-        txtFecha.setBackground(new java.awt.Color(34, 37, 47));
+        txtFecha.setBackground(new java.awt.Color(40, 41, 52));
         txtFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
+        txtFecha.setBorder(null);
+        txtFecha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFechaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFechaFocusLost(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -291,15 +453,35 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Sobrenombre (Alias)");
 
-        txtAlias.setBackground(new java.awt.Color(34, 37, 47));
+        txtAlias.setBackground(new java.awt.Color(40, 41, 52));
+        txtAlias.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtAlias.setForeground(new java.awt.Color(255, 255, 255));
+        txtAlias.setBorder(null);
+        txtAlias.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAliasFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAliasFocusLost(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Telefono");
 
-        txtTelefono.setBackground(new java.awt.Color(34, 37, 47));
+        txtTelefono.setBackground(new java.awt.Color(40, 41, 52));
+        txtTelefono.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        txtTelefono.setBorder(null);
+        txtTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusLost(evt);
+            }
+        });
         txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTelefonoKeyPressed(evt);
@@ -312,8 +494,10 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("DPI");
 
-        txtDPI.setBackground(new java.awt.Color(34, 37, 47));
+        txtDPI.setBackground(new java.awt.Color(40, 41, 52));
+        txtDPI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDPI.setForeground(new java.awt.Color(255, 255, 255));
+        txtDPI.setBorder(null);
         txtDPI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDPIKeyPressed(evt);
@@ -321,6 +505,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         });
 
         lblDpi.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        lblDpi.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -423,7 +608,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 770, 410));
 
-        panelRound2.setBackground(new java.awt.Color(34, 37, 47));
+        panelRound2.setBackground(new java.awt.Color(28, 28, 36));
         panelRound2.setRoundBottomLeft(15);
         panelRound2.setRoundBottomRight(15);
 
@@ -435,7 +620,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
             }
         });
 
-        lblIniciarS.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblIniciarS.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblIniciarS.setForeground(new java.awt.Color(255, 255, 255));
         lblIniciarS.setText("Iniciar Sesión");
         lblIniciarS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -455,8 +641,10 @@ public class agregarUsuarios extends javax.swing.JFrame {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(333, 333, 333)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIniciarS)
-                    .addComponent(btbRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btbRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblIniciarS)))
                 .addContainerGap(332, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
@@ -471,7 +659,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 770, 80));
 
-        panelRound3.setBackground(new java.awt.Color(34, 37, 47));
+        panelRound3.setBackground(new java.awt.Color(28, 28, 36));
         panelRound3.setRoundBottomLeft(15);
         panelRound3.setRoundBottomRight(15);
         panelRound3.setRoundTopLeft(15);
@@ -577,9 +765,14 @@ public class agregarUsuarios extends javax.swing.JFrame {
             Matcher m = exp[i].matcher(String.valueOf(txtContra.getPassword()));
             if (m.find()) {
                 labels[i].setForeground(new Color(99, 220, 147));
+                //txtContra.setBorder(correctoBorde);
             } else {
-                labels[i].setForeground(new Color(255, 75, 76));;
+                labels[i].setForeground(error);
+                //txtContra.setBorder(errorBorde);
             }
+        }
+        if (ctrlUsuarios.verificarPassword(String.valueOf(txtContra.getPassword()))) {
+            txtContra.setBorder(correctoBorde);
         }
     }//GEN-LAST:event_txtContraKeyReleased
 
@@ -600,8 +793,10 @@ public class agregarUsuarios extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtDPI.setEditable(false);
+            txtDPI.setBorder(errorBorde);
             lblDpi.setText("Solo numeros");
         } else {
+            txtDPI.setBorder(selectedborder);
             txtDPI.setEditable(true);
             lblDpi.setText("");
         }
@@ -612,12 +807,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
         Pattern vCorreo = Pattern.compile("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$");
         Matcher m = vCorreo.matcher(txtCorreo.getText());
         if (!m.find()) {
-            lblCorreo.setForeground(new Color(255, 75, 76));
+            lblCorreo.setForeground(error);
             lblCorreo.setText("Ingrese un correo valido");
-            jSeparator1.setForeground(new Color(255, 75, 76));
+            txtCorreo.setBorder(errorBorde);
         } else {
             lblCorreo.setText("");
-            jSeparator1.setForeground(new Color(143, 235, 170));
+            txtCorreo.setBorder(correctoBorde);
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
@@ -677,6 +872,87 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnSubirActionPerformed
+
+    private void txtCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusGained
+        // TODO add your handling code here:
+        selected(txtCorreo, 0);
+    }//GEN-LAST:event_txtCorreoFocusGained
+
+    private void txtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusLost
+        // TODO add your handling code here:
+        //selected(txtCorreo, 1);
+        txtCorreo.setBackground(new Color(40, 41, 52));
+    }//GEN-LAST:event_txtCorreoFocusLost
+
+    private void txtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusGained
+        // TODO add your handling code here:
+        selected(txtNombre, 0);
+    }//GEN-LAST:event_txtNombreFocusGained
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        // TODO add your handling code here:
+        selected(txtNombre, 1);
+    }//GEN-LAST:event_txtNombreFocusLost
+
+    private void txtFechaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaFocusGained
+        // TODO add your handling code here:
+        selected(txtFecha, 0);
+    }//GEN-LAST:event_txtFechaFocusGained
+
+    private void txtFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaFocusLost
+        // TODO add your handling code here:
+        selected(txtFecha, 1);
+    }//GEN-LAST:event_txtFechaFocusLost
+
+    private void txtAliasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAliasFocusGained
+        // TODO add your handling code here:
+        selected(txtAlias, 0);
+    }//GEN-LAST:event_txtAliasFocusGained
+
+    private void txtAliasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAliasFocusLost
+        // TODO add your handling code here:
+        selected(txtAlias, 1);
+    }//GEN-LAST:event_txtAliasFocusLost
+
+    private void txtTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusGained
+        // TODO add your handling code here:
+        selected(txtTelefono, 0);
+    }//GEN-LAST:event_txtTelefonoFocusGained
+
+    private void txtTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusLost
+        // TODO add your handling code here:
+        selected(txtTelefono, 1);
+    }//GEN-LAST:event_txtTelefonoFocusLost
+
+    private void txtApellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoFocusGained
+        // TODO add your handling code here:
+        selected(txtApellido, 0);
+    }//GEN-LAST:event_txtApellidoFocusGained
+
+    private void txtApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoFocusLost
+        // TODO add your handling code here:
+        selected(txtApellido, 1);
+    }//GEN-LAST:event_txtApellidoFocusLost
+
+    private void txtContraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraFocusGained
+        // TODO add your handling code here:
+        selected(txtContra, 0);
+    }//GEN-LAST:event_txtContraFocusGained
+
+    private void txtContraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraFocusLost
+        // TODO add your handling code here:
+        txtContra.setBackground(new Color(40, 41, 52));
+    }//GEN-LAST:event_txtContraFocusLost
+
+    private void txtValidarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValidarFocusGained
+        // TODO add your handling code here:
+        selected(txtValidar, 0);
+    }//GEN-LAST:event_txtValidarFocusGained
+
+    private void txtValidarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValidarFocusLost
+        // TODO add your handling code here:
+        selected(txtValidar, 1);
+    }//GEN-LAST:event_txtValidarFocusLost
     public void agregarUsuario() {
 
         Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
@@ -789,9 +1065,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblDpi;
     private javax.swing.JLabel lblIniciarS;

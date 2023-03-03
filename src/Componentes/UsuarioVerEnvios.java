@@ -1,5 +1,6 @@
 package Componentes;
 
+import Administrador.ctrlDepartamentos;
 import Elementos.CutomTable.TableActionCellEditor;
 import Elementos.CutomTable.TableActionCellRender;
 import Elementos.CutomTable.TableActionEvent;
@@ -107,7 +108,9 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 Element codigoPaquete = doc.getElementById("codigoPaquete");
                 Element NumeroFacura = doc.getElementById("fecha");
                 Element dOrigen = doc.getElementById("dOrigen");
+                Element dDireccionOrigen = doc.getElementById("dDireccionOrigen");
                 Element dDestino = doc.getElementById("dDestino");
+                Element dDireccionDestino = doc.getElementById("dDireccionDestino");
                 Element dNumeroPaquetes = doc.getElementById("dNumeroPaquetes");
                 Element dTipoPago = doc.getElementById("dTipoPago");
                 Element dSize = doc.getElementById("dSize");
@@ -117,11 +120,16 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
                 codigoPaquete.text("#" + factura.getNumFactura());
                 NumeroFacura.text(factura.getCodPaquete());
-                dOrigen.text(envios.getGuia().getOrigen());
+
+                String[] datosO = factura.getOrigen().split(",");
+
+                dOrigen.text(datosO[0] + "," + datosO[1]);
+                dDireccionOrigen.text(datosO[2]);
 
                 String[] datosD = factura.getDestino().split(",");
 
-                dDestino.text(factura.getDestino());
+                dDestino.text(datosD[0] + "," + datosD[1]);
+                dDireccionDestino.text(datosD[2]);
                 dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
                 dTipoPago.text(factura.getTipoPago());
                 dSize.text(envios.getGuia().getTamanoPaquete() + "");
@@ -175,9 +183,11 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 Document doc = Jsoup.parse(htmlContent);
 
                 Element codigoPaquete = doc.getElementById("codigoPaquete");
-                Element NumeroFacura = doc.getElementById("fecha");
+                Element fecha = doc.getElementById("fecha");
                 Element dOrigen = doc.getElementById("dOrigen");
+                Element dDireccionOrigen = doc.getElementById("dDireccionOrigen");
                 Element dDestino = doc.getElementById("dDestino");
+                Element dDireccionDestino = doc.getElementById("dDireccionDestino");
                 Element dNumeroPaquetes = doc.getElementById("dNumeroPaquetes");
                 Element dTipoPago = doc.getElementById("dTipoPago");
                 Element dTamano = doc.getElementById("dTamano");
@@ -188,9 +198,16 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 Factura factura = envios.getFactura();
 
                 codigoPaquete.text("#" + factura.getNumFactura());
-                NumeroFacura.text(factura.getCodPaquete());
-                dOrigen.text(envios.getGuia().getOrigen());
-                dDestino.text(factura.getDestino());
+                fecha.text(envios.getGuia().getFechaEnvio());
+                String[] datosO = factura.getOrigen().split(",");
+
+                dOrigen.text(datosO[0] + "," + datosO[1]);
+                dDireccionOrigen.text(datosO[2]);
+
+                String[] datosD = factura.getDestino().split(",");
+
+                dDestino.text(datosD[0] + "," + datosD[1]);
+                dDireccionDestino.text(datosD[2]);
                 dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
                 dTipoPago.text(factura.getTipoPago());
                 dTamano.text(envios.getGuia().getTamanoPaquete() + "");
@@ -226,9 +243,9 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 datos[1] = envio.getTipoServicio();
 
                 String[] datosD = envio.getFactura().getDestino().split(",");
-                String mostrarDestinatario ="<html>"+ datosD[0] + "<br> " + datosD[1] + "<br> " + datosD[2]+"</html>";
 
-                datos[2] = datosD[2];
+                String mostrarDestinatario = "<html>" + datosD[0] + "<br> " + datosD[1] + "<br> " + datosD[2] + "</html>";
+                datos[2] = mostrarDestinatario;
                 datos[3] = envio.getFactura().getTotal();
                 datos[4] = envio.getFactura().getTipoPago();
                 modelo.addRow(datos);

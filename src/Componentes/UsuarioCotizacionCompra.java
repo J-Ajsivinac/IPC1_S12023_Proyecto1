@@ -127,8 +127,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
             int numeroPaquetes = Integer.parseInt(txtNumeroPaquetes.getText());
             //String sizePaquete = size
-            String origen = depItemO.getCodigo() + "," + munItemO.getNombreMunicipio() + "," + txtDireccionOrigen.getText();
-            String destino = depItemD.getCodigo() + "," + munItemD.getNombreMunicipio() + "," + txtDireccionDestino.getText();
+            String origen = depItemO.getNombreDepartamento() + "," + munItemO.getNombreMunicipio() + "," + txtDireccionOrigen.getText();
+            String destino = depItemD.getNombreDepartamento() + "," + munItemD.getNombreMunicipio() + "," + txtDireccionDestino.getText();
 
             guardarCotizacion = new Guia(origen, destino, sizePaquete, numeroPaquetes);
             double multi1 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 0);

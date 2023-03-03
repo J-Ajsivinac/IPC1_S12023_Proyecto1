@@ -5,6 +5,7 @@ import Usuario.ctrlUsuarios;
 import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -27,10 +28,15 @@ public class login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-        txtMail.setBorder(bottomBorder);
-        txtPassword.setBorder(bottomBorder);
+        Border border = BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175)),
+                BorderFactory.createEmptyBorder(0, 0, 0, 0)
+        );
+        txtMail.setBorder(border);
+        txtPassword.setBorder(border);
         txtPassword.setCaretColor(Color.WHITE);
         btnCrear.requestFocusInWindow();
+        ((JComponent) txtPassword.getParent()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     }
 
     /**
