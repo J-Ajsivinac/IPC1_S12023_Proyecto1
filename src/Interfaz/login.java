@@ -16,7 +16,16 @@ import javax.swing.plaf.ColorUIResource;
  * @author mesoi
  */
 public class login extends javax.swing.JFrame {
-
+    
+    public static Border unselectedborder;
+    public static Border selectedborder;
+    public static Border errorBorde;
+    public static Border correctoBorde;
+    public static Color selectedTxt;
+    public static Color unselectedTxt;
+    public static Color error;
+    public static Color correcto;
+    
     /**
      * Creates new form login
      */
@@ -37,6 +46,15 @@ public class login extends javax.swing.JFrame {
         txtPassword.setCaretColor(Color.WHITE);
         btnCrear.requestFocusInWindow();
         ((JComponent) txtPassword.getParent()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        
+        selectedTxt = new Color(50, 51, 64);
+        unselectedTxt = new Color(40, 41, 52);
+        error = new Color(255, 75, 76);
+        correcto = new Color(143, 235, 170);
+        unselectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
+        selectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
+        errorBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, error);
+        correctoBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, correcto);
     }
 
     /**

@@ -24,15 +24,24 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         this.user = user1;
     }
 
-    public void ingresarDatosF(String nombreDF, String direccionDF, String nitDF) {
+    public void ingresarDatosF() {
+        String nombreDF = txtNombreCompleto.getText();
+        String direccionDF = txtDireccion.getText();
+        String nitDF = txtNit.getText();
         String correoEnviar = user.getCorreo();
-        if (!(nombreDF.equals("") && direccionDF.equals("") && nitDF.equals(""))) {
+        if (!(nombreDF.equals("") && direccionDF.equals("") && nitDF.equals("")) && user!=null) {
             if (ctrlUsuarios.agregarDatosFacturacion(correoEnviar, nombreDF, direccionDF, nitDF)) {
                 JOptionPane.showMessageDialog(null, "Tarjeta ingresado Correctamente");
-                
+                limpiarTxt();
             }
 
         }
+    }
+    
+    public void limpiarTxt(){
+        txtNombreCompleto.setText("");
+        txtNit.setText("");
+        txtDireccion.setText("");
     }
 
     /**
@@ -52,7 +61,8 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         txtNit = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        lblNit = new javax.swing.JLabel();
+        btnAgregarDatos = new Elementos.ButtonRound();
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel1.setText("Datos de Facturación");
@@ -65,10 +75,16 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
 
         jLabel4.setText("Nit");
 
-        jButton1.setText("Registrar Datos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtNit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNitKeyPressed(evt);
+            }
+        });
+
+        btnAgregarDatos.setText("Registrar Datos");
+        btnAgregarDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAgregarDatosActionPerformed(evt);
             }
         });
 
@@ -77,20 +93,20 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(txtNombreCompleto)
-                            .addComponent(txtDireccion)
-                            .addComponent(txtNit, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addComponent(jButton1)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombreCompleto)
+                    .addComponent(txtDireccion)
+                    .addComponent(txtNit, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                    .addComponent(lblNit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(298, Short.MAX_VALUE)
+                .addComponent(btnAgregarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(268, 268, 268))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,9 +123,11 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNit, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAgregarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -133,26 +151,36 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(80, 80, 80)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgregarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDatosActionPerformed
         // TODO add your handling code here:
-        String nombreEnviar = txtNombreCompleto.getText();
-        String direccionEnviar = txtDireccion.getText();
-        String nitEnviar = txtNit.getText();
-        ingresarDatosF(nombreEnviar, direccionEnviar, nitEnviar);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ingresarDatosF();
+    }//GEN-LAST:event_btnAgregarDatosActionPerformed
+
+    private void txtNitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitKeyPressed
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtNit.setEditable(false);
+            lblNit.setText("Solo numeros");
+        } else {
+            txtNit.setEditable(true);
+            lblNit.setText("");
+        }
+    }//GEN-LAST:event_txtNitKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private Elementos.ButtonRound btnAgregarDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblNit;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNit;
     private javax.swing.JTextField txtNombreCompleto;

@@ -1,7 +1,11 @@
 package Componentes;
 
 import Interfaz.UsuarioCliente;
+import Interfaz.login;
 import Usuario.*;
+import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,7 +15,7 @@ import javax.swing.JOptionPane;
 public class UsuarioTarjeta extends javax.swing.JPanel {
 
     private Usuario user;
-
+    private boolean validarFecha = false;
     /**
      * Creates new form UsuarioTarjeta
      */
@@ -25,16 +29,27 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         this.user = user1;
     }
 
-    public void ingresarTarjeta(String tarjetaNombre, String tarjetaNumero, String tarjetaVs) {
+    public void ingresarTarjeta() {
         String correoEnviar = user.getCorreo();
-        if (!(tarjetaNombre.equals("") && tarjetaNumero.equals("") && tarjetaVs.equals(""))) {
+        String tarjetaNombre = txtNombreTarjeta.getText();
+        String tarjetaNumero = txtNumero.getText();
+        String tarjetaVs = txtFecha.getText();
+
+        if (!(tarjetaNombre.equals("") && tarjetaNumero.equals("") && tarjetaVs.equals("")) && user != null && validarFecha) {
             if (ctrlUsuarios.agregaTarjeta(correoEnviar, tarjetaNombre, tarjetaNumero, tarjetaVs)) {
                 JOptionPane.showMessageDialog(null, "Tarjeta ingresado Correctamente");
+                limpiarTxt();
             }
 
         }
     }
-
+    
+    public void limpiarTxt(){
+        txtNombreTarjeta.setText("");
+        txtNumero.setText("");
+        txtFecha.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,10 +67,10 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtDia = new javax.swing.JTextField();
-        txtMes = new javax.swing.JTextField();
-        txta = new javax.swing.JTextField();
-        btnIngresarTarjeta = new javax.swing.JButton();
+        txtFecha = new javax.swing.JTextField();
+        buttonRound1 = new Elementos.ButtonRound();
+        lblNumero = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel1.setText("Ingresar Tarjetas de Credito o de Débito");
@@ -66,43 +81,64 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setText("Numero de la Tarjeta");
 
-        jLabel5.setText("Fecha de Vencimiento");
-
-        btnIngresarTarjeta.setText("Añadir Tarjeta");
-        btnIngresarTarjeta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarTarjetaActionPerformed(evt);
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyReleased(evt);
             }
         });
+
+        jLabel5.setText("Fecha de Vencimiento");
+
+        txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFechaKeyReleased(evt);
+            }
+        });
+
+        buttonRound1.setText("Añadir Tarjeta");
+        buttonRound1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRound1ActionPerformed(evt);
+            }
+        });
+
+        lblNumero.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+
+        lblFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblFecha.setText("dd/mm/yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNombreTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3)
+                        .addComponent(txtNombreTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel5)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(txtFecha))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(btnIngresarTarjeta)))
+                        .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,12 +154,14 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnIngresarTarjeta)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -140,7 +178,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -161,31 +199,62 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarTarjetaActionPerformed
+    private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
         // TODO add your handling code here:
-        String nombreEnviar = txtNombreTarjeta.getText();
-        String numeroEnviar = txtNumero.getText();
-        String fecha = txtDia.getText()+"/"+txtMes.getText()+"/"+txta.getText();
-        ingresarTarjeta(nombreEnviar, numeroEnviar, fecha);
-    }//GEN-LAST:event_btnIngresarTarjetaActionPerformed
+        ingresarTarjeta();
+    }//GEN-LAST:event_buttonRound1ActionPerformed
+
+    private void txtNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtNumeroKeyReleased
+
+    private void txtNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtNumero.setEditable(false);
+            lblNumero.setText("Solo numeros");
+        } else {
+            txtNumero.setEditable(true);
+            lblNumero.setText("");
+        }
+    }//GEN-LAST:event_txtNumeroKeyPressed
+
+    private void txtFechaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyReleased
+        // TODO add your handling code here:
+         Pattern vCorreo = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
+        Matcher m = vCorreo.matcher(txtFecha.getText());
+        if (!m.find()) {
+            lblFecha.setForeground(login.error);
+            lblFecha.setText("Ingrese una fecha valida");
+            validarFecha = false;
+            txtFecha.setBorder(login.errorBorde);
+        } else {
+            lblFecha.setForeground(Color.WHITE);
+            lblFecha.setText("dd/mm/yyyy");
+            txtFecha.setBorder(login.correctoBorde);
+            validarFecha = true;
+        }
+    }//GEN-LAST:event_txtFechaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngresarTarjeta;
+    private Elementos.ButtonRound buttonRound1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtDia;
-    private javax.swing.JTextField txtMes;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblNumero;
+    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtNombreTarjeta;
     private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txta;
     // End of variables declaration//GEN-END:variables
 }
