@@ -33,10 +33,12 @@ public class AdminRegiones extends javax.swing.JPanel {
         aMR = new AdminModificarRegion();
         regio = ctrlRegiones.getTodasRegiones();
         unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
+       
         selected = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
         panelBackground.setBorder(unselect);
         panelCrud.add(aAR);
         panelCrud.add(aMR);
+        
         menuClick(aAR,panelAgregar);
        // cargarDatos();
     }
@@ -44,9 +46,11 @@ public class AdminRegiones extends javax.swing.JPanel {
      public void menuClick(JPanel panel,JPanel btn) {
         aAR.setVisible(false);
         aMR.setVisible(false);
-        panelAgregar.setBorder(unselect);
+        //panelAgregar.setBorder(unselect);
+        panelAgregar.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0,  new Color(150, 157, 175)));
         panelModificar.setBorder(unselect);
         btn.setBorder(selected);
+        
         panel.setVisible(true);
     }
    

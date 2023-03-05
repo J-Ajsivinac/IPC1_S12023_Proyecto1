@@ -43,12 +43,19 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         }
     }
 
-    public void ingresarKiosco(String codigo, String codK, String nombreDepartament) {
-        if (!(codigo.equals("") && nombreDepartament.equals(""))) {
-            if (ctrlKioscos.nuevoKiosco(codigo, codK, nombreDepartament)) {
+    public void ingresarKiosco() {
+        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
+        String nombreKiosco = "";
+        String codK = "";
+        if (!(txtCodKiosco.getText().toString().equals("") && txtNombreKiosco.getText().toString().equals("")) && regItem!= null) {
+            nombreKiosco = txtNombreKiosco.getText();
+            codK = txtCodKiosco.getText();
+            if (ctrlKioscos.nuevoKiosco(regItem.getCodigo(), codK, nombreKiosco)) {
                 JOptionPane.showMessageDialog(null, "Kiosco ingresado Correctamente");
                 cargarTabla();
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "No lleno todos los campos");
         }
     }
     
@@ -245,10 +252,8 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
 
     private void btnRegistrarKioscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarKioscoActionPerformed
         // TODO add your handling code here:
-        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
-        String nombreDep = txtNombreKiosco.getText();
-        String codK = txtCodKiosco.getText();
-        ingresarKiosco(regItem.getCodigo(), codK, nombreDep);
+        
+        ingresarKiosco();
         //ingresarDepartamentos(regItem.getCodigo(), nombreDep);
     }//GEN-LAST:event_btnRegistrarKioscoActionPerformed
 

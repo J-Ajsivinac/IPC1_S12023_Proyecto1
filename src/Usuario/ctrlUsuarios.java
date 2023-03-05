@@ -22,7 +22,7 @@ public class ctrlUsuarios {
     }
 
     public static boolean nuevoUsuario(String correo, String nombre, String apellido, String contrasena, String dpi,
-            String fnacimiento, String genero, String nacionalidad, String alias, int telefono, int rol, String foto) {
+            String fnacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String foto) {
         if (!ctrlUsuarios.verifiarUsuarios(correo)) {
             if (verificarPassword(contrasena)) {
                 usuarios.add(new Usuario(contadorUsuarios, correo, nombre, apellido, contrasena, dpi, fnacimiento,

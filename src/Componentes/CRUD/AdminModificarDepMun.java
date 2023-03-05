@@ -74,7 +74,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                     DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
                     String codigoDepartamento = depItem.getCodigo();
                     String codigo = String.valueOf(model.getValueAt(row, 0));
-                    if (ctrlDepartamentos.eliminarMunicipio(codigoDepartamento,codigo)) {
+                    if (ctrlDepartamentos.eliminarMunicipio(codigoDepartamento, codigo)) {
                         model.removeRow(row);
                         JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
                     }
@@ -108,15 +108,20 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
     public void ActualizarDepartamento() {
         Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
-        String codDepartamento = dep.getCodDepartamento();
-        String nNombre = txtNuevoDepartamento.getText();
-        if (ctrlDepartamentos.modificarNombreDep(codDepartamento, nNombre)) {
-            JOptionPane.showMessageDialog(null, "Nombre Actualizado");
-            ctrlDepartamentos.copiarHistorialDep();
-            cargarB();
-            //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
-        } else {
-            JOptionPane.showMessageDialog(null, "Error");
+        String codDepartamento = "";
+        String nNombre = "";
+
+        if (dep != null && boxRegionUpdate.getSelectedItem() != null && !txtNuevoDepartamento.getText().toString().equals("")) {
+            codDepartamento = dep.getCodDepartamento();
+            nNombre = txtNuevoDepartamento.getText();
+            if (ctrlDepartamentos.modificarNombreDep(codDepartamento, nNombre)) {
+                JOptionPane.showMessageDialog(null, "Nombre Actualizado");
+                ctrlDepartamentos.copiarHistorialDep();
+                cargarB();
+                //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
         }
 
     }
@@ -124,13 +129,16 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
     public void cargarRegiones(JComboBox caja) {
         caja.removeAllItems();
         regio = ctrlRegiones.getTodasRegiones();
-        for (int i = 0; i < regio.size(); i++) {
-            if (regio.get(i) != null) {
-                String codeR = regio.get(i).getCodigo();
-                String nombreRegion = regio.get(i).getNombre();
-                caja.addItem(new Regiones(codeR, nombreRegion));
+        if (regio != null) {
+            for (int i = 0; i < regio.size(); i++) {
+                if (regio.get(i) != null) {
+                    String codeR = regio.get(i).getCodigo();
+                    String nombreRegion = regio.get(i).getNombre();
+                    caja.addItem(new Regiones(codeR, nombreRegion));
+                }
             }
         }
+
     }
 
     public void cargarDepartamentos(JComboBox actualizar, String codDepartamento) {
@@ -154,21 +162,26 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
     public void cargarTabla1() {
         modelo.setRowCount(0);
         //boxRegionEliminar
+
         Regiones depRegion = (Regiones) boxRegionEliminar.getSelectedItem();
         if (depRegion != null) {
-            ArrayList<Departamentos> totalDepartamentos = (ArrayList<Departamentos>) ctrlDepartamentos.getAllDepartamentosByCod(depRegion.getCodigo()).clone();
-            for (Departamentos dep : totalDepartamentos) {
-                Object datos[] = new Object[2];
-                datos[0] = dep.getCodDepartamento();
-                datos[1] = dep.getNombreDepartamento();
-                modelo.addRow(datos);
+            if (depRegion != null) {
+                ArrayList<Departamentos> totalDepartamentos = (ArrayList<Departamentos>) ctrlDepartamentos.getAllDepartamentosByCod(depRegion.getCodigo()).clone();
+                for (Departamentos dep : totalDepartamentos) {
+                    Object datos[] = new Object[2];
+                    datos[0] = dep.getCodDepartamento();
+                    datos[1] = dep.getNombreDepartamento();
+                    modelo.addRow(datos);
+                }
             }
         }
+
     }
 
     //
     public void cargarMunicipios(JComboBox actualizar) {
         //boxMunicipios.addItem("Municipios");
+
         limpiarBoxes(actualizar);
         Departamentos depItem = (Departamentos) boxDepartamentosM.getSelectedItem();
         if (depItem != null) {
@@ -192,16 +205,19 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         //Departamentos dep = (Departamentos) boxRegionMuni.getSelectedItem();
         Municipios mun = (Municipios) boxMuniUpdate.getSelectedItem();
         //String codDepartamento = dep.getCodDepartamento();
-        String nNombre = txtNuevoMunicipio.getText();
-        if (ctrlDepartamentos.modificarNombreMun(mun.getCodigoDepartamento().toString(), mun.getCodigoMunicipio().toString(), nNombre)) {
-            JOptionPane.showMessageDialog(null, "Nombre Actualizado");
-            //cargarB();
-            ctrlDepartamentos.copiarHistorialDep();
-            cargarMunicipios(boxMuniUpdate);
-            //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
-        } else {
-            JOptionPane.showMessageDialog(null, "Error");
+        if (mun != null && boxRegionMuni.getSelectedItem()!=null && boxDepartamentosM.getSelectedItem() !=null && !txtNuevoMunicipio.getText().toString().equals("")) {
+            String nNombre = txtNuevoMunicipio.getText();
+            if (ctrlDepartamentos.modificarNombreMun(mun.getCodigoDepartamento().toString(), mun.getCodigoMunicipio().toString(), nNombre)) {
+                JOptionPane.showMessageDialog(null, "Nombre Actualizado");
+                //cargarB();
+                ctrlDepartamentos.copiarHistorialDep();
+                cargarMunicipios(boxMuniUpdate);
+                //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
         }
+
     }
 
     public void cargarTabla2() {
@@ -465,11 +481,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boxRegionMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxRegionMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxDepartamentosM, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)

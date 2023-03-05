@@ -2,7 +2,11 @@ package Interfaz;
 
 import Componentes.*;
 import Componentes.CRUD.AdminAgregarDepMun;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  *
@@ -17,6 +21,8 @@ public class Admin extends javax.swing.JFrame {
     private AdminReporteUsuario adRUsuario;
     private AdminReporteTotales adRTotales;
     public boolean activado;
+    Border unselectedborder;
+    Border selectedborder;
 
     /**
      * Creates new form Admin
@@ -29,7 +35,7 @@ public class Admin extends javax.swing.JFrame {
         adK = new AdminiKioscos();
         adRRegion = new AdminReporteRegion();
         adRUsuario = new AdminReporteUsuario();
-        adRTotales= new AdminReporteTotales();
+        adRTotales = new AdminReporteTotales();
         panelMainContainer.add(ad);
         panelMainContainer.add(dm);
         panelMainContainer.add(adK);
@@ -37,9 +43,12 @@ public class Admin extends javax.swing.JFrame {
         panelMainContainer.add(adRUsuario);
         panelMainContainer.add(adRTotales);
         menuClick(ad);
+        
+        unselectedborder = BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(150, 157, 175));
+        selectedborder = BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(205, 233, 255));
         panelRIngresos.setVisible(activado);
         panelRRegion.setVisible(activado);
-        panelRTotal.setVisible(activado);
+        bordeMenu(panelRegiones,txtRegion);
         panelRUsuario.setVisible(activado);
     }
 
@@ -48,15 +57,43 @@ public class Admin extends javax.swing.JFrame {
             activado = false;
             panelRIngresos.setVisible(activado);
             panelRRegion.setVisible(activado);
-            panelRTotal.setVisible(activado);
+
             panelRUsuario.setVisible(activado);
         } else {
             activado = true;
             panelRIngresos.setVisible(activado);
             panelRRegion.setVisible(activado);
-            panelRTotal.setVisible(activado);
+
             panelRUsuario.setVisible(activado);
         }
+    }
+
+    public void hoverMenu(JPanel activar, int estado) {
+        if (estado == 1) {
+            activar.setBackground(new Color(19, 19, 26));
+        } else {
+            activar.setBackground(new Color(28, 28, 36));
+        }
+    }
+
+    public void bordeMenu(JPanel panel, JLabel texto) {
+        panelRegiones.setBorder(unselectedborder);
+        panelDepartamentos.setBorder(unselectedborder);
+        panelKiosco.setBorder(unselectedborder);
+        panelRRegion.setBorder(unselectedborder);
+        panelRUsuario.setBorder(unselectedborder);
+        panelRIngresos.setBorder(unselectedborder);
+        
+        txtRegion.setForeground(Color.WHITE);
+        txtDepartamentos.setForeground(Color.WHITE);
+        txtKiosco.setForeground(Color.WHITE);
+        txtDepartamentos.setForeground(Color.WHITE);
+        txtPorRegion.setForeground(Color.WHITE);
+        txtPorUsuario.setForeground(Color.WHITE);
+        txtTotal.setForeground(Color.WHITE);
+        panel.setBorder(selectedborder);
+        texto.setForeground(new Color(205, 233, 255));
+        //panel.setForeground(new Color(205, 233, 255));
     }
 
     /**
@@ -76,96 +113,142 @@ public class Admin extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         panelRegiones = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        txtRegion = new javax.swing.JLabel();
         panelDepartamentos = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        txtDepartamentos = new javax.swing.JLabel();
         panelKiosco = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        txtKiosco = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelRRegion = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        txtPorRegion = new javax.swing.JLabel();
         panelRUsuario = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        txtPorUsuario = new javax.swing.JLabel();
         panelRIngresos = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        panelRTotal = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         panelMainContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(19, 19, 26));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(28, 28, 36));
+
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Joab Ajsivinac");
         jPanel4.add(jLabel2);
 
+        jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel3.setText("Administrado");
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Administrador");
         jPanel5.add(jLabel3);
 
+        panelRegiones.setBackground(new java.awt.Color(28, 28, 36));
         panelRegiones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelRegionesMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelRegionesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelRegionesMouseExited(evt);
+            }
         });
         panelRegiones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel4.setText("Regiones y Precios");
-        panelRegiones.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        txtRegion.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        txtRegion.setForeground(new java.awt.Color(255, 255, 255));
+        txtRegion.setText("Regiones y Precios");
+        panelRegiones.add(txtRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        panelDepartamentos.setBackground(new java.awt.Color(28, 28, 36));
         panelDepartamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelDepartamentosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelDepartamentosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelDepartamentosMouseExited(evt);
+            }
         });
         panelDepartamentos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel5.setText("Departamentos y Municipios");
-        panelDepartamentos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        txtDepartamentos.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        txtDepartamentos.setForeground(new java.awt.Color(255, 255, 255));
+        txtDepartamentos.setText("Departamentos y Municipios");
+        panelDepartamentos.add(txtDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        panelKiosco.setBackground(new java.awt.Color(28, 28, 36));
         panelKiosco.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelKioscoMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelKioscoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelKioscoMouseExited(evt);
+            }
         });
         panelKiosco.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel6.setText("Kioscos");
-        panelKiosco.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        txtKiosco.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        txtKiosco.setForeground(new java.awt.Color(255, 255, 255));
+        txtKiosco.setText("Kioscos");
+        panelKiosco.add(txtKiosco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        jPanel9.setBackground(new java.awt.Color(28, 28, 36));
         jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel9MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel9MouseExited(evt);
+            }
         });
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("> Reportes");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        jPanel3.setBackground(new java.awt.Color(28, 28, 36));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelRRegion.setBackground(new java.awt.Color(28, 28, 36));
         panelRRegion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelRRegionMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelRRegionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelRRegionMouseExited(evt);
+            }
         });
 
-        jLabel9.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel9.setText("Por Región");
+        txtPorRegion.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        txtPorRegion.setForeground(new java.awt.Color(255, 255, 255));
+        txtPorRegion.setText("Por Región");
 
         javax.swing.GroupLayout panelRRegionLayout = new javax.swing.GroupLayout(panelRRegion);
         panelRRegion.setLayout(panelRRegionLayout);
@@ -173,27 +256,35 @@ public class Admin extends javax.swing.JFrame {
             panelRRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRRegionLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel9)
+                .addComponent(txtPorRegion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRRegionLayout.setVerticalGroup(
             panelRRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRRegionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9)
+                .addComponent(txtPorRegion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(panelRRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 226, -1));
+        jPanel3.add(panelRRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 230, -1));
 
+        panelRUsuario.setBackground(new java.awt.Color(28, 28, 36));
         panelRUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelRUsuarioMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelRUsuarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelRUsuarioMouseExited(evt);
+            }
         });
 
-        jLabel10.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel10.setText("Por Usuario");
+        txtPorUsuario.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        txtPorUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        txtPorUsuario.setText("Por Usuario");
 
         javax.swing.GroupLayout panelRUsuarioLayout = new javax.swing.GroupLayout(panelRUsuario);
         panelRUsuario.setLayout(panelRUsuarioLayout);
@@ -201,27 +292,35 @@ public class Admin extends javax.swing.JFrame {
             panelRUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRUsuarioLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtPorUsuario)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         panelRUsuarioLayout.setVerticalGroup(
             panelRUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10)
+                .addComponent(txtPorUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(panelRUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 41, 226, -1));
+        jPanel3.add(panelRUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 41, 230, -1));
 
+        panelRIngresos.setBackground(new java.awt.Color(28, 28, 36));
         panelRIngresos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelRIngresosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelRIngresosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelRIngresosMouseExited(evt);
+            }
         });
 
-        jLabel11.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel11.setText("Ingresos Totales");
+        txtTotal.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        txtTotal.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotal.setText("Totales");
 
         javax.swing.GroupLayout panelRIngresosLayout = new javax.swing.GroupLayout(panelRIngresos);
         panelRIngresos.setLayout(panelRIngresosLayout);
@@ -229,49 +328,35 @@ public class Admin extends javax.swing.JFrame {
             panelRIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRIngresosLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel11)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(txtTotal)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         panelRIngresosLayout.setVerticalGroup(
             panelRIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRIngresosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
+                .addComponent(txtTotal)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(panelRIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 76, -1, -1));
+        jPanel3.add(panelRIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 76, 230, -1));
 
-        jLabel12.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel12.setText("Total de Paquetes");
-
-        javax.swing.GroupLayout panelRTotalLayout = new javax.swing.GroupLayout(panelRTotal);
-        panelRTotal.setLayout(panelRTotalLayout);
-        panelRTotalLayout.setHorizontalGroup(
-            panelRTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRTotalLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel12)
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        panelRTotalLayout.setVerticalGroup(
-            panelRTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRTotalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(panelRTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 111, -1, -1));
-
+        btnCerrarSesion.setBackground(new java.awt.Color(28, 28, 36));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCerrarSesionMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseExited(evt);
+            }
         });
         btnCerrarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Cerrar Sesión");
         btnCerrarSesion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
@@ -281,7 +366,7 @@ public class Admin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+            .addComponent(panelDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelRegiones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelKiosco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -310,15 +395,16 @@ public class Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 540));
 
         panelMainContainer.setBackground(new java.awt.Color(204, 204, 204));
+        panelMainContainer.setOpaque(false);
         jPanel1.add(panelMainContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 720, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -339,14 +425,14 @@ public class Admin extends javax.swing.JFrame {
 
     private void panelDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDepartamentosMouseClicked
         // TODO add your handling code here:
-
         menuClick(dm);
-        
+        bordeMenu(panelDepartamentos,txtDepartamentos);
     }//GEN-LAST:event_panelDepartamentosMouseClicked
 
     private void panelRegionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseClicked
         // TODO add your handling code here:
         menuClick(ad);
+        bordeMenu(panelRegiones,txtRegion);
     }//GEN-LAST:event_panelRegionesMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
@@ -359,6 +445,7 @@ public class Admin extends javax.swing.JFrame {
     private void panelKioscoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelKioscoMouseClicked
         // TODO add your handling code here:
         menuClick(adK);
+        bordeMenu(panelKiosco,txtKiosco);
     }//GEN-LAST:event_panelKioscoMouseClicked
 
     private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
@@ -369,17 +456,100 @@ public class Admin extends javax.swing.JFrame {
     private void panelRRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRRegionMouseClicked
         // TODO add your handling code here:
         menuClick(adRRegion);
+        bordeMenu(panelRRegion,txtPorRegion);
     }//GEN-LAST:event_panelRRegionMouseClicked
 
     private void panelRUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRUsuarioMouseClicked
         // TODO add your handling code here:
         menuClick(adRUsuario);
+        bordeMenu(panelRUsuario,txtPorUsuario);
     }//GEN-LAST:event_panelRUsuarioMouseClicked
 
     private void panelRIngresosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRIngresosMouseClicked
         // TODO add your handling code here:
         menuClick(adRTotales);
+        bordeMenu(panelRIngresos,txtTotal);
     }//GEN-LAST:event_panelRIngresosMouseClicked
+
+    private void panelRegionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelRegiones, 1);
+    }//GEN-LAST:event_panelRegionesMouseEntered
+
+    private void panelRegionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelRegiones, 0);
+    }//GEN-LAST:event_panelRegionesMouseExited
+
+    private void panelDepartamentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDepartamentosMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelDepartamentos, 1);
+    }//GEN-LAST:event_panelDepartamentosMouseEntered
+
+    private void panelKioscoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelKioscoMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelKiosco, 1);
+    }//GEN-LAST:event_panelKioscoMouseEntered
+
+    private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
+        // TODO add your handling code here:
+        hoverMenu(jPanel9, 1);
+    }//GEN-LAST:event_jPanel9MouseEntered
+
+    private void panelRRegionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRRegionMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelRRegion, 1);
+    }//GEN-LAST:event_panelRRegionMouseEntered
+
+    private void panelRUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRUsuarioMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelRUsuario, 1);
+    }//GEN-LAST:event_panelRUsuarioMouseEntered
+
+    private void panelRIngresosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRIngresosMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelRIngresos, 1);
+    }//GEN-LAST:event_panelRIngresosMouseEntered
+
+    private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(btnCerrarSesion, 1);
+    }//GEN-LAST:event_btnCerrarSesionMouseEntered
+
+    private void panelDepartamentosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDepartamentosMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelDepartamentos, 0);
+    }//GEN-LAST:event_panelDepartamentosMouseExited
+
+    private void panelKioscoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelKioscoMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelKiosco, 0);
+    }//GEN-LAST:event_panelKioscoMouseExited
+
+    private void jPanel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseExited
+        // TODO add your handling code here:
+        hoverMenu(jPanel9, 0);
+    }//GEN-LAST:event_jPanel9MouseExited
+
+    private void panelRRegionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRRegionMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelRRegion, 0);
+    }//GEN-LAST:event_panelRRegionMouseExited
+
+    private void panelRUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRUsuarioMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelRUsuario, 0);
+    }//GEN-LAST:event_panelRUsuarioMouseExited
+
+    private void panelRIngresosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRIngresosMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelRIngresos, 0);
+    }//GEN-LAST:event_panelRIngresosMouseExited
+
+    private void btnCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseExited
+        // TODO add your handling code here:
+        hoverMenu(btnCerrarSesion, 0);
+    }//GEN-LAST:event_btnCerrarSesionMouseExited
 
     /**
      * @param args the command line arguments
@@ -429,17 +599,10 @@ public class Admin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCerrarSesion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -451,8 +614,13 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel panelMainContainer;
     private javax.swing.JPanel panelRIngresos;
     private javax.swing.JPanel panelRRegion;
-    private javax.swing.JPanel panelRTotal;
     private javax.swing.JPanel panelRUsuario;
     private javax.swing.JPanel panelRegiones;
+    private javax.swing.JLabel txtDepartamentos;
+    private javax.swing.JLabel txtKiosco;
+    private javax.swing.JLabel txtPorRegion;
+    private javax.swing.JLabel txtPorUsuario;
+    private javax.swing.JLabel txtRegion;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 }

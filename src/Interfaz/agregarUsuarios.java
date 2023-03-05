@@ -36,6 +36,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
     Color unselectedTxt;
     Color error;
     Color correcto;
+    private boolean validarFecha = false;
     public ArrayList<Kioscos> kiosco;
     public String ruta;
     private static String[] nombrePaises = {"Alemania", "Argentina", "Belice", "Brasil", "Canadá", "China",
@@ -101,6 +102,19 @@ public class agregarUsuarios extends javax.swing.JFrame {
         }
     }
 
+    public void limpiarTxt() {
+        txtAlias.setText("");
+        txtApellido.setText("");
+        txtContra.setText("");
+        txtCorreo.setText("");
+        txtDPI.setText("");
+        txtFecha.setText("");
+        //txtKiosco.setBorder(unselectedborder);
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        txtValidar.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,6 +163,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtDPI = new javax.swing.JTextField();
         lblDpi = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
         panelRound2 = new Elementos.PanelRound();
         btbRegistrar = new javax.swing.JButton();
         lblIniciarS = new javax.swing.JLabel();
@@ -185,7 +200,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
         txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
         txtCorreo.setBorder(null);
         txtCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtCorreo.setOpaque(false);
         txtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtCorreoFocusGained(evt);
@@ -434,6 +448,11 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 txtFechaFocusLost(evt);
             }
         });
+        txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFechaKeyReleased(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -489,6 +508,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         });
 
         lblTelefono.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        lblTelefono.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel16.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
@@ -507,6 +527,10 @@ public class agregarUsuarios extends javax.swing.JFrame {
         lblDpi.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         lblDpi.setForeground(new java.awt.Color(255, 255, 255));
 
+        lblFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(255, 255, 255));
+        lblFecha.setText("dd/mm/yyyy");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -521,21 +545,19 @@ public class agregarUsuarios extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblDpi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDPI, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(boxNacionalidad, javax.swing.GroupLayout.Alignment.LEADING, 0, 161, Short.MAX_VALUE))
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(boxGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(boxNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(24, 24, 24)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(boxGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtAlias, javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,7 +567,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                                     .addComponent(txtTelefono)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGap(0, 90, Short.MAX_VALUE))
                                     .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(14, 14, 14))))
         );
@@ -555,7 +577,9 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -580,7 +604,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 .addComponent(txtDPI, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel5);
@@ -819,8 +843,16 @@ public class agregarUsuarios extends javax.swing.JFrame {
     private void boxRolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRolItemStateChanged
         // TODO add your handling code here:
         if (boxRol.getSelectedIndex() == 2) {
-            boxKiosco.setEnabled(true);
-            boxKiosco.setVisible(true);
+            if (boxKiosco.getItemCount() == 0) {
+                boxRol.setSelectedIndex(1);
+                boxRol.setSelectedIndex(0);
+                boxRol.getSelectedIndex();
+                JOptionPane.showMessageDialog(null, "No hay Kioscos registrados");
+            } else {
+                boxKiosco.setEnabled(true);
+                boxKiosco.setVisible(true);
+            }
+
         } else {
             boxKiosco.setEnabled(false);
             boxKiosco.setVisible(false);
@@ -953,6 +985,24 @@ public class agregarUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         selected(txtValidar, 1);
     }//GEN-LAST:event_txtValidarFocusLost
+
+    private void txtFechaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyReleased
+        // TODO add your handling code here:
+        Pattern vCorreo = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
+        Matcher m = vCorreo.matcher(txtFecha.getText());
+        if (!m.find()) {
+            lblFecha.setForeground(error);
+            lblFecha.setText("Ingrese una fecha valida");
+            validarFecha = false;
+            txtFecha.setBorder(errorBorde);
+        } else {
+            lblFecha.setForeground(Color.WHITE);
+            lblFecha.setText("dd/mm/yyyy");
+            txtFecha.setBorder(correctoBorde);
+            validarFecha = true;
+        }
+
+    }//GEN-LAST:event_txtFechaKeyReleased
     public void agregarUsuario() {
 
         Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
@@ -963,22 +1013,31 @@ public class agregarUsuarios extends javax.swing.JFrame {
         String contra = String.valueOf(txtContra.getPassword());
         String verificar = String.valueOf(txtValidar.getPassword());
         String dpi = txtDPI.getText();
-        int rol = boxRol.getSelectedIndex() + 1;
+        int rol = boxRol.getSelectedIndex();
+        String rolCompleto = boxRol.getSelectedItem().toString();
+
+        if (rol == 2 && kioscoItem != null) {
+            rolCompleto = "Kiosco, " + kioscoItem.getNombreKiosco();
+        }
         String img = "s";
         String fecha = txtFecha.getText();
         String nacionalidad = boxNacionalidad.getSelectedItem().toString();
         String genero = boxGenero.getSelectedItem().toString();
         String alias = txtAlias.getText();
         String numero = txtTelefono.getText();
-        int n = Integer.parseInt(numero);
-        System.out.println("Hola");
-
+        if (!validarFecha) {
+            JOptionPane.showMessageDialog(null, "La fecha no es válida");
+            return;
+        }
         if (!correo.equals("") && !nombre.equals("") && !apellido.equals("") && !contra.equals("")
-                && !verificar.equals("") && !dpi.equals("") && rol != 0 && !fecha.equals("")
+                && !verificar.equals("") && !dpi.equals("") && !fecha.equals("")
                 && !nacionalidad.equals("") && !genero.equals("") && !genero.equals("") && !alias.equals("") && !numero.equals("")) {
+            int n = Integer.parseInt(numero);
             if (contra.equals(verificar)) {
-                if (ctrlUsuarios.nuevoUsuario(correo, nombre, apellido, contra, dpi, numero, genero, nacionalidad, alias, n, rol, img)) {
+                if (ctrlUsuarios.nuevoUsuario(correo, nombre, apellido, contra, dpi, numero, genero, nacionalidad, alias, n, rolCompleto, img)) {
                     JOptionPane.showMessageDialog(null, "Usuario Agregado");
+                    limpiarTxt();
+                    setBordes();
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
                 }
@@ -987,7 +1046,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Tiene un campo sin llenar");
+            JOptionPane.showMessageDialog(null, "Tiene campos sin llenar");
         }
 
     }
@@ -1067,6 +1126,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblDpi;
+    private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblIniciarS;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblimagen;

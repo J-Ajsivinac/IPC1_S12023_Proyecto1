@@ -15,13 +15,13 @@ public class Usuario {
     private String nacionalidad;
     private String alias;
     private int telefono;
-    private int rol;
+    private String rol;
     private String fotografia;
     private int contadorEnvios;
     private ArrayList<Tarjeta> tarjetas;
     private ArrayList<DatosFacturacion> DatosFacturacion;
 
-    public Usuario(int idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, int rol, String fotografia, int contador) {
+    public Usuario(int idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String fotografia, int contador) {
         this.setIdUsuario(idUsuario);
         this.setCorreo(correo);
         this.setNombre(nombre);
@@ -134,11 +134,11 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public int getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(int rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 

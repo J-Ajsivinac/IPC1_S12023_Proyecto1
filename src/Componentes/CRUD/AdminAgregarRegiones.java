@@ -2,7 +2,10 @@ package Componentes.CRUD;
 
 import Administrador.Regiones;
 import Administrador.ctrlRegiones;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,7 +25,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 700, 455);
         modelo = (DefaultTableModel) tabla1.getModel();
-        
+        lblPrecioEspecial.setText("");
+        lblPrecioEstandar.setText("");
         cargarRegiones();
     }
 
@@ -38,12 +42,30 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
             modelo.addRow(datos);
         }
     }
-    
-    public void agregarRegion(){
-        if (ctrlRegiones.nuevaRegion(txtCodigo.getText().toString(), txtNombreR.getText().toString(), Double.parseDouble(txtPrecioEst.getText()),  Double.parseDouble(txtPrecioEspe.getText()), 0)) {
-            JOptionPane.showMessageDialog(null, "Region ingresada con exito");
-            cargarRegiones();
+
+    public void agregarRegion() {
+        Pattern vPrecio = Pattern.compile("^[0-9]+\\.?[0-9]*$");
+        Matcher m = vPrecio.matcher(txtPrecioEst.getText());
+        Matcher m1 = vPrecio.matcher(txtPrecioEspe.getText());
+
+        if (!txtCodigo.getText().toString().equals("") && !txtNombreR.getText().toString().equals("") && !txtPrecioEspe.getText().toString().equals("") && !txtPrecioEst.getText().toString().equals("")) {
+            if (!m.find()) {
+                JOptionPane.showMessageDialog(null, "El precio Estandar no es un precio valido");
+                return;
+            }
+            if (!m1.find()) {
+                JOptionPane.showMessageDialog(null, "El precio Especial no es un precio valido");
+                return;
+            }
+            
+            if (ctrlRegiones.nuevaRegion(txtCodigo.getText().toString(), txtNombreR.getText().toString(), Double.parseDouble(txtPrecioEst.getText()), Double.parseDouble(txtPrecioEspe.getText()), 0)) {
+                JOptionPane.showMessageDialog(null, "Region ingresada con exito");
+                cargarRegiones();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Falatan campos por llenar");
         }
+
     }
 
     /**
@@ -68,8 +90,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         txtPrecioEst = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtPrecioEspe = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblPrecioEstandar = new javax.swing.JLabel();
+        lblPrecioEspecial = new javax.swing.JLabel();
         buttonRound1 = new Elementos.ButtonRound();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla1 = new Elementos.CutomTable.TableDark();
@@ -111,11 +133,17 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
 
         jLabel4.setText("Precio Estandar");
 
+        txtPrecioEst.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecioEstKeyReleased(evt);
+            }
+        });
+
         jLabel5.setText("Precio Especial");
 
-        jLabel6.setText("jLabel6");
+        lblPrecioEstandar.setText("jLabel6");
 
-        jLabel7.setText("jLabel6");
+        lblPrecioEspecial.setText("jLabel6");
 
         buttonRound1.setText("Agregar");
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
@@ -146,18 +174,18 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                                 .addComponent(txtPrecioEst))
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblPrecioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtNombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                                 .addComponent(txtPrecioEspe)))))
                 .addGap(24, 24, 24))
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(258, 258, 258)
+                .addGap(268, 268, 268)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -181,12 +209,14 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                     .addComponent(txtPrecioEspe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecioEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPrecioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
@@ -227,8 +257,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -248,6 +278,19 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         agregarRegion();
     }//GEN-LAST:event_buttonRound1ActionPerformed
 
+    private void txtPrecioEstKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEstKeyReleased
+        // TODO add your handling code here:
+        //^[0-9]+[.,]{1,1}\[0]{2,2}$
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtPrecioEst.setEditable(false);
+            lblPrecioEstandar.setText("Solo numeros");
+        } else {
+            txtPrecioEst.setEditable(true);
+            lblPrecioEstandar.setText("");
+        }
+    }//GEN-LAST:event_txtPrecioEstKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Elementos.ButtonRound buttonRound1;
@@ -256,10 +299,10 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblPrecioEspecial;
+    private javax.swing.JLabel lblPrecioEstandar;
     private Elementos.PanelRound panelRound1;
     private Elementos.PanelRound panelRound2;
     private Elementos.CutomTable.TableDark tabla1;

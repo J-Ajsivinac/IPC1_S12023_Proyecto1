@@ -65,8 +65,8 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         cargarB();
         cargarTabla1();
     }
-    
-    public void cargarB(){
+
+    public void cargarB() {
         cargarRegiones(boxRegionUpdate);
         cargarRegiones(boxRegionEliminar);
     }
@@ -101,16 +101,21 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         eliminar.removeAllItems();
     }
 
-    public void ActualizarDepartamento() {
+    public void actualizarDepartamento() {
         Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
-        String codDepartamento = dep.getCodDepartamento();
-        String nNombre = txtNuevoNombre.getText();
-        if (ctrlKioscos.modificarNombreKiosco(codDepartamento, nNombre)) {
-            JOptionPane.showMessageDialog(null, "Nombre Actualizado");
-            cargarB();
-            //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
-        } else {
-            JOptionPane.showMessageDialog(null, "Error");
+
+        if (dep != null && boxDepartamentosUpdate!=null && !txtNuevoNombre.getText().toString().equals("")) {
+            String codDepartamento = dep.getCodDepartamento();
+            String nNombre = txtNuevoNombre.getText();
+            if (ctrlKioscos.modificarNombreKiosco(codDepartamento, nNombre)) {
+                JOptionPane.showMessageDialog(null, "Nombre Actualizado");
+                cargarB();
+                //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan datos para poder Actualizar");
         }
 
     }
@@ -350,7 +355,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        ActualizarDepartamento();
+        actualizarDepartamento();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void boxRegionEliminarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionEliminarItemStateChanged

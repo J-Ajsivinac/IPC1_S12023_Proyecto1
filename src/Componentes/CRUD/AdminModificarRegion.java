@@ -8,7 +8,11 @@ import Elementos.CutomTable.TableActionCellRender;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -43,13 +47,17 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 if (tabla2.isEditing()) {
                     tabla2.getCellEditor().stopCellEditing();
                 }
-                DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
-                String codigo = String.valueOf(modelo.getValueAt(row, 0));
-                if (ctrlRegiones.eliminarRegion(codigo, row)) {
-                    model.removeRow(row);
-                    JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
-                    cargarBoxRegiones();
-                    cargarRegiones();
+
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la Región?");
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
+                    String codigo = String.valueOf(modelo.getValueAt(row, 0));
+                    if (ctrlRegiones.eliminarRegion(codigo, row)) {
+                        model.removeRow(row);
+                        JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+                        cargarBoxRegiones();
+                        cargarRegiones();
+                    }
                 }
 
             }
@@ -83,19 +91,22 @@ public class AdminModificarRegion extends javax.swing.JPanel {
     public void cargarRegiones() {
         modelo.setRowCount(0);
         totalRegiones = (ArrayList<Regiones>) ctrlRegiones.getTodasRegiones().clone();
-        for (Regiones Region : totalRegiones) {
-            Object datos[] = new Object[2];
-            datos[0] = Region.getCodigo();
-            datos[1] = Region.getNombre();
-            modelo.addRow(datos);
+        if (totalRegiones != null) {
+            for (Regiones Region : totalRegiones) {
+                Object datos[] = new Object[2];
+                datos[0] = Region.getCodigo();
+                datos[1] = Region.getNombre();
+                modelo.addRow(datos);
+            }
         }
+
     }
 
     public void mostrarDatos() {
         regio = ctrlRegiones.getTodasRegiones();
         Regiones regItem = (Regiones) boxRegion.getSelectedItem();
-        int opcion = boxPrecio.getSelectedIndex()+1;
-        
+        int opcion = boxPrecio.getSelectedIndex() + 1;
+
         if (regio != null && regItem != null) {
             if (opcion == 1) {
                 txtNuevoPrecio.setEditable(true);
@@ -112,6 +123,48 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             }
         }
 
+    }
+
+    public void actualizarRegion() {
+        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
+        int opciones = boxPrecio.getSelectedIndex() + 1;
+        double nuevoPrecio = 0;
+        
+        if(regItem == null){
+            return;
+        }
+        
+        if (opciones == 1 || opciones == 2) {
+            if (!txtNuevoPrecio.getText().toString().equals("")) {
+                Pattern vPrecio = Pattern.compile("^[0-9]+\\.?[0-9]*$");
+                Matcher m = vPrecio.matcher(txtNuevoPrecio.getText());
+                if (m.find()) {
+                    nuevoPrecio = Double.parseDouble(txtNuevoPrecio.getText());
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "El nuevo precio no es válido");
+                    return;
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Escriba el nuevo Precio");
+                return;
+            }
+        } else {
+            if (!txtNuevoNombre.getText().toString().equals("")) {
+                JOptionPane.showMessageDialog(null, "Escriba el nuevo Nombre");
+                return;
+            }
+        }
+        if (ctrlRegiones.cambiarPrecios(regItem.getCodigo(), opciones, nuevoPrecio, txtNuevoNombre.getText().toString())) {
+            JOptionPane.showMessageDialog(null, "Se cambiaron los datos correctamente");
+            ctrlRegiones.copiarHistorial();
+            cargarBoxRegiones();
+            cargarRegiones();
+            mostrarDatos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al cambiar los datos");
+        }
     }
 
     /**
@@ -329,21 +382,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
     private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
         // TODO add your handling code here:
-        Regiones regItem = (Regiones) boxRegion.getSelectedItem();
-        int opciones = boxPrecio.getSelectedIndex() + 1;
-        double nuevoPrecio =0;
-        if (opciones == 1 || opciones == 2) {
-            nuevoPrecio = Double.parseDouble(txtNuevoPrecio.getText());
-        }
-        if (ctrlRegiones.cambiarPrecios(regItem.getCodigo(), opciones, nuevoPrecio, txtNuevoNombre.getText().toString())) {
-            JOptionPane.showMessageDialog(null, "Se cambiaron los datos correctamente");
-            ctrlRegiones.copiarHistorial();
-            cargarBoxRegiones();
-            cargarRegiones();
-            mostrarDatos();
-        }else{
-            JOptionPane.showMessageDialog(null, "Error al cambiar los datos");
-        }
+        actualizarRegion();
     }//GEN-LAST:event_buttonRound1ActionPerformed
 
     private void boxPrecioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxPrecioItemStateChanged
@@ -361,7 +400,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             txtNuevoPrecio.setEditable(true);
             lblAdvertencia.setText("");
         }
-
     }//GEN-LAST:event_txtNuevoPrecioKeyPressed
 
 

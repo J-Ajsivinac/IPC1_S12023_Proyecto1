@@ -79,7 +79,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         Regiones regItem = (Regiones) boxRegion.getSelectedItem();
         String codigo = regItem.getCodigo();
         String nombreDepartament = txtNombreDepartamento.getText();
-        if (!(codigo.equals("") && nombreDepartament.equals(""))) {
+        if (!(codigo.equals("") && nombreDepartament.equals("")) && regItem != null) {
             if (ctrlDepartamentos.nuevoDepartamento(codigo, nombreDepartament)) {
                 JOptionPane.showMessageDialog(null, "Departamento ingresado Correctamente");
                 limpiarDepartamentos();
@@ -93,10 +93,12 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
 
     public void ingresarMunicipio() {
         Departamentos departa = (Departamentos) boxDepartamento.getSelectedItem();
-        String codigo = departa.getCodDepartamento();
-        String nombreMuni = txtNombreMunicipio.getText();
+        String codigo = "";
+        String nombreMuni = "";
 
-        if (!(codigo.equals("") && nombreMuni.equals(""))) {
+        if (!(codigo.equals("") && nombreMuni.equals("")) && departa!=null && boxRegion1.getSelectedItem() != null) {
+            codigo = departa.getCodDepartamento();
+            nombreMuni = txtNombreMunicipio.getText();
             if (ctrlDepartamentos.agregarMunicipios(codigo, nombreMuni)) {
                 JOptionPane.showMessageDialog(null, "Municipio ingresado Correctamente");
                 cargarTablaMunicipios();

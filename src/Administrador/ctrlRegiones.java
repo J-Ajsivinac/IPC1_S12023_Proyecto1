@@ -1,5 +1,7 @@
 package Administrador;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -10,8 +12,10 @@ public class ctrlRegiones {
     
     public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial, int contador) {
         if (!codigo.equals("") && !nombre.equals("") && precioEstandar > 0 && precioEspecial > 0) {
+            BigDecimal precioE = new BigDecimal(precioEstandar).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal precioEspe = new BigDecimal(precioEspecial).setScale(2, RoundingMode.HALF_UP);
             if (!verificarCodigoRegion(codigo)) {
-                regiones.add(new Regiones(codigo, nombre, precioEstandar, precioEspecial, contador));
+                regiones.add(new Regiones(codigo, nombre, precioE.doubleValue(), precioEspe.doubleValue(), contador));
                 historial = (ArrayList<Regiones>) regiones.clone();
                 return true;
             }
@@ -24,14 +28,15 @@ public class ctrlRegiones {
     }
 
     public static boolean cambiarPrecios(String codigo, int opcion, double nuevoPrecio, String nuevoNombre) {
+        BigDecimal bd = new BigDecimal(nuevoPrecio).setScale(2, RoundingMode.HALF_UP);
         for (int i = 0; i < regiones.size(); i++) {
             Regiones reg = regiones.get(i);
             if (reg.getCodigo().equals(codigo)) {
                 if (opcion == 1) {
-                    reg.setPrecioEstandar(nuevoPrecio);
+                    reg.setPrecioEstandar(bd.doubleValue());
                     return true;
                 } else if (opcion == 2) {
-                    reg.setPrecioEspecial(nuevoPrecio);
+                    reg.setPrecioEspecial(bd.doubleValue());
                     return true;
                 } else if (opcion == 3) {
                     if (!nuevoNombre.equals("")) {

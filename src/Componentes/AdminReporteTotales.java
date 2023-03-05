@@ -19,24 +19,27 @@ public class AdminReporteTotales extends javax.swing.JPanel {
         totalPaquetes();
         ingresosTotales();
     }
-    
-    public void totalPaquetes(){
-        int totalPaqu=0;
+
+    public void totalPaquetes() {
+        int totalPaqu = 0;
         ArrayList<Envios> enviosGet = ctrlEnvios.getAllEnvios();
         for (Envios envio : enviosGet) {
-            totalPaqu+=envio.getFactura().getNumeropaquetes();
+            totalPaqu += envio.getFactura().getNumeropaquetes();
         }
-        lblTotalPaquetes.setText(totalPaqu+"");
+        lblTotalPaquetes.setText(totalPaqu + "");
     }
-    
-    public void ingresosTotales(){
-        int totalPaqu=0;
+
+    public void ingresosTotales() {
+        int totalPaqu = 0;
         ArrayList<Envios> enviosGet = ctrlEnvios.getAllEnvios();
-        for (Envios envio : enviosGet) {
-            totalPaqu+=envio.getFactura().getTotal();
-        }
-        lblIngresosTotales.setText(totalPaqu+"");
+        if (enviosGet.size() > 0) {
+            for (Envios envio : enviosGet) {
+                totalPaqu += envio.getFactura().getTotal();
+            }
+            lblIngresosTotales.setText(totalPaqu + "");
+        }  
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
