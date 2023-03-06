@@ -1,9 +1,12 @@
 package Usuario;
 
 import Administrador.ctrlRegiones;
+import static Usuario.ctrlEnvios.envios;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.HashMap;
 
@@ -29,8 +32,7 @@ public class ctrlEnvios {
             Guia guiaIngresar = agregarGuia(codPaquete, ori, destinatario, tipoServicio, tamaño, numerPaquetes, dtf.format(now), totalEnvio);
             envios.add(new Envios(correo, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, facturaingresar, guiaIngresar));
             System.out.println(codPaquete);
-            ctrlRegiones.addContador(codRegion);
-            ctrlUsuarios.addContadorUser(correo,numerPaquetes);
+            ctrlUsuarios.addContadorUser(correo, numerPaquetes);
             return true;
         }
         return false;
@@ -83,9 +85,9 @@ public class ctrlEnvios {
 
         return regresar;
     }
-    
+
     public static Envios verUltimoEnvios() {
-        return envios.get(envios.size()-1);
+        return envios.get(envios.size() - 1);
     }
 
     public static ArrayList<Envios> getReportesByCod(String codRegion) {
@@ -100,21 +102,52 @@ public class ctrlEnvios {
 
         return regresar;
     }
-    
-    public static Envios getEnvioByGuia(String correoUsuario, String codGuia){
+
+    public static Envios getEnvioByGuia(String correoUsuario, String codGuia) {
         Envios regresar = null;
-        if(ctrlUsuarios.verifiarUsuarios(correoUsuario)){
+        if (ctrlUsuarios.verifiarUsuarios(correoUsuario)) {
             for (Envios envio : envios) {
-                if(envio.getGuia().getCodPaquete().equals(codGuia)){
+                if (envio.getGuia().getCodPaquete().equals(codGuia)) {
                     regresar = envio;
                 }
             }
         }
         return regresar;
     }
-    
-    public static ArrayList<Envios> getAllEnvios(){
+
+    public static ArrayList<Envios> getAllEnvios() {
         return envios;
     }
 
+    public static ArrayList<Envios> ordenarPorRegion() {
+        ArrayList<Envios> listaOrdenada = new ArrayList<>(envios);
+        Collections.sort(listaOrdenada, new comparadorRegiones(listaOrdenada));
+        return listaOrdenada;
+    }
+
+}
+
+class comparadorRegiones implements Comparator<Envios> {
+
+    private ArrayList<Envios> listaOriginal;
+
+    public comparadorRegiones(ArrayList<Envios> listaOriginal) {
+        this.listaOriginal = listaOriginal;
+    }
+
+    @Override
+    public int compare(Envios envio1, Envios envio2) {
+        int repeticiones1 = 0;
+        int repeticiones2 = 0;
+
+        for (Envios obj : envios) {
+            if (obj.getCodRegion().equals(envio1.getCodRegion())) {
+                repeticiones1++;
+            }
+            if (obj.getCodRegion().equals(envio2.getCodRegion())) {
+                repeticiones2++;
+            }
+        }
+        return Integer.compare(repeticiones2, repeticiones1);
+    }
 }

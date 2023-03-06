@@ -127,8 +127,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
             int numeroPaquetes = Integer.parseInt(txtNumeroPaquetes.getText());
             //String sizePaquete = size
-            String origen = depItemO.getNombreDepartamento() + "," + munItemO.getNombreMunicipio() + "," + txtDireccionOrigen.getText();
-            String destino = depItemD.getNombreDepartamento() + "," + munItemD.getNombreMunicipio() + "," + txtDireccionDestino.getText();
+            String nombreRegionOrigen = ctrlRegiones.getRegionCodigo(depItemO.getCodigo()).getNombre();
+            String nombreRegionDestino = ctrlRegiones.getRegionCodigo(depItemO.getCodigo()).getNombre();
+            String origen = depItemO.getNombreDepartamento() + "," + munItemO.getNombreMunicipio() + "," + txtDireccionOrigen.getText() + "," + nombreRegionOrigen;
+            String destino = depItemD.getNombreDepartamento() + "," + munItemD.getNombreMunicipio() + "," + txtDireccionDestino.getText() + "," + nombreRegionDestino;
 
             guardarCotizacion = new Guia(origen, destino, sizePaquete, numeroPaquetes);
             double multi1 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 0);
@@ -195,26 +197,27 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 cvv = JOptionPane.showInputDialog(null, "Ingrese el CVV");
                 if (cvv != null) {
                     val = validarCVV(cvv);
-                }else{
+                } else {
                     return;
                 }
             }
         }
-
+        
         if (tipoServicio == 0) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total1);
             precio = "Estandar";
-            if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+
+            if (ctrlEnvios.agregarEnvio(user.getCorreo(), origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
-                realizoEnvio=true;
+                realizoEnvio = true;
                 System.out.println(guardarCotizacion.getTamanoPaquete());
             }
         } else if (tipoServicio == 1) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
             precio = "Especial";
-            if (ctrlEnvios.agregarEnvio(user.getCorreo(), codigoRegioOringe, precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+            if (ctrlEnvios.agregarEnvio(user.getCorreo(), origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
-                realizoEnvio=true;
+                realizoEnvio = true;
                 System.out.println(guardarCotizacion.getTamanoPaquete());
             }
         }
@@ -1228,9 +1231,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void btnrRealizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrRealizarActionPerformed
         // TODO add your handling code here:
-
         if (guardarCotizacion != null) {
             registrarEnvios();
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha cotizado");
         }
     }//GEN-LAST:event_btnrRealizarActionPerformed
 
@@ -1277,9 +1281,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
         // TODO add your handling code here:
-        if(realizoEnvio){
+        if (realizoEnvio) {
             descargarFactura();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No se ha realizado ningun envio aún");
         }
     }//GEN-LAST:event_btnFacturaActionPerformed
@@ -1340,9 +1344,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void btnDGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDGuiaActionPerformed
         // TODO add your handling code here:
-        if(realizoEnvio){
+        if (realizoEnvio) {
             descargarGuia();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No se ha realizado ningun envio aún");
         }
     }//GEN-LAST:event_btnDGuiaActionPerformed

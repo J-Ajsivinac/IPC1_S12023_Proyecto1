@@ -18,8 +18,6 @@ import javax.swing.table.DefaultTableModel;
 public class AdminReporteRegion extends javax.swing.JPanel {
 
     private DefaultTableModel modelo;
-    private ArrayList<Regiones> totalRegiones;
-    //private ArrayList<Envios> totalEnvios;
 
     /**
      * Creates new form AdminReporteRegion
@@ -28,30 +26,33 @@ public class AdminReporteRegion extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 710, 500);
         modelo = (DefaultTableModel) tableA.getModel();
-        totalRegiones = (ArrayList<Regiones>) ctrlRegiones.getTodHistorial().clone();
-        ordenarRegiones();
-        
+        //ordenarRegiones();
     }
 
     public void ordenarRegiones() {
-        if (totalRegiones.size() > 0) {
-            Collections.sort(totalRegiones, new Comparator<Regiones>() {
-                @Override
-                public int compare(Regiones p1, Regiones p2) {
-                    // Aqui esta el truco, ahora comparamos p2 con p1 y no al reves como antes
-                    return new Integer(p2.getContadorEnvios()).compareTo(new Integer(p1.getContadorEnvios()));
-                }
-            });
+        modelo.setRowCount(0);
+        ArrayList<Envios> listaO = ctrlEnvios.ordenarPorRegion();
 
-            for (int i = 0; i < totalRegiones.size(); i++) {
-                if (totalRegiones.get(i).getContadorEnvios() != 0) {
-                    Object datos[] = new Object[3];
-                    datos[0] = i+1;
-                    datos[1] = totalRegiones.get(i).getNombre();
-                    datos[2] = totalRegiones.get(i).getContadorEnvios();
-                    modelo.addRow(datos);
+        ArrayList<String> RegionUnicos = new ArrayList<>();
+        for (Envios en : listaO) {
+            if (!RegionUnicos.contains(en.getCodRegion())) {
+                RegionUnicos.add(en.getCodRegion());
+            }
+        }
+        int num = 1;
+        for (String regionN : RegionUnicos) {
+            int contador = 0;
+            for (Envios reg : listaO) {
+                if (reg.getCodRegion().equals(regionN)) {
+                    contador++;
                 }
             }
+            Object datos[] = new Object[3];
+            datos[0] = num;
+            datos[1] = regionN;
+            datos[2] = contador;
+            modelo.addRow(datos);
+            num++;
         }
     }
 
@@ -69,13 +70,16 @@ public class AdminReporteRegion extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableA = new Elementos.CutomTable.TableDark();
 
-        panelRound1.setBackground(new java.awt.Color(73, 76, 79));
+        setOpaque(false);
+
+        panelRound1.setBackground(new java.awt.Color(28, 28, 36));
         panelRound1.setRoundBottomLeft(15);
         panelRound1.setRoundBottomRight(15);
         panelRound1.setRoundTopLeft(15);
         panelRound1.setRoundTopRight(15);
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Lista de Regiones con más Envios");
 
         tableA.setBackground(new java.awt.Color(0, 0, 0));

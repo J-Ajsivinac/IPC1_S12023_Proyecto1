@@ -71,11 +71,14 @@ public class AdminRegiones extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         panelCrud = new javax.swing.JPanel();
 
-        panelRound3.setBackground(new java.awt.Color(69, 74, 78));
+        setOpaque(false);
+
+        panelRound3.setBackground(new java.awt.Color(19, 19, 26));
 
         panelBackground.setOpaque(false);
         panelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelAgregar.setBackground(new java.awt.Color(40, 41, 52));
         panelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelAgregarMouseClicked(evt);
@@ -83,11 +86,14 @@ public class AdminRegiones extends javax.swing.JPanel {
         });
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Agregar");
         panelAgregar.add(jLabel4);
 
         panelBackground.add(panelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 121, -1));
 
+        panelModificar.setBackground(new java.awt.Color(40, 41, 52));
+        panelModificar.setForeground(new java.awt.Color(255, 255, 255));
         panelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelModificarMouseClicked(evt);
@@ -95,6 +101,7 @@ public class AdminRegiones extends javax.swing.JPanel {
         });
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Modificar");
         panelModificar.add(jLabel5);
 

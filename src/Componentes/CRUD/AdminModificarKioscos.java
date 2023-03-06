@@ -62,8 +62,6 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         tabla1.setBackground(Color.BLUE);
         tabla1.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla1.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event));
-        cargarB();
-        cargarTabla1();
     }
 
     public void cargarB() {
@@ -101,7 +99,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         eliminar.removeAllItems();
     }
 
-    public void actualizarDepartamento() {
+    public void actualizarKiosco() {
         Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
 
         if (dep != null && boxDepartamentosUpdate!=null && !txtNuevoNombre.getText().toString().equals("")) {
@@ -110,6 +108,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             if (ctrlKioscos.modificarNombreKiosco(codDepartamento, nNombre)) {
                 JOptionPane.showMessageDialog(null, "Nombre Actualizado");
                 cargarB();
+                txtNuevoNombre.setText("");
                 //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
@@ -178,19 +177,45 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableDark1);
 
+        setOpaque(false);
+
+        panelRound1.setBackground(new java.awt.Color(28, 28, 36));
+
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Modificar Kioscos");
+
+        panelRound2.setBackground(new java.awt.Color(19, 19, 26));
+        panelRound2.setForeground(new java.awt.Color(19, 19, 26));
+        panelRound2.setRoundBottomLeft(15);
+        panelRound2.setRoundBottomRight(15);
+        panelRound2.setRoundTopLeft(15);
+        panelRound2.setRoundTopRight(15);
 
         jPanel2.setOpaque(false);
 
+        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Región");
 
+        boxRegionUpdate.setBackground(new java.awt.Color(40, 41, 52));
+        boxRegionUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegionUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        boxRegionUpdate.setBorder(null);
         boxRegionUpdate.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 boxRegionUpdateItemStateChanged(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Departamento");
+
+        boxDepartamentosUpdate.setBackground(new java.awt.Color(40, 41, 52));
+        boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentosUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        boxDepartamentosUpdate.setBorder(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,11 +244,21 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addGap(9, 9, 9))
         );
 
+        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre Actual:");
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nuevo Nombre");
+
+        txtNuevoNombre.setBackground(new java.awt.Color(40, 41, 52));
+        txtNuevoNombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNuevoNombre.setForeground(new java.awt.Color(255, 255, 255));
+        txtNuevoNombre.setBorder(null);
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -247,8 +282,8 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
@@ -261,18 +296,20 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 21, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
 
+        jLabel7.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Eliminar Kioscos");
 
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
@@ -288,8 +325,13 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tabla1);
 
+        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Región");
 
+        boxRegionEliminar.setBackground(new java.awt.Color(40, 41, 52));
+        boxRegionEliminar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegionEliminar.setBorder(null);
         boxRegionEliminar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 boxRegionEliminarItemStateChanged(evt);
@@ -312,7 +354,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,13 +365,13 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(boxRegionEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(11, 11, 11))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -355,7 +397,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        actualizarDepartamento();
+        actualizarKiosco();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void boxRegionEliminarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionEliminarItemStateChanged

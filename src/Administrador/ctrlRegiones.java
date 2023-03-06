@@ -8,15 +8,13 @@ import javax.swing.JOptionPane;
 public class ctrlRegiones {
 
     private static ArrayList<Regiones> regiones = new ArrayList<Regiones>();
-    public static ArrayList<Regiones> historial = new ArrayList<Regiones>();
     
-    public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial, int contador) {
+    public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial) {
         if (!codigo.equals("") && !nombre.equals("") && precioEstandar > 0 && precioEspecial > 0) {
             BigDecimal precioE = new BigDecimal(precioEstandar).setScale(2, RoundingMode.HALF_UP);
             BigDecimal precioEspe = new BigDecimal(precioEspecial).setScale(2, RoundingMode.HALF_UP);
             if (!verificarCodigoRegion(codigo)) {
-                regiones.add(new Regiones(codigo, nombre, precioE.doubleValue(), precioEspe.doubleValue(), contador));
-                historial = (ArrayList<Regiones>) regiones.clone();
+                regiones.add(new Regiones(codigo, nombre, precioE.doubleValue(), precioEspe.doubleValue()));
                 return true;
             }
 
@@ -53,16 +51,12 @@ public class ctrlRegiones {
         return regiones;
     }
     
-    public static ArrayList<Regiones> getTodHistorial() {
-        return historial;
-    }
-
     public static Regiones getRegionCodigo(String codigo) {
         Regiones regresar = null;
         for (int i = 0; i < regiones.size(); i++) {
             Regiones reg = regiones.get(i);
             if (reg.getCodigo().equals(codigo)) {
-                regresar = new Regiones(codigo, reg.getNombre(), reg.getPrecioEstandar(), reg.getPrecioEspecial(), reg.getContadorEnvios());
+                regresar = new Regiones(codigo, reg.getNombre(), reg.getPrecioEstandar(), reg.getPrecioEspecial());
             }
         }
         return regresar;
@@ -87,15 +81,6 @@ public class ctrlRegiones {
         return regresar;
     }
 
-    public static void addContador(String codRegion) {
-        for (int i = 0; i < regiones.size(); i++) {
-            Regiones reg = regiones.get(i);
-            if (reg.getCodigo().equals(codRegion)) {
-                regiones.get(i).setContadorEnvios(regiones.get(i).getContadorEnvios() + 1);
-            }
-        }
-        copiarHistorial();
-    }
 
     public static boolean verificarCodigoRegion(String codigo) {
         for (int i = 0; i < regiones.size(); i++) {
@@ -118,8 +103,5 @@ public class ctrlRegiones {
         return regresar;
     }
     
-    public static void copiarHistorial(){
-        historial = (ArrayList<Regiones>) regiones.clone();
-    }
 
 }

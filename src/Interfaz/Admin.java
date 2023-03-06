@@ -230,8 +230,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel7.setText("> Reportes");
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(28, 28, 36));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.setBackground(new java.awt.Color(89, 87, 87));
 
         panelRRegion.setBackground(new java.awt.Color(28, 28, 36));
         panelRRegion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -257,7 +256,7 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(panelRRegionLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(txtPorRegion)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         panelRRegionLayout.setVerticalGroup(
             panelRRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,8 +265,6 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(txtPorRegion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel3.add(panelRRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 230, -1));
 
         panelRUsuario.setBackground(new java.awt.Color(28, 28, 36));
         panelRUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -303,8 +300,6 @@ public class Admin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(panelRUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 41, 230, -1));
-
         panelRIngresos.setBackground(new java.awt.Color(28, 28, 36));
         panelRIngresos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -339,7 +334,24 @@ public class Admin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(panelRIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 76, 230, -1));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelRRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelRUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelRIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(panelRRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelRUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelRIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         btnCerrarSesion.setBackground(new java.awt.Color(28, 28, 36));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -395,17 +407,17 @@ public class Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 540));
 
         panelMainContainer.setBackground(new java.awt.Color(204, 204, 204));
         panelMainContainer.setOpaque(false);
-        jPanel1.add(panelMainContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 720, 520));
+        jPanel1.add(panelMainContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 720, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -457,18 +469,22 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         menuClick(adRRegion);
         bordeMenu(panelRRegion,txtPorRegion);
+        adRRegion.ordenarRegiones();
     }//GEN-LAST:event_panelRRegionMouseClicked
 
     private void panelRUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRUsuarioMouseClicked
         // TODO add your handling code here:
         menuClick(adRUsuario);
         bordeMenu(panelRUsuario,txtPorUsuario);
+        adRUsuario.ordenarRegiones();
     }//GEN-LAST:event_panelRUsuarioMouseClicked
 
     private void panelRIngresosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRIngresosMouseClicked
         // TODO add your handling code here:
         menuClick(adRTotales);
         bordeMenu(panelRIngresos,txtTotal);
+        adRTotales.totalPaquetes();
+        adRTotales.ingresosTotales();
     }//GEN-LAST:event_panelRIngresosMouseClicked
 
     private void panelRegionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseEntered
