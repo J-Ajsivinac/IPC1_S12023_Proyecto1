@@ -4,6 +4,7 @@ import Administrador.Kioscos;
 import Administrador.Regiones;
 import Administrador.ctrlKioscos;
 import Administrador.ctrlRegiones;
+import Interfaz.login;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -32,7 +33,14 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(30);
         cargarRegiones();
         cargarTabla();
+        setBordes();
     }
+    
+     public void setBordes() {
+        txtCodKiosco.setBorder(login.unselectedborder);
+        txtNombreKiosco.setBorder(login.unselectedborder);
+    }
+
 
     public void cargarRegiones() {
         for (int i = 0; i < regio.size(); i++) {
@@ -138,17 +146,40 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         txtNombreKiosco.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreKiosco.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreKiosco.setBorder(null);
+        txtNombreKiosco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreKioscoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreKioscoFocusLost(evt);
+            }
+        });
 
         txtCodKiosco.setBackground(new java.awt.Color(40, 41, 52));
         txtCodKiosco.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtCodKiosco.setForeground(new java.awt.Color(255, 255, 255));
         txtCodKiosco.setBorder(null);
+        txtCodKiosco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCodKioscoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodKioscoFocusLost(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Codigo del Kiosco");
 
+        buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
         buttonRound1.setText("Registrar Kiosco");
+        buttonRound1.setBorderColor(new java.awt.Color(123, 127, 239));
+        buttonRound1.setColor(new java.awt.Color(123, 127, 239));
+        buttonRound1.setColorClick(new java.awt.Color(121, 118, 236));
+        buttonRound1.setColorOver(new java.awt.Color(121, 147, 251));
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        buttonRound1.setRadius(15);
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRound1ActionPerformed(evt);
@@ -160,23 +191,24 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombreKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCodKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombreKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(234, 234, 234)
+                        .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(249, 249, 249))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,8 +226,8 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
                     .addComponent(txtNombreKiosco, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtCodKiosco, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
@@ -282,6 +314,26 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         // TODO add your handling code here:
         ingresarKiosco();
     }//GEN-LAST:event_buttonRound1ActionPerformed
+
+    private void txtCodKioscoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodKioscoFocusGained
+        // TODO add your handling code here:
+        AdminAgregarRegiones.selected(txtCodKiosco,1);
+    }//GEN-LAST:event_txtCodKioscoFocusGained
+
+    private void txtNombreKioscoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreKioscoFocusGained
+        // TODO add your handling code here:
+        AdminAgregarRegiones.selected(txtNombreKiosco,1);
+    }//GEN-LAST:event_txtNombreKioscoFocusGained
+
+    private void txtCodKioscoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodKioscoFocusLost
+        // TODO add your handling code here:
+        AdminAgregarRegiones.selected(txtCodKiosco,0);
+    }//GEN-LAST:event_txtCodKioscoFocusLost
+
+    private void txtNombreKioscoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreKioscoFocusLost
+        // TODO add your handling code here:
+        AdminAgregarRegiones.selected(txtNombreKiosco,0);
+    }//GEN-LAST:event_txtNombreKioscoFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

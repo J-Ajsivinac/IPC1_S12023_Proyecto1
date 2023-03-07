@@ -25,7 +25,8 @@ public class login extends javax.swing.JFrame {
     public static Color unselectedTxt;
     public static Color error;
     public static Color correcto;
-    
+    public static Usuario credenciales;
+    public static int posicionU;
     /**
      * Creates new form login
      */
@@ -344,6 +345,8 @@ public class login extends javax.swing.JFrame {
             this.dispose();
         } else {
             //Acceder como Cliente
+            posicionU = ctrlUsuarios.getPosicionUsuario(correo);
+            credenciales = ctrlUsuarios.getUsuarioID(correo);
             UsuarioCliente uc = new UsuarioCliente();
             Usuario usarioEnviar = ctrlUsuarios.getUsuarioID(correo);
             uc.setUsuario(usarioEnviar);

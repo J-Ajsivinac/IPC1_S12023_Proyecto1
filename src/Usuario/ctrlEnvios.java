@@ -151,3 +151,28 @@ class comparadorRegiones implements Comparator<Envios> {
         return Integer.compare(repeticiones2, repeticiones1);
     }
 }
+
+class comparadorUsuarios implements Comparator<Envios> {
+
+    private ArrayList<Envios> listaOriginal;
+
+    public comparadorUsuarios(ArrayList<Envios> listaOriginal) {
+        this.listaOriginal = listaOriginal;
+    }
+
+    @Override
+    public int compare(Envios envio1, Envios envio2) {
+        int repeticiones1 = 0;
+        int repeticiones2 = 0;
+
+        for (Envios obj : envios) {
+            if (obj.getCodRegion().equals(envio1.getIdUsuario())) {
+                repeticiones1++;
+            }
+            if (obj.getCodRegion().equals(envio2.getIdUsuario())) {
+                repeticiones2++;
+            }
+        }
+        return Integer.compare(repeticiones2, repeticiones1);
+    }
+}

@@ -9,6 +9,7 @@ import Administrador.ctrlRegiones;
 import Elementos.CutomTable.TableActionCellEditorEliminar;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
+import Interfaz.login;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -60,9 +61,10 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         };
         tabla1.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla1.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event));
-        
+
         tabla1.fixTable(jScrollPane2);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
+        txtNuevoNombre.setBorder(login.unselectedborder);
     }
 
     public void cargarB() {
@@ -103,7 +105,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
     public void actualizarKiosco() {
         Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
 
-        if (dep != null && boxDepartamentosUpdate!=null && !txtNuevoNombre.getText().toString().equals("")) {
+        if (dep != null && boxDepartamentosUpdate != null && !txtNuevoNombre.getText().toString().equals("")) {
             String codDepartamento = dep.getCodDepartamento();
             String nNombre = txtNuevoNombre.getText();
             if (ctrlKioscos.modificarNombreKiosco(codDepartamento, nNombre)) {
@@ -114,7 +116,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan datos para poder Actualizar");
         }
 
@@ -260,8 +262,22 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         txtNuevoNombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNuevoNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoNombre.setBorder(null);
+        txtNuevoNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNuevoNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNuevoNombreFocusLost(evt);
+            }
+        });
 
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizar.setText("Actualizar");
+        btnActualizar.setBorderColor(new java.awt.Color(123, 127, 239));
+        btnActualizar.setColor(new java.awt.Color(123, 127, 239));
+        btnActualizar.setColorClick(new java.awt.Color(121, 118, 236));
+        btnActualizar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnActualizar.setRadius(15);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -300,13 +316,13 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
@@ -332,6 +348,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
         boxRegionEliminar.setBackground(new java.awt.Color(40, 41, 52));
         boxRegionEliminar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegionEliminar.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionEliminar.setBorder(null);
         boxRegionEliminar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -372,9 +389,9 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(boxRegionEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -407,6 +424,16 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         // TODO add your handling code here:
         cargarTabla1();
     }//GEN-LAST:event_boxRegionEliminarItemStateChanged
+
+    private void txtNuevoNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoNombreFocusGained
+        // TODO add your handling code here:
+        AdminAgregarRegiones.selected(txtNuevoNombre,1);
+    }//GEN-LAST:event_txtNuevoNombreFocusGained
+
+    private void txtNuevoNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoNombreFocusLost
+        // TODO add your handling code here:
+        AdminAgregarRegiones.selected(txtNuevoNombre,0);
+    }//GEN-LAST:event_txtNuevoNombreFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

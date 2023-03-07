@@ -52,12 +52,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 if (ctrlDepartamentos.eliminarDepartamento(codigo)) {
                     model.removeRow(row);
                     JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
-                    //cargarBoxRegiones();
-                    //cargarRegiones();
                 }
-
             }
-
             @Override
             public void onView(int row) {
             }
