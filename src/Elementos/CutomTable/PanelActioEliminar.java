@@ -36,7 +36,15 @@ public class PanelActioEliminar extends javax.swing.JPanel {
 
         cmdEliminar = new Elementos.ButtonRound();
 
+        cmdEliminar.setBorder(null);
+        cmdEliminar.setForeground(new java.awt.Color(255, 255, 255));
         cmdEliminar.setText("Eliminar Región");
+        cmdEliminar.setBorderColor(new java.awt.Color(245, 118, 112));
+        cmdEliminar.setColor(new java.awt.Color(245, 118, 112));
+        cmdEliminar.setColorClick(new java.awt.Color(118, 66, 67));
+        cmdEliminar.setColorOver(new java.awt.Color(118, 66, 67));
+        cmdEliminar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        cmdEliminar.setRadius(15);
         cmdEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdEliminarActionPerformed(evt);
@@ -49,14 +57,14 @@ public class PanelActioEliminar extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cmdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cmdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

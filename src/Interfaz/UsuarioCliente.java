@@ -2,7 +2,11 @@ package Interfaz;
 
 import Componentes.*;
 import Usuario.Usuario;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  *
@@ -14,12 +18,18 @@ public class UsuarioCliente extends javax.swing.JFrame {
     public UsuarioCotizacionCompra userCotiz;
     private Usuario usuarioC;
     public UsuarioVerEnvios usuarioVer;
+    
+    public boolean activado;
+    Border unselectedborder;
+    Border selectedborder;
     /**
      * Creates new form UsuarioCliente
      */
     public UsuarioCliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        unselectedborder = BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(150, 157, 175));
+        selectedborder = BorderFactory.createMatteBorder(0, 3, 0, 0, Color.WHITE);
         usert = new UsuarioTarjeta();
         userDatos = new UsuarioDatosFacturacion();
         userCotiz = new UsuarioCotizacionCompra();
@@ -29,16 +39,42 @@ public class UsuarioCliente extends javax.swing.JFrame {
         menuContenido.add(userCotiz);
         menuContenido.add(usuarioVer);
         menuClick(usert);
-        
+        bordeMenu(panelTarjetas,lblTarjeta);
     }
     
     public void setUsuario(Usuario u){
         this.usuarioC = u;
         lblNombreUsuario.setText(usuarioC.getNombre());
+        lblTipoC.setText(usuarioC.getRol());
         usert.test(usuarioC);
         userDatos.test(usuarioC);
         userCotiz.test(usuarioC);
         usuarioVer.test(usuarioC);
+    }
+    
+    public void hoverMenu(JPanel activar, int estado) {
+        if (estado == 1) {
+            activar.setBackground(new Color(19, 19, 26));
+        } else {
+            activar.setBackground(new Color(28, 28, 36));
+        }
+    }
+    
+    public void bordeMenu(JPanel panel, JLabel texto) {
+        panelTarjetas.setBorder(unselectedborder);
+        panelDatosF.setBorder(unselectedborder);
+        panelEnvios.setBorder(unselectedborder);
+        panelCotizacion.setBorder(unselectedborder);
+        
+        lblCerrar.setForeground(Color.WHITE);
+        lblCotizacion.setForeground(Color.WHITE);
+        lblDatos.setForeground(Color.WHITE);
+        lblTarjeta.setForeground(Color.WHITE);
+        lblVer.setForeground(Color.WHITE);
+
+        panel.setBorder(selectedborder);
+        texto.setForeground(new Color(205, 233, 255));
+        //panel.setForeground(new Color(205, 233, 255));
     }
 
     /**
@@ -50,92 +86,142 @@ public class UsuarioCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lblNombreUsuario = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        lblTipoC = new javax.swing.JLabel();
         panelTarjetas = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTarjeta = new javax.swing.JLabel();
         panelDatosF = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        lblDatos = new javax.swing.JLabel();
         panelCotizacion = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lblCotizacion = new javax.swing.JLabel();
         panelEnvios = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        lblVer = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        lblCerrar = new javax.swing.JLabel();
         menuContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(19, 19, 26));
 
+        jPanel1.setBackground(new java.awt.Color(19, 19, 26));
+
+        jPanel2.setBackground(new java.awt.Color(28, 28, 36));
+
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
         lblNombreUsuario.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        lblNombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreUsuario.setText(" ");
         jPanel4.add(lblNombreUsuario);
 
+        jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel3.setText("Cliente");
-        jPanel5.add(jLabel3);
+        lblTipoC.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        lblTipoC.setForeground(new java.awt.Color(255, 255, 255));
+        lblTipoC.setText("Cliente");
+        jPanel5.add(lblTipoC);
 
+        panelTarjetas.setBackground(new java.awt.Color(28, 28, 36));
         panelTarjetas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelTarjetasMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelTarjetasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelTarjetasMouseExited(evt);
+            }
         });
         panelTarjetas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel4.setText("Registrar Tarjeta");
-        panelTarjetas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblTarjeta.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        lblTarjeta.setText("Registrar Tarjeta");
+        panelTarjetas.add(lblTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        panelDatosF.setBackground(new java.awt.Color(28, 28, 36));
         panelDatosF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelDatosFMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelDatosFMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelDatosFMouseExited(evt);
+            }
         });
         panelDatosF.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel5.setText("Registrar datos de Facturación");
-        panelDatosF.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblDatos.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblDatos.setForeground(new java.awt.Color(255, 255, 255));
+        lblDatos.setText("Registrar datos de Facturación");
+        panelDatosF.add(lblDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        panelCotizacion.setBackground(new java.awt.Color(28, 28, 36));
         panelCotizacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelCotizacionMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelCotizacionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelCotizacionMouseExited(evt);
+            }
         });
         panelCotizacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel6.setText("Cotización y Compra");
-        panelCotizacion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblCotizacion.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblCotizacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotizacion.setText("Cotización y Compra");
+        panelCotizacion.add(lblCotizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        panelEnvios.setBackground(new java.awt.Color(28, 28, 36));
         panelEnvios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelEnviosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelEnviosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelEnviosMouseExited(evt);
+            }
         });
         panelEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel7.setText("Ver Envios solicitados");
-        panelEnvios.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblVer.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblVer.setForeground(new java.awt.Color(255, 255, 255));
+        lblVer.setText("Ver Envios solicitados");
+        panelEnvios.add(lblVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        btnCerrarSesion.setBackground(new java.awt.Color(28, 28, 36));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCerrarSesionMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseExited(evt);
+            }
         });
         btnCerrarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel8.setText("Cerrar Sesión");
-        btnCerrarSesion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblCerrar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        lblCerrar.setText("Cerrar Sesión");
+        btnCerrarSesion.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,21 +230,21 @@ public class UsuarioCliente extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDatosF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-            .addComponent(panelTarjetas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelCotizacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelEnvios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+            .addComponent(panelTarjetas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,10 +256,12 @@ public class UsuarioCliente extends javax.swing.JFrame {
                 .addComponent(panelCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelEnvios, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
+
+        menuContenido.setBackground(new java.awt.Color(28, 28, 36));
 
         javax.swing.GroupLayout menuContenidoLayout = new javax.swing.GroupLayout(menuContenido);
         menuContenido.setLayout(menuContenidoLayout);
@@ -186,23 +274,34 @@ public class UsuarioCliente extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(menuContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -211,15 +310,18 @@ public class UsuarioCliente extends javax.swing.JFrame {
     private void panelTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTarjetasMouseClicked
         // TODO add your handling code here:
        menuClick(usert);
+       bordeMenu(panelTarjetas,lblTarjeta);
     }//GEN-LAST:event_panelTarjetasMouseClicked
 
     private void panelDatosFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosFMouseClicked
         // TODO add your handling code here:
         menuClick(userDatos);
+        bordeMenu(panelDatosF,lblDatos);
     }//GEN-LAST:event_panelDatosFMouseClicked
 
     private void panelCotizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCotizacionMouseClicked
         // TODO add your handling code here:
+        bordeMenu(panelCotizacion,lblCotizacion);
         menuClick(userCotiz);
         userCotiz.cargarDatosFacturacion();
         userCotiz.listarTarjetas();
@@ -235,8 +337,59 @@ public class UsuarioCliente extends javax.swing.JFrame {
     private void panelEnviosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEnviosMouseClicked
         // TODO add your handling code here:
         menuClick(usuarioVer);
+        bordeMenu( panelEnvios,lblVer);
         usuarioVer.cargarDatos();
     }//GEN-LAST:event_panelEnviosMouseClicked
+
+    private void panelTarjetasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTarjetasMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelTarjetas, 1);
+    }//GEN-LAST:event_panelTarjetasMouseEntered
+
+    private void panelDatosFMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosFMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelDatosF, 1);
+    }//GEN-LAST:event_panelDatosFMouseEntered
+
+    private void panelCotizacionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCotizacionMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelCotizacion, 1);
+    }//GEN-LAST:event_panelCotizacionMouseEntered
+
+    private void panelEnviosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEnviosMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelEnvios, 1);
+    }//GEN-LAST:event_panelEnviosMouseEntered
+
+    private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(btnCerrarSesion, 1);
+    }//GEN-LAST:event_btnCerrarSesionMouseEntered
+
+    private void panelTarjetasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTarjetasMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelTarjetas, 0);
+    }//GEN-LAST:event_panelTarjetasMouseExited
+
+    private void panelDatosFMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosFMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelDatosF, 0);
+    }//GEN-LAST:event_panelDatosFMouseExited
+
+    private void panelCotizacionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCotizacionMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelCotizacion, 0);
+    }//GEN-LAST:event_panelCotizacionMouseExited
+
+    private void panelEnviosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEnviosMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelEnvios, 0);
+    }//GEN-LAST:event_panelEnviosMouseExited
+
+    private void btnCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseExited
+        // TODO add your handling code here:
+        hoverMenu(btnCerrarSesion, 0);
+    }//GEN-LAST:event_btnCerrarSesionMouseExited
 
     /**
      * @param args the command line arguments
@@ -284,16 +437,17 @@ public class UsuarioCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCerrarSesion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblCotizacion;
+    private javax.swing.JLabel lblDatos;
     private javax.swing.JLabel lblNombreUsuario;
+    private javax.swing.JLabel lblTarjeta;
+    private javax.swing.JLabel lblTipoC;
+    private javax.swing.JLabel lblVer;
     private javax.swing.JPanel menuContenido;
     private javax.swing.JPanel panelCotizacion;
     private javax.swing.JPanel panelDatosF;

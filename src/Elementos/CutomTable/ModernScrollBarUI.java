@@ -1,5 +1,6 @@
 package Elementos.CutomTable;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -86,7 +87,7 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
             width -= 16;
         }
         g2.setColor(scrollbar.getForeground());
-        g2.fillRoundRect(x, y, width, height, 10, 10);
+        g2.fillRoundRect(x, y, width, height, 5, 5);
     }
 
     private class ScrollBarButton extends JButton {

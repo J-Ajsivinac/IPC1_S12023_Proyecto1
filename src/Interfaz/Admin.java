@@ -23,7 +23,7 @@ public class Admin extends javax.swing.JFrame {
     public boolean activado;
     Border unselectedborder;
     Border selectedborder;
-
+    
     /**
      * Creates new form Admin
      */
@@ -67,7 +67,8 @@ public class Admin extends javax.swing.JFrame {
             panelRUsuario.setVisible(activado);
         }
     }
-
+    
+    
     public void hoverMenu(JPanel activar, int estado) {
         if (estado == 1) {
             activar.setBackground(new Color(19, 19, 26));
@@ -230,7 +231,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel7.setText("> Reportes");
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(89, 87, 87));
+        jPanel3.setBackground(new java.awt.Color(28, 28, 36));
 
         panelRRegion.setBackground(new java.awt.Color(28, 28, 36));
         panelRRegion.addMouseListener(new java.awt.event.MouseAdapter() {

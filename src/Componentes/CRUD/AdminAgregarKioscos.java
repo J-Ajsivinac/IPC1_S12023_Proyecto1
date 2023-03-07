@@ -28,6 +28,8 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         this.setBounds(0, 0, 700, 455);
         modelo = (DefaultTableModel) tabla1.getModel();
         regio = ctrlRegiones.getTodasRegiones();
+        tabla1.fixTable(jScrollPane1);
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(30);
         cargarRegiones();
         cargarTabla();
     }

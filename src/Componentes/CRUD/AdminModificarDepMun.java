@@ -95,6 +95,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(28);
+        
+        tabla1.fixTable(jScrollPane2);
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
+        
+        tabla2.fixTable(jScrollPane3);
+        jScrollPane3.getVerticalScrollBar().setUnitIncrement(30);
 
     }
 
@@ -160,8 +166,6 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
     public void cargarTabla1() {
         modelo.setRowCount(0);
-        //boxRegionEliminar
-
         Regiones depRegion = (Regiones) boxRegionEliminar.getSelectedItem();
         if (depRegion != null) {
             if (depRegion != null) {

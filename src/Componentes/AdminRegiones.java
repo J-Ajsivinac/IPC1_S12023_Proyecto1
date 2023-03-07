@@ -23,6 +23,8 @@ public class AdminRegiones extends javax.swing.JPanel {
     private AdminModificarRegion aMR;
     private Border unselect, selected;
 
+    
+
     /**
      * Creates new form Regiones
      */
@@ -32,28 +34,29 @@ public class AdminRegiones extends javax.swing.JPanel {
         aAR = new AdminAgregarRegiones();
         aMR = new AdminModificarRegion();
         regio = ctrlRegiones.getTodasRegiones();
-        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-       
-        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
+        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(52, 52, 52));
+
+        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(197, 202, 255));
         panelBackground.setBorder(unselect);
         panelCrud.add(aAR);
         panelCrud.add(aMR);
-        
-        menuClick(aAR,panelAgregar);
-       // cargarDatos();
+        menuClick(aAR, panelAgregar);
+        // cargarDatos();
     }
-    
-     public void menuClick(JPanel panel,JPanel btn) {
+
+    public void menuClick(JPanel panel, JPanel btn) {
         aAR.setVisible(false);
         aMR.setVisible(false);
+        panelAgregar.setBackground(new Color(40, 41, 52));
+        panelModificar.setBackground(new Color(40, 41, 52));
         //panelAgregar.setBorder(unselect);
-        panelAgregar.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0,  new Color(150, 157, 175)));
+        panelAgregar.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(52, 52, 52)));
         panelModificar.setBorder(unselect);
         btn.setBorder(selected);
-        
+        btn.setBackground(new Color(123, 127, 239));
         panel.setVisible(true);
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,7 +88,7 @@ public class AdminRegiones extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Agregar");
         panelAgregar.add(jLabel4);
@@ -100,7 +103,7 @@ public class AdminRegiones extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Modificar");
         panelModificar.add(jLabel5);
@@ -155,7 +158,7 @@ public class AdminRegiones extends javax.swing.JPanel {
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
-        menuClick(aMR,panelModificar);
+        menuClick(aMR, panelModificar);
         aMR.cargarRegiones();
         aMR.cargarBoxRegiones();
         aMR.mostrarDatos();
@@ -163,7 +166,7 @@ public class AdminRegiones extends javax.swing.JPanel {
 
     private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
         // TODO add your handling code here:
-        menuClick(aAR,panelAgregar);
+        menuClick(aAR, panelAgregar);
         aAR.cargarRegiones();
     }//GEN-LAST:event_panelAgregarMouseClicked
 

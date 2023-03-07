@@ -51,10 +51,10 @@ public class login extends javax.swing.JFrame {
         unselectedTxt = new Color(40, 41, 52);
         error = new Color(255, 75, 76);
         correcto = new Color(143, 235, 170);
-        unselectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-        selectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
-        errorBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, error);
-        correctoBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, correcto);
+        unselectedborder = BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(150, 157, 175));
+        selectedborder = BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(210, 220, 222));
+        errorBorde = BorderFactory.createMatteBorder(0, 0, 1, 0, error);
+        correctoBorde = BorderFactory.createMatteBorder(0, 0, 1, 0, correcto);
     }
 
     /**
@@ -141,6 +141,11 @@ public class login extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 txtMailMouseExited(evt);
+            }
+        });
+        txtMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMailActionPerformed(evt);
             }
         });
         jPanel5.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
@@ -320,6 +325,10 @@ public class login extends javax.swing.JFrame {
         txtMail.setBackground(new Color(50, 51, 64));
         txtMail.setBorder(bottomBorder);
     }//GEN-LAST:event_txtMailFocusGained
+
+    private void txtMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMailActionPerformed
 
     public void iniciarSesion() {
         String correo = txtMail.getText();

@@ -1,7 +1,9 @@
 
 package Elementos.CutomTable;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
@@ -23,6 +25,7 @@ public class TableActionCellEditorEliminar extends DefaultCellEditor {
     public Component getTableCellEditorComponent(JTable jtable, Object o, boolean bln, int row, int column) {
         PanelActioEliminar action = new PanelActioEliminar();
         action.initEvent(event, row);
+        
         action.setBackground(jtable.getSelectionBackground());
         return action;
     }

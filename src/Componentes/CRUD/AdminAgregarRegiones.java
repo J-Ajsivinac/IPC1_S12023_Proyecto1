@@ -2,11 +2,13 @@ package Componentes.CRUD;
 
 import Administrador.Regiones;
 import Administrador.ctrlRegiones;
+import Interfaz.login;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,8 +27,12 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 700, 455);
         modelo = (DefaultTableModel) tabla1.getModel();
+
         lblPrecioEspecial.setText("");
         lblPrecioEstandar.setText("");
+        tabla1.fixTable(jScrollPane2);
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
+        setBordes();
         cargarRegiones();
     }
 
@@ -40,6 +46,23 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
             datos[2] = Region.getPrecioEstandar();
             datos[3] = Region.getPrecioEspecial();
             modelo.addRow(datos);
+        }
+    }
+
+    public void setBordes() {
+        txtCodigo.setBorder(login.unselectedborder);
+        txtNombreR.setBorder(login.unselectedborder);
+        txtPrecioEspe.setBorder(login.unselectedborder);
+        txtPrecioEst.setBorder(login.unselectedborder);
+    }
+
+    public void selected(JTextField cambiar, int tipo) {
+        if (tipo == 1) {
+            cambiar.setBackground(new Color(50, 51, 64));
+            cambiar.setBorder(login.selectedborder);
+        } else {
+            cambiar.setBackground(new Color(40, 41, 52));
+            cambiar.setBorder(login.unselectedborder);
         }
     }
 
@@ -57,7 +80,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "El precio Especial no es un precio valido");
                 return;
             }
-            
+
             if (ctrlRegiones.nuevaRegion(txtCodigo.getText().toString(), txtNombreR.getText().toString(), Double.parseDouble(txtPrecioEst.getText()), Double.parseDouble(txtPrecioEspe.getText()))) {
                 JOptionPane.showMessageDialog(null, "Region ingresada con exito");
                 limpiartxts();
@@ -68,8 +91,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         }
 
     }
-    
-    public void limpiartxts(){
+
+    public void limpiartxts() {
         txtCodigo.setText("");
         txtNombreR.setText("");
         txtPrecioEspe.setText("");
@@ -144,6 +167,14 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         txtCodigo.setBackground(new java.awt.Color(40, 41, 52));
         txtCodigo.setForeground(new java.awt.Color(255, 255, 255));
         txtCodigo.setBorder(null);
+        txtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCodigoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoFocusLost(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,6 +183,14 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         txtNombreR.setBackground(new java.awt.Color(40, 41, 52));
         txtNombreR.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreR.setBorder(null);
+        txtNombreR.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreRFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreRFocusLost(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Precio Estandar");
@@ -159,6 +198,14 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         txtPrecioEst.setBackground(new java.awt.Color(40, 41, 52));
         txtPrecioEst.setForeground(new java.awt.Color(255, 255, 255));
         txtPrecioEst.setBorder(null);
+        txtPrecioEst.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPrecioEstFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPrecioEstFocusLost(evt);
+            }
+        });
         txtPrecioEst.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPrecioEstKeyReleased(evt);
@@ -171,6 +218,19 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         txtPrecioEspe.setBackground(new java.awt.Color(40, 41, 52));
         txtPrecioEspe.setForeground(new java.awt.Color(255, 255, 255));
         txtPrecioEspe.setBorder(null);
+        txtPrecioEspe.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPrecioEspeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPrecioEspeFocusLost(evt);
+            }
+        });
+        txtPrecioEspe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecioEspeKeyReleased(evt);
+            }
+        });
 
         lblPrecioEstandar.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecioEstandar.setText("jLabel6");
@@ -178,7 +238,15 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         lblPrecioEspecial.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecioEspecial.setText("jLabel6");
 
-        buttonRound1.setText("Agregar Región");
+        buttonRound1.setBorder(null);
+        buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRound1.setText("Agregar");
+        buttonRound1.setBorderColor(new java.awt.Color(123, 127, 239));
+        buttonRound1.setColor(new java.awt.Color(123, 127, 239));
+        buttonRound1.setColorClick(new java.awt.Color(121, 118, 236));
+        buttonRound1.setColorOver(new java.awt.Color(121, 147, 251));
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        buttonRound1.setRadius(15);
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRound1ActionPerformed(evt);
@@ -192,31 +260,30 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                    .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(224, 224, 224)
-                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5)))
-                            .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                        .addComponent(txtPrecioEst))
-                                    .addComponent(lblPrecioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                                    .addComponent(txtPrecioEspe)
-                                    .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                        .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(235, 235, 235))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(224, 224, 224)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)))
+                    .addGroup(panelRound2Layout.createSequentialGroup()
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                                .addComponent(txtPrecioEst))
+                            .addComponent(lblPrecioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                            .addComponent(txtPrecioEspe)
+                            .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(24, 24, 24))
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addGap(254, 254, 254)
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,8 +294,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(txtNombreR))
+                    .addComponent(txtNombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(txtCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -242,10 +309,14 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                     .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
+        jScrollPane2.setBackground(new java.awt.Color(28, 170, 205));
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(28, 28, 36)));
+
+        tabla1.setBackground(new java.awt.Color(28, 28, 36));
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -262,6 +333,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabla1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tabla1.setRowHeight(40);
         jScrollPane2.setViewportView(tabla1);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
@@ -311,12 +384,72 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtPrecioEst.setEditable(false);
+            txtPrecioEst.setBorder(login.errorBorde);
             lblPrecioEstandar.setText("Solo numeros");
+            lblPrecioEstandar.setForeground(login.error);
         } else {
             txtPrecioEst.setEditable(true);
+            txtPrecioEst.setBorder(login.selectedborder);
             lblPrecioEstandar.setText("");
+            lblPrecioEstandar.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_txtPrecioEstKeyReleased
+
+    private void txtCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusGained
+        // TODO add your handling code here:
+        selected(txtCodigo, 1);
+    }//GEN-LAST:event_txtCodigoFocusGained
+
+    private void txtNombreRFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreRFocusGained
+        // TODO add your handling code here:
+        selected(txtNombreR, 1);
+    }//GEN-LAST:event_txtNombreRFocusGained
+
+    private void txtPrecioEstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioEstFocusGained
+        // TODO add your handling code here:
+        selected(txtPrecioEst, 1);
+    }//GEN-LAST:event_txtPrecioEstFocusGained
+
+    private void txtPrecioEspeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioEspeFocusGained
+        // TODO add your handling code here:
+        selected(txtPrecioEspe, 1);
+    }//GEN-LAST:event_txtPrecioEspeFocusGained
+
+    private void txtPrecioEspeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEspeKeyReleased
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtPrecioEspe.setEditable(false);
+            txtPrecioEspe.setBorder(login.errorBorde);
+            lblPrecioEspecial.setText("Solo numeros");
+            lblPrecioEspecial.setForeground(login.error);
+        } else {
+            txtPrecioEspe.setEditable(true);
+            lblPrecioEspecial.setText("");
+            txtPrecioEspe.setBorder(login.selectedborder);
+            lblPrecioEspecial.setForeground(Color.WHITE);
+        }
+    }//GEN-LAST:event_txtPrecioEspeKeyReleased
+
+    private void txtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusLost
+        // TODO add your handling code here:
+        selected(txtCodigo, 0);
+    }//GEN-LAST:event_txtCodigoFocusLost
+
+    private void txtNombreRFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreRFocusLost
+        // TODO add your handling code here:
+        selected(txtNombreR, 0);
+    }//GEN-LAST:event_txtNombreRFocusLost
+
+    private void txtPrecioEstFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioEstFocusLost
+        // TODO add your handling code here:
+        selected(txtPrecioEst, 0);
+    }//GEN-LAST:event_txtPrecioEstFocusLost
+
+    private void txtPrecioEspeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioEspeFocusLost
+        // TODO add your handling code here:
+        selected(txtPrecioEspe, 0);
+    }//GEN-LAST:event_txtPrecioEspeFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
