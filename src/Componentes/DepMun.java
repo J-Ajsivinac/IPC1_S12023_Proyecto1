@@ -30,8 +30,8 @@ public class DepMun extends javax.swing.JPanel {
     public DepMun() {
         initComponents();
         this.setBounds(0, 0, 710, 500);
-        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
+        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(52, 52, 52));
+        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(197, 202, 255));
         panelBackground.setBorder(unselect);
         aADep = new AdminAgregarDepMun();
         aMDep = new AdminModificarDepMun();
@@ -43,10 +43,15 @@ public class DepMun extends javax.swing.JPanel {
     public void menuClick(JPanel panel, JPanel btn) {
         aADep.setVisible(false);
         aMDep.setVisible(false);
-        panelAgregar.setBorder(unselect);
+        panelAgregar.setBackground(new Color(40, 41, 52));
+        panelModificar.setBackground(new Color(40, 41, 52));
+        //panelAgregar.setBorder(unselect);
+        panelAgregar.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(52, 52, 52)));
         panelModificar.setBorder(unselect);
         btn.setBorder(selected);
+        btn.setBackground(new Color(123, 127, 239));
         panel.setVisible(true);
+
     }
 
     /**
@@ -85,7 +90,7 @@ public class DepMun extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Agregar");
         panelAgregar.add(jLabel4);
@@ -99,7 +104,7 @@ public class DepMun extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Modificar");
         panelModificar.add(jLabel5);

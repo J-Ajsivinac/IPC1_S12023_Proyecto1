@@ -56,7 +56,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         txtPrecioEst.setBorder(login.unselectedborder);
     }
 
-    public void selected(JTextField cambiar, int tipo) {
+    public static void selected(JTextField cambiar, int tipo) {
         if (tipo == 1) {
             cambiar.setBackground(new Color(50, 51, 64));
             cambiar.setBorder(login.selectedborder);
@@ -304,7 +304,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPrecioEspe, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                     .addComponent(txtPrecioEst))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))

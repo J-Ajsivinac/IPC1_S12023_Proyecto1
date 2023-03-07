@@ -185,7 +185,7 @@
                           <Component id="txtPrecioEspe" pref="24" max="32767" attributes="0"/>
                           <Component id="txtPrecioEst" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblPrecioEspecial" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="lblPrecioEstandar" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>

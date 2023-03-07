@@ -9,9 +9,12 @@ import Elementos.CutomTable.TableActionCellEditorEliminar;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
 import Elementos.ScrollBarCustom;
+import Interfaz.login;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -92,16 +95,31 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
         tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event2));
-        
+
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(28);
-        
+
         tabla1.fixTable(jScrollPane2);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
-        
+
         tabla2.fixTable(jScrollPane3);
         jScrollPane3.getVerticalScrollBar().setUnitIncrement(30);
+        setBordes();
+    }
 
+    public void setBordes() {
+        txtNuevoDepartamento.setBorder(login.unselectedborder);
+        txtNuevoMunicipio.setBorder(login.unselectedborder);
+    }
+    
+    public void selected(JTextField cambiar, int tipo) {
+        if (tipo == 1) {
+            cambiar.setBackground(new Color(50, 51, 64));
+            cambiar.setBorder(login.selectedborder);
+        } else {
+            cambiar.setBackground(new Color(40, 41, 52));
+            cambiar.setBorder(login.unselectedborder);
+        }
     }
 
     public void cargarB() {
@@ -208,7 +226,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         //Departamentos dep = (Departamentos) boxRegionMuni.getSelectedItem();
         Municipios mun = (Municipios) boxMuniUpdate.getSelectedItem();
         //String codDepartamento = dep.getCodDepartamento();
-        if (mun != null && boxRegionMuni.getSelectedItem()!=null && boxDepartamentosM.getSelectedItem() !=null && !txtNuevoMunicipio.getText().toString().equals("")) {
+        if (mun != null && boxRegionMuni.getSelectedItem() != null && boxDepartamentosM.getSelectedItem() != null && !txtNuevoMunicipio.getText().toString().equals("")) {
             String nNombre = txtNuevoMunicipio.getText();
             if (ctrlDepartamentos.modificarNombreMun(mun.getCodigoDepartamento().toString(), mun.getCodigoMunicipio().toString(), nNombre)) {
                 JOptionPane.showMessageDialog(null, "Nombre Actualizado");
@@ -318,6 +336,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jLabel2.setText("Región");
 
         boxRegionUpdate.setBackground(new java.awt.Color(40, 41, 52));
+        boxRegionUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         boxRegionUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionUpdate.setBorder(null);
         boxRegionUpdate.addItemListener(new java.awt.event.ItemListener() {
@@ -331,6 +350,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jLabel3.setText("Departamento");
 
         boxDepartamentosUpdate.setBackground(new java.awt.Color(40, 41, 52));
+        boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         boxDepartamentosUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosUpdate.setBorder(null);
 
@@ -375,8 +395,24 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         txtNuevoDepartamento.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoDepartamento.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoDepartamento.setBorder(null);
+        txtNuevoDepartamento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNuevoDepartamentoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNuevoDepartamentoFocusLost(evt);
+            }
+        });
 
-        btnEditarDep.setText("Modificar");
+        btnEditarDep.setBorder(null);
+        btnEditarDep.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarDep.setText("Actualzar");
+        btnEditarDep.setBorderColor(new java.awt.Color(123, 127, 239));
+        btnEditarDep.setColor(new java.awt.Color(123, 127, 239));
+        btnEditarDep.setColorClick(new java.awt.Color(121, 118, 236));
+        btnEditarDep.setColorOver(new java.awt.Color(121, 147, 251));
+        btnEditarDep.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnEditarDep.setRadius(15);
         btnEditarDep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarDepActionPerformed(evt);
@@ -458,8 +494,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                         .addGap(15, 15, 15)
                         .addComponent(jLabel7))
                     .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(btnEditarDep, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(239, 239, 239)
+                        .addComponent(btnEditarDep, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
@@ -478,8 +514,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNuevoDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addComponent(btnEditarDep, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
@@ -513,6 +549,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jLabel11.setText("Región");
 
         boxRegionMuni.setBackground(new java.awt.Color(40, 41, 52));
+        boxRegionMuni.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         boxRegionMuni.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionMuni.setBorder(null);
         boxRegionMuni.addItemListener(new java.awt.event.ItemListener() {
@@ -526,6 +563,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jLabel12.setText("Departamento");
 
         boxDepartamentosM.setBackground(new java.awt.Color(40, 41, 52));
+        boxDepartamentosM.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         boxDepartamentosM.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosM.setBorder(null);
         boxDepartamentosM.addItemListener(new java.awt.event.ItemListener() {
@@ -539,6 +577,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jLabel13.setText("Municipio");
 
         boxMuniUpdate.setBackground(new java.awt.Color(40, 41, 52));
+        boxMuniUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         boxMuniUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxMuniUpdate.setBorder(null);
 
@@ -585,8 +624,24 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         txtNuevoMunicipio.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoMunicipio.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoMunicipio.setBorder(null);
+        txtNuevoMunicipio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNuevoMunicipioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNuevoMunicipioFocusLost(evt);
+            }
+        });
 
-        btnEditarMuni.setText("Modificar");
+        btnEditarMuni.setBorder(null);
+        btnEditarMuni.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarMuni.setText("Actualizar");
+        btnEditarMuni.setBorderColor(new java.awt.Color(123, 127, 239));
+        btnEditarMuni.setColor(new java.awt.Color(123, 127, 239));
+        btnEditarMuni.setColorClick(new java.awt.Color(121, 118, 236));
+        btnEditarMuni.setColorOver(new java.awt.Color(121, 147, 251));
+        btnEditarMuni.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnEditarMuni.setRadius(15);
         btnEditarMuni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarMuniActionPerformed(evt);
@@ -672,9 +727,6 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                                 .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtMunicipioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelRound3Layout.createSequentialGroup()
-                                .addGap(244, 244, 244)
-                                .addComponent(btnEditarMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addContainerGap()
@@ -690,7 +742,10 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(boxDeparE, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(boxDeparE, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(btnEditarMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -707,9 +762,9 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(btnEditarMuni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEditarMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -831,6 +886,26 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         // TODO add your handling code here:
         cargarTabla2();
     }//GEN-LAST:event_boxDeparEItemStateChanged
+
+    private void txtNuevoDepartamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoDepartamentoFocusGained
+        // TODO add your handling code here:
+        selected(txtNuevoDepartamento, 1);
+    }//GEN-LAST:event_txtNuevoDepartamentoFocusGained
+
+    private void txtNuevoMunicipioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoMunicipioFocusGained
+        // TODO add your handling code here:
+        selected(txtNuevoMunicipio, 1);
+    }//GEN-LAST:event_txtNuevoMunicipioFocusGained
+
+    private void txtNuevoDepartamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoDepartamentoFocusLost
+        // TODO add your handling code here:
+         selected(txtNuevoMunicipio, 0);
+    }//GEN-LAST:event_txtNuevoDepartamentoFocusLost
+
+    private void txtNuevoMunicipioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoMunicipioFocusLost
+        // TODO add your handling code here:
+         selected(txtNuevoMunicipio, 0);
+    }//GEN-LAST:event_txtNuevoMunicipioFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
