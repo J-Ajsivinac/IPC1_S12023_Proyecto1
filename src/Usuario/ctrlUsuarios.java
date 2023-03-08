@@ -132,35 +132,50 @@ public class ctrlUsuarios {
     }
 
     public static boolean verificarTarjetas(String codigo, int index) {
-            Usuario d = usuarios.get(index);
-            if (d.getTarjetas().size() != 0) {
-                for (int j = 0; j < d.getTarjetas().size(); j++) {
-                    if (d.getTarjetas().get(j).getTarjetaNumero().equals(codigo)) {
-                        return true;
-                    }
+        Usuario d = usuarios.get(index);
+        if (d.getTarjetas().size() != 0) {
+            for (int j = 0; j < d.getTarjetas().size(); j++) {
+                if (d.getTarjetas().get(j).getTarjetaNumero().equals(codigo)) {
+                    return true;
                 }
-            }        
+            }
+        }
         return false;
     }
+
     public static boolean agregaTarjeta(String correo, String nombreTarjeta, String numeroT, String FechaV, int index) {
         int posicion = getPosicionUsuario(correo);
 
         if (verifiarUsuarios(correo) && !verificarTarjetas(numeroT, index)) {
             usuarios.get(posicion).getTarjetas().add(new Tarjeta(nombreTarjeta, numeroT, FechaV));
             return true;
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "El numero de Tarjeta ya ha sido Ingresado");
         }
         return false;
     }
 
-    public static boolean agregarDatosFacturacion(String correo, String nombre, String direccion, String nit) {
+    public static boolean verificarDatosF(String nit, int index) {
+        Usuario d = usuarios.get(index);
+        if (d.getDatosFacturacion().size() != 0) {
+            for (int j = 0; j < d.getDatosFacturacion().size(); j++) {
+                if (d.getDatosFacturacion().get(j).getNit().equals(nit)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean agregarDatosFacturacion(String correo, String nombre, String direccion, String nit, int index) {
         Usuario departa = getUsuarioID(correo);
         int posicion = getPosicionUsuario(correo);
 
-        if (verifiarUsuarios(correo)) {
+        if (verifiarUsuarios(correo) && !verificarDatosF(nit, index)) {
             usuarios.get(posicion).getDatosFacturacion().add(new DatosFacturacion(nombre, direccion, nit));
             return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El nit ya existe");
         }
         return false;
     }
@@ -220,15 +235,20 @@ public class ctrlUsuarios {
     }
 
     public static boolean cambiarTarjetas(int index, int opcion, int posicion, String valorNuevo) {
-        System.out.println(index);
         if (index != -1) {
             switch (opcion) {
                 case 1:
                     usuarios.get(index).getTarjetas().get(posicion).setTarjetanombre(valorNuevo);
                     return true;
                 case 2:
-                    usuarios.get(index).getTarjetas().get(posicion).setTarjetaNumero(valorNuevo);
-                    return true;
+                    if (!verificarTarjetas(valorNuevo, index)) {
+                        usuarios.get(index).getTarjetas().get(posicion).setTarjetaNumero(valorNuevo);
+                        return true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El No de tarjeta ya existe");
+                        return false;
+                    }
+
                 case 3:
                     usuarios.get(index).getTarjetas().get(posicion).setTarjetaVencimiento(valorNuevo);
                     return true;
@@ -242,6 +262,39 @@ public class ctrlUsuarios {
     public static boolean eliminarTarjetas(String correo, int posiciónU, int posicionT) {
         if (verifiarUsuarios(correo)) {
             usuarios.get(posiciónU).getTarjetas().remove(posicionT);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean cambiarDatosF(int index, int opcion, int posicion, String valorNuevo) {
+        if (index != -1) {
+            switch (opcion) {
+                case 1:
+                    usuarios.get(index).getDatosFacturacion().get(posicion).setNombreCompletoF(valorNuevo);
+                    return true;
+                case 2:
+                    usuarios.get(index).getDatosFacturacion().get(posicion).setDireccionF(valorNuevo);
+                    return true;
+                case 3:
+                    if (!verificarDatosF(valorNuevo, index)) {
+                        usuarios.get(index).getDatosFacturacion().get(posicion).setNit(valorNuevo);
+                        return true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El Nit ya existe");
+                        return false;
+                    }
+
+                default:
+                    return false;
+            }
+        }
+        return false;
+    }
+
+    public static boolean eliminarDatosF(String correo, int posiciónU, int posicionT) {
+        if (verifiarUsuarios(correo)) {
+            usuarios.get(posiciónU).getDatosFacturacion().remove(posicionT);
             return true;
         }
         return false;

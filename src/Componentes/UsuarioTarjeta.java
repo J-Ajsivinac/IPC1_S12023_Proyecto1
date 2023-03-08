@@ -276,6 +276,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha de Vencimiento");
 
@@ -419,11 +420,11 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modificar Tarjetas de Credito o de Débito");
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Numero de Tarjeta: ");
 
-        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Cambiar");
 
@@ -434,15 +435,15 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Valor Actual:");
 
-        lblValor.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblValor.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         lblValor.setForeground(new java.awt.Color(255, 255, 255));
         lblValor.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel10.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Nuevo Valor");
 
@@ -502,12 +503,13 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                                     .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(panelRound2Layout.createSequentialGroup()
                                     .addComponent(jLabel6)
-                                    .addGap(18, 18, 18)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(boxNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(boxCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(boxCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(12, 12, 12))))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

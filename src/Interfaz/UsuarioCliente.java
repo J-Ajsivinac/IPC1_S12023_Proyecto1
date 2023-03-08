@@ -315,6 +315,8 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
     private void panelDatosFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosFMouseClicked
         // TODO add your handling code here:
+        userDatos.cargarTablaNits();
+        userDatos.cargarTablaNitsEliminar();
         menuClick(userDatos);
         bordeMenu(panelDatosF,lblDatos);
     }//GEN-LAST:event_panelDatosFMouseClicked
