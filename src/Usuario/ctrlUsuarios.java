@@ -322,9 +322,61 @@ public class ctrlUsuarios {
                     JOptionPane.showMessageDialog(null, "La contraseña no cumple con los requistos");
                 }
             }
+        }
+        return false;
+    }
 
+    public boolean cambiarPerfil(String[] nuevosvalores, int index) {
+        Usuario u = usuarios.get(index);
+        boolean regresar = false;
+        String[] valores = {u.getNombre(), u.getApellido(), u.getFechaNacimiento(), u.getTelefono() + "", u.getNacionalidad(), u.getGenero(), u.getDpi(), u.getDpi()};
+        for (int i = 0; i < valores.length; i++) {
+            if (!valores[i].equals(nuevosvalores[i])) {
+                switch (i) {
+                    case 1:
+                        usuarios.get(index).setNombre(nuevosvalores[i]);
+                        regresar= true;
+                        break;
+                    case 2:
+                        usuarios.get(index).setApellido(nuevosvalores[i]);
+                        regresar= true;
+                        break;
+                    case 3:
+                        usuarios.get(index).setFechaNacimiento(nuevosvalores[i]);
+                        regresar= true;
+                        break;
+                    case 4:
+                        int numero = Integer.parseInt(nuevosvalores[i]);
+                        usuarios.get(index).setTelefono(numero);
+                        regresar= true;
+                        break;
+                    case 5:
+                        usuarios.get(index).setNacionalidad(nuevosvalores[i]);
+                        regresar= true;
+                        break;
+                    case 6:
+                        usuarios.get(index).setGenero(nuevosvalores[i]);
+                        regresar= true;
+                        break;
+                    case 7:
+                        usuarios.get(index).setDpi(nuevosvalores[i]);
+                        regresar= true;
+                        break;
+                    default:
+                        regresar= false;
+                        return regresar;
+                }
+            }
         }
 
+        return regresar;
+    }
+    
+    public boolean cambiarRol(String RolCompleto, int index){
+        if(!usuarios.get(index).getRol().equals(RolCompleto)){
+            usuarios.get(index).setRol(RolCompleto);
+            return true;
+        }
         return false;
     }
 }
