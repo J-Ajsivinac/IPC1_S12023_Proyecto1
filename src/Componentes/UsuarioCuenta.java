@@ -11,7 +11,9 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -22,6 +24,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     private static String[] nombrePaises = {"Alemania", "Argentina", "Belice", "Brasil", "Canadá", "China",
         "El Salvador", "España", "Guatemala", "Honduras", "Japón", "México", "Portugal", "Uruguay"};
     private UsuarioCliente cliente;
+
     /**
      * Creates new form UsuarioCuenta
      */
@@ -31,8 +34,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(28);
     }
-    
-    public UsuarioCuenta (UsuarioCliente uC){
+
+    public UsuarioCuenta(UsuarioCliente uC) {
         initComponents();
         this.setBounds(0, 0, 724, 520);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
@@ -137,6 +140,64 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
     }
 
+    public void actualizarIMG() {
+        String ruta = "";
+        JFileChooser archivos = new JFileChooser();
+        try {
+            FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
+            archivos.setFileFilter(filtrado);
+        } catch (Exception e) {
+            System.out.println("--"+e);
+        }
+
+        int respuesta = archivos.showOpenDialog(this);
+        if (respuesta == archivos.APPROVE_OPTION) {
+
+            /// Cargar la imagen original
+            try {
+                ruta = archivos.getSelectedFile().getPath();
+                ImageIcon originalImageIcon = new ImageIcon(ruta);
+
+                // Obtener el tamaño original de la imagen
+                int originalImageWidth = originalImageIcon.getIconWidth();
+                int originalImageHeight = originalImageIcon.getIconHeight();
+
+                // Obtener el tamaño del JLabel
+                int labelWidth = lblimagen.getWidth();
+                int labelHeight = lblimagen.getHeight();
+
+                // Calcular la relación de aspecto de la imagen original y del JLabel
+                double originalImageAspectRatio = (double) originalImageWidth / originalImageHeight;
+                double labelAspectRatio = (double) labelWidth / labelHeight;
+
+                // Escalar la imagen si es necesario
+                ImageIcon scaledImageIcon;
+                if (originalImageAspectRatio > labelAspectRatio) {
+                    // La imagen es más ancha que el JLabel
+                    int scaledImageWidth = labelWidth;
+                    int scaledImageHeight = (int) (scaledImageWidth / originalImageAspectRatio);
+                    Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
+                    scaledImageIcon = new ImageIcon(scaledImage);
+                } else {
+                    // La imagen es más alta que el JLabel
+                    int scaledImageHeight = labelHeight;
+                    int scaledImageWidth = (int) (scaledImageHeight * originalImageAspectRatio);
+                    Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
+                    scaledImageIcon = new ImageIcon(scaledImage);
+                }
+                // Establecer el ImageIcon escalado en el JLabel
+
+                if (ctrlUsuarios.cambiarIMG(login.posicionU, ruta)) {
+
+                    lblimagen.setIcon(scaledImageIcon);
+                    JOptionPane.showMessageDialog(null, "Fotografía cambiada con éxito");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
     public void actualizarGeneral() {
         Usuario actualizado = ctrlUsuarios.getUsuarioIndice(login.posicionU);
         String correo = txtCorreo.getText();
@@ -171,6 +232,54 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                         cliente.dispose();
                     }
                 }
+            }
+        }
+    }
+
+    public void actualizarPerfil() {
+        Usuario actualizado = ctrlUsuarios.getUsuarioIndice(login.posicionU);
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String fecha = txtFecha.getText();
+        String nacionalidad = boxNacionalidad.getSelectedItem().toString();
+        String telefono = txtTelefono.getText();
+        String genero = boxGenero.getSelectedItem().toString();
+        String dpi = txtDpi.getText();
+
+        if (!(nombre.equals("") && apellido.equals("") && fecha.equals("") && telefono.equals("") && dpi.equals(""))) {
+            String[] valores = {nombre, apellido, fecha, telefono, nacionalidad, genero, dpi};
+            if (ctrlUsuarios.cambiarPerfil(valores, login.posicionU)) {
+                cargarDatosU();
+                JOptionPane.showMessageDialog(null, "Datos actualizados con éxito");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Existen campos sin llenar");
+        }
+    }
+
+    public void actualizarRol() {
+        Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
+        int rol = boxRol.getSelectedIndex();
+        String rolCompleto = boxRol.getSelectedItem().toString();
+        if (rol == 2 && kioscoItem != null) {
+            rolCompleto = "Kiosco," + kioscoItem.getNombreKiosco();
+        }
+        if (ctrlUsuarios.cambiarRol(rolCompleto, login.posicionU)) {
+            cargarDatosU();
+            JOptionPane.showMessageDialog(null, "Datos actualizdos con éxito");
+        }
+    }
+
+    public void eliminarCuenta() {
+        int decision = JOptionPane.showConfirmDialog(null, "¿Desea Elimianr su Cuenta?");
+        if (decision == JOptionPane.YES_OPTION) {
+            String contra = JOptionPane.showInputDialog(null, "Ingrese su contraseña para confirmar");
+            if (ctrlUsuarios.eliminarUsuario(login.posicionU, contra)) {
+                JOptionPane.showMessageDialog(null, "Usuario Eliminado Correctamente");
+                JOptionPane.showMessageDialog(null, "Se cerrara la sesión");
+                login l = new login();
+                l.setVisible(true);
+                cliente.dispose();
             }
         }
     }
@@ -225,6 +334,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         lblimagen = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         buttonRound2 = new Elementos.ButtonRound();
+        jLabel27 = new javax.swing.JLabel();
         panelRound4 = new Elementos.PanelRound();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -232,6 +342,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         boxKiosco = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
         buttonRound4 = new Elementos.ButtonRound();
+        buttonRound5 = new Elementos.ButtonRound();
 
         setBackground(new java.awt.Color(19, 19, 26));
 
@@ -466,6 +577,11 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         buttonRound3.setColorOver(new java.awt.Color(121, 147, 251));
         buttonRound3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         buttonRound3.setRadius(15);
+        buttonRound3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRound3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -572,6 +688,10 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             }
         });
 
+        jLabel27.setFont(new java.awt.Font("Montserrat", 2, 12)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Dependiendo del tamaño de la imagen puede demorar más tiempo");
+
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
@@ -584,7 +704,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -597,7 +718,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                         .addGap(33, 33, 33)
                         .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel13))
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel27))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -682,18 +805,37 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        buttonRound5.setBorder(null);
+        buttonRound5.setForeground(new java.awt.Color(226, 96, 104));
+        buttonRound5.setText("Eliminar Cuenta");
+        buttonRound5.setBorderColor(new java.awt.Color(62, 63, 72));
+        buttonRound5.setColor(new java.awt.Color(47, 49, 53));
+        buttonRound5.setColorOver(new java.awt.Color(47, 44, 64));
+        buttonRound5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        buttonRound5.setRadius(15);
+        buttonRound5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRound5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(buttonRound5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,7 +848,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(buttonRound5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -725,16 +869,28 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
     private void buttonRound4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound4ActionPerformed
         // TODO add your handling code here:
+        actualizarRol();
     }//GEN-LAST:event_buttonRound4ActionPerformed
 
     private void buttonRound2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound2ActionPerformed
         // TODO add your handling code here:
+        actualizarIMG();
     }//GEN-LAST:event_buttonRound2ActionPerformed
 
     private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
         // TODO add your handling code here:
         actualizarGeneral();
     }//GEN-LAST:event_buttonRound1ActionPerformed
+
+    private void buttonRound3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound3ActionPerformed
+        // TODO add your handling code here:
+        actualizarPerfil();
+    }//GEN-LAST:event_buttonRound3ActionPerformed
+
+    private void buttonRound5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound5ActionPerformed
+        // TODO add your handling code here:
+        eliminarCuenta();
+    }//GEN-LAST:event_buttonRound5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -746,6 +902,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     private Elementos.ButtonRound buttonRound2;
     private Elementos.ButtonRound buttonRound3;
     private Elementos.ButtonRound buttonRound4;
+    private Elementos.ButtonRound buttonRound5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -764,6 +921,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

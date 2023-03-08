@@ -297,11 +297,25 @@ public class ctrlUsuarios {
         return false;
     }
 
-    public static boolean cambiarDUsuario(int index, int opcion, String valorNuevo) {
+    public static boolean cambiarIMG(int index, String nRuta) {
+        if (!nRuta.equals(usuarios.get(index).getFotografia())) {
+            usuarios.get(index).setFotografia(nRuta);
+            return true;
+        }
         return false;
     }
 
     public static boolean cambiarDGeneral(int index, String nuevoCorreo, String nuevaContra, int opcion) {
+        Usuario u = usuarios.get(index);
+        if (!ctrlUsuarios.verifiarUsuarios(nuevoCorreo)) {
+            JOptionPane.showMessageDialog(null, "Este correo ya esta registrado");
+            return false;
+        }
+
+        if (u.getCorreo().equals(nuevoCorreo) && u.getContrasena().equals(nuevaContra) || nuevaContra.equals("")) {
+            return false;
+        }
+
         if (opcion == 1) {
             usuarios.get(index).setCorreo(nuevoCorreo);
             return true;
@@ -326,56 +340,70 @@ public class ctrlUsuarios {
         return false;
     }
 
-    public boolean cambiarPerfil(String[] nuevosvalores, int index) {
+    public static boolean cambiarPerfil(String[] nuevosvalores, int index) {
         Usuario u = usuarios.get(index);
         boolean regresar = false;
-        String[] valores = {u.getNombre(), u.getApellido(), u.getFechaNacimiento(), u.getTelefono() + "", u.getNacionalidad(), u.getGenero(), u.getDpi(), u.getDpi()};
+        boolean cambio = false;
+        String[] valores = {u.getNombre(), u.getApellido(), u.getFechaNacimiento(), u.getTelefono() + "", u.getNacionalidad(), u.getGenero(), u.getDpi()};
         for (int i = 0; i < valores.length; i++) {
             if (!valores[i].equals(nuevosvalores[i])) {
                 switch (i) {
-                    case 1:
+                    case 0:
                         usuarios.get(index).setNombre(nuevosvalores[i]);
-                        regresar= true;
+                        cambio = true;
+                        regresar = true;
+                        break;
+                    case 1:
+                        usuarios.get(index).setApellido(nuevosvalores[i]);
+                        cambio = true;
+                        regresar = true;
                         break;
                     case 2:
-                        usuarios.get(index).setApellido(nuevosvalores[i]);
-                        regresar= true;
+                        usuarios.get(index).setFechaNacimiento(nuevosvalores[i]);
+                        regresar = true;
                         break;
                     case 3:
-                        usuarios.get(index).setFechaNacimiento(nuevosvalores[i]);
-                        regresar= true;
-                        break;
-                    case 4:
                         int numero = Integer.parseInt(nuevosvalores[i]);
                         usuarios.get(index).setTelefono(numero);
-                        regresar= true;
+                        regresar = true;
+                        break;
+                    case 4:
+                        usuarios.get(index).setNacionalidad(nuevosvalores[i]);
+                        regresar = true;
                         break;
                     case 5:
-                        usuarios.get(index).setNacionalidad(nuevosvalores[i]);
-                        regresar= true;
+                        usuarios.get(index).setGenero(nuevosvalores[i]);
+                        regresar = true;
                         break;
                     case 6:
-                        usuarios.get(index).setGenero(nuevosvalores[i]);
-                        regresar= true;
-                        break;
-                    case 7:
                         usuarios.get(index).setDpi(nuevosvalores[i]);
-                        regresar= true;
+                        regresar = true;
                         break;
                     default:
-                        regresar= false;
-                        return regresar;
+                        return false;
                 }
             }
         }
-
+        if (cambio) {
+            ctrlEnvios.cambiarDatosU(u.getIdUsuario(), nuevosvalores[0] + " " + nuevosvalores[1]);
+        }
         return regresar;
     }
-    
-    public boolean cambiarRol(String RolCompleto, int index){
-        if(!usuarios.get(index).getRol().equals(RolCompleto)){
+
+    public static boolean cambiarRol(String RolCompleto, int index) {
+        if (!usuarios.get(index).getRol().equals(RolCompleto)) {
             usuarios.get(index).setRol(RolCompleto);
             return true;
+        }
+        return false;
+    }
+
+    public static boolean eliminarUsuario(int index, String password) {
+        if (usuarios.get(index).getContrasena().equals(password)) {
+            usuarios.remove(index);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "La contraseña no es la correcta");
         }
         return false;
     }

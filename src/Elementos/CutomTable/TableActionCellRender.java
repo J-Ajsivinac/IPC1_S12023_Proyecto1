@@ -1,4 +1,3 @@
-
 package Elementos.CutomTable;
 
 import java.awt.Color;
@@ -17,9 +16,11 @@ public class TableActionCellRender extends DefaultTableCellRenderer {
         Component com = super.getTableCellRendererComponent(jtable, o, isSeleted, bln1, row, column);
         PanelAction action = new PanelAction();
         if (isSeleted == false && row % 2 == 0) {
-            action.setBackground(Color.BLACK);
+            action.setBackground(new Color(40, 41, 52));
+        } else if (isSeleted == false && row % 2 != 0) {
+            action.setBackground(new Color(57, 53, 74));
         } else {
-            action.setBackground(com.getBackground());
+            action.setBackground(new Color(98, 101, 128));
         }
         return action;
     }

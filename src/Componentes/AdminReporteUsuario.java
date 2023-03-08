@@ -1,7 +1,9 @@
 package Componentes;
 
 import Administrador.Regiones;
+import Usuario.Envios;
 import Usuario.Usuario;
+import Usuario.ctrlEnvios;
 import Usuario.ctrlUsuarios;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,28 +26,35 @@ public class AdminReporteUsuario extends javax.swing.JPanel {
         modelo = (DefaultTableModel) tableRU.getModel();
         totalUsuarios = (ArrayList<Usuario>) ctrlUsuarios.getTodUsuarios().clone();
     }
-    
-    public void ordenarRegiones() {
-         modelo.setRowCount(0);
-        if (totalUsuarios.size() > 0) {
-            Collections.sort(totalUsuarios, new Comparator<Usuario>() {
-                @Override
-                public int compare(Usuario p1, Usuario p2) {
-                    // Aqui esta el truco, ahora comparamos p2 con p1 y no al reves como antes
-                    return new Integer(p2.getContadorEnvios()).compareTo(new Integer(p1.getContadorEnvios()));
-                }
-            });
+       
+     public void ordenarUsuarios() {
+        modelo.setRowCount(0);
+        ArrayList<Envios> listaO = (ArrayList<Envios>) ctrlEnvios.ordenarPorId().clone();
 
-            for (int i = 0; i < totalUsuarios.size(); i++) {
-                if (totalUsuarios.get(i).getContadorEnvios() != 0) {
-                    Object datos[] = new Object[4];
-                    datos[0] = i+1;
-                    datos[1] = totalUsuarios.get(i).getNombre();
-                    datos[2] = totalUsuarios.get(i).getApellido();
-                    datos[3] = totalUsuarios.get(i).getContadorEnvios();
-                    modelo.addRow(datos);
+        ArrayList<String> usarioId = new ArrayList<>();
+        ArrayList<String> nombres = new ArrayList<>();
+        for (Envios en : listaO) {
+            if (!usarioId.contains(en.getIdUsuario())) {
+                usarioId.add(en.getIdUsuario());
+                nombres.add(en.getNombreUsuario());
+            }
+        }
+        int num = 1;
+        int i=0;
+        for (String usuarioIds : usarioId) {
+            int contador = 0;
+            for (Envios reg : listaO) {
+                if (reg.getIdUsuario().equals(usuarioIds)) {
+                    contador++;
                 }
             }
+            Object datos[] = new Object[3];
+            datos[0] = num;
+            datos[1] = nombres.get(i);
+            datos[2] = contador;
+            modelo.addRow(datos);
+            num++;
+            i++;
         }
     }
     /**

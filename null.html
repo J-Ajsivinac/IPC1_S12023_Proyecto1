@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/e73cd8025f.js" crossorigin="anonymous"></script>
+  <title>Cotización</title>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .content {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            background-color: #e3e3e3;
+        }
+
+        .content .card {
+            box-sizing: border-box;
+            border: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: .5s;
+            width: 50%;
+            min-width: 600px;
+            height: 410px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+
+        }
+
+        .content .card .superior {
+            width: 100%;
+            padding-left: 5%;
+            padding-right: 5%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
+
+        .content .card .superior .datos{
+            width: 40%;
+            display: flex;
+            font-size: 18px;
+            flex-direction: column;
+            align-items: end;
+            font-weight: bold;
+        }
+
+        .content .card .superior img {
+            width: 10%;
+        }
+
+        .content .card .centro {
+            width: 95%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 210px;
+            border-radius: 16px;
+            background-color: #fff;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+
+        }
+
+        .content .card .centro .datosGuia {
+            width: 100%;
+            height: 96%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+
+        }
+
+        .content .card .centro .datosGuia .contendedorD {
+            padding-left: 2%;
+            padding-right: 2%;
+            height: 25%;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+
+        .content .card .centro .datosGuia .contendedorD span .texto {
+            padding-left: 0.5vh;
+        }
+
+        .content .card .centro .datosGuia .contendedorD span i {
+            width: 20px;
+        }
+
+        .content .card .centro .datosGuia .contendedorD .conten-origen {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            align-items: end;
+            justify-content: center;
+            height: 95%;
+        }
+
+        
+        .content .card .centro .datosGuia .contendedorD .conten-origen #dOrigen,#dDestino {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .content .card .centro .datosGuia .contendedorD .conten-origen #dDireccionOrigen,#dDireccionDestino {
+            color: #6f6f71;
+            font-size: 15px;
+        }
+
+        .content .contenBarras .contenedorCodigo img {
+            width: 90%;
+            height: 90px;
+
+        }
+
+        .content .card .inferior {
+            margin-top: 18px;
+            width: 95%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .content .card .inferior .cPrecios{
+            width: 45%;
+            border-radius: 16px;
+            background-color: #fff;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+            display: flex;
+            flex-direction: row;
+            height: 97%;
+            padding-left: 15px;
+            padding-right: 15px;
+            align-items: center;
+        }
+
+        .content .card .inferior .cPrecios i{
+            width: 40px;
+            text-align: center;
+            font-size: 4vh;
+        }
+
+        .content .card .inferior .cPrecios .contenedor-precios{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content .card .inferior .cPrecios .contenedor-precios span{
+            text-align: left;
+            width: 100%;
+            padding-left: 10%;
+        }
+    </style>
+ </head>
+ <body>
+  <div class="content">
+   <div class="card">
+    <div class="superior">
+     <div class="imagen"><img src="https://www.svgrepo.com/show/221731/package-box.svg" alt="">
+     </div>
+     <div class="datos">
+      <div id="codigoPaquete">
+       Cotización
+      </div>
+     </div>
+    </div>
+    <div class="centro">
+     <div class="datosGuia">
+      <div class="contendedorD"><span> <i class="fa-solid fa-location-dot"></i> <span class="texto">Origen</span> </span>
+       <div class="conten-origen"><span id="dOrigen">gUATEMALA,G1</span> <span id="dDireccionOrigen">Dirección origen larga</span>
+       </div>
+      </div>
+      <div class="contendedorD"><span> <i class="fa-solid fa-location-dot"></i> <span class="texto">Destino</span> </span>
+       <div class="conten-origen"><span id="dDestino">gUATEMALA,G1</span> <span id="dDireccionDestino">Dirección destino Larga 2</span>
+       </div>
+      </div>
+      <div class="contendedorD"><span> <i class="fa-sharp fa-solid fa-hashtag"></i> <span class="texto">Numero de Paquetes</span> </span> <span id="dNumeroPaquetes">12</span>
+      </div>
+      <div class="contendedorD"><span> <i class="fa-sharp fa-solid fa-box"></i> <span class="texto">Tamaño de Paquetes</span> </span> <span id="dTamano">Mediano</span>
+      </div>
+     </div>
+    </div>
+    <div class="inferior">
+     <div class="cPrecios contenedor-Estandar"><i class="fa-solid fa-truck"></i>
+      <div class="contenedor-precios"><span>Precio Estandar</span> <span id="dPrecioEst" style="color: #6f6f71;">0.0</span>
+      </div>
+     </div>
+     <div class="cPrecios contenedor-Especial"><i class="fa-solid fa-truck-fast"></i>
+      <div class="contenedor-precios"><span>Precio Especial</span> <span id="dPrecioEspe" style="color: #6f6f71;">0.0 </span>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

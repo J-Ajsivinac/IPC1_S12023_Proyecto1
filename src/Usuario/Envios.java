@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 public class Envios {
 
-    private String correo;
     private String idUsuario;
     private String nombreUsuario;
     private String codRegion;
@@ -13,10 +12,10 @@ public class Envios {
     private Factura factura;
     private Guia Guia;
 
-    public Envios(String correo,String idUsuario, String nombreUsuario, String codRegion, String codPaquete, String tipoServicio, String destinatario,
+    public Envios(String idUsuario, String nombreUsuario, String codRegion, String codPaquete, String tipoServicio, String destinatario,
             double totalEnvio, Factura factura, Guia guia) {
         super();
-        this.setCorreo(correo);
+
         this.setIdUsuario(idUsuario);
         this.setNombreUsuario(nombreUsuario);
         this.setCodRegion(codRegion);
@@ -24,14 +23,6 @@ public class Envios {
         this.setDestinatario(destinatario);
         this.setFactura(factura);
         this.setGuia(guia);
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getIdUsuario() {

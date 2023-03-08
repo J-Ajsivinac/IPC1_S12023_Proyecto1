@@ -15,6 +15,7 @@ import Usuario.Usuario;
 import Usuario.ctrlEnvios;
 import Usuario.ctrlUsuarios;
 import static Usuario.ctrlUsuarios.getUsuarioIndice;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,8 +30,10 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -53,6 +56,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     boolean realizoEnvio = false;
     private ArrayList<Tarjeta> tarj = new ArrayList<Tarjeta>();
     private Usuario user;
+    private Color desactivado = new Color(34, 37, 47);
+    private Color act = new Color(144, 135, 176);
+    private Color textact = new Color(19, 19, 26);
 
     /**
      * Creates new form UsuarioCotizacionCompra
@@ -84,7 +90,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         radioPeque.setVisible(false);
         radioContra.setVisible(false);
         radioCuenta.setVisible(false);
-
+        activarFondo1(panelPeque, lblP1, lblP2, lblP3);
+        activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
+        activarFondo3(panelRound2, lblTitulo, lblDescripcion);
     }
 
     public void test(Usuario user1) {
@@ -93,8 +101,47 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         //System.out.println("Estoy en el usuario Cotizacion");
     }
 
-    public void activarFondo1(JPanel activar) {
+    public void activarFondo1(JPanel activar, JLabel texto1, JLabel texto2, JLabel texto3) {
+        panelPeque.setBackground(desactivado);
+        panelGrande.setBackground(desactivado);
+        panelMediano.setBackground(desactivado);
+        lblP1.setForeground(Color.WHITE);
+        lblP2.setForeground(Color.WHITE);
+        lblP3.setForeground(Color.WHITE);
+        lblM1.setForeground(Color.WHITE);
+        lblM2.setForeground(Color.WHITE);
+        lblM3.setForeground(Color.WHITE);
+        lblG1.setForeground(Color.WHITE);
+        lblG2.setForeground(Color.WHITE);
+        lblG3.setForeground(Color.WHITE);
+        activar.setBackground(act);
+        texto1.setForeground(textact);
+        texto2.setForeground(textact);
+        texto3.setForeground(textact);
+    }
 
+    public void activarFondo2(JPanel activar, JLabel texto1, JRadioButton texto2) {
+        panelEspecial.setBackground(desactivado);
+        panelEstandar.setBackground(desactivado);
+        txtTotalEstandar.setForeground(Color.WHITE);
+        txtTotalEspecial.setForeground(Color.WHITE);
+        radioEstandar.setForeground(Color.WHITE);
+        radioEspecial.setForeground(Color.WHITE);
+        activar.setBackground(act);
+        texto1.setForeground(textact);
+        texto2.setForeground(textact);
+    }
+
+    public void activarFondo3(JPanel activar, JLabel texto1, JLabel texto2) {
+        panelRound3.setBackground(desactivado);
+        panelRound2.setBackground(desactivado);
+        lblTitulo.setForeground(Color.WHITE);
+        lblTitulo2.setForeground(Color.WHITE);
+        lblDescripcion.setForeground(Color.WHITE);
+        lblDesc2.setForeground(Color.WHITE);
+        activar.setBackground(act);
+        texto1.setForeground(textact);
+        texto2.setForeground(textact);
     }
 
     public void cargarCombos(JComboBox caja) {
@@ -199,6 +246,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         String codigoRegioOringe = origenDatos[0];
         DatosFacturacion facturaItem = (DatosFacturacion) boxFacturacion.getSelectedItem();
         String tPago = "";
+        if (facturaItem == null) {
+            JOptionPane.showMessageDialog(null, "No se han registrado datos de Facturación");
+            return;
+        }
+
         if (opcionPago == 1) {
             tPago = "contra entrega";
         } else if (opcionPago == 2) {
@@ -215,22 +267,31 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         }
         Usuario actual = getUsuarioIndice(login.posicionU);
+        String nombre = actual.getNombre() + " " + actual.getApellido();
+
+        if (opcionPago == 1) {
+            total1 += 5;
+            total2 += 5;
+        }
+
         if (tipoServicio == 0) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total1);
             precio = "Estandar";
 
-            if (ctrlEnvios.agregarEnvio(actual.getCorreo(), login.credenciales.getIdUsuario(), actual.getNombre(), origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+            if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 realizoEnvio = true;
-                System.out.println(guardarCotizacion.getTamanoPaquete());
+                total1 = 0;
+                total2 = 0;
             }
         } else if (tipoServicio == 1) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
             precio = "Especial";
-            if (ctrlEnvios.agregarEnvio(actual.getCorreo(), login.credenciales.getIdUsuario(), actual.getNombre(), origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+            if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 realizoEnvio = true;
-                System.out.println(guardarCotizacion.getTamanoPaquete());
+                total1 = 0;
+                total2 = 0;
             }
         }
 
@@ -265,7 +326,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 Element codigoPaquete = doc.getElementById("codigoPaquete");
                 Element NumeroFacura = doc.getElementById("fecha");
                 Element dOrigen = doc.getElementById("dOrigen");
+                Element dDireccionOrigen = doc.getElementById("dDireccionOrigen");
                 Element dDestino = doc.getElementById("dDestino");
+                Element dDireccionDestino = doc.getElementById("dDireccionDestino");
                 Element dNumeroPaquetes = doc.getElementById("dNumeroPaquetes");
                 Element dTipoPago = doc.getElementById("dTipoPago");
                 Element dSize = doc.getElementById("dSize");
@@ -275,11 +338,16 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
                 codigoPaquete.text("#" + factura.getNumFactura());
                 NumeroFacura.text(factura.getCodPaquete());
-                dOrigen.text(envios.getGuia().getOrigen());
+
+                String[] datosO = factura.getOrigen().split(",");
+
+                dOrigen.text(datosO[0] + "," + datosO[1]);
+                dDireccionOrigen.text(datosO[2]);
 
                 String[] datosD = factura.getDestino().split(",");
 
-                dDestino.text(factura.getDestino());
+                dDestino.text(datosD[0] + "," + datosD[1]);
+                dDireccionDestino.text(datosD[2]);
                 dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
                 dTipoPago.text(factura.getTipoPago());
                 dSize.text(envios.getGuia().getTamanoPaquete() + "");
@@ -333,9 +401,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 Document doc = Jsoup.parse(htmlContent);
 
                 Element codigoPaquete = doc.getElementById("codigoPaquete");
-                Element NumeroFacura = doc.getElementById("fecha");
+                Element fecha = doc.getElementById("fecha");
                 Element dOrigen = doc.getElementById("dOrigen");
+                Element dDireccionOrigen = doc.getElementById("dDireccionOrigen");
                 Element dDestino = doc.getElementById("dDestino");
+                Element dDireccionDestino = doc.getElementById("dDireccionDestino");
                 Element dNumeroPaquetes = doc.getElementById("dNumeroPaquetes");
                 Element dTipoPago = doc.getElementById("dTipoPago");
                 Element dTamano = doc.getElementById("dTamano");
@@ -346,9 +416,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 Factura factura = envios.getFactura();
 
                 codigoPaquete.text("#" + factura.getNumFactura());
-                NumeroFacura.text(factura.getCodPaquete());
-                dOrigen.text(envios.getGuia().getOrigen());
-                dDestino.text(factura.getDestino());
+                fecha.text(envios.getGuia().getFechaEnvio());
+
+                String[] datosO = factura.getOrigen().split(",");
+                dOrigen.text(datosO[0] + "," + datosO[1]);
+                dDireccionOrigen.text(datosO[2]);
+                String[] datosD = factura.getDestino().split(",");
+                dDestino.text(datosD[0] + "," + datosD[1]);
+                dDireccionDestino.text(datosD[2]);
                 dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
                 dTipoPago.text(factura.getTipoPago());
                 dTamano.text(envios.getGuia().getTamanoPaquete() + "");
@@ -407,10 +482,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtNumeroPaquetes = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         panelPeque = new Elementos.PanelRound();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblP1 = new javax.swing.JLabel();
+        lblP3 = new javax.swing.JLabel();
         radioPeque = new javax.swing.JRadioButton();
-        jLabel18 = new javax.swing.JLabel();
+        lblP2 = new javax.swing.JLabel();
         panelEstandar = new Elementos.PanelRound();
         radioEstandar = new javax.swing.JRadioButton();
         txtTotalEstandar = new javax.swing.JLabel();
@@ -418,15 +493,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         radioEspecial = new javax.swing.JRadioButton();
         txtTotalEspecial = new javax.swing.JLabel();
         panelMediano = new Elementos.PanelRound();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lblM1 = new javax.swing.JLabel();
+        lblM3 = new javax.swing.JLabel();
         radioMediano = new javax.swing.JRadioButton();
-        jLabel24 = new javax.swing.JLabel();
+        lblM2 = new javax.swing.JLabel();
         panelGrande = new Elementos.PanelRound();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lblG1 = new javax.swing.JLabel();
+        lblG2 = new javax.swing.JLabel();
         RadioGrande = new javax.swing.JRadioButton();
-        jLabel25 = new javax.swing.JLabel();
+        lblG3 = new javax.swing.JLabel();
         btnCotizar = new Elementos.ButtonRound();
         jLabel7 = new javax.swing.JLabel();
         btnGuardarCotizacion = new Elementos.ButtonRound();
@@ -444,12 +519,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         panelRound2 = new Elementos.PanelRound();
         radioContra = new javax.swing.JRadioButton();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblDescripcion = new javax.swing.JLabel();
         panelRound3 = new Elementos.PanelRound();
         radioCuenta = new javax.swing.JRadioButton();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lblTitulo2 = new javax.swing.JLabel();
+        lblDesc2 = new javax.swing.JLabel();
         btnrRealizar = new Elementos.ButtonRound();
         btnFactura = new Elementos.ButtonRound();
         panelRound12 = new Elementos.PanelRound();
@@ -488,6 +563,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         boxDepartamentos.setBackground(new java.awt.Color(40, 41, 52));
         boxDepartamentos.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentos.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentos.setBorder(null);
         boxDepartamentos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -502,10 +578,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         boxMunicipios.setBackground(new java.awt.Color(40, 41, 52));
         boxMunicipios.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxMunicipios.setForeground(new java.awt.Color(255, 255, 255));
         boxMunicipios.setBorder(null);
 
         txtDireccionOrigen.setBackground(new java.awt.Color(40, 41, 52));
         txtDireccionOrigen.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtDireccionOrigen.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccionOrigen.setBorder(null);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
@@ -544,6 +622,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         boxDepartamentosD.setBackground(new java.awt.Color(40, 41, 52));
         boxDepartamentosD.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentosD.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosD.setBorder(null);
         boxDepartamentosD.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -553,10 +632,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         boxMunicipiosD.setBackground(new java.awt.Color(40, 41, 52));
         boxMunicipiosD.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxMunicipiosD.setForeground(new java.awt.Color(255, 255, 255));
         boxMunicipiosD.setBorder(null);
 
         txtDireccionDestino.setBackground(new java.awt.Color(40, 41, 52));
         txtDireccionDestino.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtDireccionDestino.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccionDestino.setBorder(null);
 
         javax.swing.GroupLayout panelRound11Layout = new javax.swing.GroupLayout(panelRound11);
@@ -620,12 +701,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jLabel5.setText("Numero de Paquetes");
 
         txtNumeroPaquetes.setBackground(new java.awt.Color(40, 41, 52));
+        txtNumeroPaquetes.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Tamaño de paquetes");
 
-        panelPeque.setBackground(new java.awt.Color(216, 219, 255));
+        panelPeque.setBackground(new java.awt.Color(144, 135, 176));
         panelPeque.setRoundBottomLeft(15);
         panelPeque.setRoundBottomRight(15);
         panelPeque.setRoundTopLeft(15);
@@ -637,18 +719,20 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelPeque.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(19, 19, 26));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Pequeño");
-        panelPeque.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
+        lblP1.setBackground(new java.awt.Color(40, 41, 52));
+        lblP1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblP1.setForeground(new java.awt.Color(255, 255, 255));
+        lblP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblP1.setText("Pequeño");
+        panelPeque.add(lblP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
 
-        jLabel9.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(19, 19, 26));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("* 1.4");
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelPeque.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
+        lblP3.setBackground(new java.awt.Color(40, 41, 52));
+        lblP3.setFont(new java.awt.Font("Montserrat", 3, 13)); // NOI18N
+        lblP3.setForeground(new java.awt.Color(255, 255, 255));
+        lblP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblP3.setText("* 1.4");
+        lblP3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelPeque.add(lblP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
 
         radioPeque.setSelected(true);
         radioPeque.setOpaque(false);
@@ -659,14 +743,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelPeque.add(radioPeque, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel18.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(19, 19, 26));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("1lb - 10lb");
-        jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelPeque.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
+        lblP2.setBackground(new java.awt.Color(40, 41, 52));
+        lblP2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblP2.setForeground(new java.awt.Color(255, 255, 255));
+        lblP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblP2.setText("1lb - 10lb");
+        lblP2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelPeque.add(lblP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
 
-        panelEstandar.setBackground(new java.awt.Color(166, 156, 202));
+        panelEstandar.setBackground(new java.awt.Color(144, 135, 176));
         panelEstandar.setRoundBottomLeft(10);
         panelEstandar.setRoundBottomRight(10);
         panelEstandar.setRoundTopLeft(10);
@@ -679,13 +764,18 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         radioEstandar.setBackground(new java.awt.Color(67, 63, 71));
         radioEstandar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        radioEstandar.setForeground(new java.awt.Color(19, 19, 26));
+        radioEstandar.setForeground(new java.awt.Color(255, 255, 255));
         radioEstandar.setSelected(true);
         radioEstandar.setText("Servicio Estandar");
         radioEstandar.setOpaque(false);
+        radioEstandar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                radioEstandarMouseClicked(evt);
+            }
+        });
 
         txtTotalEstandar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        txtTotalEstandar.setForeground(new java.awt.Color(19, 19, 26));
+        txtTotalEstandar.setForeground(new java.awt.Color(255, 255, 255));
         txtTotalEstandar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtTotalEstandar.setText("Total 00.00");
 
@@ -725,6 +815,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         radioEspecial.setForeground(new java.awt.Color(255, 255, 255));
         radioEspecial.setText("Servicio Especial");
         radioEspecial.setOpaque(false);
+        radioEspecial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                radioEspecialMouseClicked(evt);
+            }
+        });
 
         txtTotalEspecial.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         txtTotalEspecial.setForeground(new java.awt.Color(255, 255, 255));
@@ -764,17 +859,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelMediano.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Mediano");
-        panelMediano.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
+        lblM1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblM1.setForeground(new java.awt.Color(255, 255, 255));
+        lblM1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblM1.setText("Mediano");
+        panelMediano.add(lblM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
 
-        jLabel14.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("* 1.7");
-        panelMediano.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
+        lblM3.setFont(new java.awt.Font("Montserrat", 3, 13)); // NOI18N
+        lblM3.setForeground(new java.awt.Color(255, 255, 255));
+        lblM3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblM3.setText("* 1.7");
+        panelMediano.add(lblM3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
 
         radioMediano.setOpaque(false);
         radioMediano.addItemListener(new java.awt.event.ItemListener() {
@@ -784,11 +879,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelMediano.add(radioMediano, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel24.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("1lb - 10lb");
-        panelMediano.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
+        lblM2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblM2.setForeground(new java.awt.Color(255, 255, 255));
+        lblM2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblM2.setText("1lb - 10lb");
+        panelMediano.add(lblM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
 
         panelGrande.setBackground(new java.awt.Color(34, 37, 47));
         panelGrande.setRoundBottomLeft(15);
@@ -802,17 +897,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelGrande.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Grande");
-        panelGrande.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
+        lblG1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblG1.setForeground(new java.awt.Color(255, 255, 255));
+        lblG1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblG1.setText("Grande");
+        panelGrande.add(lblG1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
 
-        jLabel16.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("1lb - 10lb");
-        panelGrande.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
+        lblG2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblG2.setForeground(new java.awt.Color(255, 255, 255));
+        lblG2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblG2.setText("1lb - 10lb");
+        panelGrande.add(lblG2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
 
         RadioGrande.setOpaque(false);
         RadioGrande.addItemListener(new java.awt.event.ItemListener() {
@@ -822,13 +917,21 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelGrande.add(RadioGrande, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel25.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("* 2");
-        panelGrande.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
+        lblG3.setFont(new java.awt.Font("Montserrat", 3, 13)); // NOI18N
+        lblG3.setForeground(new java.awt.Color(255, 255, 255));
+        lblG3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblG3.setText("* 2");
+        panelGrande.add(lblG3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
 
+        btnCotizar.setBorder(null);
+        btnCotizar.setForeground(new java.awt.Color(255, 255, 255));
         btnCotizar.setText("Cotizar");
+        btnCotizar.setBorderColor(new java.awt.Color(123, 127, 239));
+        btnCotizar.setColor(new java.awt.Color(123, 127, 239));
+        btnCotizar.setColorClick(new java.awt.Color(121, 118, 236));
+        btnCotizar.setColorOver(new java.awt.Color(121, 147, 251));
+        btnCotizar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        btnCotizar.setRadius(15);
         btnCotizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCotizarActionPerformed(evt);
@@ -839,7 +942,16 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("jLabel7");
 
-        btnGuardarCotizacion.setText("Guardar Cotización");
+        btnGuardarCotizacion.setBackground(new java.awt.Color(218, 211, 254));
+        btnGuardarCotizacion.setBorder(null);
+        btnGuardarCotizacion.setForeground(new java.awt.Color(96, 77, 182));
+        btnGuardarCotizacion.setText("Descargar Cotización");
+        btnGuardarCotizacion.setBorderColor(new java.awt.Color(218, 211, 254));
+        btnGuardarCotizacion.setColor(new java.awt.Color(218, 211, 254));
+        btnGuardarCotizacion.setColorClick(new java.awt.Color(182, 170, 246));
+        btnGuardarCotizacion.setColorOver(new java.awt.Color(201, 190, 255));
+        btnGuardarCotizacion.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        btnGuardarCotizacion.setRadius(15);
         btnGuardarCotizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarCotizacionActionPerformed(evt);
@@ -869,15 +981,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                                 .addGap(102, 102, 102)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(panelPeque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(37, 37, 37)
                                         .addComponent(panelMediano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(31, 31, 31)
-                                        .addComponent(panelGrande, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(panelGrande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnCotizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(249, 249, 249)
                                 .addComponent(jLabel6))))
@@ -893,7 +1003,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -907,14 +1017,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                     .addComponent(panelMediano, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelGrande, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(panelEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
@@ -930,7 +1040,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -940,6 +1050,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelRound5.setRoundTopLeft(15);
         panelRound5.setRoundTopRight(15);
 
+        panel2.setBackground(new java.awt.Color(34, 34, 43));
         panel2.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
@@ -953,6 +1064,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelRound9.setRoundTopRight(15);
 
         boxTarjetas.setBackground(new java.awt.Color(40, 41, 52));
+        boxTarjetas.setForeground(new java.awt.Color(255, 255, 255));
         boxTarjetas.setEnabled(false);
         boxTarjetas.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1005,17 +1117,26 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         areaDetalles.setBackground(new java.awt.Color(40, 41, 52));
         areaDetalles.setColumns(20);
         areaDetalles.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        areaDetalles.setForeground(new java.awt.Color(255, 255, 255));
         areaDetalles.setRows(5);
         jScrollPane1.setViewportView(areaDetalles);
 
+        btnDGuia.setBorder(null);
+        btnDGuia.setForeground(new java.awt.Color(51, 141, 79));
         btnDGuia.setText("Descargar Guía");
+        btnDGuia.setBorderColor(new java.awt.Color(193, 231, 206));
+        btnDGuia.setColor(new java.awt.Color(193, 231, 206));
+        btnDGuia.setColorClick(new java.awt.Color(131, 218, 160));
+        btnDGuia.setColorOver(new java.awt.Color(176, 220, 192));
+        btnDGuia.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        btnDGuia.setRadius(15);
         btnDGuia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDGuiaActionPerformed(evt);
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Tipo de Pago");
 
@@ -1037,13 +1158,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(19, 19, 26));
-        jLabel19.setText("Cobro contra entrega");
+        lblTitulo.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(19, 19, 26));
+        lblTitulo.setText("Cobro contra entrega");
 
-        jLabel20.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(19, 19, 26));
-        jLabel20.setText("cobro adicional de Q5.00");
+        lblDescripcion.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblDescripcion.setForeground(new java.awt.Color(19, 19, 26));
+        lblDescripcion.setText("cobro adicional de Q5.00");
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -1052,8 +1173,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20))
+                    .addComponent(lblTitulo)
+                    .addComponent(lblDescripcion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(radioContra)
                 .addContainerGap())
@@ -1065,9 +1186,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(radioContra)
                     .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
+                        .addComponent(lblTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel20)))
+                        .addComponent(lblDescripcion)))
                 .addGap(12, 12, 12))
         );
 
@@ -1088,13 +1209,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
-        jLabel21.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("Cobro a mi Cuenta");
+        lblTitulo2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblTitulo2.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo2.setText("Cobro a mi Cuenta");
 
-        jLabel22.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Pago con Tarjeta de credito/Debito");
+        lblDesc2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblDesc2.setForeground(new java.awt.Color(255, 255, 255));
+        lblDesc2.setText("Pago con Tarjeta de credito/Debito");
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -1104,10 +1225,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
+                        .addComponent(lblDesc2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
+                        .addComponent(lblTitulo2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(radioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17))))
@@ -1118,22 +1239,38 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
-                        .addComponent(jLabel21))
+                        .addGap(0, 7, Short.MAX_VALUE)
+                        .addComponent(lblTitulo2))
                     .addComponent(radioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel22)
+                .addComponent(lblDesc2)
                 .addGap(12, 12, 12))
         );
 
+        btnrRealizar.setBorder(null);
+        btnrRealizar.setForeground(new java.awt.Color(255, 255, 255));
         btnrRealizar.setText("Relizar Pago y Enviar");
+        btnrRealizar.setBorderColor(new java.awt.Color(123, 127, 239));
+        btnrRealizar.setColor(new java.awt.Color(123, 127, 239));
+        btnrRealizar.setColorClick(new java.awt.Color(121, 118, 236));
+        btnrRealizar.setColorOver(new java.awt.Color(121, 147, 251));
+        btnrRealizar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        btnrRealizar.setRadius(15);
         btnrRealizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnrRealizarActionPerformed(evt);
             }
         });
 
+        btnFactura.setBorder(null);
+        btnFactura.setForeground(new java.awt.Color(38, 102, 222));
         btnFactura.setText("Descargar Factura");
+        btnFactura.setBorderColor(new java.awt.Color(182, 231, 255));
+        btnFactura.setColor(new java.awt.Color(182, 231, 255));
+        btnFactura.setColorClick(new java.awt.Color(142, 211, 246));
+        btnFactura.setColorOver(new java.awt.Color(169, 216, 238));
+        btnFactura.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        btnFactura.setRadius(15);
         btnFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFacturaActionPerformed(evt);
@@ -1160,6 +1297,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtNombreFacturacion.setText("jLabel7");
 
         boxFacturacion.setBackground(new java.awt.Color(40, 41, 52));
+        boxFacturacion.setForeground(new java.awt.Color(255, 255, 255));
         boxFacturacion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 boxFacturacionItemStateChanged(evt);
@@ -1237,10 +1375,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1277,9 +1415,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
@@ -1287,9 +1425,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         scroll.setViewportView(jPanel21);
@@ -1320,6 +1458,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelGrandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelGrandeMouseClicked
         // TODO add your handling code here:
+        activarFondo1(panelGrande, lblG1, lblG2, lblG3);
         RadioGrande.setSelected(true);
         sizePaquete = "Grande";
     }//GEN-LAST:event_panelGrandeMouseClicked
@@ -1330,6 +1469,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelMedianoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMedianoMouseClicked
         // TODO add your handling code here:
+        activarFondo1(panelMediano, lblM1, lblM2, lblM3);
         radioMediano.setSelected(true);
         sizePaquete = "Mediano";
     }//GEN-LAST:event_panelMedianoMouseClicked
@@ -1340,18 +1480,21 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelEspecialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEspecialMouseClicked
         // TODO add your handling code here:
+        activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
         radioEspecial.setSelected(true);
         tipoServicio = 1;
     }//GEN-LAST:event_panelEspecialMouseClicked
 
     private void panelEstandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstandarMouseClicked
         // TODO add your handling code here:
+        activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
         radioEstandar.setSelected(true);
         tipoServicio = 0;
     }//GEN-LAST:event_panelEstandarMouseClicked
 
     private void panelPequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPequeMouseClicked
         // TODO add your handling code here:
+        activarFondo1(panelPeque, lblP1, lblP2, lblP3);
         radioPeque.setSelected(true);
         sizePaquete = "Pequeño";
     }//GEN-LAST:event_panelPequeMouseClicked
@@ -1394,8 +1537,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void radioContraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioContraItemStateChanged
         // TODO add your handling code here:
-        total1 += 5;
-        total2 += 5;
         opcionPago = 1;
     }//GEN-LAST:event_radioContraItemStateChanged
 
@@ -1417,12 +1558,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelRound3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound3MouseClicked
         // TODO add your handling code here:
+        activarFondo3(panelRound3, lblTitulo2, lblDesc2);
         radioCuenta.setSelected(true);
         boxTarjetas.setEnabled(true);
     }//GEN-LAST:event_panelRound3MouseClicked
 
     private void panelRound2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MouseClicked
         // TODO add your handling code here:
+        activarFondo3(panelRound2, lblTitulo, lblDescripcion);
         radioContra.setSelected(true);
         boxTarjetas.setEnabled(false);
     }//GEN-LAST:event_panelRound2MouseClicked
@@ -1463,14 +1606,24 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             } catch (IOException ex) {
                 Logger.getLogger(UsuarioCotizacionCompra.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Element dCorta = doc.getElementById("dOrigen");
-            Element dLarga = doc.getElementById("dDireccionOrigen");
+
             Element numPaq = doc.getElementById("dNumeroPaquetes");
             Element tamPaq = doc.getElementById("dTamano");
             Element precioEst = doc.getElementById("dPrecioEst");
             Element precioEspe = doc.getElementById("dPrecioEspe");
-            dCorta.text(guardarCotizacion.getOrigen());
-            dLarga.text("Aqui va la direccion no lo tengo regis");
+            
+            Element dOrigen = doc.getElementById("dOrigen");
+            Element dDireccionOrigen = doc.getElementById("dDireccionOrigen");
+            Element dDestino = doc.getElementById("dDestino");
+            Element dDireccionDestino = doc.getElementById("dDireccionDestino");
+            
+            String[] datosO = guardarCotizacion.getOrigen().split(",");
+            dOrigen.text(datosO[0] + "," + datosO[1]);
+            dDireccionOrigen.text(datosO[2]);
+            String[] datosD = guardarCotizacion.getDestino().split(",");
+            dDestino.text(datosD[0] + "," + datosD[1]);
+            dDireccionDestino.text(datosD[2]);
+
             numPaq.text(guardarCotizacion.getNumeropaquetes() + "");
             tamPaq.text(guardarCotizacion.getTamanoPaquete());
             precioEst.text(total1 + "");
@@ -1499,6 +1652,16 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDGuiaActionPerformed
 
+    private void radioEstandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioEstandarMouseClicked
+        // TODO add your handling code here:
+        activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
+    }//GEN-LAST:event_radioEstandarMouseClicked
+
+    private void radioEspecialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioEspecialMouseClicked
+        // TODO add your handling code here:
+        activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
+    }//GEN-LAST:event_radioEspecialMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton RadioGrande;
@@ -1515,34 +1678,34 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private Elementos.ButtonRound btnGuardarCotizacion;
     private Elementos.ButtonRound btnrRealizar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDesc2;
+    private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblG1;
+    private javax.swing.JLabel lblG2;
+    private javax.swing.JLabel lblG3;
+    private javax.swing.JLabel lblM1;
+    private javax.swing.JLabel lblM2;
+    private javax.swing.JLabel lblM3;
+    private javax.swing.JLabel lblP1;
+    private javax.swing.JLabel lblP2;
+    private javax.swing.JLabel lblP3;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo2;
     private javax.swing.JPanel panel2;
     private Elementos.PanelRound panelEspecial;
     private Elementos.PanelRound panelEstandar;

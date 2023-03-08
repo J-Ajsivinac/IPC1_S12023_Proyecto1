@@ -477,7 +477,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         menuClick(adRUsuario);
         bordeMenu(panelRUsuario,txtPorUsuario);
-        adRUsuario.ordenarRegiones();
+        adRUsuario.ordenarUsuarios();
     }//GEN-LAST:event_panelRUsuarioMouseClicked
 
     private void panelRIngresosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRIngresosMouseClicked

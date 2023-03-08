@@ -5,6 +5,7 @@ import Elementos.CutomTable.TableActionCellEditor;
 import Elementos.CutomTable.TableActionCellRender;
 import Elementos.CutomTable.TableActionEvent;
 import Elementos.ScrollBarCustom;
+import Interfaz.login;
 import Usuario.Envios;
 import Usuario.Factura;
 import Usuario.Usuario;
@@ -43,7 +44,8 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
     public UsuarioVerEnvios() {
         initComponents();
         this.setBounds(0, 0, 724, 520);
-
+        table1.fixTable(jScrollPane2);
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
         modelo = (DefaultTableModel) table1.getModel();
         //cargarDatos();
         TableActionEvent event = new TableActionEvent() {
@@ -236,7 +238,8 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
     public void cargarDatos() {
         modelo.setRowCount(0);
         if (user != null) {
-            ArrayList<Envios> envios = ctrlEnvios.verEnvios(user.getCorreo());
+            
+            ArrayList<Envios> envios = ctrlEnvios.verEnvios(login.credenciales.getIdUsuario());
             for (Envios envio : envios) {
                 Object datos[] = new Object[5];
                 datos[0] = envio.getGuia().getCodPaquete();
@@ -297,6 +300,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         });
         table1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         table1.setRowHeight(92);
+        table1.setSelectionBackground(new java.awt.Color(98, 101, 128));
         jScrollPane2.setViewportView(table1);
         if (table1.getColumnModel().getColumnCount() > 0) {
             table1.getColumnModel().getColumn(0).setPreferredWidth(50);

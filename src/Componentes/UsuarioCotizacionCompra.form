@@ -61,9 +61,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="panelRound4" max="32767" attributes="0"/>
-                          <Component id="panelRound5" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="panelRound4" min="-2" max="-2" attributes="0"/>
+                          <Component id="panelRound5" alignment="0" min="-2" pref="672" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -74,9 +74,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelRound4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
                       <Component id="panelRound5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -107,7 +107,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel1" min="-2" pref="602" max="-2" attributes="0"/>
+                          <Component id="jPanel1" min="-2" pref="651" max="-2" attributes="0"/>
                           <EmptySpace pref="18" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -146,17 +146,14 @@
                                               <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <Component id="btnCotizar" min="-2" pref="189" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                                      <Component id="btnGuardarCotizacion" min="-2" pref="209" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
                                                       <Component id="panelPeque" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                                       <Component id="panelMediano" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                                      <Component id="panelGrande" max="32767" attributes="0"/>
+                                                      <Component id="panelGrande" min="-2" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Component id="btnCotizar" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="btnGuardarCotizacion" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -181,7 +178,7 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="21" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -197,15 +194,14 @@
                                   <Component id="panelGrande" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btnCotizar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Component id="btnGuardarCotizacion" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnCotizar" min="-2" pref="32" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnGuardarCotizacion" min="-2" pref="32" max="-2" attributes="0"/>
+                              <EmptySpace pref="17" max="32767" attributes="0"/>
                               <Component id="panelEstandar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="panelEspecial" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -311,6 +307,9 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Montserrat" size="12" style="0"/>
                                 </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="0"/>
                                 </Property>
@@ -334,6 +333,9 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Montserrat" size="12" style="0"/>
                                 </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="0"/>
                                 </Property>
@@ -352,6 +354,9 @@
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Montserrat" size="12" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                 </Property>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="null"/>
@@ -419,6 +424,9 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Montserrat" size="12" style="0"/>
                                 </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="0"/>
                                 </Property>
@@ -441,6 +449,9 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Montserrat" size="12" style="0"/>
                                 </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="0"/>
                                 </Property>
@@ -459,6 +470,9 @@
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Montserrat" size="12" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                 </Property>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="null"/>
@@ -496,6 +510,9 @@
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="34" green="29" red="28" type="rgb"/>
                         </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -512,7 +529,7 @@
                     <Container class="Elementos.PanelRound" name="panelPeque">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="db" red="d8" type="rgb"/>
+                          <Color blue="b0" green="87" red="90" type="rgb"/>
                         </Property>
                         <Property name="roundBottomLeft" type="int" value="15"/>
                         <Property name="roundBottomRight" type="int" value="15"/>
@@ -527,13 +544,16 @@
                         <Property name="useNullLayout" type="boolean" value="false"/>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabel8">
+                        <Component class="javax.swing.JLabel" name="lblP1">
                           <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="34" green="29" red="28" type="rgb"/>
+                            </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="1"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="1a" green="13" red="13" type="rgb"/>
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="Peque&#xf1;o"/>
@@ -544,13 +564,16 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel9">
+                        <Component class="javax.swing.JLabel" name="lblP3">
                           <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="34" green="29" red="28" type="rgb"/>
+                            </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Montserrat" size="13" style="0"/>
+                              <Font name="Montserrat" size="13" style="3"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="1a" green="13" red="13" type="rgb"/>
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="* 1.4"/>
@@ -576,13 +599,16 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel18">
+                        <Component class="javax.swing.JLabel" name="lblP2">
                           <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="34" green="29" red="28" type="rgb"/>
+                            </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="0"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="1a" green="13" red="13" type="rgb"/>
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="1lb - 10lb"/>
@@ -599,7 +625,7 @@
                     <Container class="Elementos.PanelRound" name="panelEstandar">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ca" green="9c" red="a6" type="rgb"/>
+                          <Color blue="b0" green="87" red="90" type="rgb"/>
                         </Property>
                         <Property name="roundBottomLeft" type="int" value="10"/>
                         <Property name="roundBottomRight" type="int" value="10"/>
@@ -645,12 +671,15 @@
                               <Font name="Montserrat" size="13" style="1"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="1a" green="13" red="13" type="rgb"/>
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Servicio Estandar"/>
                             <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="radioEstandarMouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="txtTotalEstandar">
                           <Properties>
@@ -658,7 +687,7 @@
                               <Font name="Montserrat" size="13" style="1"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="1a" green="13" red="13" type="rgb"/>
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="4"/>
                             <Property name="text" type="java.lang.String" value="Total 00.00"/>
@@ -717,6 +746,9 @@
                             <Property name="text" type="java.lang.String" value="Servicio Especial"/>
                             <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="radioEspecialMouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="txtTotalEspecial">
                           <Properties>
@@ -750,7 +782,7 @@
                         <Property name="useNullLayout" type="boolean" value="false"/>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabel10">
+                        <Component class="javax.swing.JLabel" name="lblM1">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="1"/>
@@ -767,10 +799,10 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel14">
+                        <Component class="javax.swing.JLabel" name="lblM3">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Montserrat" size="13" style="0"/>
+                              <Font name="Montserrat" size="13" style="3"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -797,7 +829,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel24">
+                        <Component class="javax.swing.JLabel" name="lblM2">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="0"/>
@@ -834,7 +866,7 @@
                         <Property name="useNullLayout" type="boolean" value="false"/>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabel15">
+                        <Component class="javax.swing.JLabel" name="lblG1">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="1"/>
@@ -851,7 +883,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel16">
+                        <Component class="javax.swing.JLabel" name="lblG2">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="0"/>
@@ -881,10 +913,10 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel25">
+                        <Component class="javax.swing.JLabel" name="lblG3">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Montserrat" size="13" style="0"/>
+                              <Font name="Montserrat" size="13" style="3"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -902,7 +934,29 @@
                     </Container>
                     <Component class="Elementos.ButtonRound" name="btnCotizar">
                       <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Cotizar"/>
+                        <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ef" green="7f" red="7b" type="rgb"/>
+                        </Property>
+                        <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ef" green="7f" red="7b" type="rgb"/>
+                        </Property>
+                        <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ec" green="76" red="79" type="rgb"/>
+                        </Property>
+                        <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="fb" green="93" red="79" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Montserrat" size="13" style="1"/>
+                        </Property>
+                        <Property name="radius" type="int" value="15"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCotizarActionPerformed"/>
@@ -921,7 +975,32 @@
                     </Component>
                     <Component class="Elementos.ButtonRound" name="btnGuardarCotizacion">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Guardar Cotizaci&#xf3;n"/>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="fe" green="d3" red="da" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="b6" green="4d" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Descargar Cotizaci&#xf3;n"/>
+                        <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="fe" green="d3" red="da" type="rgb"/>
+                        </Property>
+                        <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="fe" green="d3" red="da" type="rgb"/>
+                        </Property>
+                        <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="f6" green="aa" red="b6" type="rgb"/>
+                        </Property>
+                        <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="be" red="c9" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Montserrat" size="13" style="1"/>
+                        </Property>
+                        <Property name="radius" type="int" value="15"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarCotizacionActionPerformed"/>
@@ -964,6 +1043,9 @@
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="panel2">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="2b" green="22" red="22" type="rgb"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
 
@@ -1015,11 +1097,11 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="panelRound3" max="32767" attributes="0"/>
                                   <Component id="panelRound2" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Component id="panelRound9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="panelRound12" min="-2" max="-2" attributes="0"/>
@@ -1101,6 +1183,9 @@
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="34" green="29" red="28" type="rgb"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="0"/>
                             </Property>
@@ -1165,6 +1250,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="0"/>
                             </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
                             <Property name="rows" type="int" value="5"/>
                           </Properties>
                         </Component>
@@ -1172,7 +1260,29 @@
                     </Container>
                     <Component class="Elementos.ButtonRound" name="btnDGuia">
                       <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="4f" green="8d" red="33" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Descargar Gu&#xed;a"/>
+                        <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ce" green="e7" red="c1" type="rgb"/>
+                        </Property>
+                        <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ce" green="e7" red="c1" type="rgb"/>
+                        </Property>
+                        <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="a0" green="da" red="83" type="rgb"/>
+                        </Property>
+                        <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="c0" green="dc" red="b0" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Montserrat" size="13" style="1"/>
+                        </Property>
+                        <Property name="radius" type="int" value="15"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDGuiaActionPerformed"/>
@@ -1181,7 +1291,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel17">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Montserrat" size="12" style="0"/>
+                          <Font name="Montserrat" size="13" style="0"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1209,8 +1319,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblDescripcion" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="95" max="32767" attributes="0"/>
                                   <Component id="radioContra" min="-2" max="-2" attributes="0"/>
@@ -1225,9 +1335,9 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="radioContra" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDescripcion" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -1244,10 +1354,10 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="radioContraItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel19">
+                        <Component class="javax.swing.JLabel" name="lblTitulo">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Montserrat" size="12" style="1"/>
+                              <Font name="Montserrat" size="13" style="1"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="1a" green="13" red="13" type="rgb"/>
@@ -1255,7 +1365,7 @@
                             <Property name="text" type="java.lang.String" value="Cobro contra entrega"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel20">
+                        <Component class="javax.swing.JLabel" name="lblDescripcion">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="0"/>
@@ -1289,11 +1399,11 @@
                                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDesc2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblTitulo2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="radioCuenta" min="-2" pref="19" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -1308,13 +1418,13 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
-                                          <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+                                          <Component id="lblTitulo2" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="radioCuenta" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDesc2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1326,10 +1436,10 @@
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="radioCuentaItemStateChanged"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel21">
+                        <Component class="javax.swing.JLabel" name="lblTitulo2">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Montserrat" size="12" style="1"/>
+                              <Font name="Montserrat" size="13" style="1"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1337,7 +1447,7 @@
                             <Property name="text" type="java.lang.String" value="Cobro a mi Cuenta"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel22">
+                        <Component class="javax.swing.JLabel" name="lblDesc2">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Montserrat" size="13" style="0"/>
@@ -1352,7 +1462,29 @@
                     </Container>
                     <Component class="Elementos.ButtonRound" name="btnrRealizar">
                       <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Relizar Pago y Enviar"/>
+                        <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ef" green="7f" red="7b" type="rgb"/>
+                        </Property>
+                        <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ef" green="7f" red="7b" type="rgb"/>
+                        </Property>
+                        <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ec" green="76" red="79" type="rgb"/>
+                        </Property>
+                        <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="fb" green="93" red="79" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Montserrat" size="13" style="1"/>
+                        </Property>
+                        <Property name="radius" type="int" value="15"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnrRealizarActionPerformed"/>
@@ -1360,7 +1492,29 @@
                     </Component>
                     <Component class="Elementos.ButtonRound" name="btnFactura">
                       <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="de" green="66" red="26" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Descargar Factura"/>
+                        <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="e7" red="b6" type="rgb"/>
+                        </Property>
+                        <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="e7" red="b6" type="rgb"/>
+                        </Property>
+                        <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="f6" green="d3" red="8e" type="rgb"/>
+                        </Property>
+                        <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ee" green="d8" red="a9" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Montserrat" size="13" style="1"/>
+                        </Property>
+                        <Property name="radius" type="int" value="15"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFacturaActionPerformed"/>
@@ -1456,6 +1610,9 @@
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="34" green="29" red="28" type="rgb"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="0"/>

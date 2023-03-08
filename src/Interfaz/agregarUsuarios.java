@@ -113,6 +113,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         txtNombre.setText("");
         txtTelefono.setText("");
         txtValidar.setText("");
+        ruta="";
     }
 
     /**
