@@ -5,6 +5,7 @@ import Administrador.Municipios;
 import Administrador.ctrlDepartamentos;
 import Administrador.ctrlRegiones;
 import Elementos.ScrollBarCustom;
+import Interfaz.login;
 import Usuario.DatosFacturacion;
 import Usuario.Envios;
 import Usuario.Factura;
@@ -13,6 +14,7 @@ import Usuario.Tarjeta;
 import Usuario.Usuario;
 import Usuario.ctrlEnvios;
 import Usuario.ctrlUsuarios;
+import static Usuario.ctrlUsuarios.getUsuarioIndice;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -90,11 +92,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         //System.out.println("Estoy en el usuario Cotizacion");
     }
-    
-    public void activarFondo1(JPanel activar){
-        
+
+    public void activarFondo1(JPanel activar) {
+
     }
-    
 
     public void cargarCombos(JComboBox caja) {
         caja.addItem(new Departamentos("", "", 0.0, 0.0, "", "Departamentos"));
@@ -213,12 +214,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 }
             }
         }
-        
+        Usuario actual = getUsuarioIndice(login.posicionU);
         if (tipoServicio == 0) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total1);
             precio = "Estandar";
 
-            if (ctrlEnvios.agregarEnvio(user.getCorreo(), origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+            if (ctrlEnvios.agregarEnvio(actual.getCorreo(), login.credenciales.getIdUsuario(), actual.getNombre(), origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 realizoEnvio = true;
                 System.out.println(guardarCotizacion.getTamanoPaquete());
@@ -226,7 +227,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         } else if (tipoServicio == 1) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
             precio = "Especial";
-            if (ctrlEnvios.agregarEnvio(user.getCorreo(), origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+            if (ctrlEnvios.agregarEnvio(actual.getCorreo(), login.credenciales.getIdUsuario(), actual.getNombre(), origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 realizoEnvio = true;
                 System.out.println(guardarCotizacion.getTamanoPaquete());
@@ -1417,7 +1418,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private void panelRound3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound3MouseClicked
         // TODO add your handling code here:
         radioCuenta.setSelected(true);
-
         boxTarjetas.setEnabled(true);
     }//GEN-LAST:event_panelRound3MouseClicked
 
