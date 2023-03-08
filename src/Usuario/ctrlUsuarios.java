@@ -1,5 +1,7 @@
 package Usuario;
 
+import static Administrador.ctrlDepartamentos.generarCodigos;
+import static Administrador.ctrlDepartamentos.verificarCodigoDepa;
 import Interfaz.agregarUsuarios;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -8,8 +10,7 @@ import javax.swing.JOptionPane;
 
 public class ctrlUsuarios {
 
-    public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    public static int contadorUsuarios = 0;
+    private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
     public static boolean verifiarUsuarios(String correo) {
         for (int i = 0; i < usuarios.size(); i++) {
@@ -21,14 +22,30 @@ public class ctrlUsuarios {
         return false;
     }
 
+    public static boolean verificarID(String codigo) {
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario d = usuarios.get(i);
+            if (d.getIdUsuario().equals(codigo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean nuevoUsuario(String correo, String nombre, String apellido, String contrasena, String dpi,
             String fnacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String foto) {
         if (!ctrlUsuarios.verifiarUsuarios(correo)) {
             if (verificarPassword(contrasena)) {
-                usuarios.add(new Usuario(contadorUsuarios, correo, nombre, apellido, contrasena, dpi, fnacimiento,
+                String codUsuario = "";
+                while (true) {
+                    codUsuario = generarCodigos("U");
+                    if (!verificarID(codUsuario)) {
+                        break;
+                    }
+                }
+                usuarios.add(new Usuario(codUsuario, correo, nombre, apellido, contrasena, dpi, fnacimiento,
                         genero, nacionalidad, alias, telefono, rol, foto, 0));
-                contadorUsuarios++;
-                System.out.println("password: " + contrasena + "usuario_" + correo);
+                System.out.println("password: " + contrasena + "usuario_" + correo + "id_ " + codUsuario);
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "La contraseña no cumple con los requisitos", "Error",
@@ -53,19 +70,6 @@ public class ctrlUsuarios {
         }
     }
 
-    public static Usuario getUsuarioID(int idUsuario) {
-        Usuario regresar = null;
-        for (int i = 0; i < usuarios.size(); i++) {
-            Usuario u = usuarios.get(i);
-            if (u.getIdUsuario() == idUsuario) {
-                regresar = new Usuario(idUsuario, u.getCorreo(), u.getNombre(), u.getApellido(), u.getContrasena(),
-                        u.getDpi(), u.getFechaNacimiento(), u.getGenero(), u.getNacionalidad(), u.getAlias(),
-                        u.getTelefono(), u.getRol(), u.getFotografia(), u.getContadorEnvios());
-            }
-        }
-        return regresar;
-    }
-
     public static Usuario getUsuarioID(String correo) {
         Usuario regresar = null;
         for (int i = 0; i < usuarios.size(); i++) {
@@ -74,17 +78,6 @@ public class ctrlUsuarios {
                 regresar = new Usuario(u.getIdUsuario(), u.getCorreo(), u.getNombre(), u.getApellido(), u.getContrasena(),
                         u.getDpi(), u.getFechaNacimiento(), u.getGenero(), u.getNacionalidad(), u.getAlias(),
                         u.getTelefono(), u.getRol(), u.getFotografia(), u.getContadorEnvios());
-            }
-        }
-        return regresar;
-    }
-
-    public static Usuario getUsuarioDatosMinimos(int idUsuario) {
-        Usuario regresar = null;
-        for (int i = 0; i < usuarios.size(); i++) {
-            Usuario u = usuarios.get(i);
-            if (u.getIdUsuario() == idUsuario) {
-                regresar = new Usuario(idUsuario, u.getNombre(), u.getApellido());
             }
         }
         return regresar;
@@ -234,6 +227,10 @@ public class ctrlUsuarios {
         return usuarios;
     }
 
+    public static Usuario getUsuarioIndice(int index) {
+        return usuarios.get(index);
+    }
+
     public static boolean cambiarTarjetas(int index, int opcion, int posicion, String valorNuevo) {
         if (index != -1) {
             switch (opcion) {
@@ -297,6 +294,37 @@ public class ctrlUsuarios {
             usuarios.get(posiciónU).getDatosFacturacion().remove(posicionT);
             return true;
         }
+        return false;
+    }
+
+    public static boolean cambiarDUsuario(int index, int opcion, String valorNuevo) {
+        return false;
+    }
+
+    public static boolean cambiarDGeneral(int index, String nuevoCorreo, String nuevaContra, int opcion) {
+        if (opcion == 1) {
+            usuarios.get(index).setCorreo(nuevoCorreo);
+            return true;
+        } else if (opcion == 2) {
+            if (!usuarios.get(index).getCorreo().equals(nuevoCorreo)) {
+                if (verificarPassword(nuevaContra)) {
+                    usuarios.get(index).setCorreo(nuevoCorreo);
+                    usuarios.get(index).setContrasena(nuevaContra);
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "La contraseña no cumple con los requistos");
+                }
+            } else {
+                if (verificarPassword(nuevaContra)) {
+                    usuarios.get(index).setContrasena(nuevaContra);
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "La contraseña no cumple con los requistos");
+                }
+            }
+
+        }
+
         return false;
     }
 }

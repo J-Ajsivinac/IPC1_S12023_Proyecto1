@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Usuario {
 
-    private int idUsuario;
+    private String idUsuario;
     private String correo;
     private String nombre;
     private String apellido;
@@ -21,7 +21,7 @@ public class Usuario {
     private ArrayList<Tarjeta> tarjetas;
     private ArrayList<DatosFacturacion> DatosFacturacion;
 
-    public Usuario(int idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String fotografia, int contador) {
+    public Usuario(String idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String fotografia, int contador) {
         this.setIdUsuario(idUsuario);
         this.setCorreo(correo);
         this.setNombre(nombre);
@@ -40,17 +40,17 @@ public class Usuario {
         this.setContadorEnvios(contador);
     }
 
-    public Usuario(int idUsuario, String nombre, String Apellido){
+    public Usuario(String idUsuario, String nombre, String Apellido){
         this.setIdUsuario(idUsuario);
         this.setNombre(nombre);
         this.setApellido(Apellido);
     }
     
-    public int getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 

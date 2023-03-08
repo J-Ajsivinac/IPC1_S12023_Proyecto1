@@ -1017,9 +1017,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
         String rolCompleto = boxRol.getSelectedItem().toString();
 
         if (rol == 2 && kioscoItem != null) {
-            rolCompleto = "Kiosco, " + kioscoItem.getNombreKiosco();
+            rolCompleto = "Kiosco," + kioscoItem.getNombreKiosco();
         }
         String img = "s";
+        if(!ruta.equals("")){
+            img = ruta;
+        }
         String fecha = txtFecha.getText();
         String nacionalidad = boxNacionalidad.getSelectedItem().toString();
         String genero = boxGenero.getSelectedItem().toString();
@@ -1034,7 +1037,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 && !nacionalidad.equals("") && !genero.equals("") && !genero.equals("") && !alias.equals("") && !numero.equals("")) {
             int n = Integer.parseInt(numero);
             if (contra.equals(verificar)) {
-                if (ctrlUsuarios.nuevoUsuario(correo, nombre, apellido, contra, dpi, numero, genero, nacionalidad, alias, n, rolCompleto, img)) {
+                if (ctrlUsuarios.nuevoUsuario(correo, nombre, apellido, contra, dpi, fecha, genero, nacionalidad, alias, n, rolCompleto, img)) {
                     JOptionPane.showMessageDialog(null, "Usuario Agregado");
                     limpiarTxt();
                     setBordes();

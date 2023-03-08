@@ -14,7 +14,7 @@ public class Proyecto1 {
         ctrlRegiones.nuevaRegion("SO", "Suroriente", 38.68, 32.48);
         ctrlRegiones.nuevaRegion("SOC", "Suroccidente", 34.00, 29.00);
         ctrlRegiones.nuevaRegion("NOC", "Noroccidente", 44.50, 40.00);
-        ctrlUsuarios.nuevoUsuario("a", "", "", "Ji#0", "1212", "12", "fd", "fdas", "fdas", 0, "fdas", "fdas");
+        ctrlUsuarios.nuevoUsuario("a", "???", "____", "Ji#0", "20222254512", "12/02/2002", "Femenino", "Guatemala", "Hola", 1234567890, "Usuario Empresarial", "C:\\Users\\mesoi\\Downloads\\HTML5_Badge_256.png");
         login l = new login();
         l.setVisible(true);
     }

@@ -5,16 +5,20 @@ import java.util.Comparator;
 public class Envios {
 
     private String correo;
+    private String idUsuario;
+    private String nombreUsuario;
     private String codRegion;
     private String tipoServicio;
     private String destinatario;
     private Factura factura;
     private Guia Guia;
 
-    public Envios(String correo, String codRegion, String codPaquete, String tipoServicio, String destinatario,
+    public Envios(String correo,String idUsuario, String nombreUsuario, String codRegion, String codPaquete, String tipoServicio, String destinatario,
             double totalEnvio, Factura factura, Guia guia) {
         super();
-        this.setIdUsuario(correo);
+        this.setCorreo(correo);
+        this.setIdUsuario(idUsuario);
+        this.setNombreUsuario(nombreUsuario);
         this.setCodRegion(codRegion);
         this.setTipoServicio(tipoServicio);
         this.setDestinatario(destinatario);
@@ -22,13 +26,31 @@ public class Envios {
         this.setGuia(guia);
     }
 
-    public String getIdUsuario() {
+    public String getCorreo() {
         return correo;
     }
 
-    public void setIdUsuario(String correo) {
+    public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+    
+    
 
     public String getCodRegion() {
         return codRegion;

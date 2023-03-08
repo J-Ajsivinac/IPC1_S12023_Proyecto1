@@ -4,6 +4,7 @@ import Componentes.*;
 import Usuario.Usuario;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -13,15 +14,17 @@ import javax.swing.border.Border;
  * @author mesoi
  */
 public class UsuarioCliente extends javax.swing.JFrame {
+
     public UsuarioTarjeta usert;
     public UsuarioDatosFacturacion userDatos;
     public UsuarioCotizacionCompra userCotiz;
     private Usuario usuarioC;
     public UsuarioVerEnvios usuarioVer;
-    
+    private UsuarioCuenta usuarioCliente;
     public boolean activado;
     Border unselectedborder;
     Border selectedborder;
+
     /**
      * Creates new form UsuarioCliente
      */
@@ -34,15 +37,17 @@ public class UsuarioCliente extends javax.swing.JFrame {
         userDatos = new UsuarioDatosFacturacion();
         userCotiz = new UsuarioCotizacionCompra();
         usuarioVer = new UsuarioVerEnvios();
+        usuarioCliente = new UsuarioCuenta(this);
         menuContenido.add(usert);
         menuContenido.add(userDatos);
         menuContenido.add(userCotiz);
         menuContenido.add(usuarioVer);
+        menuContenido.add(usuarioCliente);
         menuClick(usert);
-        bordeMenu(panelTarjetas,lblTarjeta);
+        bordeMenu(panelTarjetas, lblTarjeta);
     }
-    
-    public void setUsuario(Usuario u){
+
+    public void setUsuario(Usuario u) {
         this.usuarioC = u;
         lblNombreUsuario.setText(usuarioC.getNombre());
         lblTipoC.setText(usuarioC.getRol());
@@ -51,7 +56,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
         userCotiz.test(usuarioC);
         usuarioVer.test(usuarioC);
     }
-    
+
     public void hoverMenu(JPanel activar, int estado) {
         if (estado == 1) {
             activar.setBackground(new Color(19, 19, 26));
@@ -59,23 +64,31 @@ public class UsuarioCliente extends javax.swing.JFrame {
             activar.setBackground(new Color(28, 28, 36));
         }
     }
-    
+
     public void bordeMenu(JPanel panel, JLabel texto) {
         panelTarjetas.setBorder(unselectedborder);
         panelDatosF.setBorder(unselectedborder);
         panelEnvios.setBorder(unselectedborder);
         panelCotizacion.setBorder(unselectedborder);
-        
+        panelCuenta.setBorder(unselectedborder);
         lblCerrar.setForeground(Color.WHITE);
         lblCotizacion.setForeground(Color.WHITE);
         lblDatos.setForeground(Color.WHITE);
         lblTarjeta.setForeground(Color.WHITE);
         lblVer.setForeground(Color.WHITE);
+        lblVer1.setForeground(Color.WHITE);
 
         panel.setBorder(selectedborder);
         texto.setForeground(new Color(205, 233, 255));
         //panel.setForeground(new Color(205, 233, 255));
     }
+    
+    public void cerrarSesion(){
+        login l = new login();
+        l.setVisible(true);
+        this.dispose();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,6 +116,8 @@ public class UsuarioCliente extends javax.swing.JFrame {
         lblVer = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
+        panelCuenta = new javax.swing.JPanel();
+        lblVer1 = new javax.swing.JLabel();
         menuContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -223,6 +238,25 @@ public class UsuarioCliente extends javax.swing.JFrame {
         lblCerrar.setText("Cerrar Sesión");
         btnCerrarSesion.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        panelCuenta.setBackground(new java.awt.Color(28, 28, 36));
+        panelCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelCuentaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelCuentaMouseExited(evt);
+            }
+        });
+        panelCuenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblVer1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblVer1.setForeground(new java.awt.Color(255, 255, 255));
+        lblVer1.setText("Cuenta");
+        panelCuenta.add(lblVer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -238,6 +272,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
             .addComponent(panelTarjetas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +291,9 @@ public class UsuarioCliente extends javax.swing.JFrame {
                 .addComponent(panelCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelEnvios, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -309,8 +346,8 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
     private void panelTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTarjetasMouseClicked
         // TODO add your handling code here:
-       menuClick(usert);
-       bordeMenu(panelTarjetas,lblTarjeta);
+        menuClick(usert);
+        bordeMenu(panelTarjetas, lblTarjeta);
     }//GEN-LAST:event_panelTarjetasMouseClicked
 
     private void panelDatosFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosFMouseClicked
@@ -318,12 +355,12 @@ public class UsuarioCliente extends javax.swing.JFrame {
         userDatos.cargarTablaNits();
         userDatos.cargarTablaNitsEliminar();
         menuClick(userDatos);
-        bordeMenu(panelDatosF,lblDatos);
+        bordeMenu(panelDatosF, lblDatos);
     }//GEN-LAST:event_panelDatosFMouseClicked
 
     private void panelCotizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCotizacionMouseClicked
         // TODO add your handling code here:
-        bordeMenu(panelCotizacion,lblCotizacion);
+        bordeMenu(panelCotizacion, lblCotizacion);
         menuClick(userCotiz);
         userCotiz.cargarDatosFacturacion();
         userCotiz.listarTarjetas();
@@ -331,15 +368,13 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
         // TODO add your handling code here:
-        login l = new login();
-        l.setVisible(true);
-        this.dispose();
+        cerrarSesion();
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     private void panelEnviosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEnviosMouseClicked
         // TODO add your handling code here:
         menuClick(usuarioVer);
-        bordeMenu( panelEnvios,lblVer);
+        bordeMenu(panelEnvios, lblVer);
         usuarioVer.cargarDatos();
     }//GEN-LAST:event_panelEnviosMouseClicked
 
@@ -393,6 +428,23 @@ public class UsuarioCliente extends javax.swing.JFrame {
         hoverMenu(btnCerrarSesion, 0);
     }//GEN-LAST:event_btnCerrarSesionMouseExited
 
+    private void panelCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCuentaMouseClicked
+        // TODO add your handling code here:
+        usuarioCliente.cargarDatosU();
+        bordeMenu(panelCuenta, lblVer1);
+        menuClick(usuarioCliente);
+    }//GEN-LAST:event_panelCuentaMouseClicked
+
+    private void panelCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCuentaMouseEntered
+        // TODO add your handling code here:
+        hoverMenu(panelCuenta, 1);
+    }//GEN-LAST:event_panelCuentaMouseEntered
+
+    private void panelCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCuentaMouseExited
+        // TODO add your handling code here:
+        hoverMenu(panelCuenta, 0);
+    }//GEN-LAST:event_panelCuentaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -427,12 +479,13 @@ public class UsuarioCliente extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void menuClick(JPanel panel){
+
+    public void menuClick(JPanel panel) {
         usert.setVisible(false);
         userDatos.setVisible(false);
         userCotiz.setVisible(false);
         usuarioVer.setVisible(false);
+        usuarioCliente.setVisible(false);
         panel.setVisible(true);
     }
 
@@ -450,8 +503,10 @@ public class UsuarioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblTarjeta;
     private javax.swing.JLabel lblTipoC;
     private javax.swing.JLabel lblVer;
+    private javax.swing.JLabel lblVer1;
     private javax.swing.JPanel menuContenido;
     private javax.swing.JPanel panelCotizacion;
+    private javax.swing.JPanel panelCuenta;
     private javax.swing.JPanel panelDatosF;
     private javax.swing.JPanel panelEnvios;
     private javax.swing.JPanel panelTarjetas;
