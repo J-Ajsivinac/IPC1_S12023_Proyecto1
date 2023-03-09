@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ctrlEnvios {
 
@@ -118,75 +119,12 @@ public class ctrlEnvios {
         return envios;
     }
 
-    public static ArrayList<Envios> ordenarPorRegion() {
-        ArrayList<Envios> listaOrdenada = new ArrayList<>(envios);
-        Collections.sort(listaOrdenada, new comparadorRegiones(listaOrdenada));
-        return listaOrdenada;
-    }
-    
-    public static ArrayList<Envios> ordenarPorId() {
-        ArrayList<Envios> listaOrdenada = new ArrayList<>(envios);
-        Collections.sort(listaOrdenada, new comparadorUsuarios(listaOrdenada));
-        return listaOrdenada;
-    }
-    
-     public static boolean cambiarDatosU(String idUsuario, String nuevoDato){
+    public static boolean cambiarDatosU(String idUsuario, String nuevoDato) {
         for (Envios envio : envios) {
-            if(envio.getIdUsuario().equals(idUsuario)){
+            if (envio.getIdUsuario().equals(idUsuario)) {
                 envio.setNombreUsuario(nuevoDato);
             }
         }
         return false;
-    }
-
-}
-
-class comparadorRegiones implements Comparator<Envios> {
-
-    private ArrayList<Envios> listaOriginal;
-
-    public comparadorRegiones(ArrayList<Envios> listaOriginal) {
-        this.listaOriginal = listaOriginal;
-    }
-
-    @Override
-    public int compare(Envios envio1, Envios envio2) {
-        int repeticiones1 = 0;
-        int repeticiones2 = 0;
-
-        for (Envios obj : envios) {
-            if (obj.getCodRegion().equals(envio1.getCodRegion())) {
-                repeticiones1++;
-            }
-            if (obj.getCodRegion().equals(envio2.getCodRegion())) {
-                repeticiones2++;
-            }
-        }
-        return Integer.compare(repeticiones2, repeticiones1);
-    }
-}
-
-class comparadorUsuarios implements Comparator<Envios> {
-
-    private ArrayList<Envios> listaOriginal;
-
-    public comparadorUsuarios(ArrayList<Envios> listaOriginal) {
-        this.listaOriginal = listaOriginal;
-    }
-
-    @Override
-    public int compare(Envios envio1, Envios envio2) {
-        int repeticiones1 = 0;
-        int repeticiones2 = 0;
-
-        for (Envios obj : envios) {
-            if (obj.getCodRegion().equals(envio1.getIdUsuario())) {
-                repeticiones1++;
-            }
-            if (obj.getCodRegion().equals(envio2.getIdUsuario())) {
-                repeticiones2++;
-            }
-        }
-        return Integer.compare(repeticiones2, repeticiones1);
     }
 }

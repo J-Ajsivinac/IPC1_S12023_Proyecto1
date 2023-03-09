@@ -31,15 +31,15 @@ public class AdminReporteRegion extends javax.swing.JPanel {
 
     public void ordenarRegiones() {
         modelo.setRowCount(0);
-        ArrayList<Envios> listaO = ctrlEnvios.ordenarPorRegion();
+        ArrayList<Envios> listaO = (ArrayList<Envios>) ctrlEnvios.getAllEnvios().clone();
 
         ArrayList<String> RegionUnicos = new ArrayList<>();
+        ArrayList<Integer> repeticiones = new ArrayList<>();
         for (Envios en : listaO) {
             if (!RegionUnicos.contains(en.getCodRegion())) {
                 RegionUnicos.add(en.getCodRegion());
             }
         }
-        int num = 1;
         for (String regionN : RegionUnicos) {
             int contador = 0;
             for (Envios reg : listaO) {
@@ -47,12 +47,30 @@ public class AdminReporteRegion extends javax.swing.JPanel {
                     contador++;
                 }
             }
+            repeticiones.add(contador);
+        }
+
+        // Ordenando el arreglo con el método burbuja
+        for (int i = 0; i < repeticiones.size() - 1; i++) {
+            for (int j = 0; j < repeticiones.size() - i - 1; j++) {
+                if (repeticiones.get(j) < repeticiones.get(j + 1)) {
+                    int temp = repeticiones.get(j);
+                    repeticiones.set(j, repeticiones.get(j + 1));
+                    repeticiones.set(j + 1, temp);
+                    // arreglando los nombres de los productos
+                    String temp1 = RegionUnicos.get(j);
+                    RegionUnicos.set(j, RegionUnicos.get(j + 1));
+                    RegionUnicos.set(j + 1, temp1);
+                }
+            }
+        }
+
+        for (int i = 0; i < repeticiones.size() ; i++) {
             Object datos[] = new Object[3];
-            datos[0] = num;
-            datos[1] = regionN;
-            datos[2] = contador;
+            datos[0] = i+1;
+            datos[1] = RegionUnicos.get(i);
+            datos[2] = repeticiones.get(i);
             modelo.addRow(datos);
-            num++;
         }
     }
 

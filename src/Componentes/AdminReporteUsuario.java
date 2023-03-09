@@ -15,8 +15,9 @@ import javax.swing.table.DefaultTableModel;
  * @author mesoi
  */
 public class AdminReporteUsuario extends javax.swing.JPanel {
+
     private DefaultTableModel modelo;
-    private ArrayList<Usuario> totalUsuarios;
+
     /**
      * Creates new form AdminReporteUsuario
      */
@@ -24,39 +25,57 @@ public class AdminReporteUsuario extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 710, 500);
         modelo = (DefaultTableModel) tableRU.getModel();
-        totalUsuarios = (ArrayList<Usuario>) ctrlUsuarios.getTodUsuarios().clone();
     }
-       
-     public void ordenarUsuarios() {
-        modelo.setRowCount(0);
-        ArrayList<Envios> listaO = (ArrayList<Envios>) ctrlEnvios.ordenarPorId().clone();
 
+    public void ordenarUsuarios() {
+        modelo.setRowCount(0);
+        ArrayList<Envios> listaO = (ArrayList<Envios>) ctrlEnvios.getAllEnvios().clone();
+        //int num = 1;
         ArrayList<String> usarioId = new ArrayList<>();
+
         ArrayList<String> nombres = new ArrayList<>();
+        ArrayList<Integer> repeticiones = new ArrayList<>();
         for (Envios en : listaO) {
             if (!usarioId.contains(en.getIdUsuario())) {
                 usarioId.add(en.getIdUsuario());
                 nombres.add(en.getNombreUsuario());
             }
         }
-        int num = 1;
-        int i=0;
         for (String usuarioIds : usarioId) {
             int contador = 0;
             for (Envios reg : listaO) {
                 if (reg.getIdUsuario().equals(usuarioIds)) {
-                    contador++;
+                    contador+=reg.getFactura().getNumeropaquetes();
                 }
             }
+            repeticiones.add(contador);
+        }
+
+        // Ordenando el arreglo con el método burbuja
+        for (int i = 0; i < repeticiones.size() - 1; i++) {
+            for (int j = 0; j < repeticiones.size() - i - 1; j++) {
+                if (repeticiones.get(j) < repeticiones.get(j + 1)) {
+                    int temp = repeticiones.get(j);
+                    repeticiones.set(j, repeticiones.get(j + 1));
+                    repeticiones.set(j + 1, temp);
+                    // arreglando los nombres de los productos
+                    String temp1 = nombres.get(j);
+                    nombres.set(j, nombres.get(j + 1));
+                    nombres.set(j + 1, temp1);
+                }
+            }
+        }
+
+        for (int i = 0; i < repeticiones.size(); i++) {
             Object datos[] = new Object[3];
-            datos[0] = num;
+            datos[0] = i + 1;
             datos[1] = nombres.get(i);
-            datos[2] = contador;
+            datos[2] = repeticiones.get(i);
             modelo.addRow(datos);
-            num++;
-            i++;
+
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

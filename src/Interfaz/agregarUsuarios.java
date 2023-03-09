@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MediaTracker;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +39,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
     Color correcto;
     private boolean validarFecha = false;
     public ArrayList<Kioscos> kiosco;
-    public String ruta;
+    public String ruta = "src\\img\\usuario.png";
     private static String[] nombrePaises = {"Alemania", "Argentina", "Belice", "Brasil", "Canadá", "China",
         "El Salvador", "España", "Guatemala", "Honduras", "Japón", "México", "Portugal", "Uruguay"};
 
@@ -113,7 +114,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         txtNombre.setText("");
         txtTelefono.setText("");
         txtValidar.setText("");
-        ruta="";
+        ruta = "";
     }
 
     /**
@@ -871,7 +872,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
         if (respuesta == archivos.APPROVE_OPTION) {
             ruta = archivos.getSelectedFile().getPath();
             /// Cargar la imagen original
+
             ImageIcon originalImageIcon = new ImageIcon(ruta);
+            if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                ///htmls/factura.html
+                originalImageIcon = new ImageIcon("src\\img\\usuario.png");
+            }
 
             // Obtener el tamaño original de la imagen
             int originalImageWidth = originalImageIcon.getIconWidth();
@@ -1021,7 +1027,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             rolCompleto = "Kiosco," + kioscoItem.getNombreKiosco();
         }
         String img = "s";
-        if(!ruta.equals("")){
+        if (!ruta.equals("")) {
             img = ruta;
         }
         String fecha = txtFecha.getText();
