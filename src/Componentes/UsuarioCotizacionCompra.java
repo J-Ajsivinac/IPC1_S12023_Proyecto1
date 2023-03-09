@@ -47,11 +47,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     public ArrayList<Departamentos> depa;
     public ButtonGroup size;
     public String sizePaquete;
-    public int tipoServicio;
     public static Guia guardarCotizacion;
     double total1;
     double total2;
-    int opcionPago;
     String tipoP;
     boolean realizoEnvio = false;
     private ArrayList<Tarjeta> tarj = new ArrayList<Tarjeta>();
@@ -78,7 +76,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         ButtonGroup price = new ButtonGroup();
         price.add(radioEstandar);
         price.add(radioEspecial);
-        opcionPago = 1;
         ButtonGroup tipoPago = new ButtonGroup();
         tipoPago.add(radioContra);
         tipoPago.add(radioCuenta);
@@ -187,7 +184,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             int numeroPaquetes = Integer.parseInt(txtNumeroPaquetes.getText());
             //String sizePaquete = size
             String nombreRegionOrigen = ctrlRegiones.getRegionCodigo(depItemO.getIdRegion()).getNombre();
-            String nombreRegionDestino = ctrlRegiones.getRegionCodigo(depItemO.getCodigo()).getNombre();
+            String nombreRegionDestino = ctrlRegiones.getRegionCodigo(depItemO.getIdRegion()).getNombre();
             String origen = depItemO.getNombreDepartamento() + "," + munItemO.getNombreMunicipio() + "," + txtDireccionOrigen.getText() + "," + nombreRegionOrigen;
             String destino = depItemD.getNombreDepartamento() + "," + munItemD.getNombreMunicipio() + "," + txtDireccionDestino.getText() + "," + nombreRegionDestino;
 
@@ -195,9 +192,18 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             double multi1 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 0);
             double multi2 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 1);
             System.out.println(multi1 + "---" + multi2);
-
-            total1 = multi1 * 1 * numeroPaquetes;
-            total2 = multi2 * 1 * numeroPaquetes;
+            double tamano1=0;
+            if(radioPeque.isSelected()){
+                tamano1 = 1.4;
+            }else if(radioMediano.isSelected()){
+                tamano1 = 1.7;
+            }else if(RadioGrande.isSelected()){
+                tamano1 = 2;
+            }
+            
+            
+            total1 = multi1 * tamano1 * numeroPaquetes;
+            total2 = multi2 * tamano1 * numeroPaquetes;
             BigDecimal bd = new BigDecimal(total1).setScale(2, RoundingMode.HALF_UP);
             total1 = bd.doubleValue();
             BigDecimal bd2 = new BigDecimal(total2).setScale(2, RoundingMode.HALF_UP);
@@ -251,9 +257,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             return;
         }
 
-        if (opcionPago == 1) {
+        if (radioContra.isSelected()) {
             tPago = "contra entrega";
-        } else if (opcionPago == 2) {
+            total1 += 5;
+            total2 += 5;
+        } else if (radioCuenta.isSelected()) {
             tPago = "con tarjeta";
             String cvv;
             boolean val = false;
@@ -269,12 +277,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         Usuario actual = getUsuarioIndice(login.posicionU);
         String nombre = actual.getNombre() + " " + actual.getApellido();
 
-        if (opcionPago == 1) {
-            total1 += 5;
-            total2 += 5;
-        }
-
-        if (tipoServicio == 0) {
+        if (radioEstandar.isSelected()) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total1);
             precio = "Estandar";
 
@@ -284,7 +287,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 total1 = 0;
                 total2 = 0;
             }
-        } else if (tipoServicio == 1) {
+        } else if (radioEspecial.isSelected()) {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
             precio = "Especial";
             if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
@@ -1482,14 +1485,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         // TODO add your handling code here:
         activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
         radioEspecial.setSelected(true);
-        tipoServicio = 1;
     }//GEN-LAST:event_panelEspecialMouseClicked
 
     private void panelEstandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstandarMouseClicked
         // TODO add your handling code here:
         activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
         radioEstandar.setSelected(true);
-        tipoServicio = 0;
     }//GEN-LAST:event_panelEstandarMouseClicked
 
     private void panelPequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPequeMouseClicked
@@ -1532,12 +1533,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void radioCuentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioCuentaItemStateChanged
         // TODO add your handling code here:
-        opcionPago = 2;
     }//GEN-LAST:event_radioCuentaItemStateChanged
 
     private void radioContraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioContraItemStateChanged
         // TODO add your handling code here:
-        opcionPago = 1;
     }//GEN-LAST:event_radioContraItemStateChanged
 
     private void boxTarjetasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTarjetasItemStateChanged
@@ -1654,11 +1653,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void radioEstandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioEstandarMouseClicked
         // TODO add your handling code here:
+        radioEstandar.setSelected(true);
         activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
     }//GEN-LAST:event_radioEstandarMouseClicked
 
     private void radioEspecialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioEspecialMouseClicked
         // TODO add your handling code here:
+        activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
+        radioEspecial.setSelected(true);
         activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
     }//GEN-LAST:event_radioEspecialMouseClicked
 
