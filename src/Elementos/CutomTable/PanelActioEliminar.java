@@ -38,7 +38,7 @@ public class PanelActioEliminar extends javax.swing.JPanel {
 
         cmdEliminar.setBorder(null);
         cmdEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        cmdEliminar.setText("Eliminar Región");
+        cmdEliminar.setText("Eliminar");
         cmdEliminar.setBorderColor(new java.awt.Color(245, 118, 112));
         cmdEliminar.setColor(new java.awt.Color(245, 118, 112));
         cmdEliminar.setColorClick(new java.awt.Color(118, 66, 67));

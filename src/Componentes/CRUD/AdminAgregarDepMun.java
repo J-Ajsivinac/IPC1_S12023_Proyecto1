@@ -207,21 +207,24 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         panelRound2.setRoundTopLeft(15);
         panelRound2.setRoundTopRight(15);
 
+        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Región");
 
+        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre del Departamento");
 
         boxRegion.setBackground(new java.awt.Color(40, 41, 52));
         boxRegion.setForeground(new java.awt.Color(255, 255, 255));
 
+        buttonRound1.setBorder(null);
         buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
         buttonRound1.setText("Registrar Departamento");
         buttonRound1.setBorderColor(new java.awt.Color(123, 127, 239));
         buttonRound1.setColor(new java.awt.Color(123, 127, 239));
         buttonRound1.setColorClick(new java.awt.Color(121, 118, 236));
-        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         buttonRound1.setRadius(15);
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,9 +251,12 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        table1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        table1.setRowHeight(40);
         jScrollPane2.setViewportView(table1);
 
         txtNombreDepartamento.setBackground(new java.awt.Color(40, 41, 52));
+        txtNombreDepartamento.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNombreDepartamento.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreDepartamento.setBorder(null);
         txtNombreDepartamento.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -276,12 +282,12 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtNombreDepartamento, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(16, Short.MAX_VALUE))))
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(211, 211, 211)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,13 +325,16 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         panelRound3.setRoundTopLeft(15);
         panelRound3.setRoundTopRight(15);
 
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Región");
 
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nombre del Departamento");
 
         boxRegion1.setBackground(new java.awt.Color(40, 41, 52));
+        boxRegion1.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegion1.setForeground(new java.awt.Color(255, 255, 255));
         boxRegion1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -334,14 +343,16 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         });
 
         boxDepartamento.setBackground(new java.awt.Color(40, 41, 52));
+        boxDepartamento.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamento.setForeground(new java.awt.Color(255, 255, 255));
 
+        buttonRound2.setBorder(null);
         buttonRound2.setForeground(new java.awt.Color(255, 255, 255));
         buttonRound2.setText("Registrar Departamento");
         buttonRound2.setBorderColor(new java.awt.Color(123, 127, 239));
         buttonRound2.setColor(new java.awt.Color(123, 127, 239));
         buttonRound2.setColorClick(new java.awt.Color(121, 118, 236));
-        buttonRound2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        buttonRound2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         buttonRound2.setRadius(15);
         buttonRound2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,15 +379,19 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        table2.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        table2.setRowHeight(40);
         jScrollPane3.setViewportView(table2);
         if (table2.getColumnModel().getColumnCount() > 0) {
             table2.getColumnModel().getColumn(0).setPreferredWidth(13);
         }
 
+        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Nombre del Municipio");
 
         txtNombreMunicipio.setBackground(new java.awt.Color(40, 41, 52));
+        txtNombreMunicipio.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNombreMunicipio.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreMunicipio.setBorder(null);
         txtNombreMunicipio.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -390,29 +405,26 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
-                        .addContainerGap())
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelRound3Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtNombreMunicipio, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelRound3Layout.createSequentialGroup()
-                                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(boxRegion1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(boxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6))))
-                                .addGap(15, 15, 15))))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombreMunicipio, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound3Layout.createSequentialGroup()
+                                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(boxRegion1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(boxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))))
+                        .addGap(15, 15, 15))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,11 +476,11 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(17, 17, 17))
         );
 
         jScrollPane1.setViewportView(jPanel1);

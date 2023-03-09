@@ -183,11 +183,12 @@ public class login extends javax.swing.JFrame {
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnIngresar.setBorder(null);
-        btnIngresar.setForeground(new java.awt.Color(66, 133, 254));
+        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Ingresar");
-        btnIngresar.setBorderColor(new java.awt.Color(255, 255, 255));
-        btnIngresar.setColorClick(new java.awt.Color(222, 226, 254));
-        btnIngresar.setColorOver(new java.awt.Color(222, 226, 254));
+        btnIngresar.setBorderColor(new java.awt.Color(85, 104, 254));
+        btnIngresar.setColor(new java.awt.Color(85, 104, 254));
+        btnIngresar.setColorClick(new java.awt.Color(83, 99, 229));
+        btnIngresar.setColorOver(new java.awt.Color(73, 91, 226));
         btnIngresar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnIngresar.setRadius(15);
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {

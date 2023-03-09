@@ -311,9 +311,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
         panelRound1.setBackground(new java.awt.Color(19, 19, 26));
 
-        jScrollPane1.setBorder(null);
+        jScrollPane1.setBackground(new java.awt.Color(19, 19, 26));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(19, 19, 26)));
 
         jPanel1.setBackground(new java.awt.Color(19, 19, 26));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(19, 19, 26)));
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -327,12 +329,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
         jPanel2.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Región");
 
         boxRegionUpdate.setBackground(new java.awt.Color(40, 41, 52));
-        boxRegionUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegionUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegionUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionUpdate.setBorder(null);
         boxRegionUpdate.addItemListener(new java.awt.event.ItemListener() {
@@ -341,12 +343,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Departamento");
 
         boxDepartamentosUpdate.setBackground(new java.awt.Color(40, 41, 52));
-        boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentosUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosUpdate.setBorder(null);
 
@@ -359,7 +361,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxRegionUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(boxDepartamentosUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,7 +386,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         lblDepartamentoActual.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblDepartamentoActual.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nuevo Nombre");
 
@@ -407,7 +409,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         btnEditarDep.setColor(new java.awt.Color(123, 127, 239));
         btnEditarDep.setColorClick(new java.awt.Color(121, 118, 236));
         btnEditarDep.setColorOver(new java.awt.Color(121, 147, 251));
-        btnEditarDep.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnEditarDep.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnEditarDep.setRadius(15);
         btnEditarDep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,14 +446,15 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tabla1.setRowHeight(45);
+        tabla1.setRowHeight(65);
         jScrollPane2.setViewportView(tabla1);
 
-        jLabel18.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Region");
 
         boxRegionEliminar.setBackground(new java.awt.Color(40, 41, 52));
+        boxRegionEliminar.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegionEliminar.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionEliminar.setBorder(null);
         boxRegionEliminar.addItemListener(new java.awt.event.ItemListener() {
@@ -470,12 +473,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblDepartamentoActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(txtNuevoDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -493,6 +492,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                         .addGap(239, 239, 239)
                         .addComponent(btnEditarDep, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(lblDepartamentoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,11 +506,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDepartamentoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(11, 11, 11)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblDepartamentoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNuevoDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -540,12 +545,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
         jPanel3.setOpaque(false);
 
-        jLabel11.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Región");
 
         boxRegionMuni.setBackground(new java.awt.Color(40, 41, 52));
-        boxRegionMuni.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegionMuni.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegionMuni.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionMuni.setBorder(null);
         boxRegionMuni.addItemListener(new java.awt.event.ItemListener() {
@@ -554,12 +559,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Departamento");
 
         boxDepartamentosM.setBackground(new java.awt.Color(40, 41, 52));
-        boxDepartamentosM.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentosM.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentosM.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosM.setBorder(null);
         boxDepartamentosM.addItemListener(new java.awt.event.ItemListener() {
@@ -568,12 +573,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Municipio");
 
         boxMuniUpdate.setBackground(new java.awt.Color(40, 41, 52));
-        boxMuniUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxMuniUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxMuniUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxMuniUpdate.setBorder(null);
 
@@ -613,11 +618,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addGap(12, 12, 12))
         );
 
-        jLabel16.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Nuevo Nombre");
 
         txtNuevoMunicipio.setBackground(new java.awt.Color(40, 41, 52));
+        txtNuevoMunicipio.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNuevoMunicipio.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoMunicipio.setBorder(null);
         txtNuevoMunicipio.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -636,7 +642,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         btnEditarMuni.setColor(new java.awt.Color(123, 127, 239));
         btnEditarMuni.setColorClick(new java.awt.Color(121, 118, 236));
         btnEditarMuni.setColorOver(new java.awt.Color(121, 147, 251));
-        btnEditarMuni.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnEditarMuni.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnEditarMuni.setRadius(15);
         btnEditarMuni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -644,10 +650,10 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             }
         });
 
-        txtMunicipioActual.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtMunicipioActual.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtMunicipioActual.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel14.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Nombre Actual:");
 
@@ -679,11 +685,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         tabla2.setRowHeight(65);
         jScrollPane3.setViewportView(tabla2);
 
-        jLabel19.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Region");
 
         boxRegionDepE.setBackground(new java.awt.Color(40, 41, 52));
+        boxRegionDepE.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegionDepE.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionDepE.setBorder(null);
         boxRegionDepE.addItemListener(new java.awt.event.ItemListener() {
@@ -692,11 +699,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             }
         });
 
-        jLabel20.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Departamento");
 
         boxDeparE.setBackground(new java.awt.Color(40, 41, 52));
+        boxDeparE.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDeparE.setForeground(new java.awt.Color(255, 255, 255));
         boxDeparE.setBorder(null);
         boxDeparE.addItemListener(new java.awt.event.ItemListener() {
@@ -720,11 +728,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                         .addGap(15, 15, 15)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
-                            .addGroup(panelRound3Layout.createSequentialGroup()
+                            .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtMunicipioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtMunicipioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel17))
@@ -735,15 +744,15 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRound3Layout.createSequentialGroup()
                                 .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(boxRegionDepE, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(boxRegionDepE, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(boxDeparE, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(233, 233, 233)
                         .addComponent(btnEditarMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

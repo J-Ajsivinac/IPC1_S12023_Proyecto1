@@ -76,6 +76,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
     public void cargarB() {
         cargarRegiones(boxRegionUpdate);
         cargarRegiones(boxRegionEliminar);
+        cargarKiosco();
     }
 
     public void cargarRegiones(JComboBox caja) {
@@ -143,6 +144,14 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         }
     }
 
+    public void cargarKiosco() {
+        Regiones depItem = (Regiones) boxRegionUpdate.getSelectedItem();
+        if (depItem != null) {
+            String codDepartamento = depItem.getIdRegion();
+            cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,12 +212,12 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
         jPanel2.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Región");
 
         boxRegionUpdate.setBackground(new java.awt.Color(40, 41, 52));
-        boxRegionUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegionUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegionUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionUpdate.setBorder(null);
         boxRegionUpdate.addItemListener(new java.awt.event.ItemListener() {
@@ -217,12 +226,12 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Departamento");
+        jLabel3.setText("Kiosco");
 
         boxDepartamentosUpdate.setBackground(new java.awt.Color(40, 41, 52));
-        boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentosUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosUpdate.setBorder(null);
 
@@ -235,11 +244,11 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxRegionUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(boxDepartamentosUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(boxDepartamentosUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,19 +262,19 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addGap(9, 9, 9))
         );
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre Actual:");
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nuevo Nombre");
 
         txtNuevoNombre.setBackground(new java.awt.Color(40, 41, 52));
-        txtNuevoNombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNuevoNombre.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNuevoNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoNombre.setBorder(null);
         txtNuevoNombre.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -277,12 +286,13 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             }
         });
 
+        btnActualizar.setBorder(null);
         btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizar.setText("Actualizar");
         btnActualizar.setBorderColor(new java.awt.Color(123, 127, 239));
         btnActualizar.setColor(new java.awt.Color(123, 127, 239));
         btnActualizar.setColorClick(new java.awt.Color(121, 118, 236));
-        btnActualizar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnActualizar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnActualizar.setRadius(15);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,24 +305,25 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(260, 260, 260))
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(260, 260, 260))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +333,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,12 +360,12 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         tabla1.setRowHeight(65);
         jScrollPane2.setViewportView(tabla1);
 
-        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Región");
 
         boxRegionEliminar.setBackground(new java.awt.Color(40, 41, 52));
-        boxRegionEliminar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegionEliminar.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegionEliminar.setForeground(new java.awt.Color(255, 255, 255));
         boxRegionEliminar.setBorder(null);
         boxRegionEliminar.addItemListener(new java.awt.event.ItemListener() {
@@ -369,19 +380,19 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7)
                     .addComponent(jLabel1)
-                    .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(boxRegionEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(boxRegionEliminar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,13 +403,13 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(boxRegionEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -415,11 +426,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
     private void boxRegionUpdateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionUpdateItemStateChanged
         // TODO add your handling code here:
-        Regiones depItem = (Regiones) boxRegionUpdate.getSelectedItem();
-        if (depItem != null) {
-            String codDepartamento = depItem.getIdRegion();
-            cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
-        }
+        cargarKiosco();
     }//GEN-LAST:event_boxRegionUpdateItemStateChanged
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed

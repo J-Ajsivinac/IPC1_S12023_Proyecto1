@@ -43,24 +43,23 @@ public class PanelAction extends javax.swing.JPanel {
         cmdGuia = new Elementos.ButtonRound();
         cmdFactura = new Elementos.ButtonRound();
 
-        cmdGuia.setBackground(new java.awt.Color(108, 224, 150));
         cmdGuia.setBorder(null);
-        cmdGuia.setForeground(new java.awt.Color(255, 255, 255));
+        cmdGuia.setForeground(new java.awt.Color(45, 136, 74));
         cmdGuia.setText("Guía");
-        cmdGuia.setBorderColor(new java.awt.Color(108, 224, 150));
-        cmdGuia.setColor(new java.awt.Color(108, 224, 150));
-        cmdGuia.setColorClick(new java.awt.Color(31, 162, 89));
-        cmdGuia.setColorOver(new java.awt.Color(40, 189, 94));
+        cmdGuia.setBorderColor(new java.awt.Color(193, 231, 206));
+        cmdGuia.setColor(new java.awt.Color(193, 231, 206));
+        cmdGuia.setColorClick(new java.awt.Color(131, 218, 160));
+        cmdGuia.setColorOver(new java.awt.Color(176, 220, 192));
         cmdGuia.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         cmdGuia.setRadius(10);
 
         cmdFactura.setBorder(null);
-        cmdFactura.setForeground(new java.awt.Color(255, 255, 255));
+        cmdFactura.setForeground(new java.awt.Color(38, 102, 222));
         cmdFactura.setText("Factura");
-        cmdFactura.setBorderColor(new java.awt.Color(132, 181, 253));
-        cmdFactura.setColor(new java.awt.Color(129, 181, 253));
-        cmdFactura.setColorClick(new java.awt.Color(3, 96, 226));
-        cmdFactura.setColorOver(new java.awt.Color(28, 121, 252));
+        cmdFactura.setBorderColor(new java.awt.Color(182, 231, 255));
+        cmdFactura.setColor(new java.awt.Color(182, 231, 255));
+        cmdFactura.setColorClick(new java.awt.Color(142, 211, 246));
+        cmdFactura.setColorOver(new java.awt.Color(169, 216, 238));
         cmdFactura.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         cmdFactura.setRadius(10);
 

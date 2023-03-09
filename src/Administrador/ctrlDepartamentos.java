@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class ctrlDepartamentos {
 
     private static ArrayList<Departamentos> departamentos = new ArrayList<Departamentos>();
-    
+
     public static boolean nuevoDepartamento(String codigo, String nombreDepartamento) {
         if (!codigo.equals("") && !nombreDepartamento.equals("")) {
             String codDepartamento = "";
@@ -19,7 +19,7 @@ public class ctrlDepartamentos {
             }
             if (!verificarNombreDepa(nombreDepartamento)) {
                 Regiones r = ctrlRegiones.getRegionCodigo(codigo);
-                departamentos.add(new Departamentos(r.getIdRegion(),r.getCodigo(), r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
+                departamentos.add(new Departamentos(r.getIdRegion(), r.getCodigo(), r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
                         codDepartamento, nombreDepartamento));
                 return true;
             } else {
@@ -35,7 +35,7 @@ public class ctrlDepartamentos {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
             if (d.getCodDepartamento().equals(Codigo)) {
-                regresar = new Departamentos(d.getIdRegion(),d.getCodigo(), d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento());
+                regresar = new Departamentos(d.getIdRegion(), d.getCodigo(), d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento());
             }
         }
         return regresar;
@@ -136,8 +136,13 @@ public class ctrlDepartamentos {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos dep = departamentos.get(i);
             if (dep.getCodDepartamento().equals(codDepartamento)) {
-                dep.setNombreDepartamento(nuevoNombre);
-                return true;
+                if (!verificarNombreDepa(nuevoNombre)) {
+                    dep.setNombreDepartamento(nuevoNombre);
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "El nombre del Departamento ya existe");
+                }
+
             }
         }
         return false;
@@ -151,8 +156,13 @@ public class ctrlDepartamentos {
             for (int j = 0; j < muni1.size(); j++) {
                 Municipios mun = dep.getMunicipios().get(j);
                 if (mun.getCodigoMunicipio().equals(codMunicipio)) {
-                    mun.setNombreMunicipio(nuevoNombre);
-                    return true;
+                    if (!verificarNombreMuni(nuevoNombre)) {
+                        mun.setNombreMunicipio(nuevoNombre);
+                        return true;
+                    }else{
+                        JOptionPane.showMessageDialog(null, "El nombre del Municipio ya existe");
+                    }
+
                 }
             }
         }
@@ -168,26 +178,26 @@ public class ctrlDepartamentos {
         }
         return false;
     }
-    
-    public static void eliminarTDepartamentos(String codRegion){
-         for (int j = 0; j < departamentos.size(); j++) {
+
+    public static void eliminarTDepartamentos(String codRegion) {
+        for (int j = 0; j < departamentos.size(); j++) {
             Departamentos d = departamentos.get(j);
             if (d.getCodigo().equals(codRegion)) {
                 departamentos.remove(j);
             }
         }
     }
-    
-    public static boolean eliminarMunicipio(String codigDepar,String codigoMun) {
+
+    public static boolean eliminarMunicipio(String codigDepar, String codigoMun) {
         if (verificarCodigoDepa(codigDepar)) {
             int posicion = getPosicionDepartamentos(codigDepar);
-            ArrayList<Municipios> mun =getMuniDepartamento(codigDepar);
+            ArrayList<Municipios> mun = getMuniDepartamento(codigDepar);
             for (int i = 0; i < mun.size(); i++) {
-                if(mun.get(i).getCodigoMunicipio().equals(codigoMun)){
+                if (mun.get(i).getCodigoMunicipio().equals(codigoMun)) {
                     departamentos.get(posicion).getMunicipios().remove(i);
                     return true;
                 }
-            }   
+            }
         }
         return false;
     }
@@ -240,10 +250,10 @@ public class ctrlDepartamentos {
         for (int j = 0; j < departamentos.size(); j++) {
             Departamentos d = departamentos.get(j);
             if (d.getIdRegion().equals(codigRegion)) {
-                mRegresar.add(new Departamentos(d.getIdRegion(),codigRegion, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento()));
+                mRegresar.add(new Departamentos(d.getIdRegion(), codigRegion, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento()));
             }
         }
         return mRegresar;
     }
-   
+
 }

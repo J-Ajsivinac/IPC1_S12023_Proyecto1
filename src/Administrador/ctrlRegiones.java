@@ -57,6 +57,8 @@ public class ctrlRegiones {
                         if (!verificarCodigoRegion(codigo)) {
                             reg.setCodigo(nuevoNombre);
                             return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "El codigo ya ha sido ingresado");
                         }
 
                     }

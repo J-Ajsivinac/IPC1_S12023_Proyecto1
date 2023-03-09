@@ -68,7 +68,15 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jScrollPane3.getVerticalScrollBar().setUnitIncrement(30);
         tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event2));
-         cargarBoxOpcion();
+        cargarBoxOpcion();
+        setBordes();
+    }
+    
+     public void setBordes() {
+        txtDireccion.setBorder(login.unselectedborder);
+        txtNit.setBorder(login.unselectedborder);
+        txtNuevoV.setBorder(login.unselectedborder);
+        txtNombreCompleto.setBorder(login.unselectedborder);
     }
 
     public void test(Usuario user1) {
@@ -241,6 +249,14 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         txtNombreCompleto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreCompleto.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreCompleto.setBorder(null);
+        txtNombreCompleto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreCompletoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreCompletoFocusLost(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,11 +270,27 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         txtDireccion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccion.setBorder(null);
+        txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusLost(evt);
+            }
+        });
 
         txtNit.setBackground(new java.awt.Color(40, 41, 52));
         txtNit.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNit.setForeground(new java.awt.Color(255, 255, 255));
         txtNit.setBorder(null);
+        txtNit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNitFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNitFocusLost(evt);
+            }
+        });
         txtNit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNitKeyPressed(evt);
@@ -393,10 +425,17 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nit:");
 
+        boxNit.setBackground(new java.awt.Color(40, 41, 52));
+        boxNit.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        boxNit.setForeground(new java.awt.Color(255, 255, 255));
+
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Cambiar:");
 
+        boxCambiar.setBackground(new java.awt.Color(40, 41, 52));
+        boxCambiar.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        boxCambiar.setForeground(new java.awt.Color(255, 255, 255));
         boxCambiar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Dirección", "Nit" }));
         boxCambiar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -420,6 +459,14 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         txtNuevoV.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNuevoV.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoV.setBorder(null);
+        txtNuevoV.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNuevoVFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNuevoVFocusLost(evt);
+            }
+        });
         txtNuevoV.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNuevoVKeyPressed(evt);
@@ -564,7 +611,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                     .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,7 +620,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -585,7 +632,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,6 +670,46 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         // TODO add your handling code here:
         actualizarNits();
     }//GEN-LAST:event_buttonRound1ActionPerformed
+
+    private void txtNombreCompletoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreCompletoFocusGained
+        // TODO add your handling code here:
+         UsuarioTarjeta.selected(txtNombreCompleto,1);
+    }//GEN-LAST:event_txtNombreCompletoFocusGained
+
+    private void txtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusGained
+        // TODO add your handling code here:
+        UsuarioTarjeta.selected(txtDireccion,1);
+    }//GEN-LAST:event_txtDireccionFocusGained
+
+    private void txtNitFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNitFocusGained
+        // TODO add your handling code here:
+        UsuarioTarjeta.selected(txtNit,1);
+    }//GEN-LAST:event_txtNitFocusGained
+
+    private void txtNuevoVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoVFocusGained
+        // TODO add your handling code here:
+        UsuarioTarjeta.selected(txtNuevoV,1);
+    }//GEN-LAST:event_txtNuevoVFocusGained
+
+    private void txtNombreCompletoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreCompletoFocusLost
+        // TODO add your handling code here:
+        UsuarioTarjeta.selected(txtNombreCompleto,0);
+    }//GEN-LAST:event_txtNombreCompletoFocusLost
+
+    private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
+        // TODO add your handling code here:
+         UsuarioTarjeta.selected(txtDireccion,0);
+    }//GEN-LAST:event_txtDireccionFocusLost
+
+    private void txtNitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNitFocusLost
+        // TODO add your handling code here:
+          UsuarioTarjeta.selected(txtNit,0);
+    }//GEN-LAST:event_txtNitFocusLost
+
+    private void txtNuevoVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoVFocusLost
+        // TODO add your handling code here:
+        UsuarioTarjeta.selected(txtNuevoV,0);
+    }//GEN-LAST:event_txtNuevoVFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

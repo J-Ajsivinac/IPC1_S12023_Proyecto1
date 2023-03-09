@@ -55,8 +55,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private ArrayList<Tarjeta> tarj = new ArrayList<Tarjeta>();
     private Usuario user;
     private Color desactivado = new Color(34, 37, 47);
-    private Color act = new Color(144, 135, 176);
-    private Color textact = new Color(19, 19, 26);
+    private Color act = new Color(200, 187, 250);
+    private Color textact = new Color(68, 68, 86);
 
     /**
      * Creates new form UsuarioCotizacionCompra
@@ -142,13 +142,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     }
 
     public void cargarCombos(JComboBox caja) {
-        caja.addItem(new Departamentos("","", "", 0.0, 0.0, "", "Departamentos"));
+        caja.addItem(new Departamentos("", "", "", 0.0, 0.0, "", "Departamentos"));
         //boxDepartamentos.addItem("Departamento");
         for (int i = 0; i < depa.size(); i++) {
             if (depa.get(i) != null) {
                 String codeR = depa.get(i).getCodigo();
                 String nombreRegion = depa.get(i).getNombre();
-                caja.addItem(new Departamentos(depa.get(i).getIdRegion(),codeR, nombreRegion, depa.get(i).getPrecioEstandar(), depa.get(i).getPrecioEspecial(), depa.get(i).getCodDepartamento(), depa.get(i).getNombreDepartamento()));
+                caja.addItem(new Departamentos(depa.get(i).getIdRegion(), codeR, nombreRegion, depa.get(i).getPrecioEstandar(), depa.get(i).getPrecioEspecial(), depa.get(i).getCodDepartamento(), depa.get(i).getNombreDepartamento()));
             }
         }
     }
@@ -192,16 +192,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             double multi1 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 0);
             double multi2 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 1);
             System.out.println(multi1 + "---" + multi2);
-            double tamano1=0;
-            if(radioPeque.isSelected()){
+            double tamano1 = 0;
+            if (radioPeque.isSelected()) {
                 tamano1 = 1.4;
-            }else if(radioMediano.isSelected()){
+            } else if (radioMediano.isSelected()) {
                 tamano1 = 1.7;
-            }else if(RadioGrande.isSelected()){
+            } else if (RadioGrande.isSelected()) {
                 tamano1 = 2;
             }
-            
-            
+
             total1 = multi1 * tamano1 * numeroPaquetes;
             total2 = multi2 * tamano1 * numeroPaquetes;
             BigDecimal bd = new BigDecimal(total1).setScale(2, RoundingMode.HALF_UP);
@@ -559,13 +558,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jPanel3.setOpaque(false);
 
         panelRound1.setBackground(new java.awt.Color(19, 19, 26));
-        panelRound1.setRoundBottomLeft(10);
-        panelRound1.setRoundBottomRight(10);
-        panelRound1.setRoundTopLeft(10);
-        panelRound1.setRoundTopRight(10);
+        panelRound1.setRoundBottomLeft(16);
+        panelRound1.setRoundBottomRight(16);
+        panelRound1.setRoundTopLeft(16);
+        panelRound1.setRoundTopRight(16);
 
         boxDepartamentos.setBackground(new java.awt.Color(40, 41, 52));
-        boxDepartamentos.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentos.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentos.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentos.setBorder(null);
         boxDepartamentos.addItemListener(new java.awt.event.ItemListener() {
@@ -580,12 +579,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
 
         boxMunicipios.setBackground(new java.awt.Color(40, 41, 52));
-        boxMunicipios.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxMunicipios.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxMunicipios.setForeground(new java.awt.Color(255, 255, 255));
         boxMunicipios.setBorder(null);
 
         txtDireccionOrigen.setBackground(new java.awt.Color(40, 41, 52));
-        txtDireccionOrigen.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtDireccionOrigen.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDireccionOrigen.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccionOrigen.setBorder(null);
 
@@ -606,25 +605,25 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Origen");
 
         panelRound11.setBackground(new java.awt.Color(19, 19, 26));
-        panelRound11.setRoundBottomLeft(10);
-        panelRound11.setRoundBottomRight(10);
-        panelRound11.setRoundTopLeft(10);
-        panelRound11.setRoundTopRight(10);
+        panelRound11.setRoundBottomLeft(16);
+        panelRound11.setRoundBottomRight(16);
+        panelRound11.setRoundTopLeft(16);
+        panelRound11.setRoundTopRight(16);
 
         boxDepartamentosD.setBackground(new java.awt.Color(40, 41, 52));
-        boxDepartamentosD.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxDepartamentosD.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentosD.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosD.setBorder(null);
         boxDepartamentosD.addItemListener(new java.awt.event.ItemListener() {
@@ -634,12 +633,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
 
         boxMunicipiosD.setBackground(new java.awt.Color(40, 41, 52));
-        boxMunicipiosD.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxMunicipiosD.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxMunicipiosD.setForeground(new java.awt.Color(255, 255, 255));
         boxMunicipiosD.setBorder(null);
 
         txtDireccionDestino.setBackground(new java.awt.Color(40, 41, 52));
-        txtDireccionDestino.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtDireccionDestino.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDireccionDestino.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccionDestino.setBorder(null);
 
@@ -653,21 +652,21 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                     .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         panelRound11Layout.setVerticalGroup(
             panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound11Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel13.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Destino");
 
@@ -689,7 +688,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel13))
@@ -704,17 +703,19 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jLabel5.setText("Numero de Paquetes");
 
         txtNumeroPaquetes.setBackground(new java.awt.Color(40, 41, 52));
+        txtNumeroPaquetes.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNumeroPaquetes.setForeground(new java.awt.Color(255, 255, 255));
+        txtNumeroPaquetes.setBorder(null);
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Tamaño de paquetes");
 
-        panelPeque.setBackground(new java.awt.Color(144, 135, 176));
-        panelPeque.setRoundBottomLeft(15);
-        panelPeque.setRoundBottomRight(15);
-        panelPeque.setRoundTopLeft(15);
-        panelPeque.setRoundTopRight(15);
+        panelPeque.setBackground(new java.awt.Color(168, 149, 244));
+        panelPeque.setRoundBottomLeft(20);
+        panelPeque.setRoundBottomRight(20);
+        panelPeque.setRoundTopLeft(20);
+        panelPeque.setRoundTopRight(20);
         panelPeque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelPequeMouseClicked(evt);
@@ -723,7 +724,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelPeque.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblP1.setBackground(new java.awt.Color(40, 41, 52));
-        lblP1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblP1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblP1.setForeground(new java.awt.Color(255, 255, 255));
         lblP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblP1.setText("Pequeño");
@@ -754,11 +755,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblP2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panelPeque.add(lblP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
 
-        panelEstandar.setBackground(new java.awt.Color(144, 135, 176));
-        panelEstandar.setRoundBottomLeft(10);
-        panelEstandar.setRoundBottomRight(10);
-        panelEstandar.setRoundTopLeft(10);
-        panelEstandar.setRoundTopRight(10);
+        panelEstandar.setBackground(new java.awt.Color(168, 149, 244));
+        panelEstandar.setRoundBottomLeft(18);
+        panelEstandar.setRoundBottomRight(18);
+        panelEstandar.setRoundTopLeft(18);
+        panelEstandar.setRoundTopRight(18);
         panelEstandar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelEstandarMouseClicked(evt);
@@ -804,10 +805,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         );
 
         panelEspecial.setBackground(new java.awt.Color(34, 37, 47));
-        panelEspecial.setRoundBottomLeft(10);
-        panelEspecial.setRoundBottomRight(10);
-        panelEspecial.setRoundTopLeft(10);
-        panelEspecial.setRoundTopRight(10);
+        panelEspecial.setRoundBottomLeft(18);
+        panelEspecial.setRoundBottomRight(18);
+        panelEspecial.setRoundTopLeft(18);
+        panelEspecial.setRoundTopRight(18);
         panelEspecial.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelEspecialMouseClicked(evt);
@@ -851,10 +852,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         );
 
         panelMediano.setBackground(new java.awt.Color(34, 37, 47));
-        panelMediano.setRoundBottomLeft(15);
-        panelMediano.setRoundBottomRight(15);
-        panelMediano.setRoundTopLeft(15);
-        panelMediano.setRoundTopRight(15);
+        panelMediano.setRoundBottomLeft(20);
+        panelMediano.setRoundBottomRight(20);
+        panelMediano.setRoundTopLeft(20);
+        panelMediano.setRoundTopRight(20);
         panelMediano.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelMedianoMouseClicked(evt);
@@ -862,7 +863,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelMediano.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblM1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblM1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblM1.setForeground(new java.awt.Color(255, 255, 255));
         lblM1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblM1.setText("Mediano");
@@ -889,10 +890,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelMediano.add(lblM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
 
         panelGrande.setBackground(new java.awt.Color(34, 37, 47));
-        panelGrande.setRoundBottomLeft(15);
-        panelGrande.setRoundBottomRight(15);
-        panelGrande.setRoundTopLeft(15);
-        panelGrande.setRoundTopRight(15);
+        panelGrande.setRoundBottomLeft(20);
+        panelGrande.setRoundBottomRight(20);
+        panelGrande.setRoundTopLeft(20);
+        panelGrande.setRoundTopRight(20);
         panelGrande.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelGrandeMouseClicked(evt);
@@ -900,7 +901,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelGrande.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblG1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblG1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblG1.setForeground(new java.awt.Color(255, 255, 255));
         lblG1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblG1.setText("Grande");
@@ -945,12 +946,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("jLabel7");
 
-        btnGuardarCotizacion.setBackground(new java.awt.Color(218, 211, 254));
         btnGuardarCotizacion.setBorder(null);
         btnGuardarCotizacion.setForeground(new java.awt.Color(96, 77, 182));
         btnGuardarCotizacion.setText("Descargar Cotización");
-        btnGuardarCotizacion.setBorderColor(new java.awt.Color(218, 211, 254));
-        btnGuardarCotizacion.setColor(new java.awt.Color(218, 211, 254));
+        btnGuardarCotizacion.setBorderColor(new java.awt.Color(197, 185, 248));
+        btnGuardarCotizacion.setColor(new java.awt.Color(197, 185, 248));
         btnGuardarCotizacion.setColorClick(new java.awt.Color(182, 170, 246));
         btnGuardarCotizacion.setColorOver(new java.awt.Color(201, 190, 255));
         btnGuardarCotizacion.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
@@ -967,7 +967,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1006,12 +1006,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(txtNumeroPaquetes))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
@@ -1023,7 +1023,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(18, 23, Short.MAX_VALUE)
                 .addComponent(panelEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1043,8 +1043,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelRound5.setBackground(new java.awt.Color(28, 28, 36));
@@ -1116,12 +1116,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        jScrollPane1.setBackground(new java.awt.Color(28, 28, 36));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(28, 28, 36)));
+
         areaDetalles.setEditable(false);
         areaDetalles.setBackground(new java.awt.Color(40, 41, 52));
         areaDetalles.setColumns(20);
         areaDetalles.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         areaDetalles.setForeground(new java.awt.Color(255, 255, 255));
         areaDetalles.setRows(5);
+        areaDetalles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(28, 28, 36)));
+        areaDetalles.setCaretColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(areaDetalles);
 
         btnDGuia.setBorder(null);
@@ -1139,15 +1144,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Tipo de Pago");
 
-        panelRound2.setBackground(new java.awt.Color(166, 156, 202));
-        panelRound2.setRoundBottomLeft(15);
-        panelRound2.setRoundBottomRight(15);
-        panelRound2.setRoundTopLeft(15);
-        panelRound2.setRoundTopRight(15);
+        panelRound2.setBackground(new java.awt.Color(168, 149, 244));
+        panelRound2.setRoundBottomLeft(18);
+        panelRound2.setRoundBottomRight(18);
+        panelRound2.setRoundTopLeft(18);
+        panelRound2.setRoundTopRight(18);
         panelRound2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelRound2MouseClicked(evt);
@@ -1196,10 +1201,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         );
 
         panelRound3.setBackground(new java.awt.Color(34, 37, 47));
-        panelRound3.setRoundBottomLeft(15);
-        panelRound3.setRoundBottomRight(15);
-        panelRound3.setRoundTopLeft(15);
-        panelRound3.setRoundTopRight(15);
+        panelRound3.setRoundBottomLeft(18);
+        panelRound3.setRoundBottomRight(18);
+        panelRound3.setRoundTopLeft(18);
+        panelRound3.setRoundTopRight(18);
         panelRound3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelRound3MouseClicked(evt);
@@ -1364,7 +1369,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                                     .addComponent(panelRound9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
+                        .addGap(93, 93, 93)
                         .addComponent(btnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
                         .addComponent(btnDGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1385,15 +1390,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnrRealizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(btnrRealizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                    .addComponent(btnDGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
@@ -1407,9 +1411,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
@@ -1428,7 +1433,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(18, 35, Short.MAX_VALUE)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1610,12 +1615,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             Element tamPaq = doc.getElementById("dTamano");
             Element precioEst = doc.getElementById("dPrecioEst");
             Element precioEspe = doc.getElementById("dPrecioEspe");
-            
+
             Element dOrigen = doc.getElementById("dOrigen");
             Element dDireccionOrigen = doc.getElementById("dDireccionOrigen");
             Element dDestino = doc.getElementById("dDestino");
             Element dDireccionDestino = doc.getElementById("dDireccionDestino");
-            
+
             String[] datosO = guardarCotizacion.getOrigen().split(",");
             dOrigen.text(datosO[0] + "," + datosO[1]);
             dDireccionOrigen.text(datosO[2]);

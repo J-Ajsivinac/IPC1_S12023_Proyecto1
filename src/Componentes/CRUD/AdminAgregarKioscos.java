@@ -125,7 +125,7 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
 
         boxRegion.setBackground(new java.awt.Color(40, 41, 52));
-        boxRegion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegion.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegion.setForeground(new java.awt.Color(255, 255, 255));
         boxRegion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -133,16 +133,16 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Región");
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre del Kiosco");
 
         txtNombreKiosco.setBackground(new java.awt.Color(40, 41, 52));
-        txtNombreKiosco.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNombreKiosco.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNombreKiosco.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreKiosco.setBorder(null);
         txtNombreKiosco.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -155,7 +155,7 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         });
 
         txtCodKiosco.setBackground(new java.awt.Color(40, 41, 52));
-        txtCodKiosco.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtCodKiosco.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtCodKiosco.setForeground(new java.awt.Color(255, 255, 255));
         txtCodKiosco.setBorder(null);
         txtCodKiosco.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -167,17 +167,18 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Codigo del Kiosco");
 
+        buttonRound1.setBorder(null);
         buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
         buttonRound1.setText("Registrar Kiosco");
         buttonRound1.setBorderColor(new java.awt.Color(123, 127, 239));
         buttonRound1.setColor(new java.awt.Color(123, 127, 239));
         buttonRound1.setColorClick(new java.awt.Color(121, 118, 236));
         buttonRound1.setColorOver(new java.awt.Color(121, 147, 251));
-        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         buttonRound1.setRadius(15);
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,40 +194,44 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombreKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
+                        .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombreKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCodKiosco)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(176, 176, 176))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
                         .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtNombreKiosco, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCodKiosco, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombreKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addGap(9, 9, 9))
         );
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
@@ -249,8 +254,6 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
-                {null, null, null},
-                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -265,6 +268,8 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabla1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tabla1.setRowHeight(40);
         jScrollPane1.setViewportView(tabla1);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
@@ -287,8 +292,8 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -78,7 +78,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                 boxRol.setSelectedIndex(2);
                 int i = 0;
                 for (Kioscos kiosco : kD) {
-                    if (rolP[1].equals(kiosco)) {
+                    if (rolP[1].equals(kiosco.getCodigoKioco())) {
                         boxKiosco.setSelectedIndex(i);
                         break;
                     }
@@ -128,15 +128,24 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     }
 
     public void agregarBoxes() {
+        boxGenero.removeAllItems();
+        boxRol.removeAllItems();
+        boxKiosco.removeAllItems();
+        boxNacionalidad.removeAllItems();
+        
         boxGenero.addItem("Masculino");
-        boxGenero.addItem("Femenino");
-
+        boxGenero.addItem("Femenino");  
         for (String nombres : nombrePaises) {
             boxNacionalidad.addItem(nombres);
         }
+
         boxRol.addItem("Usuario Individual");
         boxRol.addItem("Usuario Empresarial");
         boxRol.addItem("Kiosko");
+        ArrayList<Kioscos> kD = ctrlKioscos.getAllKioscos();
+        for (Kioscos kiosco : kD) {
+            boxKiosco.addItem(new Kioscos(kiosco.getIdRegion(), kiosco.getCodigo(), kiosco.getNombre(), kiosco.getPrecioEstandar(), kiosco.getPrecioEspecial(), kiosco.getCodigoKioco(), kiosco.getNombreKiosco()));
+        }
 
     }
 
@@ -147,7 +156,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
             archivos.setFileFilter(filtrado);
         } catch (Exception e) {
-            System.out.println("--"+e);
+            System.out.println("--" + e);
         }
 
         int respuesta = archivos.showOpenDialog(this);
@@ -261,7 +270,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
         int rol = boxRol.getSelectedIndex();
         String rolCompleto = boxRol.getSelectedItem().toString();
+
         if (rol == 2 && kioscoItem != null) {
+            rolCompleto="";
             rolCompleto = "Kiosco," + kioscoItem.getNombreKiosco();
         }
         if (ctrlUsuarios.cambiarRol(rolCompleto, login.posicionU)) {
@@ -740,6 +751,11 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         boxRol.setBackground(new java.awt.Color(40, 41, 52));
         boxRol.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRol.setForeground(new java.awt.Color(255, 255, 255));
+        boxRol.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxRolItemStateChanged(evt);
+            }
+        });
 
         boxKiosco.setBackground(new java.awt.Color(40, 41, 52));
         boxKiosco.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
@@ -892,10 +908,29 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         eliminarCuenta();
     }//GEN-LAST:event_buttonRound5ActionPerformed
 
+    private void boxRolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRolItemStateChanged
+        // TODO add your handling code here:
+        if (boxRol.getSelectedIndex() == 2) {
+            if (boxKiosco.getItemCount() == 0) {
+                boxRol.setSelectedIndex(1);
+                boxRol.setSelectedIndex(0);
+                boxRol.getSelectedIndex();
+                JOptionPane.showMessageDialog(null, "No hay Kioscos registrados");
+            } else {
+                boxKiosco.setEnabled(true);
+                boxKiosco.setVisible(true);
+            }
+
+        } else {
+            boxKiosco.setEnabled(false);
+            boxKiosco.setVisible(false);
+        }
+    }//GEN-LAST:event_boxRolItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxGenero;
-    private javax.swing.JComboBox<String> boxKiosco;
+    private javax.swing.JComboBox<Object> boxKiosco;
     private javax.swing.JComboBox<String> boxNacionalidad;
     private javax.swing.JComboBox<String> boxRol;
     private Elementos.ButtonRound buttonRound1;

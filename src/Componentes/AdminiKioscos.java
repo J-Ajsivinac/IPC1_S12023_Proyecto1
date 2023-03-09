@@ -29,18 +29,19 @@ public class AdminiKioscos extends javax.swing.JPanel {
     public AdminiKioscos() {
         initComponents();
         this.setBounds(0, 0, 710, 500);
-        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
-        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.RED);
+        unselect = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(52, 52, 52));
+        selected = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(197, 202, 255));
         panelBackground.setBorder(unselect);
         aAK = new AdminAgregarKioscos();
         aMK = new AdminModificarKioscos();
         regio = ctrlRegiones.getTodasRegiones();
         panelCrud.add(aAK);
         panelCrud.add(aMK);
-        menuClick(aAK, panelAgregar);
+        
     }
 
     public void cargarK1(){
+        menuClick(aAK, panelAgregar);
         aAK.cargarRegiones();
         aAK.cargarTabla();
     }
@@ -48,9 +49,13 @@ public class AdminiKioscos extends javax.swing.JPanel {
     public void menuClick(JPanel panel, JPanel btn) {
         aAK.setVisible(false);
         aMK.setVisible(false);
-        panelAgregar.setBorder(unselect);
+        panelAgregar.setBackground(new Color(40, 41, 52));
+        panelModificar.setBackground(new Color(40, 41, 52));
+        //panelAgregar.setBorder(unselect);
+        panelAgregar.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(52, 52, 52)));
         panelModificar.setBorder(unselect);
         btn.setBorder(selected);
+        btn.setBackground(new Color(123, 127, 239));
         panel.setVisible(true);
     }
 
@@ -85,7 +90,7 @@ public class AdminiKioscos extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Agregar");
         panelAgregar.add(jLabel4);
@@ -99,7 +104,7 @@ public class AdminiKioscos extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Modificar");
         panelModificar.add(jLabel5);
@@ -154,14 +159,16 @@ public class AdminiKioscos extends javax.swing.JPanel {
 
     private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
         // TODO add your handling code here:
+        aAK.cargarRegiones();
+        aAK.cargarTabla();
         menuClick(aAK, panelAgregar);
     }//GEN-LAST:event_panelAgregarMouseClicked
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
-        menuClick(aMK, panelModificar);
         aMK.cargarB();
         aMK.cargarTabla1();
+        menuClick(aMK, panelModificar);
     }//GEN-LAST:event_panelModificarMouseClicked
 
 

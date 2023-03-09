@@ -41,27 +41,24 @@
   <SubComponents>
     <Component class="Elementos.ButtonRound" name="cmdGuia">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="96" green="e0" red="6c" type="rgb"/>
-        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="4a" green="88" red="2d" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Gu&#xed;a"/>
         <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="96" green="e0" red="6c" type="rgb"/>
+          <Color blue="ce" green="e7" red="c1" type="rgb"/>
         </Property>
         <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="96" green="e0" red="6c" type="rgb"/>
+          <Color blue="ce" green="e7" red="c1" type="rgb"/>
         </Property>
         <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="59" green="a2" red="1f" type="rgb"/>
+          <Color blue="a0" green="da" red="83" type="rgb"/>
         </Property>
         <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="5e" green="bd" red="28" type="rgb"/>
+          <Color blue="c0" green="dc" red="b0" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Montserrat" size="12" style="1"/>
@@ -75,20 +72,20 @@
           <Border info="null"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="de" green="66" red="26" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Factura"/>
         <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="fd" green="b5" red="84" type="rgb"/>
+          <Color blue="ff" green="e7" red="b6" type="rgb"/>
         </Property>
         <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="fd" green="b5" red="81" type="rgb"/>
+          <Color blue="ff" green="e7" red="b6" type="rgb"/>
         </Property>
         <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="e2" green="60" red="3" type="rgb"/>
+          <Color blue="f6" green="d3" red="8e" type="rgb"/>
         </Property>
         <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="fc" green="79" red="1c" type="rgb"/>
+          <Color blue="ee" green="d8" red="a9" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Montserrat" size="12" style="1"/>

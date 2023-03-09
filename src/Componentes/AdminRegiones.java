@@ -56,7 +56,16 @@ public class AdminRegiones extends javax.swing.JPanel {
         btn.setBackground(new Color(123, 127, 239));
         panel.setVisible(true);
     }
-
+    public void inicioModificar(){
+        aMR.cargarRegiones();
+        aMR.cargarBoxRegiones();
+        aMR.mostrarDatos();
+    }
+    
+    public void inicioAgregar(){
+        menuClick(aAR, panelAgregar);
+        aAR.cargarRegiones();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,16 +167,14 @@ public class AdminRegiones extends javax.swing.JPanel {
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
+        inicioModificar();
         menuClick(aMR, panelModificar);
-        aMR.cargarRegiones();
-        aMR.cargarBoxRegiones();
-        aMR.mostrarDatos();
     }//GEN-LAST:event_panelModificarMouseClicked
 
     private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
         // TODO add your handling code here:
-        menuClick(aAR, panelAgregar);
-        aAR.cargarRegiones();
+        inicioAgregar();
+        menuClick(aAR, panelAgregar); 
     }//GEN-LAST:event_panelAgregarMouseClicked
 
 

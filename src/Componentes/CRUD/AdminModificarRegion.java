@@ -76,8 +76,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         tabla2.fixTable(jScrollPane2);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
-        cargarRegiones();
-        mostrarDatos();
 
     }
 

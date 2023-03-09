@@ -2,6 +2,7 @@ package Administrador;
 
 import static Administrador.ctrlDepartamentos.generarCodigos;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ctrlKioscos {
 
@@ -11,10 +12,15 @@ public class ctrlKioscos {
         if (!codigoKiosco.equals("") && !nombreKiosco.equals("")) {
 
             if (!verificarKioscos(codigoKiosco)) {
-                Regiones r = ctrlRegiones.getRegionCodigo(idRegion);
-                kioscos.add(new Kioscos(idRegion, r.getCodigo(), r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
-                        codigoKiosco, nombreKiosco));
-                return true;
+                if (!verificarKioscosNombre(nombreKiosco)) {
+                    Regiones r = ctrlRegiones.getRegionCodigo(idRegion);
+                    kioscos.add(new Kioscos(idRegion, r.getCodigo(), r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
+                            codigoKiosco, nombreKiosco));
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "El Nombre de Kiosco ya existe");
+                }
+
             }
         }
         return false;
@@ -24,6 +30,16 @@ public class ctrlKioscos {
         for (int i = 0; i < kioscos.size(); i++) {
             Kioscos d = kioscos.get(i);
             if (d.getCodigoKioco().equals(codigo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean verificarKioscosNombre(String Nombre) {
+        for (int i = 0; i < kioscos.size(); i++) {
+            Kioscos d = kioscos.get(i);
+            if (d.getNombreKiosco().equals(Nombre)) {
                 return true;
             }
         }
@@ -50,8 +66,13 @@ public class ctrlKioscos {
         for (int i = 0; i < kioscos.size(); i++) {
             Kioscos kiosco = kioscos.get(i);
             if (kiosco.getCodigoKioco().equals(codKiosco)) {
-                kiosco.setNombreKiosco(nuevoNombre);
-                return true;
+                if (!verificarKioscosNombre(nuevoNombre)) {
+                    kiosco.setNombreKiosco(nuevoNombre);
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "El kiosco ya Existe");
+                }
+
             }
         }
         return false;

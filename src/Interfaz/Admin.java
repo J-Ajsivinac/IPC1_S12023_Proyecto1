@@ -445,6 +445,8 @@ public class Admin extends javax.swing.JFrame {
 
     private void panelRegionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseClicked
         // TODO add your handling code here:
+        ad.inicioModificar();
+        ad.inicioAgregar();
         menuClick(ad);
         bordeMenu(panelRegiones,txtRegion);
     }//GEN-LAST:event_panelRegionesMouseClicked

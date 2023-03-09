@@ -37,15 +37,16 @@ public class DepMun extends javax.swing.JPanel {
         aMDep = new AdminModificarDepMun();
         panelCrud.add(aADep);
         panelCrud.add(aMDep);
-        menuClick(aADep, panelAgregar);
+
     }
-    
-    public void cargar1(){
+
+    public void cargar1() {
         aADep.cargarRegiones();
         aADep.cargarDepartamentosMun();
         aADep.cargarTablaDepartamentos();
         aADep.cargarTablaMunicipios();
         aADep.setBordes();
+        menuClick(aADep, panelAgregar);
     }
 
     public void menuClick(JPanel panel, JPanel btn) {
@@ -59,7 +60,6 @@ public class DepMun extends javax.swing.JPanel {
         btn.setBorder(selected);
         btn.setBackground(new Color(123, 127, 239));
         panel.setVisible(true);
-
     }
 
     /**
@@ -168,10 +168,10 @@ public class DepMun extends javax.swing.JPanel {
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
-        menuClick(aMDep, panelModificar);
         aMDep.cargarB();
         aMDep.cargarTabla1();
         aMDep.cargarTabla2();
+        menuClick(aMDep, panelModificar);
     }//GEN-LAST:event_panelModificarMouseClicked
 
 

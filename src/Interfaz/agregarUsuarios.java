@@ -1024,7 +1024,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
         String rolCompleto = boxRol.getSelectedItem().toString();
 
         if (rol == 2 && kioscoItem != null) {
-            rolCompleto = "Kiosco," + kioscoItem.getNombreKiosco();
+            rolCompleto="";
+            rolCompleto = "Kiosco," + kioscoItem.getCodigoKioco();
         }
         String img = "s";
         if (!ruta.equals("")) {

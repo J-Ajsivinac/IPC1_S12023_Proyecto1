@@ -1,11 +1,16 @@
 package Interfaz;
 
+import Administrador.Kioscos;
+import Administrador.ctrlKioscos;
 import Componentes.*;
 import Usuario.Usuario;
+import Usuario.ctrlUsuarios;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -45,6 +50,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
         menuContenido.add(usuarioCliente);
         menuClick(usert);
         bordeMenu(panelTarjetas, lblTarjeta);
+        verificar();
     }
 
     public void setUsuario(Usuario u) {
@@ -82,13 +88,40 @@ public class UsuarioCliente extends javax.swing.JFrame {
         texto.setForeground(new Color(205, 233, 255));
         //panel.setForeground(new Color(205, 233, 255));
     }
-    
-    public void cerrarSesion(){
+
+    public void cerrarSesion() {
         login l = new login();
         l.setVisible(true);
         this.dispose();
     }
-    
+
+    public void verificar() {
+        Usuario actualizado = ctrlUsuarios.getUsuarioIndice(login.posicionU);
+        boolean activar = false;
+        String[] rolP = actualizado.getRol().split(",");
+        if (rolP[0].equals("Usuario Individual")) {
+        } else if (rolP[0].equals("Usuario Empresarial")) {
+        } else {
+            ArrayList<Kioscos> kD = ctrlKioscos.getAllKioscos();
+            if (kD.size() != 0) {
+                for (Kioscos kiosco : kD) {
+                    if (rolP[1].equals(kiosco.getCodigoKioco())) {
+                        activar = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!activar) {
+                String rolCompleto="Usuario Individual";
+                if (ctrlUsuarios.cambiarRol(rolCompleto, login.posicionU)) {
+                    JOptionPane.showMessageDialog(null, "Se Kiosco no existe, su rol actual es: Usuario individual");
+                    JOptionPane.showMessageDialog(null, "Si lo desea cambiar dirigase a Cuenta");
+                }
+            }
+
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
