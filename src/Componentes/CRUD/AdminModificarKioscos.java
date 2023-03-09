@@ -65,6 +65,12 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         tabla1.fixTable(jScrollPane2);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
         txtNuevoNombre.setBorder(login.unselectedborder);
+        Regiones depItem = (Regiones) boxRegionUpdate.getSelectedItem();
+        if (depItem != null) {
+            String codDepartamento = depItem.getIdRegion();
+            cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
+        }
+
     }
 
     public void cargarB() {
@@ -77,7 +83,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         regio = ctrlRegiones.getTodasRegiones();
         for (int i = 0; i < regio.size(); i++) {
             if (regio.get(i) != null) {
-                String codeR = regio.get(i).getCodigo();
+                String codeR = regio.get(i).getIdRegion();
                 String nombreRegion = regio.get(i).getNombre();
                 caja.addItem(new Regiones(codeR, nombreRegion));
             }
@@ -93,7 +99,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             if (kiosco.get(i) != null) {
                 String codeD = kiosco.get(i).getCodigoKioco();
                 String nombreMuni = kiosco.get(i).getNombreKiosco();
-                actualizar.addItem(new Departamentos(codeD, nombreMuni, kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), kiosco.get(i).getCodigoKioco(), kiosco.get(i).getNombreKiosco()));
+                actualizar.addItem(new Kioscos(kiosco.get(i).getIdRegion(), codeD, nombreMuni, kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), kiosco.get(i).getCodigoKioco(), kiosco.get(i).getNombreKiosco()));
             }
         }
     }
@@ -103,10 +109,10 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
     }
 
     public void actualizarKiosco() {
-        Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
+        Kioscos dep = (Kioscos) boxDepartamentosUpdate.getSelectedItem();
 
         if (dep != null && boxDepartamentosUpdate != null && !txtNuevoNombre.getText().toString().equals("")) {
-            String codDepartamento = dep.getCodDepartamento();
+            String codDepartamento = dep.getCodigoKioco();
             String nNombre = txtNuevoNombre.getText();
             if (ctrlKioscos.modificarNombreKiosco(codDepartamento, nNombre)) {
                 JOptionPane.showMessageDialog(null, "Nombre Actualizado");
@@ -127,7 +133,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         //boxRegionEliminar
         Regiones depRegion = (Regiones) boxRegionEliminar.getSelectedItem();
         if (depRegion != null) {
-            ArrayList<Kioscos> totalKioscoses = (ArrayList<Kioscos>) ctrlKioscos.getAllDepartamentosKiosco(depRegion.getCodigo()).clone();
+            ArrayList<Kioscos> totalKioscoses = (ArrayList<Kioscos>) ctrlKioscos.getAllDepartamentosKiosco(depRegion.getIdRegion()).clone();
             for (Kioscos k : totalKioscoses) {
                 Object datos[] = new Object[2];
                 datos[0] = k.getCodigoKioco();
@@ -340,6 +346,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 "Codigo", "Nombre", "Borrar"
             }
         ));
+        tabla1.setRowHeight(65);
         jScrollPane2.setViewportView(tabla1);
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -410,7 +417,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         // TODO add your handling code here:
         Regiones depItem = (Regiones) boxRegionUpdate.getSelectedItem();
         if (depItem != null) {
-            String codDepartamento = depItem.getCodigo();
+            String codDepartamento = depItem.getIdRegion();
             cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
         }
     }//GEN-LAST:event_boxRegionUpdateItemStateChanged
@@ -427,12 +434,12 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
     private void txtNuevoNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoNombreFocusGained
         // TODO add your handling code here:
-        AdminAgregarRegiones.selected(txtNuevoNombre,1);
+        AdminAgregarRegiones.selected(txtNuevoNombre, 1);
     }//GEN-LAST:event_txtNuevoNombreFocusGained
 
     private void txtNuevoNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoNombreFocusLost
         // TODO add your handling code here:
-        AdminAgregarRegiones.selected(txtNuevoNombre,0);
+        AdminAgregarRegiones.selected(txtNuevoNombre, 0);
     }//GEN-LAST:event_txtNuevoNombreFocusLost
 
 

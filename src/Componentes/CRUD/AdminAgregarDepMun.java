@@ -40,51 +40,50 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         modelo1 = (DefaultTableModel) table2.getModel();
         table1.fixTable(jScrollPane2);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
-        
+
         table2.fixTable(jScrollPane3);
         jScrollPane3.getVerticalScrollBar().setUnitIncrement(30);
-        
-        
-        cargarRegiones();
-        cargarDepartamentosMun(boxDepartamento);
-        cargarTablaDepartamentos();
-        cargarTablaMunicipios();
-        setBordes();
-        
-        
     }
-    
+
     public void setBordes() {
         txtNombreDepartamento.setBorder(login.unselectedborder);
         txtNombreMunicipio.setBorder(login.unselectedborder);
     }
 
     public void cargarRegiones() {
+        regio = ctrlRegiones.getTodasRegiones();
         boxRegion.removeAllItems();
+        boxRegion1.removeAllItems();
         for (int i = 0; i < regio.size(); i++) {
             if (regio.get(i) != null) {
-                String codeR = regio.get(i).getCodigo();
+                String codeR = regio.get(i).getIdRegion();
                 String nombreRegion = regio.get(i).getNombre();
                 boxRegion.addItem(new Regiones(codeR, nombreRegion));
                 boxRegion1.addItem(new Regiones(codeR, nombreRegion));
             }
-
         }
     }
 
-    public void cargarDepartamentosMun(JComboBox actualizar) {
+    public void cargarDepartamentosMun() {
         //boxMunicipios.addItem("Municipios");
+        boxDepartamento.removeAllItems();
         Regiones depItem = (Regiones) boxRegion1.getSelectedItem();
-        String codDepartamento = depItem.getCodigo();
-        limpiarBoxes(actualizar);
-        ArrayList<Departamentos> departamento = ctrlDepartamentos.getAllDepartamentosByCod(codDepartamento);
-        for (int i = 0; i < departamento.size(); i++) {
-            if (departamento.get(i) != null) {
-                String codeD = departamento.get(i).getCodDepartamento();
-                String nombreMuni = departamento.get(i).getNombreDepartamento();
-                actualizar.addItem(new Departamentos(codeD, nombreMuni, departamento.get(i).getPrecioEstandar(), departamento.get(i).getPrecioEspecial(), departamento.get(i).getCodDepartamento(), departamento.get(i).getNombreDepartamento()));
+        
+        if (depItem != null) {
+            String codDepartamento = depItem.getIdRegion();
+            System.out.println(codDepartamento);
+            ArrayList<Departamentos> departamento = ctrlDepartamentos.getAllDepartamentosByCod(codDepartamento);
+            for (int i = 0; i < departamento.size(); i++) {
+                if (departamento.get(i) != null) {
+                    String codeD = departamento.get(i).getCodDepartamento();
+                    String nombreMuni = departamento.get(i).getNombreDepartamento();
+                    boxDepartamento.addItem(new Departamentos(departamento.get(i).getIdRegion(), codeD, nombreMuni, departamento.get(i).getPrecioEstandar(), departamento.get(i).getPrecioEspecial(), departamento.get(i).getCodDepartamento(), departamento.get(i).getNombreDepartamento()));
+                }
             }
+        }else{
+            System.out.println("xd");
         }
+
     }
 
     public void limpiarBoxes(JComboBox eliminar) {
@@ -97,14 +96,15 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
 
     public void ingresarDepartamentos() {
         Regiones regItem = (Regiones) boxRegion.getSelectedItem();
-        String codigo = regItem.getCodigo();
+
         String nombreDepartament = txtNombreDepartamento.getText();
-        if (!(codigo.equals("") && nombreDepartament.equals("")) && regItem != null) {
+        if (!(nombreDepartament.equals("")) && regItem != null) {
+            String codigo = regItem.getIdRegion();
             if (ctrlDepartamentos.nuevoDepartamento(codigo, nombreDepartament)) {
                 JOptionPane.showMessageDialog(null, "Departamento ingresado Correctamente");
+                cargarRegiones();
                 txtNombreDepartamento.setText("");
-                limpiarDepartamentos();
-                cargarDepartamentosMun(boxDepartamento);
+                cargarDepartamentosMun();
                 cargarTablaDepartamentos();
             }
         } else {
@@ -114,11 +114,11 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
 
     public void ingresarMunicipio() {
         Departamentos departa = (Departamentos) boxDepartamento.getSelectedItem();
-         Regiones region = (Regiones) boxRegion1.getSelectedItem();
+        Regiones region = (Regiones) boxRegion1.getSelectedItem();
         String codigo = "";
         String nombreMuni = txtNombreMunicipio.getText();
-        if (!(nombreMuni.equals("")) && departa!=null && region != null) {
-            codigo = departa.getCodDepartamento();    
+        if (!(nombreMuni.equals("")) && departa != null && region != null) {
+            codigo = departa.getCodDepartamento();
             if (ctrlDepartamentos.agregarMunicipios(codigo, nombreMuni)) {
                 cargarTablaMunicipios();
                 txtNombreMunicipio.setText("");
@@ -135,7 +135,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         for (Departamentos departa : depa) {
             Object datos[] = new Object[3];
             datos[0] = departa.getCodDepartamento();
-            String cod = departa.getCodigo();
+            String cod = departa.getIdRegion();
             datos[1] = ctrlRegiones.getRegionCodigo(cod).getNombre();
             datos[2] = departa.getNombreDepartamento();
             modelo.addRow(datos);
@@ -149,9 +149,9 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
             for (Municipios mun : munic) {
                 Object datos[] = new Object[3];
                 String codDep = mun.getCodigoDepartamento();
-                String codRegion = ctrlDepartamentos.getDepartamentoCodigo(codDep).getCodigo();
+                String codRegion = ctrlDepartamentos.getDepartamentoCodigo(codDep).getIdRegion();
                 if (codDep != null && codRegion != null) {
-                    datos[0] = ctrlRegiones.getRegionCodigo(codRegion);
+                    datos[0] = ctrlRegiones.getRegionCodigo(codRegion).getNombre();
                     datos[1] = codDep;
                     datos[2] = mun.getNombreMunicipio();
                     modelo1.addRow(datos);
@@ -161,7 +161,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         }
 
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -503,7 +503,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
 
     private void boxRegion1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegion1ItemStateChanged
         // TODO add your handling code here:
-        cargarDepartamentosMun(boxDepartamento);
+        cargarDepartamentosMun();
     }//GEN-LAST:event_boxRegion1ItemStateChanged
 
     private void buttonRound2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound2ActionPerformed
@@ -513,17 +513,17 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
 
     private void txtNombreDepartamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreDepartamentoFocusGained
         // TODO add your handling code here:
-        AdminAgregarRegiones.selected(txtNombreDepartamento,1);
+        AdminAgregarRegiones.selected(txtNombreDepartamento, 1);
     }//GEN-LAST:event_txtNombreDepartamentoFocusGained
 
     private void txtNombreMunicipioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreMunicipioFocusGained
         // TODO add your handling code here:
-         AdminAgregarRegiones.selected(txtNombreMunicipio,1);
+        AdminAgregarRegiones.selected(txtNombreMunicipio, 1);
     }//GEN-LAST:event_txtNombreMunicipioFocusGained
 
     private void txtNombreDepartamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreDepartamentoFocusLost
         // TODO add your handling code here:
-        AdminAgregarRegiones.selected(txtNombreDepartamento,0);
+        AdminAgregarRegiones.selected(txtNombreDepartamento, 0);
     }//GEN-LAST:event_txtNombreDepartamentoFocusLost
 
 

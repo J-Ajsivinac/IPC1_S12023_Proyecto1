@@ -87,7 +87,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             if (kiosco.get(i) != null) {
                 String codeK = kiosco.get(i).getCodigoKioco();
                 String nombreKiosco = kiosco.get(i).getNombreKiosco();
-                boxKiosco.addItem(new Kioscos(kiosco.get(i).getCodigo(), kiosco.get(i).getNombre(), kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), codeK, nombreKiosco));
+                boxKiosco.addItem(new Kioscos(kiosco.get(i).getIdRegion(),kiosco.get(i).getCodigo(), kiosco.get(i).getNombre(), kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), codeK, nombreKiosco));
             }
 
         }

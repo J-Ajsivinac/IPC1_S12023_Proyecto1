@@ -7,12 +7,12 @@ public class ctrlKioscos {
 
     public static ArrayList<Kioscos> kioscos = new ArrayList<Kioscos>();
 
-    public static boolean nuevoKiosco(String codigo, String codigoKiosco, String nombreKiosco) {
-        if (!codigo.equals("") && !nombreKiosco.equals("")) {
+    public static boolean nuevoKiosco(String idRegion, String codigoKiosco, String nombreKiosco) {
+        if (!codigoKiosco.equals("") && !nombreKiosco.equals("")) {
 
             if (!verificarKioscos(codigoKiosco)) {
-                Regiones r = ctrlRegiones.getRegionCodigo(codigo);
-                kioscos.add(new Kioscos(codigo, r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
+                Regiones r = ctrlRegiones.getRegionCodigo(idRegion);
+                kioscos.add(new Kioscos(idRegion, r.getCodigo(), r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
                         codigoKiosco, nombreKiosco));
                 return true;
             }
@@ -29,7 +29,7 @@ public class ctrlKioscos {
         }
         return false;
     }
-    
+
     public static int getPosicionDepartamentos(String Codigo) {
         int regresar = -1;
         for (int i = 0; i < kioscos.size(); i++) {
@@ -41,11 +41,11 @@ public class ctrlKioscos {
         }
         return regresar;
     }
-    
+
     public static ArrayList<Kioscos> getAllKioscos() {
         return kioscos;
     }
-    
+
     public static boolean modificarNombreKiosco(String codKiosco, String nuevoNombre) {
         for (int i = 0; i < kioscos.size(); i++) {
             Kioscos kiosco = kioscos.get(i);
@@ -56,7 +56,7 @@ public class ctrlKioscos {
         }
         return false;
     }
-    
+
     public static boolean eliminarKiosco(String codKiosco) {
         if (verificarKioscos(codKiosco)) {
             int posicion = getPosicionDepartamentos(codKiosco);
@@ -65,13 +65,23 @@ public class ctrlKioscos {
         }
         return false;
     }
-    
-     public static ArrayList<Kioscos> getAllDepartamentosKiosco(String codigRegion) {
+
+    public static void eliminarTKisoco(String codRegion) {
+        for (int j = 0; j < kioscos.size(); j++) {
+            Kioscos d = kioscos.get(j);
+            if (d.getCodigo().equals(codRegion)) {
+                kioscos.remove(j);
+            }
+        }
+    }
+
+    //REVISAR
+    public static ArrayList<Kioscos> getAllDepartamentosKiosco(String codigRegion) {
         ArrayList<Kioscos> mRegresar = new ArrayList<Kioscos>();
         for (int j = 0; j < kioscos.size(); j++) {
             Kioscos d = kioscos.get(j);
-            if (d.getCodigo().equals(codigRegion)) {
-                mRegresar.add(new Kioscos(codigRegion, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodigoKioco(), d.getNombreKiosco()));
+            if (d.getIdRegion().equals(codigRegion)) {
+                mRegresar.add(new Kioscos(d.getIdRegion(), d.getCodigo(), d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodigoKioco(), d.getNombreKiosco()));
             }
         }
         return mRegresar;

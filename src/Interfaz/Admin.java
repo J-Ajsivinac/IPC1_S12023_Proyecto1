@@ -439,6 +439,7 @@ public class Admin extends javax.swing.JFrame {
     private void panelDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDepartamentosMouseClicked
         // TODO add your handling code here:
         menuClick(dm);
+        dm.cargar1();
         bordeMenu(panelDepartamentos,txtDepartamentos);
     }//GEN-LAST:event_panelDepartamentosMouseClicked
 
@@ -458,6 +459,7 @@ public class Admin extends javax.swing.JFrame {
     private void panelKioscoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelKioscoMouseClicked
         // TODO add your handling code here:
         menuClick(adK);
+        adK.cargarK1();
         bordeMenu(panelKiosco,txtKiosco);
     }//GEN-LAST:event_panelKioscoMouseClicked
 

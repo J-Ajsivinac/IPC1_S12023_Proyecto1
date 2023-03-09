@@ -1,25 +1,34 @@
 package Administrador;
 
 public class Regiones {
-
+    private String idRegion;
     private String codigo;
     private String nombre;
     private double precioEstandar;
     private double precioEspecial;
     
-    public Regiones(String codigo, String nombre, double precioEstandar, double precioEspecial) {
+    public Regiones(String idRegion ,String codigo, String nombre, double precioEstandar, double precioEspecial) {
         super();
+        this.setIdRegion(idRegion);
         this.setCodigo(codigo);
         this.setNombre(nombre);
         this.setPrecioEstandar(precioEstandar);
         this.setPrecioEspecial(precioEspecial);
     }
     
-    public Regiones(String codigo, String nombre) {
-        this.setCodigo(codigo);
+    public Regiones(String idRegion, String nombre) {
+        this.setIdRegion(idRegion);
         this.setNombre(nombre);
     }
 
+    public String getIdRegion() {
+        return idRegion;
+    }
+
+    public void setIdRegion(String idRegion) {
+        this.idRegion = idRegion;
+    }
+    
     public String getCodigo() {
         return codigo;
     }

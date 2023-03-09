@@ -127,4 +127,13 @@ public class ctrlEnvios {
         }
         return false;
     }
+    
+    public static boolean cambiarDatosR(String nombreRegion, String nuevoDato) {
+        for (Envios envio : envios) {
+            if (envio.getCodRegion().equals(nombreRegion)) {
+                envio.setNombreUsuario(nuevoDato);
+            }
+        }
+        return false;
+    }
 }

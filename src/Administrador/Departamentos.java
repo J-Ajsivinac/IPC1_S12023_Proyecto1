@@ -7,15 +7,15 @@ public class Departamentos extends Regiones {
     private String codDepartamento;
     private String nombreDepartamento;
     private ArrayList<Municipios> municipios;
-    
-    public Departamentos(String codigo, String nombre, double precioEstandar, double precioEspecial, String codDepartamento,
+
+    public Departamentos(String codRegion, String codigo, String nombre, double precioEstandar, double precioEspecial, String codDepartamento,
             String nombreDepa) {
-        super(codigo, nombre, precioEstandar, precioEspecial);
+        super(codRegion, codigo, nombre, precioEstandar, precioEspecial);
         this.setCodDepartamento(codDepartamento);
         this.setNombreDepartamento(nombreDepa);
         this.municipios = new ArrayList<>();
     }
-    
+
     public String getCodDepartamento() {
         return codDepartamento;
     }
@@ -39,7 +39,7 @@ public class Departamentos extends Regiones {
     public void setMunicipios(ArrayList<Municipios> municipios) {
         this.municipios = municipios;
     }
-    
+
     @Override
     public String toString() {
         return this.getNombreDepartamento();

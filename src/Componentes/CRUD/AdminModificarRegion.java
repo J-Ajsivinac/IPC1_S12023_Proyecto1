@@ -98,7 +98,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             if (regio.get(i) != null) {
                 String codeR = regio.get(i).getCodigo();
                 String nombreRegion = regio.get(i).getNombre();
-                boxRegion.addItem(new Regiones(codeR, nombreRegion, regio.get(i).getPrecioEstandar(), regio.get(i).getPrecioEspecial()));
+                boxRegion.addItem(new Regiones(regio.get(i).getIdRegion(), codeR, nombreRegion, regio.get(i).getPrecioEstandar(), regio.get(i).getPrecioEspecial()));
             }
 
         }
@@ -151,6 +151,15 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 txtNuevoNombre.setBorder(login.unselectedborder);
                 lblPrecioActual.setText(regItem.getNombre() + "");
                 activar = false;
+            } else if (opcion == 4) {
+                txtNuevoPrecio.setEditable(false);
+                txtNuevoNombre.setEditable(true);
+                txtNuevoPrecio.setBorder(null);
+                txtNuevoNombre.setBackground(new Color(40, 41, 52));
+                txtNuevoPrecio.setBackground(new Color(28, 28, 36));
+                txtNuevoNombre.setBorder(login.unselectedborder);
+                lblPrecioActual.setText(regItem.getCodigo() + "");
+                activar = false;
             }
         }
 
@@ -182,12 +191,13 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 return;
             }
         } else {
-            if (!txtNuevoNombre.getText().toString().equals("")) {
+            if (txtNuevoNombre.getText().toString().equals("")) {
                 JOptionPane.showMessageDialog(null, "Escriba el nuevo Nombre");
                 return;
             }
         }
-        if (ctrlRegiones.cambiarPrecios(regItem.getCodigo(), opciones, nuevoPrecio, txtNuevoNombre.getText().toString())) {
+
+        if (ctrlRegiones.cambiarPrecios(regItem.getIdRegion(), opciones, nuevoPrecio, txtNuevoNombre.getText().toString())) {
             cargarBoxRegiones();
             cargarRegiones();
             txtNuevoNombre.setText("");
@@ -256,6 +266,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         txtNuevoPrecio.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoPrecio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNuevoPrecio.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoPrecio.setBorder(null);
         txtNuevoPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -305,7 +316,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         boxPrecio.setBackground(new java.awt.Color(34, 37, 47));
         boxPrecio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         boxPrecio.setForeground(new java.awt.Color(255, 255, 255));
-        boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial", "Nombre" }));
+        boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial", "Nombre", "Codigo" }));
         boxPrecio.setBorder(null);
         boxPrecio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -346,6 +357,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         txtNuevoNombre.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoNombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtNuevoNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNuevoNombre.setBorder(null);
         txtNuevoNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -485,18 +497,21 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
     private void txtNuevoPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoPrecioKeyPressed
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            txtNuevoPrecio.setEditable(false);
-            lblAdvertencia.setText("Solo numeros");
-            txtNuevoPrecio.setBorder(login.errorBorde);
-            lblAdvertencia.setForeground(login.error);
-        } else {
-            txtNuevoPrecio.setEditable(true);
-            lblAdvertencia.setText("");
-            txtNuevoPrecio.setBorder(login.selectedborder);
-            lblAdvertencia.setForeground(Color.WHITE);
+        if (activar) {
+            char c = evt.getKeyChar();
+            if (Character.isLetter(c)) {
+                txtNuevoPrecio.setEditable(false);
+                lblAdvertencia.setText("Solo numeros");
+                txtNuevoPrecio.setBorder(login.errorBorde);
+                lblAdvertencia.setForeground(login.error);
+            } else {
+                txtNuevoPrecio.setEditable(true);
+                lblAdvertencia.setText("");
+                txtNuevoPrecio.setBorder(login.selectedborder);
+                lblAdvertencia.setForeground(Color.WHITE);
+            }
         }
+
     }//GEN-LAST:event_txtNuevoPrecioKeyPressed
 
     private void txtNuevoPrecioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoPrecioFocusGained
@@ -505,6 +520,8 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             txtNuevoPrecio.setBackground(new Color(50, 51, 64));
             txtNuevoPrecio.setBorder(login.selectedborder);
             txtNuevoNombre.setBorder(null);
+        } else {
+            txtNuevoPrecio.setEditable(false);
         }
 
     }//GEN-LAST:event_txtNuevoPrecioFocusGained
@@ -525,6 +542,8 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             txtNuevoPrecio.setBackground(new Color(40, 41, 52));
             txtNuevoPrecio.setBorder(login.unselectedborder);
             txtNuevoNombre.setBorder(null);
+        } else {
+            txtNuevoPrecio.setEditable(false);
         }
 
     }//GEN-LAST:event_txtNuevoPrecioFocusLost

@@ -19,7 +19,7 @@ public class ctrlDepartamentos {
             }
             if (!verificarNombreDepa(nombreDepartamento)) {
                 Regiones r = ctrlRegiones.getRegionCodigo(codigo);
-                departamentos.add(new Departamentos(codigo, r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
+                departamentos.add(new Departamentos(r.getIdRegion(),r.getCodigo(), r.getNombre(), r.getPrecioEstandar(), r.getPrecioEspecial(),
                         codDepartamento, nombreDepartamento));
                 return true;
             } else {
@@ -35,7 +35,7 @@ public class ctrlDepartamentos {
         for (int i = 0; i < departamentos.size(); i++) {
             Departamentos d = departamentos.get(i);
             if (d.getCodDepartamento().equals(Codigo)) {
-                regresar = new Departamentos(d.getCodigo(), d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento());
+                regresar = new Departamentos(d.getIdRegion(),d.getCodigo(), d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento());
             }
         }
         return regresar;
@@ -239,8 +239,8 @@ public class ctrlDepartamentos {
         ArrayList<Departamentos> mRegresar = new ArrayList<Departamentos>();
         for (int j = 0; j < departamentos.size(); j++) {
             Departamentos d = departamentos.get(j);
-            if (d.getCodigo().equals(codigRegion)) {
-                mRegresar.add(new Departamentos(codigRegion, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento()));
+            if (d.getIdRegion().equals(codigRegion)) {
+                mRegresar.add(new Departamentos(d.getIdRegion(),codigRegion, d.getNombre(), d.getPrecioEstandar(), d.getPrecioEspecial(), d.getCodDepartamento(), d.getNombreDepartamento()));
             }
         }
         return mRegresar;

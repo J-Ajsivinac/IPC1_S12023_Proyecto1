@@ -31,8 +31,6 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         regio = ctrlRegiones.getTodasRegiones();
         tabla1.fixTable(jScrollPane1);
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(30);
-        cargarRegiones();
-        cargarTabla();
         setBordes();
     }
     
@@ -43,9 +41,10 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
 
 
     public void cargarRegiones() {
+        boxRegion.removeAllItems();
         for (int i = 0; i < regio.size(); i++) {
             if (regio.get(i) != null) {
-                String codeR = regio.get(i).getCodigo();
+                String codeR = regio.get(i).getIdRegion();
                 String nombreRegion = regio.get(i).getNombre();
                 boxRegion.addItem(new Regiones(codeR, nombreRegion));
             }
@@ -60,7 +59,7 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         if (!(txtCodKiosco.getText().toString().equals("") && txtNombreKiosco.getText().toString().equals("")) && regItem!= null) {
             nombreKiosco = txtNombreKiosco.getText();
             codK = txtCodKiosco.getText();
-            if (ctrlKioscos.nuevoKiosco(regItem.getCodigo(), codK, nombreKiosco)) {
+            if (ctrlKioscos.nuevoKiosco(regItem.getIdRegion(), codK, nombreKiosco)) {
                 JOptionPane.showMessageDialog(null, "Kiosco ingresado Correctamente");
                 cargarTabla();
                 limpiartxt();

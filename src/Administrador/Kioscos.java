@@ -5,13 +5,13 @@ public class Kioscos extends Regiones {
     private String codigoKioco;
     private String nombreKiosco;
 
-    public Kioscos(String codigo, String nombre, double precioEstandar, double precioEspecial, String codigoKioco,
+    public Kioscos(String idRegion, String codigo, String nombre, double precioEstandar, double precioEspecial, String codigoKioco,
             String nombreKiosco) {
-        super(codigo, nombre, precioEstandar, precioEspecial);
+        super(idRegion, codigo, nombre, precioEstandar, precioEspecial);
         this.setCodigoKioco(codigoKioco);
         this.setNombreKiosco(nombreKiosco);
     }
-    
+
     public String getCodigoKioco() {
         return codigoKioco;
     }
@@ -27,7 +27,7 @@ public class Kioscos extends Regiones {
     public void setNombreKiosco(String nombreKiosco) {
         this.nombreKiosco = nombreKiosco;
     }
-    
+
     @Override
     public String toString() {
         return this.getNombreKiosco();

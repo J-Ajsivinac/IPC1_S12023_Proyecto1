@@ -145,13 +145,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     }
 
     public void cargarCombos(JComboBox caja) {
-        caja.addItem(new Departamentos("", "", 0.0, 0.0, "", "Departamentos"));
+        caja.addItem(new Departamentos("","", "", 0.0, 0.0, "", "Departamentos"));
         //boxDepartamentos.addItem("Departamento");
         for (int i = 0; i < depa.size(); i++) {
             if (depa.get(i) != null) {
                 String codeR = depa.get(i).getCodigo();
                 String nombreRegion = depa.get(i).getNombre();
-                caja.addItem(new Departamentos(codeR, nombreRegion, depa.get(i).getPrecioEstandar(), depa.get(i).getPrecioEspecial(), depa.get(i).getCodDepartamento(), depa.get(i).getNombreDepartamento()));
+                caja.addItem(new Departamentos(depa.get(i).getIdRegion(),codeR, nombreRegion, depa.get(i).getPrecioEstandar(), depa.get(i).getPrecioEspecial(), depa.get(i).getCodDepartamento(), depa.get(i).getNombreDepartamento()));
             }
         }
     }
@@ -186,7 +186,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
             int numeroPaquetes = Integer.parseInt(txtNumeroPaquetes.getText());
             //String sizePaquete = size
-            String nombreRegionOrigen = ctrlRegiones.getRegionCodigo(depItemO.getCodigo()).getNombre();
+            String nombreRegionOrigen = ctrlRegiones.getRegionCodigo(depItemO.getIdRegion()).getNombre();
             String nombreRegionDestino = ctrlRegiones.getRegionCodigo(depItemO.getCodigo()).getNombre();
             String origen = depItemO.getNombreDepartamento() + "," + munItemO.getNombreMunicipio() + "," + txtDireccionOrigen.getText() + "," + nombreRegionOrigen;
             String destino = depItemD.getNombreDepartamento() + "," + munItemD.getNombreMunicipio() + "," + txtDireccionDestino.getText() + "," + nombreRegionDestino;

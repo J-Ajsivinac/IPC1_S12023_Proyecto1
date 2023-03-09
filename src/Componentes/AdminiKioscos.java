@@ -21,7 +21,8 @@ public class AdminiKioscos extends javax.swing.JPanel {
     public ArrayList<Regiones> regio;
     public AdminAgregarKioscos aAK;
     private AdminModificarKioscos aMK;
-     private Border unselect, selected;
+    private Border unselect, selected;
+
     /**
      * Creates new form AdminiKioscos
      */
@@ -38,8 +39,13 @@ public class AdminiKioscos extends javax.swing.JPanel {
         panelCrud.add(aMK);
         menuClick(aAK, panelAgregar);
     }
-    
-      public void menuClick(JPanel panel,JPanel btn) {
+
+    public void cargarK1(){
+        aAK.cargarRegiones();
+        aAK.cargarTabla();
+    }
+
+    public void menuClick(JPanel panel, JPanel btn) {
         aAK.setVisible(false);
         aMK.setVisible(false);
         panelAgregar.setBorder(unselect);
@@ -47,8 +53,7 @@ public class AdminiKioscos extends javax.swing.JPanel {
         btn.setBorder(selected);
         panel.setVisible(true);
     }
-    
-      
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,12 +154,12 @@ public class AdminiKioscos extends javax.swing.JPanel {
 
     private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
         // TODO add your handling code here:
-        menuClick(aAK,panelAgregar);
+        menuClick(aAK, panelAgregar);
     }//GEN-LAST:event_panelAgregarMouseClicked
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
-        menuClick(aMK,panelModificar);
+        menuClick(aMK, panelModificar);
         aMK.cargarB();
         aMK.cargarTabla1();
     }//GEN-LAST:event_panelModificarMouseClicked

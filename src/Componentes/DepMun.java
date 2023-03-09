@@ -39,6 +39,14 @@ public class DepMun extends javax.swing.JPanel {
         panelCrud.add(aMDep);
         menuClick(aADep, panelAgregar);
     }
+    
+    public void cargar1(){
+        aADep.cargarRegiones();
+        aADep.cargarDepartamentosMun();
+        aADep.cargarTablaDepartamentos();
+        aADep.cargarTablaMunicipios();
+        aADep.setBordes();
+    }
 
     public void menuClick(JPanel panel, JPanel btn) {
         aADep.setVisible(false);

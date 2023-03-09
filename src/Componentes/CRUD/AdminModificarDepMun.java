@@ -151,7 +151,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         if (regio != null) {
             for (int i = 0; i < regio.size(); i++) {
                 if (regio.get(i) != null) {
-                    String codeR = regio.get(i).getCodigo();
+                    String codeR = regio.get(i).getIdRegion();
                     String nombreRegion = regio.get(i).getNombre();
                     caja.addItem(new Regiones(codeR, nombreRegion));
                 }
@@ -169,7 +169,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             if (departamento.get(i) != null) {
                 String codeD = departamento.get(i).getCodDepartamento();
                 String nombreMuni = departamento.get(i).getNombreDepartamento();
-                actualizar.addItem(new Departamentos(codeD, nombreMuni, departamento.get(i).getPrecioEstandar(), departamento.get(i).getPrecioEspecial(), departamento.get(i).getCodDepartamento(), departamento.get(i).getNombreDepartamento()));
+                actualizar.addItem(new Departamentos(departamento.get(i).getIdRegion(),codeD, nombreMuni, departamento.get(i).getPrecioEstandar(), departamento.get(i).getPrecioEspecial(), departamento.get(i).getCodDepartamento(), departamento.get(i).getNombreDepartamento()));
             }
         }
     }
@@ -183,7 +183,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         Regiones depRegion = (Regiones) boxRegionEliminar.getSelectedItem();
         if (depRegion != null) {
             if (depRegion != null) {
-                ArrayList<Departamentos> totalDepartamentos = (ArrayList<Departamentos>) ctrlDepartamentos.getAllDepartamentosByCod(depRegion.getCodigo()).clone();
+                ArrayList<Departamentos> totalDepartamentos = (ArrayList<Departamentos>) ctrlDepartamentos.getAllDepartamentosByCod(depRegion.getIdRegion()).clone();
                 for (Departamentos dep : totalDepartamentos) {
                     Object datos[] = new Object[2];
                     datos[0] = dep.getCodDepartamento();
@@ -676,6 +676,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabla2.setRowHeight(65);
         jScrollPane3.setViewportView(tabla2);
 
         jLabel19.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -832,7 +833,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         // TODO add your handling code here:
         Regiones depItem = (Regiones) boxRegionUpdate.getSelectedItem();
         if (depItem != null) {
-            String codDepartamento = depItem.getCodigo();
+            String codDepartamento = depItem.getIdRegion();
             cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
         }
 
@@ -852,7 +853,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         // TODO add your handling code here:
         Regiones depItem = (Regiones) boxRegionMuni.getSelectedItem();
         if (depItem != null) {
-            String codDepartamento = depItem.getCodigo();
+            String codDepartamento = depItem.getIdRegion();
             cargarDepartamentos(boxDepartamentosM, codDepartamento);
         }
     }//GEN-LAST:event_boxRegionMuniItemStateChanged
@@ -873,7 +874,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         // TODO add your handling code here:
         Regiones depItem = (Regiones) boxRegionDepE.getSelectedItem();
         if (depItem != null) {
-            String codDepartamento = depItem.getCodigo();
+            String codDepartamento = depItem.getIdRegion();
             cargarDepartamentos(boxDeparE, codDepartamento);
         }
     }//GEN-LAST:event_boxRegionDepEItemStateChanged
