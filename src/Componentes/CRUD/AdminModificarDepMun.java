@@ -51,9 +51,14 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 String codigo = String.valueOf(model.getValueAt(row, 0));
                 if (ctrlDepartamentos.eliminarDepartamento(codigo)) {
                     model.removeRow(row);
+                    cargarB();
+                    cargarTabla1();
+                    cargarTabla2();
+
                     JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
                 }
             }
+
             @Override
             public void onView(int row) {
             }
@@ -76,6 +81,9 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                     String codigo = String.valueOf(model.getValueAt(row, 0));
                     if (ctrlDepartamentos.eliminarMunicipio(codigoDepartamento, codigo)) {
                         model.removeRow(row);
+                        cargarB();
+                        cargarTabla1();
+                        cargarTabla2();
                         JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
                     }
                 }
@@ -107,7 +115,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         txtNuevoDepartamento.setBorder(login.unselectedborder);
         txtNuevoMunicipio.setBorder(login.unselectedborder);
     }
-    
+
     public void selected(JTextField cambiar, int tipo) {
         if (tipo == 1) {
             cambiar.setBackground(new Color(50, 51, 64));
@@ -129,8 +137,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
         String codDepartamento = "";
         String nNombre = "";
-
-        if (dep != null && boxRegionUpdate.getSelectedItem() != null && !txtNuevoDepartamento.getText().toString().equals("")) {
+        if (txtNuevoDepartamento.getText().toString().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un nuevo Nombre");
+            return;
+        }
+        if (dep != null && boxRegionUpdate.getSelectedItem() != null) {
             codDepartamento = dep.getCodDepartamento();
             nNombre = txtNuevoDepartamento.getText();
             if (ctrlDepartamentos.modificarNombreDep(codDepartamento, nNombre)) {
@@ -141,6 +152,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay Departamentos ingresados");
         }
 
     }
@@ -169,7 +182,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             if (departamento.get(i) != null) {
                 String codeD = departamento.get(i).getCodDepartamento();
                 String nombreMuni = departamento.get(i).getNombreDepartamento();
-                actualizar.addItem(new Departamentos(departamento.get(i).getIdRegion(),codeD, nombreMuni, departamento.get(i).getPrecioEstandar(), departamento.get(i).getPrecioEspecial(), departamento.get(i).getCodDepartamento(), departamento.get(i).getNombreDepartamento()));
+                actualizar.addItem(new Departamentos(departamento.get(i).getIdRegion(), codeD, nombreMuni, departamento.get(i).getPrecioEstandar(), departamento.get(i).getPrecioEspecial(), departamento.get(i).getCodDepartamento(), departamento.get(i).getNombreDepartamento()));
             }
         }
     }
@@ -222,7 +235,12 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         //Departamentos dep = (Departamentos) boxRegionMuni.getSelectedItem();
         Municipios mun = (Municipios) boxMuniUpdate.getSelectedItem();
         //String codDepartamento = dep.getCodDepartamento();
-        if (mun != null && boxRegionMuni.getSelectedItem() != null && boxDepartamentosM.getSelectedItem() != null && !txtNuevoMunicipio.getText().toString().equals("")) {
+        if (txtNuevoMunicipio.getText().toString().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un nuevo Nombre");
+            return;
+        }
+
+        if (mun != null && boxRegionMuni.getSelectedItem() != null && boxDepartamentosM.getSelectedItem() != null) {
             String nNombre = txtNuevoMunicipio.getText();
             if (ctrlDepartamentos.modificarNombreMun(mun.getCodigoDepartamento().toString(), mun.getCodigoMunicipio().toString(), nNombre)) {
                 JOptionPane.showMessageDialog(null, "Nombre Actualizado");
@@ -232,6 +250,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay Departamentos/Municipios ingresados");
         }
 
     }
@@ -351,6 +371,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentosUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxDepartamentosUpdate.setBorder(null);
+        boxDepartamentosUpdate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxDepartamentosUpdateItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -581,6 +606,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         boxMuniUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxMuniUpdate.setForeground(new java.awt.Color(255, 255, 255));
         boxMuniUpdate.setBorder(null);
+        boxMuniUpdate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxMuniUpdateItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -905,13 +935,33 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
     private void txtNuevoDepartamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoDepartamentoFocusLost
         // TODO add your handling code here:
-         selected(txtNuevoMunicipio, 0);
+        selected(txtNuevoMunicipio, 0);
     }//GEN-LAST:event_txtNuevoDepartamentoFocusLost
 
     private void txtNuevoMunicipioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoMunicipioFocusLost
         // TODO add your handling code here:
-         selected(txtNuevoMunicipio, 0);
+        selected(txtNuevoMunicipio, 0);
     }//GEN-LAST:event_txtNuevoMunicipioFocusLost
+
+    private void boxDepartamentosUpdateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxDepartamentosUpdateItemStateChanged
+        // TODO add your handling code here:
+        Departamentos tItem = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
+        if (tItem != null) {
+            lblDepartamentoActual.setText(tItem.getNombreDepartamento());
+        } else {
+            lblDepartamentoActual.setText("");
+        }
+    }//GEN-LAST:event_boxDepartamentosUpdateItemStateChanged
+
+    private void boxMuniUpdateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxMuniUpdateItemStateChanged
+        // TODO add your handling code here:
+        Municipios tItem = (Municipios) boxMuniUpdate.getSelectedItem();
+        if (tItem != null) {
+            txtMunicipioActual.setText(tItem.getNombreMunicipio());
+        } else {
+            txtMunicipioActual.setText("");
+        }
+    }//GEN-LAST:event_boxMuniUpdateItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

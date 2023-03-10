@@ -7,11 +7,15 @@ import Interfaz.UsuarioCliente;
 import Interfaz.login;
 import Usuario.Usuario;
 import Usuario.ctrlUsuarios;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -33,6 +37,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         this.setBounds(0, 0, 724, 520);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(28);
+
     }
 
     public UsuarioCuenta(UsuarioCliente uC) {
@@ -41,6 +46,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(28);
         this.cliente = uC;
+        txtContra.setCaretColor(Color.WHITE);
+        txtAnterior.setCaretColor(Color.WHITE);
     }
 
     public void cargarDatosU() {
@@ -132,9 +139,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         boxRol.removeAllItems();
         boxKiosco.removeAllItems();
         boxNacionalidad.removeAllItems();
-        
+
         boxGenero.addItem("Masculino");
-        boxGenero.addItem("Femenino");  
+        boxGenero.addItem("Femenino");
         for (String nombres : nombrePaises) {
             boxNacionalidad.addItem(nombres);
         }
@@ -197,14 +204,24 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                 // Establecer el ImageIcon escalado en el JLabel
 
                 if (ctrlUsuarios.cambiarIMG(login.posicionU, ruta)) {
-
                     lblimagen.setIcon(scaledImageIcon);
+                    UsuarioCliente.cargarImg();
                     JOptionPane.showMessageDialog(null, "Fotografía cambiada con éxito");
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
+    }
+
+    public void reset1() {
+        lblimagen.revalidate();
+        lblimagen.repaint();
+        lblop1.setForeground(login.error);
+        lblop2.setForeground(login.error);
+        lblop3.setForeground(login.error);
+        lblop4.setForeground(login.error);
+        lblCorreo.setText("");
     }
 
     public void actualizarGeneral() {
@@ -259,6 +276,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             String[] valores = {nombre, apellido, fecha, telefono, nacionalidad, genero, dpi};
             if (ctrlUsuarios.cambiarPerfil(valores, login.posicionU)) {
                 cargarDatosU();
+                UsuarioCliente.actualizarMenu();
                 JOptionPane.showMessageDialog(null, "Datos actualizados con éxito");
             }
         } else {
@@ -272,11 +290,12 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         String rolCompleto = boxRol.getSelectedItem().toString();
 
         if (rol == 2 && kioscoItem != null) {
-            rolCompleto="";
+            rolCompleto = "";
             rolCompleto = "Kiosco," + kioscoItem.getNombreKiosco();
         }
         if (ctrlUsuarios.cambiarRol(rolCompleto, login.posicionU)) {
             cargarDatosU();
+            UsuarioCliente.actualizarMenu();
             JOptionPane.showMessageDialog(null, "Datos actualizdos con éxito");
         }
     }
@@ -310,13 +329,13 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblop1 = new javax.swing.JLabel();
+        lblop2 = new javax.swing.JLabel();
+        lblop4 = new javax.swing.JLabel();
+        lblop3 = new javax.swing.JLabel();
         buttonRound1 = new Elementos.ButtonRound();
         txtContra = new javax.swing.JPasswordField();
         txtAnterior = new javax.swing.JPasswordField();
@@ -379,10 +398,15 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         txtCorreo.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
         txtCorreo.setBorder(null);
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyReleased(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("jLabel3");
+        lblCorreo.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        lblCorreo.setText("jLabel3");
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -392,21 +416,21 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Contraseña Anterior");
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Contraseña");
+        lblop1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblop1.setForeground(new java.awt.Color(255, 255, 255));
+        lblop1.setText("Letras Mayúsculas");
 
-        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Contraseña");
+        lblop2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblop2.setForeground(new java.awt.Color(255, 255, 255));
+        lblop2.setText("Letras Minúsculas");
 
-        jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Contraseña");
+        lblop4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblop4.setForeground(new java.awt.Color(255, 255, 255));
+        lblop4.setText("Caracteres Especiales");
 
-        jLabel9.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Contraseña");
+        lblop3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblop3.setForeground(new java.awt.Color(255, 255, 255));
+        lblop3.setText("Números");
 
         buttonRound1.setBorder(null);
         buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
@@ -427,6 +451,11 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         txtContra.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtContra.setForeground(new java.awt.Color(255, 255, 255));
         txtContra.setBorder(null);
+        txtContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtContraKeyReleased(evt);
+            }
+        });
 
         txtAnterior.setBackground(new java.awt.Color(40, 41, 52));
         txtAnterior.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
@@ -443,12 +472,12 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblop3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblop4))
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -459,9 +488,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                                     .addComponent(txtAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblop1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblop2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(255, 255, 255)
                         .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -477,7 +506,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -488,12 +517,12 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     .addComponent(txtAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(lblop1)
+                    .addComponent(lblop2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8))
+                    .addComponent(lblop3)
+                    .addComponent(lblop4))
                 .addGap(18, 18, 18)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
@@ -927,6 +956,43 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_boxRolItemStateChanged
 
+    private void txtContraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyReleased
+        // TODO add your handling code here:
+        Pattern vMayus = Pattern.compile("^(?=.*[A-Z])");
+        Pattern vMinus = Pattern.compile("^(?=.*[a-z])");
+        Pattern vNum = Pattern.compile("^(?=.*[0-9])");
+        Pattern vEspecial = Pattern.compile("^(?=.*[!#%&@*$_-])");
+        Pattern[] exp = {vMayus, vMinus, vNum, vEspecial};
+        JLabel[] labels = {lblop1, lblop2, lblop3, lblop4};
+        for (int i = 0; i < exp.length; i++) {
+            Matcher m = exp[i].matcher(String.valueOf(txtContra.getPassword()));
+            if (m.find()) {
+                labels[i].setForeground(new Color(99, 220, 147));
+                //txtContra.setBorder(correctoBorde);
+            } else {
+                labels[i].setForeground(login.error);
+                //txtContra.setBorder(errorBorde);
+            }
+        }
+        if (ctrlUsuarios.verificarPassword(String.valueOf(txtContra.getPassword()))) {
+            txtContra.setBorder(login.correctoBorde);
+        }
+    }//GEN-LAST:event_txtContraKeyReleased
+
+    private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
+        // TODO add your handling code here:
+        Pattern vCorreo = Pattern.compile("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$");
+        Matcher m = vCorreo.matcher(txtCorreo.getText());
+        if (!m.find()) {
+            lblCorreo.setForeground(login.error);
+            lblCorreo.setText("Ingrese un correo valido");
+            txtCorreo.setBorder(login.errorBorde);
+        } else {
+            lblCorreo.setText("");
+            txtCorreo.setBorder(login.correctoBorde);
+        }
+    }//GEN-LAST:event_txtCorreoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxGenero;
@@ -957,16 +1023,16 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblimagen;
+    private javax.swing.JLabel lblop1;
+    private javax.swing.JLabel lblop2;
+    private javax.swing.JLabel lblop3;
+    private javax.swing.JLabel lblop4;
     private Elementos.PanelRound panelRound1;
     private Elementos.PanelRound panelRound2;
     private Elementos.PanelRound panelRound3;

@@ -6,8 +6,11 @@ import Componentes.*;
 import Usuario.Usuario;
 import Usuario.ctrlUsuarios;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.MediaTracker;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -51,6 +54,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
         menuClick(usert);
         bordeMenu(panelTarjetas, lblTarjeta);
         verificar();
+        cargarImg();
     }
 
     public void setUsuario(Usuario u) {
@@ -61,6 +65,12 @@ public class UsuarioCliente extends javax.swing.JFrame {
         userDatos.test(usuarioC);
         userCotiz.test(usuarioC);
         usuarioVer.test(usuarioC);
+    }
+    
+    public static void actualizarMenu(){
+        Usuario us = ctrlUsuarios.getUsuarioIndice(login.posicionU);
+        lblNombreUsuario.setText(us.getNombre());
+        lblTipoC.setText(us.getRol());
     }
 
     public void hoverMenu(JPanel activar, int estado) {
@@ -122,7 +132,45 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
         }
     }
+    
+    public static void cargarImg(){
+        Usuario userA = ctrlUsuarios.getUsuarioIndice(login.posicionU);
+        ImageIcon originalImageIcon = new ImageIcon(userA.getFotografia());
+        if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+            ///htmls/factura.html
+            originalImageIcon = new ImageIcon("src\\img\\usuario.png");
+        }
+        // Obtener el tamaño original de la imagen
+        int originalImageWidth = originalImageIcon.getIconWidth();
+        int originalImageHeight = originalImageIcon.getIconHeight();
 
+        // Obtener el tamaño del JLabel
+        int labelWidth = jLabel1.getWidth();
+        int labelHeight = jLabel1.getHeight();
+
+        // Calcular la relación de aspecto de la imagen original y del JLabel
+        double originalImageAspectRatio = (double) originalImageWidth / originalImageHeight;
+        double labelAspectRatio = (double) labelWidth / labelHeight;
+
+        // Escalar la imagen si es necesario
+        ImageIcon scaledImageIcon;
+        if (originalImageAspectRatio > labelAspectRatio) {
+            // La imagen es más ancha que el JLabel
+            int scaledImageWidth = labelWidth;
+            int scaledImageHeight = (int) (scaledImageWidth / originalImageAspectRatio);
+            Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
+            scaledImageIcon = new ImageIcon(scaledImage);
+        } else {
+            // La imagen es más alta que el JLabel
+            int scaledImageHeight = labelHeight;
+            int scaledImageWidth = (int) (scaledImageHeight * originalImageAspectRatio);
+            Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
+            scaledImageIcon = new ImageIcon(scaledImage);
+        }
+        // Establecer el ImageIcon escalado en el JLabel
+        jLabel1.setIcon(scaledImageIcon);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -397,6 +445,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
         menuClick(userCotiz);
         userCotiz.cargarDatosFacturacion();
         userCotiz.listarTarjetas();
+        userCotiz.cargarDatosF();
     }//GEN-LAST:event_panelCotizacionMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
@@ -524,7 +573,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCerrarSesion;
-    private javax.swing.JLabel jLabel1;
+    private static javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -532,9 +581,9 @@ public class UsuarioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblCotizacion;
     private javax.swing.JLabel lblDatos;
-    private javax.swing.JLabel lblNombreUsuario;
+    private static javax.swing.JLabel lblNombreUsuario;
     private javax.swing.JLabel lblTarjeta;
-    private javax.swing.JLabel lblTipoC;
+    private static javax.swing.JLabel lblTipoC;
     private javax.swing.JLabel lblVer;
     private javax.swing.JLabel lblVer1;
     private javax.swing.JPanel menuContenido;

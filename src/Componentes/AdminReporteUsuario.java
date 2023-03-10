@@ -25,6 +25,8 @@ public class AdminReporteUsuario extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 710, 500);
         modelo = (DefaultTableModel) tableRU.getModel();
+        tableRU.fixTable(jScrollPane1);
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(30);
     }
 
     public void ordenarUsuarios() {

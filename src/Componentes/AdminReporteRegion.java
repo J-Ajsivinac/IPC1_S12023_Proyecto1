@@ -26,6 +26,8 @@ public class AdminReporteRegion extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 710, 500);
         modelo = (DefaultTableModel) tableA.getModel();
+        tableA.fixTable(jScrollPane2);
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
         //ordenarRegiones();
     }
 

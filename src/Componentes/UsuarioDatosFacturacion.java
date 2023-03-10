@@ -227,6 +227,9 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(19, 19, 26));
 
+        jScrollPane1.setBackground(new java.awt.Color(19, 19, 26));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(19, 19, 26)));
+
         jPanel2.setBackground(new java.awt.Color(19, 19, 26));
 
         panelRound1.setBackground(new java.awt.Color(28, 28, 36));

@@ -28,7 +28,7 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
  * @author mesoi
  */
 public class agregarUsuarios extends javax.swing.JFrame {
-
+    
     Border unselectedborder;
     Border selectedborder;
     Border errorBorde;
@@ -47,7 +47,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
      * Creates new form agregarUsuarios
      */
     public agregarUsuarios() {
-
+        
         initComponents();
         this.setLocationRelativeTo(null);
         agregarBoxes();
@@ -62,12 +62,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
         selectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
         errorBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, error);
         correctoBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, correcto);
-
+        
         boxKiosco.setVisible(false);
         setBordes();
-
+        
     }
-
+    
     public void setBordes() {
         txtAlias.setBorder(unselectedborder);
         txtApellido.setBorder(unselectedborder);
@@ -79,20 +79,20 @@ public class agregarUsuarios extends javax.swing.JFrame {
         txtNombre.setBorder(unselectedborder);
         txtTelefono.setBorder(unselectedborder);
         txtValidar.setBorder(unselectedborder);
-
+        
     }
-
+    
     public void cargarKioscos() {
         for (int i = 0; i < kiosco.size(); i++) {
             if (kiosco.get(i) != null) {
                 String codeK = kiosco.get(i).getCodigoKioco();
                 String nombreKiosco = kiosco.get(i).getNombreKiosco();
-                boxKiosco.addItem(new Kioscos(kiosco.get(i).getIdRegion(),kiosco.get(i).getCodigo(), kiosco.get(i).getNombre(), kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), codeK, nombreKiosco));
+                boxKiosco.addItem(new Kioscos(kiosco.get(i).getIdRegion(), kiosco.get(i).getCodigo(), kiosco.get(i).getNombre(), kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), codeK, nombreKiosco));
             }
-
+            
         }
     }
-
+    
     public void selected(JTextField cambiar, int tipo) {
         if (tipo == 0) {
             cambiar.setBackground(new Color(50, 51, 64));
@@ -102,7 +102,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             cambiar.setBorder(unselectedborder);
         }
     }
-
+    
     public void limpiarTxt() {
         txtAlias.setText("");
         txtApellido.setText("");
@@ -854,7 +854,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 boxKiosco.setEnabled(true);
                 boxKiosco.setVisible(true);
             }
-
+            
         } else {
             boxKiosco.setEnabled(false);
             boxKiosco.setVisible(false);
@@ -867,7 +867,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         JFileChooser archivos = new JFileChooser();
         FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
         archivos.setFileFilter(filtrado);
-
+        
         int respuesta = archivos.showOpenDialog(this);
         if (respuesta == archivos.APPROVE_OPTION) {
             ruta = archivos.getSelectedFile().getPath();
@@ -908,7 +908,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             }
             // Establecer el ImageIcon escalado en el JLabel
             lblimagen.setIcon(scaledImageIcon);
-
+            
         }
     }//GEN-LAST:event_btnSubirActionPerformed
 
@@ -1011,9 +1011,9 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtFechaKeyReleased
     public void agregarUsuario() {
-
+        
         Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
-
+        
         String correo = txtCorreo.getText();
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
@@ -1022,9 +1022,9 @@ public class agregarUsuarios extends javax.swing.JFrame {
         String dpi = txtDPI.getText();
         int rol = boxRol.getSelectedIndex();
         String rolCompleto = boxRol.getSelectedItem().toString();
-
+        
         if (rol == 2 && kioscoItem != null) {
-            rolCompleto="";
+            rolCompleto = "";
             rolCompleto = "Kiosco," + kioscoItem.getCodigoKioco();
         }
         String img = "s";
@@ -1046,6 +1046,16 @@ public class agregarUsuarios extends javax.swing.JFrame {
             int n = Integer.parseInt(numero);
             if (contra.equals(verificar)) {
                 if (ctrlUsuarios.nuevoUsuario(correo, nombre, apellido, contra, dpi, fecha, genero, nacionalidad, alias, n, rolCompleto, img)) {
+                    lblimagen.setIcon(null);
+
+// Actualizar el JLabel para reflejar los cambios
+                    lblimagen.revalidate();
+                    lblimagen.repaint();
+                    lblop1.setForeground(error);
+                    lblop2.setForeground(error);
+                    lblop3.setForeground(error);
+                    lblop4.setForeground(error);
+                    lblCorreo.setText("");
                     JOptionPane.showMessageDialog(null, "Usuario Agregado");
                     limpiarTxt();
                     setBordes();
@@ -1055,24 +1065,24 @@ public class agregarUsuarios extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
             }
-
+            
         } else {
             JOptionPane.showMessageDialog(null, "Tiene campos sin llenar");
         }
-
+        
     }
-
+    
     public void agregarBoxes() {
         boxGenero.addItem("Masculino");
         boxGenero.addItem("Femenino");
-
+        
         for (String nombres : nombrePaises) {
             boxNacionalidad.addItem(nombres);
         }
         boxRol.addItem("Usuario Individual");
         boxRol.addItem("Usuario Empresarial");
         boxRol.addItem("Kiosko");
-
+        
     }
 
     /**
@@ -1106,7 +1116,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new agregarUsuarios().setVisible(true);
-
+                
             }
         });
     }

@@ -34,6 +34,10 @@ public class ctrlUsuarios {
 
     public static boolean nuevoUsuario(String correo, String nombre, String apellido, String contrasena, String dpi,
             String fnacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String foto) {
+        if (correo.equals("ipc1_202200135@ipc1delivery.com")) {
+            JOptionPane.showMessageDialog(null, "Este correo no puede ser ingresado", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         if (!ctrlUsuarios.verifiarUsuarios(correo)) {
             if (verificarPassword(contrasena)) {
                 String codUsuario = "";
@@ -307,21 +311,26 @@ public class ctrlUsuarios {
 
     public static boolean cambiarDGeneral(int index, String nuevoCorreo, String nuevaContra, int opcion) {
         Usuario u = usuarios.get(index);
-        if (!ctrlUsuarios.verifiarUsuarios(nuevoCorreo)) {
-            JOptionPane.showMessageDialog(null, "Este correo ya esta registrado");
-            return false;
-        }
-
-        if (u.getCorreo().equals(nuevoCorreo) && u.getContrasena().equals(nuevaContra) || nuevaContra.equals("")) {
-            return false;
-        }
 
         if (opcion == 1) {
-            usuarios.get(index).setCorreo(nuevoCorreo);
-            return true;
+            if (!verifiarUsuarios(nuevoCorreo)) {
+                if (u.getCorreo().equals(nuevoCorreo)) {
+                    JOptionPane.showMessageDialog(null, "Los datos enviados son los mismos a los registrados");
+                    return false;
+                }
+                usuarios.get(index).setCorreo(nuevoCorreo);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Este correo ya esta registrado");
+            }
+
         } else if (opcion == 2) {
             if (!usuarios.get(index).getCorreo().equals(nuevoCorreo)) {
                 if (verificarPassword(nuevaContra)) {
+                    if (u.getCorreo().equals(nuevoCorreo) && u.getContrasena().equals(nuevaContra)) {
+                        JOptionPane.showMessageDialog(null, "Los datos enviados son los mismos a los registrados");
+                        return false;
+                    }
                     usuarios.get(index).setCorreo(nuevoCorreo);
                     usuarios.get(index).setContrasena(nuevaContra);
                     return true;
@@ -330,6 +339,10 @@ public class ctrlUsuarios {
                 }
             } else {
                 if (verificarPassword(nuevaContra)) {
+                    if(u.getContrasena().equals(nuevaContra)){
+                        JOptionPane.showMessageDialog(null, "Los datos enviados son los mismos a los registrados");
+                        return false;
+                    }
                     usuarios.get(index).setContrasena(nuevaContra);
                     return true;
                 } else {

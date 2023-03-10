@@ -162,8 +162,13 @@ public class DepMun extends javax.swing.JPanel {
 
     private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
         // TODO add your handling code here:
-        menuClick(aADep, panelAgregar);
         aADep.cargarRegiones();
+        aADep.cargarDepartamentosMun();
+        aADep.cargarTablaDepartamentos();
+        aADep.cargarTablaMunicipios();
+        aADep.setBordes();
+        menuClick(aADep, panelAgregar);
+        
     }//GEN-LAST:event_panelAgregarMouseClicked
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked

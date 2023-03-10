@@ -80,6 +80,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jScrollPane3.getVerticalScrollBar().setUnitIncrement(30);
         tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event2));
+        setBordes();
     }
 
     public void test(Usuario user1) {

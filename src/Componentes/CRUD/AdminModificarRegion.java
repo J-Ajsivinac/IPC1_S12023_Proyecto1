@@ -202,8 +202,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             txtNuevoPrecio.setText("");
             mostrarDatos();
             JOptionPane.showMessageDialog(null, "Se cambiaron los datos correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al cambiar los datos");
         }
     }
 
@@ -258,7 +256,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         panelRound2.setRoundTopLeft(15);
         panelRound2.setRoundTopRight(15);
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nuevo Precio");
 
@@ -298,21 +296,21 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         panelSuperior.setBackground(new java.awt.Color(19, 19, 26));
         panelSuperior.setOpaque(false);
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Región");
 
         boxRegion.setBackground(new java.awt.Color(34, 37, 47));
-        boxRegion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxRegion.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegion.setForeground(new java.awt.Color(255, 255, 255));
         boxRegion.setBorder(null);
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cambiar:");
 
         boxPrecio.setBackground(new java.awt.Color(34, 37, 47));
-        boxPrecio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxPrecio.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxPrecio.setForeground(new java.awt.Color(255, 255, 255));
         boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial", "Nombre", "Codigo" }));
         boxPrecio.setBorder(null);
@@ -335,7 +333,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         panelSuperiorLayout.setVerticalGroup(
             panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +347,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 .addGap(9, 9, 9))
         );
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nuevo Nombre");
 
@@ -366,11 +364,11 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Valor Actual:");
 
-        lblPrecioActual.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        lblPrecioActual.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         lblPrecioActual.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecioActual.setText(" ");
 
@@ -380,27 +378,29 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel5)
+                .addGap(5, 5, 5)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(txtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(panelSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(265, 265, 265))
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                        .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(265, 265, 265))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76))))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,7 +455,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

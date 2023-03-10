@@ -26,6 +26,8 @@ public class ctrlRegiones {
             if (!verificarCodigoRegion(codigo)) {
                 regiones.add(new Regiones(codRegion, codigo, nombre, precioE.doubleValue(), precioEspe.doubleValue()));
                 return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "El codigo de Region ya existe");
             }
 
         } else {
@@ -54,7 +56,7 @@ public class ctrlRegiones {
                     }
                 } else if (opcion == 4) {
                     if (!nuevoNombre.equals("")) {
-                        if (!verificarCodigoRegion(codigo)) {
+                        if (!verificarCodigoRegion(nuevoNombre)) {
                             reg.setCodigo(nuevoNombre);
                             return true;
                         }else{

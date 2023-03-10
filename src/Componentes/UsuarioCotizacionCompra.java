@@ -4,6 +4,7 @@ import Administrador.Departamentos;
 import Administrador.Municipios;
 import Administrador.ctrlDepartamentos;
 import Administrador.ctrlRegiones;
+import static Componentes.UsuarioTarjeta.selected;
 import Elementos.ScrollBarCustom;
 import Interfaz.login;
 import Usuario.DatosFacturacion;
@@ -27,6 +28,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -90,12 +93,34 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         activarFondo1(panelPeque, lblP1, lblP2, lblP3);
         activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
         activarFondo3(panelRound2, lblTitulo, lblDescripcion);
+        setBordes();
+        txtNombreTarjeta.setText("");
+        txtNombreFacturacion.setText("");
     }
 
     public void test(Usuario user1) {
         this.user = user1;
 
         //System.out.println("Estoy en el usuario Cotizacion");
+    }
+
+    public void setBordes() {
+        txtDireccionDestino.setBorder(login.unselectedborder);
+        txtDireccionOrigen.setBorder(login.unselectedborder);
+        txtNumeroPaquetes.setBorder(login.unselectedborder);
+    }
+
+    public void cargarDatosF() {
+        Tarjeta tarItem = (Tarjeta) boxTarjetas.getSelectedItem();
+        if (tarItem != null) {
+            txtNombreTarjeta.setText(tarItem.getTarjetanombre());
+        }
+
+        DatosFacturacion tarItem1 = (DatosFacturacion) boxFacturacion.getSelectedItem();
+        if (tarItem1 != null) {
+            txtNombreFacturacion.setText(tarItem1.getNombreCompletoF());
+        }
+
     }
 
     public void activarFondo1(JPanel activar, JLabel texto1, JLabel texto2, JLabel texto3) {
@@ -171,8 +196,27 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         eliminar.removeAllItems();
     }
 
+    public void limpiarTxtCotizacion() {
+        txtDireccionOrigen.setText("");
+        txtDireccionDestino.setText("");
+        txtNumeroPaquetes.setText("");
+        boxDepartamentos.setSelectedIndex(0);
+        boxDepartamentosD.setSelectedIndex(0);
+        boxMunicipios.setSelectedIndex(0);
+        boxMunicipiosD.setSelectedIndex(0);
+        txtTotalEstandar.setText("Total 0.00");
+        txtTotalEspecial.setText("Total 0.00");
+    }
+
     public void saveCotizacion() {
         System.out.println(boxMunicipios.getSelectedIndex());
+        //^\d+$
+        Pattern vCorreo = Pattern.compile("^\\d+$");
+        Matcher m = vCorreo.matcher(txtNumeroPaquetes.getText());
+        if (!m.find()) {
+            JOptionPane.showMessageDialog(null, "El numero de paquetes no es válido");
+            return;
+        }
         if (!txtNumeroPaquetes.getText().equals("") && !txtDireccionDestino.getText().equals("") && !txtDireccionOrigen.getText().equals("") && boxDepartamentos.getSelectedIndex() != 0
                 && boxMunicipios.getSelectedIndex() != 0 && boxDepartamentosD.getSelectedIndex() != 0 && boxMunicipiosD.getSelectedIndex() != 0) {
             Departamentos depItemO = (Departamentos) boxDepartamentos.getSelectedItem();
@@ -209,6 +253,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             total2 = bd2.doubleValue();
             txtTotalEstandar.setText("Total " + total1);
             txtTotalEspecial.setText("Total " + total2);
+
+            JOptionPane.showMessageDialog(null, "Cotización exitosa");
         } else {
             JOptionPane.showMessageDialog(null, "Llene todos los datos");
         }
@@ -290,6 +336,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
             precio = "Especial";
             if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete())) {
+                limpiarTxtCotizacion();
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 realizoEnvio = true;
                 total1 = 0;
@@ -587,6 +634,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtDireccionOrigen.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDireccionOrigen.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccionOrigen.setBorder(null);
+        txtDireccionOrigen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDireccionOrigenFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDireccionOrigenFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -641,6 +696,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtDireccionDestino.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDireccionDestino.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccionDestino.setBorder(null);
+        txtDireccionDestino.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDireccionDestinoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDireccionDestinoFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound11Layout = new javax.swing.GroupLayout(panelRound11);
         panelRound11.setLayout(panelRound11Layout);
@@ -706,6 +769,19 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtNumeroPaquetes.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNumeroPaquetes.setForeground(new java.awt.Color(255, 255, 255));
         txtNumeroPaquetes.setBorder(null);
+        txtNumeroPaquetes.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNumeroPaquetesFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroPaquetesFocusLost(evt);
+            }
+        });
+        txtNumeroPaquetes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumeroPaquetesKeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -1394,7 +1470,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addComponent(btnrRealizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDGuia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1556,7 +1632,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         // TODO add your handling code here:
         DatosFacturacion tarItem = (DatosFacturacion) boxFacturacion.getSelectedItem();
         if (tarItem != null) {
-            txtNombreTarjeta.setText(tarItem.getNombreCompletoF());
+            txtNombreFacturacion.setText(tarItem.getNombreCompletoF());
         }
     }//GEN-LAST:event_boxFacturacionItemStateChanged
 
@@ -1643,6 +1719,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 Logger.getLogger(UsuarioCotizacionCompra.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha cotizado");
         }
 
     }//GEN-LAST:event_btnGuardarCotizacionActionPerformed
@@ -1668,6 +1746,50 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         radioEspecial.setSelected(true);
         activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
     }//GEN-LAST:event_radioEspecialMouseClicked
+
+    private void txtNumeroPaquetesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroPaquetesKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtNumeroPaquetes.setEditable(false);
+            txtNumeroPaquetes.setBorder(login.errorBorde);
+            jLabel7.setText("Solo numeros");
+        } else {
+            txtNumeroPaquetes.setBorder(login.selectedborder);
+            txtNumeroPaquetes.setEditable(true);
+            jLabel7.setText("");
+        }
+    }//GEN-LAST:event_txtNumeroPaquetesKeyPressed
+
+    private void txtDireccionOrigenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionOrigenFocusGained
+        // TODO add your handling code here:
+        selected(txtDireccionOrigen, 1);
+    }//GEN-LAST:event_txtDireccionOrigenFocusGained
+
+    private void txtDireccionDestinoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionDestinoFocusGained
+        // TODO add your handling code here:
+        selected(txtDireccionDestino, 1);
+    }//GEN-LAST:event_txtDireccionDestinoFocusGained
+
+    private void txtNumeroPaquetesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroPaquetesFocusGained
+        // TODO add your handling code here:
+        selected(txtNumeroPaquetes, 1);
+    }//GEN-LAST:event_txtNumeroPaquetesFocusGained
+
+    private void txtDireccionOrigenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionOrigenFocusLost
+        // TODO add your handling code here:
+        selected(txtDireccionOrigen, 0);
+    }//GEN-LAST:event_txtDireccionOrigenFocusLost
+
+    private void txtDireccionDestinoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionDestinoFocusLost
+        // TODO add your handling code here:
+        selected(txtDireccionDestino, 0);
+    }//GEN-LAST:event_txtDireccionDestinoFocusLost
+
+    private void txtNumeroPaquetesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroPaquetesFocusLost
+        // TODO add your handling code here:
+        selected(txtNumeroPaquetes, 0);
+    }//GEN-LAST:event_txtNumeroPaquetesFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
