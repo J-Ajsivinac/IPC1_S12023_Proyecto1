@@ -22,7 +22,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -47,12 +45,12 @@ import org.jsoup.nodes.Element;
  */
 public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
-    public ArrayList<Departamentos> depa;
-    public ButtonGroup size;
-    public String sizePaquete;
-    public static Guia guardarCotizacion;
-    double total1;
-    double total2;
+    private ArrayList<Departamentos> depa;
+    private ButtonGroup size;
+    private String sizePaquete;
+    private static Guia guardarCotizacion;
+    private double total1;
+    private double total2;
     String tipoP;
     boolean realizoEnvio = false;
     private ArrayList<Tarjeta> tarj = new ArrayList<Tarjeta>();

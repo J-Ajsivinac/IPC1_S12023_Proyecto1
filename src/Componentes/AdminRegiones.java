@@ -7,9 +7,7 @@ import Componentes.CRUD.AdminModificarRegion;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 /**
@@ -18,7 +16,7 @@ import javax.swing.border.Border;
  */
 public class AdminRegiones extends javax.swing.JPanel {
 
-    public ArrayList<Regiones> regio;
+    private ArrayList<Regiones> regio;
     private AdminAgregarRegiones aAR;
     private AdminModificarRegion aMR;
     private Border unselect, selected;

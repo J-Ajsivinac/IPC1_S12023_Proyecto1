@@ -1,12 +1,9 @@
 package Componentes;
 
-import Administrador.Departamentos;
-import Administrador.ctrlDepartamentos;
 import Elementos.CutomTable.TableActionCellEditorEliminar;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
 import Elementos.ScrollBarCustom;
-import Interfaz.UsuarioCliente;
 import Interfaz.login;
 import Usuario.*;
 import java.awt.Color;

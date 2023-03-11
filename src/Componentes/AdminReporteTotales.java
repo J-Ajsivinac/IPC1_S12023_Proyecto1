@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 /**
  *
  * @author mesoi
@@ -75,7 +74,7 @@ public class AdminReporteTotales extends javax.swing.JPanel {
         panelRound2.setRoundTopLeft(15);
         panelRound2.setRoundTopRight(15);
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Numero Total de Paquetes Enviados");
 
@@ -97,11 +96,11 @@ public class AdminReporteTotales extends javax.swing.JPanel {
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(74, 74, 74)
                 .addComponent(lblTotalPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         panelRound3.setBackground(new java.awt.Color(28, 28, 36));
@@ -163,7 +162,7 @@ public class AdminReporteTotales extends javax.swing.JPanel {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

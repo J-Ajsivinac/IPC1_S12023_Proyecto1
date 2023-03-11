@@ -1,17 +1,13 @@
 package Componentes;
 
-import Administrador.ctrlDepartamentos;
 import Elementos.CutomTable.TableActionCellEditor;
 import Elementos.CutomTable.TableActionCellRender;
 import Elementos.CutomTable.TableActionEvent;
-import Elementos.ScrollBarCustom;
 import Interfaz.login;
 import Usuario.Envios;
 import Usuario.Factura;
 import Usuario.Usuario;
 import Usuario.ctrlEnvios;
-import Usuario.ctrlUsuarios;
-import java.awt.Color;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,8 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -1,14 +1,8 @@
 package Componentes;
 
-import Administrador.Regiones;
-import Administrador.ctrlRegiones;
 import Usuario.Envios;
 import Usuario.ctrlEnvios;
-import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**

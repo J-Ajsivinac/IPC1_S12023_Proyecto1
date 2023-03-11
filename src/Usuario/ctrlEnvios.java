@@ -1,20 +1,14 @@
 package Usuario;
 
-import Administrador.ctrlRegiones;
-import static Usuario.ctrlEnvios.envios;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ctrlEnvios {
 
-    public static ArrayList<Envios> envios = new ArrayList<Envios>();
-    public static int contadorFacuras = 1;
+    private static ArrayList<Envios> envios = new ArrayList<Envios>();
+    private static int contadorFacuras = 1;
 
     public static boolean agregarEnvio(String id, String Nombre, String codRegion, String tipoServicio, String destinatario,
             double totalEnvio, String tipoPago, String ori, String nit, int numerPaquetes, String tamaño) {

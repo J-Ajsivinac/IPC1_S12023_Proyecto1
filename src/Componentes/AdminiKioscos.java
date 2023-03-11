@@ -18,8 +18,8 @@ import javax.swing.border.Border;
  */
 public class AdminiKioscos extends javax.swing.JPanel {
 
-    public ArrayList<Regiones> regio;
-    public AdminAgregarKioscos aAK;
+    private ArrayList<Regiones> regio;
+    private AdminAgregarKioscos aAK;
     private AdminModificarKioscos aMK;
     private Border unselect, selected;
 

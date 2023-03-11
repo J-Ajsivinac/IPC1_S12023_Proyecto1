@@ -1,8 +1,6 @@
 package Usuario;
 
 import static Administrador.ctrlDepartamentos.generarCodigos;
-import static Administrador.ctrlDepartamentos.verificarCodigoDepa;
-import Interfaz.agregarUsuarios;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +46,7 @@ public class ctrlUsuarios {
                     }
                 }
                 usuarios.add(new Usuario(codUsuario, correo, nombre, apellido, contrasena, dpi, fnacimiento,
-                        genero, nacionalidad, alias, telefono, rol, foto, 0));
+                        genero, nacionalidad, alias, telefono, rol, foto));
                 System.out.println("password: " + contrasena + "usuario_" + correo + "id_ " + codUsuario);
                 return true;
             } else {
@@ -81,7 +79,7 @@ public class ctrlUsuarios {
             if (u.getCorreo().equals(correo)) {
                 regresar = new Usuario(u.getIdUsuario(), u.getCorreo(), u.getNombre(), u.getApellido(), u.getContrasena(),
                         u.getDpi(), u.getFechaNacimiento(), u.getGenero(), u.getNacionalidad(), u.getAlias(),
-                        u.getTelefono(), u.getRol(), u.getFotografia(), u.getContadorEnvios());
+                        u.getTelefono(), u.getRol(), u.getFotografia());
             }
         }
         return regresar;
@@ -207,15 +205,6 @@ public class ctrlUsuarios {
         }
 
         return mRegresar;
-    }
-
-    public static void addContadorUser(String correo, int cantPa) {
-        for (int i = 0; i < usuarios.size(); i++) {
-            Usuario reg = usuarios.get(i);
-            if (reg.getCorreo().equals(correo)) {
-                usuarios.get(i).setContadorEnvios(usuarios.get(i).getContadorEnvios() + cantPa);
-            }
-        }
     }
 
     public static Factura getFacturaByCode(String correo, String Guia) {

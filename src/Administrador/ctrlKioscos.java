@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class ctrlKioscos {
 
-    public static ArrayList<Kioscos> kioscos = new ArrayList<Kioscos>();
+    private static ArrayList<Kioscos> kioscos = new ArrayList<Kioscos>();
 
     public static boolean nuevoKiosco(String idRegion, String codigoKiosco, String nombreKiosco) {
         if (!codigoKiosco.equals("") && !nombreKiosco.equals("")) {

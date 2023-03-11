@@ -17,11 +17,10 @@ public class Usuario {
     private int telefono;
     private String rol;
     private String fotografia;
-    private int contadorEnvios;
     private ArrayList<Tarjeta> tarjetas;
     private ArrayList<DatosFacturacion> DatosFacturacion;
 
-    public Usuario(String idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String fotografia, int contador) {
+    public Usuario(String idUsuario, String correo, String nombre, String apellido, String contrasena, String dpi, String fechaNacimiento, String genero, String nacionalidad, String alias, int telefono, String rol, String fotografia) {
         this.setIdUsuario(idUsuario);
         this.setCorreo(correo);
         this.setNombre(nombre);
@@ -37,7 +36,6 @@ public class Usuario {
         this.setFotografia(fotografia);
         this.tarjetas = new ArrayList<>();
         this.DatosFacturacion = new ArrayList<>();
-        this.setContadorEnvios(contador);
     }
 
     public Usuario(String idUsuario, String nombre, String Apellido){
@@ -164,16 +162,6 @@ public class Usuario {
 
     public void setDatosFacturacion(ArrayList<DatosFacturacion> DatosFacturacion) {
         this.DatosFacturacion = DatosFacturacion;
-    }
-
-    public int getContadorEnvios() {
-        return contadorEnvios;
-    }
-
-    public void setContadorEnvios(int contadorEnvios) {
-        this.contadorEnvios = contadorEnvios;
-    }
+    }  
     
-    
-
 }
