@@ -2,12 +2,16 @@ package Interfaz;
 
 import Usuario.Usuario;
 import Usuario.ctrlUsuarios;
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import java.awt.Color;
 import java.awt.Insets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.plaf.ColorUIResource;
 
@@ -16,7 +20,7 @@ import javax.swing.plaf.ColorUIResource;
  * @author mesoi
  */
 public class login extends javax.swing.JFrame {
-    
+
     public static Border unselectedborder;
     public static Border selectedborder;
     public static Border errorBorde;
@@ -27,13 +31,11 @@ public class login extends javax.swing.JFrame {
     public static Color correcto;
     public static Usuario credenciales;
     public static int posicionU;
+
     /**
      * Creates new form login
      */
     public login() {
-        UIManager.put("TextField.caretForeground", new ColorUIResource(255, 255, 255));
-        UIManager.put("ComboBox.selectionBackground", new ColorUIResource(57, 60, 72));
-        UIManager.put("ComboBox.selectionForeground", new ColorUIResource(255, 255, 255));
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -42,12 +44,9 @@ public class login extends javax.swing.JFrame {
                 BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175)),
                 BorderFactory.createEmptyBorder(0, 0, 0, 0)
         );
-        txtMail.setBorder(border);
-        txtPassword.setBorder(border);
-        txtPassword.setCaretColor(Color.WHITE);
         btnCrear.requestFocusInWindow();
         ((JComponent) txtPassword.getParent()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        
+
         selectedTxt = new Color(50, 51, 64);
         unselectedTxt = new Color(40, 41, 52);
         error = new Color(255, 75, 76);
@@ -123,11 +122,9 @@ public class login extends javax.swing.JFrame {
         jLabel2.setText("Correo Electrónico");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        txtMail.setBackground(new java.awt.Color(40, 41, 52));
         txtMail.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtMail.setForeground(new java.awt.Color(255, 255, 255));
         txtMail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtMail.setBorder(null);
         txtMail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtMailFocusGained(evt);
@@ -149,7 +146,7 @@ public class login extends javax.swing.JFrame {
                 txtMailActionPerformed(evt);
             }
         });
-        jPanel5.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
+        jPanel5.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 35));
 
         jPanel4.add(jPanel5);
 
@@ -162,10 +159,8 @@ public class login extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        txtPassword.setBackground(new java.awt.Color(40, 41, 52));
         txtPassword.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setBorder(null);
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPasswordFocusGained(evt);
@@ -174,7 +169,7 @@ public class login extends javax.swing.JFrame {
                 txtPasswordFocusLost(evt);
             }
         });
-        jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 30));
+        jPanel6.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 480, 35));
 
         jPanel4.add(jPanel6);
 
@@ -293,14 +288,13 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
         txtPassword.setBackground(new Color(40, 41, 52));
-        txtPassword.setBorder(bottomBorder);
     }//GEN-LAST:event_txtPasswordFocusLost
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
         txtPassword.setBackground(new Color(50, 51, 64));
-        txtPassword.setBorder(bottomBorder);
+
     }//GEN-LAST:event_txtPasswordFocusGained
 
     private void txtMailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMailMouseExited
@@ -318,14 +312,13 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(150, 157, 175));
         txtMail.setBackground(new Color(40, 41, 52));
-        txtMail.setBorder(bottomBorder);
+
     }//GEN-LAST:event_txtMailFocusLost
 
     private void txtMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusGained
         // TODO add your handling code here:
         Border bottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
         txtMail.setBackground(new Color(50, 51, 64));
-        txtMail.setBorder(bottomBorder);
     }//GEN-LAST:event_txtMailFocusGained
 
     private void txtMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMailActionPerformed
@@ -360,35 +353,6 @@ public class login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
         //</editor-fold>
 
         /* Create and display the form */

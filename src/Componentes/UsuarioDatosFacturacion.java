@@ -69,14 +69,6 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event2));
         cargarBoxOpcion();
-        setBordes();
-    }
-    
-     public void setBordes() {
-        txtDireccion.setBorder(login.unselectedborder);
-        txtNit.setBorder(login.unselectedborder);
-        txtNuevoV.setBorder(login.unselectedborder);
-        txtNombreCompleto.setBorder(login.unselectedborder);
     }
 
     public void test(Usuario user1) {
@@ -248,10 +240,8 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre Completo");
 
-        txtNombreCompleto.setBackground(new java.awt.Color(40, 41, 52));
         txtNombreCompleto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreCompleto.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombreCompleto.setBorder(null);
         txtNombreCompleto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNombreCompletoFocusGained(evt);
@@ -269,10 +259,8 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nit");
 
-        txtDireccion.setBackground(new java.awt.Color(40, 41, 52));
         txtDireccion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(255, 255, 255));
-        txtDireccion.setBorder(null);
         txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDireccionFocusGained(evt);
@@ -282,10 +270,8 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
             }
         });
 
-        txtNit.setBackground(new java.awt.Color(40, 41, 52));
         txtNit.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNit.setForeground(new java.awt.Color(255, 255, 255));
-        txtNit.setBorder(null);
         txtNit.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNitFocusGained(evt);
@@ -372,15 +358,15 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNit, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -428,7 +414,6 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nit:");
 
-        boxNit.setBackground(new java.awt.Color(40, 41, 52));
         boxNit.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxNit.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -436,7 +421,6 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Cambiar:");
 
-        boxCambiar.setBackground(new java.awt.Color(40, 41, 52));
         boxCambiar.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxCambiar.setForeground(new java.awt.Color(255, 255, 255));
         boxCambiar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Dirección", "Nit" }));
@@ -458,10 +442,8 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Valor Actual: ");
 
-        txtNuevoV.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoV.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNuevoV.setForeground(new java.awt.Color(255, 255, 255));
-        txtNuevoV.setBorder(null);
         txtNuevoV.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNuevoVFocusGained(evt);
@@ -533,17 +515,17 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(boxNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boxNit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(boxCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(boxCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNuevoV, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNuevoV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -623,7 +605,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

@@ -80,27 +80,17 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jScrollPane3.getVerticalScrollBar().setUnitIncrement(30);
         tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRenderEliminar());
         tabla2.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditorEliminar(event2));
-        setBordes();
     }
 
     public void test(Usuario user1) {
         this.user = user1;
     }
 
-    public void setBordes() {
-        txtFecha.setBorder(login.unselectedborder);
-        txtNombreTarjeta.setBorder(login.unselectedborder);
-        txtNuevoV.setBorder(login.unselectedborder);
-        txtNumero.setBorder(login.unselectedborder);
-    }
-
     public static void selected(JTextField cambiar, int tipo) {
         if (tipo == 1) {
             cambiar.setBackground(new Color(50, 51, 64));
-            cambiar.setBorder(login.selectedborder);
         } else {
             cambiar.setBackground(new Color(40, 41, 52));
-            cambiar.setBorder(login.unselectedborder);
         }
     }
 
@@ -273,10 +263,8 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre de la tarjeta");
 
-        txtNombreTarjeta.setBackground(new java.awt.Color(40, 41, 52));
         txtNombreTarjeta.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNombreTarjeta.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombreTarjeta.setBorder(null);
         txtNombreTarjeta.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNombreTarjetaFocusGained(evt);
@@ -290,10 +278,8 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Numero de la Tarjeta");
 
-        txtNumero.setBackground(new java.awt.Color(40, 41, 52));
         txtNumero.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNumero.setForeground(new java.awt.Color(255, 255, 255));
-        txtNumero.setBorder(null);
         txtNumero.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNumeroFocusGained(evt);
@@ -315,10 +301,8 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha de Vencimiento");
 
-        txtFecha.setBackground(new java.awt.Color(40, 41, 52));
         txtFecha.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
-        txtFecha.setBorder(null);
         txtFecha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFechaFocusGained(evt);
@@ -390,15 +374,15 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel3)
                 .addGap(6, 6, 6)
-                .addComponent(txtNombreTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombreTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -467,7 +451,6 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Numero de Tarjeta: ");
 
-        boxNumeroTarjeta.setBackground(new java.awt.Color(40, 41, 52));
         boxNumeroTarjeta.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxNumeroTarjeta.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -475,7 +458,6 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Cambiar");
 
-        boxCambiar.setBackground(new java.awt.Color(40, 41, 52));
         boxCambiar.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxCambiar.setForeground(new java.awt.Color(255, 255, 255));
         boxCambiar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Numero", "Fecha de Vencimiento" }));
@@ -497,10 +479,8 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Nuevo Valor");
 
-        txtNuevoV.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoV.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNuevoV.setForeground(new java.awt.Color(255, 255, 255));
-        txtNuevoV.setBorder(null);
         txtNuevoV.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNuevoVFocusGained(evt);
@@ -581,10 +561,10 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(boxCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -592,7 +572,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNuevoV, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNuevoV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -686,7 +666,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -737,11 +717,14 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
             lblFecha.setForeground(login.error);
             lblFecha.setText("Ingrese una fecha valida");
             validarFecha = false;
-            txtFecha.setBorder(login.errorBorde);
+            txtFecha.putClientProperty("Component.outlineWidth", 1);
+            txtFecha.putClientProperty("JComponent.outline", "error");
+
         } else {
             lblFecha.setForeground(Color.WHITE);
             lblFecha.setText("dd/mm/yyyy");
-            txtFecha.setBorder(login.correctoBorde);
+            txtFecha.putClientProperty("Component.outlineWidth", 1);
+            txtFecha.putClientProperty("JComponent.outline", "correct");
             validarFecha = true;
         }
     }//GEN-LAST:event_txtFechaKeyReleased
@@ -775,11 +758,13 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 lblAdvertencia.setForeground(login.error);
                 lblAdvertencia.setText("Ingrese una fecha valida");
                 //validarFecha = false;
-                txtNuevoV.setBorder(login.errorBorde);
+                txtNuevoV.putClientProperty("Component.outlineWidth", 1);
+                txtNuevoV.putClientProperty("JComponent.outline", "error");
             } else {
                 lblAdvertencia.setForeground(Color.WHITE);
                 lblAdvertencia.setText("dd/mm/yyyy");
-                txtNuevoV.setBorder(login.correctoBorde);
+                txtNuevoV.putClientProperty("Component.outlineWidth", 1);
+                txtNuevoV.putClientProperty("JComponent.outline", "correct");
                 //validarFecha = true;
             }
         }
@@ -792,42 +777,42 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
 
     private void txtNombreTarjetaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreTarjetaFocusGained
         // TODO add your handling code here:
-          selected(txtNombreTarjeta,1);
+        selected(txtNombreTarjeta, 1);
     }//GEN-LAST:event_txtNombreTarjetaFocusGained
 
     private void txtNumeroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroFocusGained
         // TODO add your handling code here:
-        selected(txtNumero,1);
+        selected(txtNumero, 1);
     }//GEN-LAST:event_txtNumeroFocusGained
 
     private void txtFechaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaFocusGained
         // TODO add your handling code here:
-        selected(txtFecha,1);
+        selected(txtFecha, 1);
     }//GEN-LAST:event_txtFechaFocusGained
 
     private void txtNuevoVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoVFocusGained
         // TODO add your handling code here:
-        selected(txtNuevoV,1);
+        selected(txtNuevoV, 1);
     }//GEN-LAST:event_txtNuevoVFocusGained
 
     private void txtNombreTarjetaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreTarjetaFocusLost
         // TODO add your handling code here:
-        selected(txtNombreTarjeta,0);
+        selected(txtNombreTarjeta, 0);
     }//GEN-LAST:event_txtNombreTarjetaFocusLost
 
     private void txtNumeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroFocusLost
         // TODO add your handling code here:
-        selected(txtNumero,0);
+        selected(txtNumero, 0);
     }//GEN-LAST:event_txtNumeroFocusLost
 
     private void txtFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaFocusLost
         // TODO add your handling code here:
-        selected(txtFecha,0);
+        selected(txtFecha, 0);
     }//GEN-LAST:event_txtFechaFocusLost
 
     private void txtNuevoVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoVFocusLost
         // TODO add your handling code here:
-        selected(txtNuevoV,0);
+        selected(txtNuevoV, 0);
     }//GEN-LAST:event_txtNuevoVFocusLost
 
 

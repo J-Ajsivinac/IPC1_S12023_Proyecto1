@@ -45,7 +45,6 @@ public class DepMun extends javax.swing.JPanel {
         aADep.cargarDepartamentosMun();
         aADep.cargarTablaDepartamentos();
         aADep.cargarTablaMunicipios();
-        aADep.setBordes();
         menuClick(aADep, panelAgregar);
     }
 
@@ -54,10 +53,6 @@ public class DepMun extends javax.swing.JPanel {
         aMDep.setVisible(false);
         panelAgregar.setBackground(new Color(40, 41, 52));
         panelModificar.setBackground(new Color(40, 41, 52));
-        //panelAgregar.setBorder(unselect);
-        panelAgregar.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(52, 52, 52)));
-        panelModificar.setBorder(unselect);
-        btn.setBorder(selected);
         btn.setBackground(new Color(123, 127, 239));
         panel.setVisible(true);
     }
@@ -75,10 +70,10 @@ public class DepMun extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         panelRound3 = new Elementos.PanelRound();
         panelBackground = new javax.swing.JPanel();
-        panelAgregar = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        panelModificar = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        panelAgregar = new Elementos.PanelRound();
+        jLabel6 = new javax.swing.JLabel();
+        panelModificar = new Elementos.PanelRound();
+        jLabel7 = new javax.swing.JLabel();
         panelCrud = new javax.swing.JPanel();
 
         setOpaque(false);
@@ -89,35 +84,93 @@ public class DepMun extends javax.swing.JPanel {
         panelRound3.setForeground(new java.awt.Color(19, 19, 26));
 
         panelBackground.setOpaque(false);
-        panelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelAgregar.setBackground(new java.awt.Color(40, 41, 52));
+        panelAgregar.setRoundTopLeft(12);
+        panelAgregar.setRoundTopRight(12);
         panelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelAgregarMouseClicked(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Agregar");
-        panelAgregar.add(jLabel4);
+        jLabel6.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Agregar");
 
-        panelBackground.add(panelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 121, -1));
+        javax.swing.GroupLayout panelAgregarLayout = new javax.swing.GroupLayout(panelAgregar);
+        panelAgregar.setLayout(panelAgregarLayout);
+        panelAgregarLayout.setHorizontalGroup(
+            panelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 121, Short.MAX_VALUE)
+            .addGroup(panelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAgregarLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        panelAgregarLayout.setVerticalGroup(
+            panelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAgregarLayout.createSequentialGroup()
+                    .addGap(0, 5, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addGap(0, 5, Short.MAX_VALUE)))
+        );
 
         panelModificar.setBackground(new java.awt.Color(40, 41, 52));
+        panelModificar.setRoundTopLeft(12);
+        panelModificar.setRoundTopRight(12);
         panelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelModificarMouseClicked(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Modificar");
-        panelModificar.add(jLabel5);
+        jLabel7.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Modificar");
 
-        panelBackground.add(panelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 121, -1));
+        javax.swing.GroupLayout panelModificarLayout = new javax.swing.GroupLayout(panelModificar);
+        panelModificar.setLayout(panelModificarLayout);
+        panelModificarLayout.setHorizontalGroup(
+            panelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 121, Short.MAX_VALUE)
+            .addGroup(panelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelModificarLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        panelModificarLayout.setVerticalGroup(
+            panelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 27, Short.MAX_VALUE)
+            .addGroup(panelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelModificarLayout.createSequentialGroup()
+                    .addGap(0, 5, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addGap(0, 5, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout panelBackgroundLayout = new javax.swing.GroupLayout(panelBackground);
+        panelBackground.setLayout(panelBackgroundLayout);
+        panelBackgroundLayout.setHorizontalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(panelAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelBackgroundLayout.setVerticalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
+                .addComponent(panelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         panelCrud.setBackground(new java.awt.Color(255, 51, 153));
         panelCrud.setOpaque(false);
@@ -126,7 +179,7 @@ public class DepMun extends javax.swing.JPanel {
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelCrud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -138,7 +191,7 @@ public class DepMun extends javax.swing.JPanel {
                 .addGap(9, 9, 9)
                 .addComponent(panelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCrud, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelCrud, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -166,9 +219,7 @@ public class DepMun extends javax.swing.JPanel {
         aADep.cargarDepartamentosMun();
         aADep.cargarTablaDepartamentos();
         aADep.cargarTablaMunicipios();
-        aADep.setBordes();
         menuClick(aADep, panelAgregar);
-        
     }//GEN-LAST:event_panelAgregarMouseClicked
 
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
@@ -182,13 +233,13 @@ public class DepMun extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JPanel panelAgregar;
+    private Elementos.PanelRound panelAgregar;
     private javax.swing.JPanel panelBackground;
     private javax.swing.JPanel panelCrud;
-    private javax.swing.JPanel panelModificar;
+    private Elementos.PanelRound panelModificar;
     private Elementos.PanelRound panelRound3;
     // End of variables declaration//GEN-END:variables
 }

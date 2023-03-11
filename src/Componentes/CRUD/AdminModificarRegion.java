@@ -51,7 +51,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                     tabla2.getCellEditor().stopCellEditing();
                 }
 
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la Región?");
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la Región?","Confiramción", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
                 if (respuesta == JOptionPane.YES_OPTION) {
                     DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
                     String codigo = String.valueOf(modelo.getValueAt(row, 0));
@@ -82,10 +82,8 @@ public class AdminModificarRegion extends javax.swing.JPanel {
     public void selected(JTextField cambiar, int tipo) {
         if (tipo == 1) {
             cambiar.setBackground(new Color(50, 51, 64));
-            cambiar.setBorder(login.selectedborder);
         } else {
             cambiar.setBackground(new Color(40, 41, 52));
-            cambiar.setBorder(login.unselectedborder);
         }
     }
 
@@ -127,8 +125,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 txtNuevoNombre.setEditable(false);
                 txtNuevoPrecio.setBackground(new Color(40, 41, 52));
                 txtNuevoNombre.setBackground(new Color(28, 28, 36));
-                txtNuevoPrecio.setBorder(login.unselectedborder);
-                txtNuevoNombre.setBorder(null);
                 lblPrecioActual.setText(regItem.getPrecioEstandar() + "");
                 activar = true;
             } else if (opcion == 2) {
@@ -136,26 +132,25 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 txtNuevoNombre.setEditable(false);
                 txtNuevoPrecio.setBackground(new Color(40, 41, 52));
                 txtNuevoNombre.setBackground(new Color(28, 28, 36));
-                txtNuevoPrecio.setBorder(login.unselectedborder);
-                txtNuevoNombre.setBorder(null);
+
                 lblPrecioActual.setText(regItem.getPrecioEspecial() + "");
                 activar = true;
             } else if (opcion == 3) {
                 txtNuevoPrecio.setEditable(false);
                 txtNuevoNombre.setEditable(true);
-                txtNuevoPrecio.setBorder(null);
+
                 txtNuevoNombre.setBackground(new Color(40, 41, 52));
                 txtNuevoPrecio.setBackground(new Color(28, 28, 36));
-                txtNuevoNombre.setBorder(login.unselectedborder);
+
                 lblPrecioActual.setText(regItem.getNombre() + "");
                 activar = false;
             } else if (opcion == 4) {
                 txtNuevoPrecio.setEditable(false);
                 txtNuevoNombre.setEditable(true);
-                txtNuevoPrecio.setBorder(null);
+
                 txtNuevoNombre.setBackground(new Color(40, 41, 52));
                 txtNuevoPrecio.setBackground(new Color(28, 28, 36));
-                txtNuevoNombre.setBorder(login.unselectedborder);
+
                 lblPrecioActual.setText(regItem.getCodigo() + "");
                 activar = false;
             }
@@ -260,10 +255,8 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nuevo Precio");
 
-        txtNuevoPrecio.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoPrecio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNuevoPrecio.setForeground(new java.awt.Color(255, 255, 255));
-        txtNuevoPrecio.setBorder(null);
         txtNuevoPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNuevoPrecioFocusGained(evt);
@@ -300,20 +293,16 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Región");
 
-        boxRegion.setBackground(new java.awt.Color(34, 37, 47));
         boxRegion.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegion.setForeground(new java.awt.Color(255, 255, 255));
-        boxRegion.setBorder(null);
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cambiar:");
 
-        boxPrecio.setBackground(new java.awt.Color(34, 37, 47));
         boxPrecio.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxPrecio.setForeground(new java.awt.Color(255, 255, 255));
         boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial", "Nombre", "Codigo" }));
-        boxPrecio.setBorder(null);
         boxPrecio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 boxPrecioItemStateChanged(evt);
@@ -340,10 +329,10 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             .addGroup(panelSuperiorLayout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9))
         );
 
@@ -351,10 +340,8 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nuevo Nombre");
 
-        txtNuevoNombre.setBackground(new java.awt.Color(40, 41, 52));
         txtNuevoNombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtNuevoNombre.setForeground(new java.awt.Color(255, 255, 255));
-        txtNuevoNombre.setBorder(null);
         txtNuevoNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNuevoNombreFocusGained(evt);
@@ -412,10 +399,10 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                     .addComponent(lblPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addComponent(lblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -500,12 +487,14 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             if (Character.isLetter(c)) {
                 txtNuevoPrecio.setEditable(false);
                 lblAdvertencia.setText("Solo numeros");
-                txtNuevoPrecio.setBorder(login.errorBorde);
+                txtNuevoPrecio.putClientProperty("Component.outlineWidth", 1);
+                txtNuevoPrecio.putClientProperty("JComponent.outline", "error");
                 lblAdvertencia.setForeground(login.error);
             } else {
                 txtNuevoPrecio.setEditable(true);
                 lblAdvertencia.setText("");
-                txtNuevoPrecio.setBorder(login.selectedborder);
+                txtNuevoPrecio.putClientProperty("Component.outlineWidth", 1);
+                txtNuevoPrecio.putClientProperty("JComponent.outline", "correct");
                 lblAdvertencia.setForeground(Color.WHITE);
             }
         }
@@ -516,8 +505,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (activar) {
             txtNuevoPrecio.setBackground(new Color(50, 51, 64));
-            txtNuevoPrecio.setBorder(login.selectedborder);
-            txtNuevoNombre.setBorder(null);
         } else {
             txtNuevoPrecio.setEditable(false);
         }
@@ -528,8 +515,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (!activar) {
             txtNuevoNombre.setBackground(new Color(50, 51, 64));
-            txtNuevoNombre.setBorder(login.selectedborder);
-            txtNuevoPrecio.setBorder(null);
         }
 
     }//GEN-LAST:event_txtNuevoNombreFocusGained
@@ -538,8 +523,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (activar) {
             txtNuevoPrecio.setBackground(new Color(40, 41, 52));
-            txtNuevoPrecio.setBorder(login.unselectedborder);
-            txtNuevoNombre.setBorder(null);
         } else {
             txtNuevoPrecio.setEditable(false);
         }
@@ -550,8 +533,6 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (!activar) {
             txtNuevoNombre.setBackground(new Color(40, 41, 52));
-            txtNuevoNombre.setBorder(login.unselectedborder);
-            txtNuevoPrecio.setBorder(null);
         }
     }//GEN-LAST:event_txtNuevoNombreFocusLost
 

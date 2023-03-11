@@ -2,7 +2,10 @@ package Componentes;
 
 import Usuario.Envios;
 import Usuario.ctrlEnvios;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,11 +19,12 @@ public class AdminReporteTotales extends javax.swing.JPanel {
     public AdminReporteTotales() {
         initComponents();
         this.setBounds(0, 0, 710, 500);
-        
+        setImage1(lblAlerta, "src\\img\\dolar (1).png");
+
     }
 
     public void totalPaquetes() {
-        int totalPaqu = 0;
+        double totalPaqu = 0;
         ArrayList<Envios> enviosGet = ctrlEnvios.getAllEnvios();
         for (Envios envio : enviosGet) {
             totalPaqu += envio.getFactura().getNumeropaquetes();
@@ -36,7 +40,12 @@ public class AdminReporteTotales extends javax.swing.JPanel {
                 totalPaqu += envio.getFactura().getTotal();
             }
             lblIngresosTotales.setText(totalPaqu + "");
-        }  
+        }
+    }
+
+    public void setImage1(JLabel labelimagen, String root) {
+        ImageIcon imagen1 = new ImageIcon(root);
+        lbl1.setIcon(new ImageIcon(imagen1.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH)));
     }
 
     /**
@@ -55,7 +64,8 @@ public class AdminReporteTotales extends javax.swing.JPanel {
         panelRound3 = new Elementos.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         lblIngresosTotales = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblAlerta = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
 
         panelRound1.setBackground(new java.awt.Color(19, 19, 26));
 
@@ -91,7 +101,7 @@ public class AdminReporteTotales extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelRound3.setBackground(new java.awt.Color(28, 28, 36));
@@ -113,10 +123,15 @@ public class AdminReporteTotales extends javax.swing.JPanel {
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(lblIngresosTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(lblIngresosTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -126,10 +141,13 @@ public class AdminReporteTotales extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblIngresosTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dolar (1).png"))); // NOI18N
+        lbl1.setIconTextGap(10);
+        lbl1.setPreferredSize(new java.awt.Dimension(128, 128));
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -143,8 +161,8 @@ public class AdminReporteTotales extends javax.swing.JPanel {
                         .addGap(37, 37, 37)
                         .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(68, 68, 68)
+                        .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -154,9 +172,9 @@ public class AdminReporteTotales extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -174,8 +192,9 @@ public class AdminReporteTotales extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblIngresosTotales;
     private javax.swing.JLabel lblTotalPaquetes;
     private Elementos.PanelRound panelRound1;

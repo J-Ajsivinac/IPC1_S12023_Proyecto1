@@ -394,10 +394,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Correo Electronico");
 
-        txtCorreo.setBackground(new java.awt.Color(40, 41, 52));
         txtCorreo.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        txtCorreo.setBorder(null);
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyReleased(evt);
@@ -447,20 +445,16 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             }
         });
 
-        txtContra.setBackground(new java.awt.Color(40, 41, 52));
         txtContra.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtContra.setForeground(new java.awt.Color(255, 255, 255));
-        txtContra.setBorder(null);
         txtContra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtContraKeyReleased(evt);
             }
         });
 
-        txtAnterior.setBackground(new java.awt.Color(40, 41, 52));
         txtAnterior.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtAnterior.setForeground(new java.awt.Color(255, 255, 255));
-        txtAnterior.setBorder(null);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -504,7 +498,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -513,8 +507,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(7, 7, 7)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblop1)
@@ -542,24 +536,18 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Nombre");
 
-        txtNombre.setBackground(new java.awt.Color(40, 41, 52));
         txtNombre.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombre.setBorder(null);
 
         jLabel15.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Apellido");
 
-        txtApellido.setBackground(new java.awt.Color(40, 41, 52));
         txtApellido.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtApellido.setForeground(new java.awt.Color(255, 255, 255));
-        txtApellido.setBorder(null);
 
-        txtFecha.setBackground(new java.awt.Color(40, 41, 52));
         txtFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
-        txtFecha.setBorder(null);
 
         jLabel16.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
@@ -572,10 +560,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Teléfono");
 
-        txtTelefono.setBackground(new java.awt.Color(40, 41, 52));
         txtTelefono.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
-        txtTelefono.setBorder(null);
 
         jLabel19.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -588,11 +574,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Género");
 
-        boxNacionalidad.setBackground(new java.awt.Color(40, 41, 52));
         boxNacionalidad.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxNacionalidad.setForeground(new java.awt.Color(255, 255, 255));
 
-        boxGenero.setBackground(new java.awt.Color(40, 41, 52));
         boxGenero.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxGenero.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -600,10 +584,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("DPI");
 
-        txtDpi.setBackground(new java.awt.Color(40, 41, 52));
         txtDpi.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDpi.setForeground(new java.awt.Color(255, 255, 255));
-        txtDpi.setBorder(null);
 
         jLabel23.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -670,16 +652,16 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -690,12 +672,12 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(boxNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -777,7 +759,6 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Rol");
 
-        boxRol.setBackground(new java.awt.Color(40, 41, 52));
         boxRol.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRol.setForeground(new java.awt.Color(255, 255, 255));
         boxRol.addItemListener(new java.awt.event.ItemListener() {
@@ -786,7 +767,6 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             }
         });
 
-        boxKiosco.setBackground(new java.awt.Color(40, 41, 52));
         boxKiosco.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxKiosco.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -843,8 +823,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     .addComponent(jLabel26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(buttonRound4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -968,14 +948,18 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             Matcher m = exp[i].matcher(String.valueOf(txtContra.getPassword()));
             if (m.find()) {
                 labels[i].setForeground(new Color(99, 220, 147));
-                //txtContra.setBorder(correctoBorde);
+                txtContra.putClientProperty("Component.outlineWidth", 1);
+                txtContra.putClientProperty("JComponent.outline", "correct");
             } else {
                 labels[i].setForeground(login.error);
-                //txtContra.setBorder(errorBorde);
+                txtContra.putClientProperty("Component.outlineWidth", 1);
+                txtContra.putClientProperty("JComponent.outline", "error");
+
             }
         }
         if (ctrlUsuarios.verificarPassword(String.valueOf(txtContra.getPassword()))) {
-            txtContra.setBorder(login.correctoBorde);
+            txtContra.putClientProperty("Component.outlineWidth", 1);
+            txtContra.putClientProperty("JComponent.outline", "correct");
         }
     }//GEN-LAST:event_txtContraKeyReleased
 
@@ -986,10 +970,12 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         if (!m.find()) {
             lblCorreo.setForeground(login.error);
             lblCorreo.setText("Ingrese un correo valido");
-            txtCorreo.setBorder(login.errorBorde);
+            lblCorreo.putClientProperty("Component.outlineWidth", 1);
+            lblCorreo.putClientProperty("JComponent.outline", "error");
         } else {
             lblCorreo.setText("");
-            txtCorreo.setBorder(login.correctoBorde);
+            lblCorreo.putClientProperty("Component.outlineWidth", 1);
+            lblCorreo.putClientProperty("JComponent.outline", "correct");
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 

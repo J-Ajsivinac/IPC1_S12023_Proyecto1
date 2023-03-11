@@ -30,6 +30,7 @@ public class Admin extends javax.swing.JFrame {
     public Admin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         ad = new AdminRegiones();
         dm = new DepMun();
         adK = new AdminiKioscos();

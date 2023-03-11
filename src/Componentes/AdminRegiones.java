@@ -23,8 +23,6 @@ public class AdminRegiones extends javax.swing.JPanel {
     private AdminModificarRegion aMR;
     private Border unselect, selected;
 
-    
-
     /**
      * Creates new form Regiones
      */
@@ -50,22 +48,22 @@ public class AdminRegiones extends javax.swing.JPanel {
         panelAgregar.setBackground(new Color(40, 41, 52));
         panelModificar.setBackground(new Color(40, 41, 52));
         //panelAgregar.setBorder(unselect);
-        panelAgregar.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(52, 52, 52)));
-        panelModificar.setBorder(unselect);
-        btn.setBorder(selected);
+        //panelModificar.setBorder(unselect);
         btn.setBackground(new Color(123, 127, 239));
         panel.setVisible(true);
     }
-    public void inicioModificar(){
+
+    public void inicioModificar() {
         aMR.cargarRegiones();
         aMR.cargarBoxRegiones();
         aMR.mostrarDatos();
     }
-    
-    public void inicioAgregar(){
+
+    public void inicioAgregar() {
         menuClick(aAR, panelAgregar);
         aAR.cargarRegiones();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,10 +75,10 @@ public class AdminRegiones extends javax.swing.JPanel {
 
         panelRound3 = new Elementos.PanelRound();
         panelBackground = new javax.swing.JPanel();
-        panelAgregar = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        panelModificar = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        panelAgregar = new Elementos.PanelRound();
+        jLabel6 = new javax.swing.JLabel();
+        panelModificar = new Elementos.PanelRound();
+        jLabel7 = new javax.swing.JLabel();
         panelCrud = new javax.swing.JPanel();
 
         setOpaque(false);
@@ -88,36 +86,87 @@ public class AdminRegiones extends javax.swing.JPanel {
         panelRound3.setBackground(new java.awt.Color(19, 19, 26));
 
         panelBackground.setOpaque(false);
-        panelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelAgregar.setBackground(new java.awt.Color(40, 41, 52));
+        panelAgregar.setRoundTopLeft(12);
+        panelAgregar.setRoundTopRight(12);
         panelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelAgregarMouseClicked(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Agregar");
-        panelAgregar.add(jLabel4);
+        jLabel6.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Agregar");
 
-        panelBackground.add(panelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 121, -1));
+        javax.swing.GroupLayout panelAgregarLayout = new javax.swing.GroupLayout(panelAgregar);
+        panelAgregar.setLayout(panelAgregarLayout);
+        panelAgregarLayout.setHorizontalGroup(
+            panelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAgregarLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        panelAgregarLayout.setVerticalGroup(
+            panelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAgregarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         panelModificar.setBackground(new java.awt.Color(40, 41, 52));
-        panelModificar.setForeground(new java.awt.Color(255, 255, 255));
+        panelModificar.setRoundTopLeft(12);
+        panelModificar.setRoundTopRight(12);
         panelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelModificarMouseClicked(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Modificar");
-        panelModificar.add(jLabel5);
+        jLabel7.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Modificar");
 
-        panelBackground.add(panelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 121, -1));
+        javax.swing.GroupLayout panelModificarLayout = new javax.swing.GroupLayout(panelModificar);
+        panelModificar.setLayout(panelModificarLayout);
+        panelModificarLayout.setHorizontalGroup(
+            panelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModificarLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        panelModificarLayout.setVerticalGroup(
+            panelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModificarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelBackgroundLayout = new javax.swing.GroupLayout(panelBackground);
+        panelBackground.setLayout(panelBackgroundLayout);
+        panelBackgroundLayout.setHorizontalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(panelAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelBackgroundLayout.setVerticalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
+                .addComponent(panelAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
 
         panelCrud.setBackground(new java.awt.Color(255, 51, 153));
         panelCrud.setOpaque(false);
@@ -137,7 +186,7 @@ public class AdminRegiones extends javax.swing.JPanel {
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelCrud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,26 +214,26 @@ public class AdminRegiones extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
+        // TODO add your handling code here:
+        inicioAgregar();
+        menuClick(aAR, panelAgregar);
+    }//GEN-LAST:event_panelAgregarMouseClicked
+
     private void panelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelModificarMouseClicked
         // TODO add your handling code here:
         inicioModificar();
         menuClick(aMR, panelModificar);
     }//GEN-LAST:event_panelModificarMouseClicked
 
-    private void panelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAgregarMouseClicked
-        // TODO add your handling code here:
-        inicioAgregar();
-        menuClick(aAR, panelAgregar); 
-    }//GEN-LAST:event_panelAgregarMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel panelAgregar;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private Elementos.PanelRound panelAgregar;
     private javax.swing.JPanel panelBackground;
     private javax.swing.JPanel panelCrud;
-    private javax.swing.JPanel panelModificar;
+    private Elementos.PanelRound panelModificar;
     private Elementos.PanelRound panelRound3;
     // End of variables declaration//GEN-END:variables
 }

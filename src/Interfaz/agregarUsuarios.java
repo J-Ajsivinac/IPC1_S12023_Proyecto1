@@ -3,9 +3,9 @@ package Interfaz;
 import Administrador.Kioscos;
 import Administrador.ctrlKioscos;
 import Usuario.ctrlUsuarios;
+import com.formdev.flatlaf.ui.FlatBorder;
+import com.formdev.flatlaf.ui.FlatLineBorder;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.util.ArrayList;
@@ -20,15 +20,13 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
  *
  * @author mesoi
  */
 public class agregarUsuarios extends javax.swing.JFrame {
-    
+
     Border unselectedborder;
     Border selectedborder;
     Border errorBorde;
@@ -47,9 +45,9 @@ public class agregarUsuarios extends javax.swing.JFrame {
      * Creates new form agregarUsuarios
      */
     public agregarUsuarios() {
-        
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         agregarBoxes();
         boxKiosco.setEnabled(false);
         kiosco = ctrlKioscos.getAllKioscos();
@@ -62,26 +60,16 @@ public class agregarUsuarios extends javax.swing.JFrame {
         selectedborder = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 220, 222));
         errorBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, error);
         correctoBorde = BorderFactory.createMatteBorder(0, 0, 2, 0, correcto);
-        
+
         boxKiosco.setVisible(false);
         setBordes();
-        
+
     }
-    
+
     public void setBordes() {
-        txtAlias.setBorder(unselectedborder);
-        txtApellido.setBorder(unselectedborder);
-        txtContra.setBorder(unselectedborder);
-        txtCorreo.setBorder(unselectedborder);
-        txtDPI.setBorder(unselectedborder);
-        txtFecha.setBorder(unselectedborder);
-        //txtKiosco.setBorder(unselectedborder);
-        txtNombre.setBorder(unselectedborder);
-        txtTelefono.setBorder(unselectedborder);
-        txtValidar.setBorder(unselectedborder);
-        
+
     }
-    
+
     public void cargarKioscos() {
         for (int i = 0; i < kiosco.size(); i++) {
             if (kiosco.get(i) != null) {
@@ -89,20 +77,18 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 String nombreKiosco = kiosco.get(i).getNombreKiosco();
                 boxKiosco.addItem(new Kioscos(kiosco.get(i).getIdRegion(), kiosco.get(i).getCodigo(), kiosco.get(i).getNombre(), kiosco.get(i).getPrecioEstandar(), kiosco.get(i).getPrecioEspecial(), codeK, nombreKiosco));
             }
-            
+
         }
     }
-    
+
     public void selected(JTextField cambiar, int tipo) {
         if (tipo == 0) {
             cambiar.setBackground(new Color(50, 51, 64));
-            cambiar.setBorder(selectedborder);
         } else {
             cambiar.setBackground(new Color(40, 41, 52));
-            cambiar.setBorder(unselectedborder);
         }
     }
-    
+
     public void limpiarTxt() {
         txtAlias.setText("");
         txtApellido.setText("");
@@ -115,6 +101,56 @@ public class agregarUsuarios extends javax.swing.JFrame {
         txtTelefono.setText("");
         txtValidar.setText("");
         ruta = "";
+    }
+
+    public void cargarImagen() {
+        ruta = "";
+        JFileChooser archivos = new JFileChooser();
+        FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
+        archivos.setFileFilter(filtrado);
+
+        int respuesta = archivos.showOpenDialog(this);
+        if (respuesta == archivos.APPROVE_OPTION) {
+            ruta = archivos.getSelectedFile().getPath();
+            /// Cargar la imagen original
+
+            ImageIcon originalImageIcon = new ImageIcon(ruta);
+            if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                ///htmls/factura.html
+                originalImageIcon = new ImageIcon("src\\img\\usuario.png");
+            }
+
+            // Obtener el tamaño original de la imagen
+            int originalImageWidth = originalImageIcon.getIconWidth();
+            int originalImageHeight = originalImageIcon.getIconHeight();
+
+            // Obtener el tamaño del JLabel
+            int labelWidth = lblimagen.getWidth();
+            int labelHeight = lblimagen.getHeight();
+
+            // Calcular la relación de aspecto de la imagen original y del JLabel
+            double originalImageAspectRatio = (double) originalImageWidth / originalImageHeight;
+            double labelAspectRatio = (double) labelWidth / labelHeight;
+
+            // Escalar la imagen si es necesario
+            ImageIcon scaledImageIcon;
+            if (originalImageAspectRatio > labelAspectRatio) {
+                // La imagen es más ancha que el JLabel
+                int scaledImageWidth = labelWidth;
+                int scaledImageHeight = (int) (scaledImageWidth / originalImageAspectRatio);
+                Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
+                scaledImageIcon = new ImageIcon(scaledImage);
+            } else {
+                // La imagen es más alta que el JLabel
+                int scaledImageHeight = labelHeight;
+                int scaledImageWidth = (int) (scaledImageHeight * originalImageAspectRatio);
+                Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
+                scaledImageIcon = new ImageIcon(scaledImage);
+            }
+            // Establecer el ImageIcon escalado en el JLabel
+            lblimagen.setIcon(scaledImageIcon);
+
+        }
     }
 
     /**
@@ -167,22 +203,23 @@ public class agregarUsuarios extends javax.swing.JFrame {
         lblDpi = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         panelRound2 = new Elementos.PanelRound();
-        btbRegistrar = new javax.swing.JButton();
         lblIniciarS = new javax.swing.JLabel();
+        buttonRound1 = new Elementos.ButtonRound();
         panelRound3 = new Elementos.PanelRound();
         panelImagen = new javax.swing.JPanel();
         lblimagen = new javax.swing.JLabel();
-        btnSubir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        buttonRound2 = new Elementos.ButtonRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(19, 19, 26));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Registrar Usuarios");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 14, 150, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 14, 170, -1));
 
         panelRound1.setBackground(new java.awt.Color(28, 28, 36));
         panelRound1.setRoundTopLeft(15);
@@ -197,10 +234,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Correo Electronico");
 
-        txtCorreo.setBackground(new java.awt.Color(40, 41, 52));
         txtCorreo.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        txtCorreo.setBorder(null);
         txtCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -223,10 +258,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre");
 
-        txtNombre.setBackground(new java.awt.Color(40, 41, 52));
         txtNombre.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombre.setBorder(null);
         txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNombreFocusGained(evt);
@@ -240,10 +273,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Apellido");
 
-        txtApellido.setBackground(new java.awt.Color(40, 41, 52));
         txtApellido.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtApellido.setForeground(new java.awt.Color(255, 255, 255));
-        txtApellido.setBorder(null);
         txtApellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtApellidoFocusGained(evt);
@@ -281,9 +312,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Rol");
 
-        boxRol.setBackground(new java.awt.Color(34, 37, 47));
+        boxRol.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRol.setForeground(new java.awt.Color(255, 255, 255));
-        boxRol.setBorder(null);
         boxRol.setOpaque(false);
         boxRol.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -296,12 +326,10 @@ public class agregarUsuarios extends javax.swing.JFrame {
         txtKiosco.setText("Kiosco");
 
         boxKiosco.setBackground(new java.awt.Color(34, 37, 47));
-        boxKiosco.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        boxKiosco.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxKiosco.setForeground(new java.awt.Color(255, 255, 255));
 
-        txtContra.setBackground(new java.awt.Color(40, 41, 52));
         txtContra.setForeground(new java.awt.Color(255, 255, 255));
-        txtContra.setBorder(null);
         txtContra.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtContraFocusGained(evt);
@@ -316,9 +344,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             }
         });
 
-        txtValidar.setBackground(new java.awt.Color(40, 41, 52));
         txtValidar.setForeground(new java.awt.Color(255, 255, 255));
-        txtValidar.setBorder(null);
         txtValidar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtValidarFocusGained(evt);
@@ -333,7 +359,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel2))
@@ -343,21 +369,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(txtValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblop1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(lblop2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblop3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,17 +385,32 @@ public class agregarUsuarios extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(boxKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblop1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(lblop2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtContra)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtApellido))))
                 .addGap(11, 11, 11))
         );
         jPanel4Layout.setVerticalGroup(
@@ -393,8 +419,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel2)
                 .addGap(6, 6, 6)
-                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -402,17 +428,17 @@ public class agregarUsuarios extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblop1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblop2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -420,14 +446,14 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblop3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblop4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(txtKiosco))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(boxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(boxKiosco, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(boxRol, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
         );
 
         jPanel3.add(jPanel4);
@@ -438,10 +464,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Fecha de Nacimiento");
 
-        txtFecha.setBackground(new java.awt.Color(40, 41, 52));
         txtFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
-        txtFecha.setBorder(null);
         txtFecha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFechaFocusGained(evt);
@@ -461,23 +485,25 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel11.setText("Nacionalidad");
 
         boxNacionalidad.setBackground(new java.awt.Color(34, 37, 47));
+        boxNacionalidad.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxNacionalidad.setForeground(new java.awt.Color(255, 255, 255));
+        boxNacionalidad.setBorder(null);
 
         jLabel12.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Genero");
 
         boxGenero.setBackground(new java.awt.Color(34, 37, 47));
+        boxGenero.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxGenero.setForeground(new java.awt.Color(255, 255, 255));
+        boxGenero.setBorder(null);
 
         jLabel13.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Sobrenombre (Alias)");
 
-        txtAlias.setBackground(new java.awt.Color(40, 41, 52));
         txtAlias.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtAlias.setForeground(new java.awt.Color(255, 255, 255));
-        txtAlias.setBorder(null);
         txtAlias.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtAliasFocusGained(evt);
@@ -491,10 +517,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Telefono");
 
-        txtTelefono.setBackground(new java.awt.Color(40, 41, 52));
         txtTelefono.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
-        txtTelefono.setBorder(null);
         txtTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtTelefonoFocusGained(evt);
@@ -516,10 +540,16 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("DPI");
 
-        txtDPI.setBackground(new java.awt.Color(40, 41, 52));
         txtDPI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDPI.setForeground(new java.awt.Color(255, 255, 255));
-        txtDPI.setBorder(null);
+        txtDPI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDPIFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDPIFocusLost(evt);
+            }
+        });
         txtDPI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDPIKeyPressed(evt);
@@ -580,7 +610,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -588,25 +618,25 @@ public class agregarUsuarios extends javax.swing.JFrame {
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAlias, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAlias, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDPI, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDPI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel5);
@@ -638,17 +668,11 @@ public class agregarUsuarios extends javax.swing.JFrame {
         panelRound2.setRoundBottomLeft(15);
         panelRound2.setRoundBottomRight(15);
 
-        btbRegistrar.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        btbRegistrar.setText("Registrar");
-        btbRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btbRegistrarActionPerformed(evt);
-            }
-        });
-
         lblIniciarS.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         lblIniciarS.setForeground(new java.awt.Color(255, 255, 255));
+        lblIniciarS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIniciarS.setText("Iniciar Sesión");
+        lblIniciarS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblIniciarS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblIniciarSMouseClicked(evt);
@@ -660,30 +684,45 @@ public class agregarUsuarios extends javax.swing.JFrame {
             }
         });
 
+        buttonRound1.setBorder(null);
+        buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRound1.setText("Registrar");
+        buttonRound1.setBorderColor(new java.awt.Color(85, 104, 254));
+        buttonRound1.setColor(new java.awt.Color(85, 104, 254));
+        buttonRound1.setColorClick(new java.awt.Color(83, 99, 229));
+        buttonRound1.setColorOver(new java.awt.Color(73, 91, 226));
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        buttonRound1.setRadius(15);
+        buttonRound1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRound1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(333, 333, 333)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btbRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblIniciarS)))
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addGap(308, 308, 308)
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(310, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIniciarS, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(321, 321, 321))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(btbRegistrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblIniciarS)
-                .addGap(12, 12, 12))
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblIniciarS, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 770, 80));
+        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 770, 90));
 
         panelRound3.setBackground(new java.awt.Color(28, 28, 36));
         panelRound3.setRoundBottomLeft(15);
@@ -698,29 +737,53 @@ public class agregarUsuarios extends javax.swing.JFrame {
         lblimagen.setMinimumSize(new java.awt.Dimension(1, 1));
         lblimagen.setPreferredSize(new java.awt.Dimension(110, 110));
 
+        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Fotografía");
+
+        buttonRound2.setBorder(null);
+        buttonRound2.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRound2.setText("Subir");
+        buttonRound2.setBorderColor(new java.awt.Color(123, 127, 239));
+        buttonRound2.setColor(new java.awt.Color(123, 127, 239));
+        buttonRound2.setColorClick(new java.awt.Color(121, 118, 236));
+        buttonRound2.setColorOver(new java.awt.Color(121, 147, 251));
+        buttonRound2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        buttonRound2.setRadius(15);
+        buttonRound2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRound2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelImagenLayout = new javax.swing.GroupLayout(panelImagen);
         panelImagen.setLayout(panelImagenLayout);
         panelImagenLayout.setHorizontalGroup(
             panelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImagenLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(lblimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+            .addGroup(panelImagenLayout.createSequentialGroup()
+                .addGroup(panelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelImagenLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelImagenLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(panelImagenLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         panelImagenLayout.setVerticalGroup(
             panelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelImagenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblimagen, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
-
-        btnSubir.setText("Subir");
-        btnSubir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubirActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -730,22 +793,16 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(btnSubir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSubir)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 160, 210));
+        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 160, 220));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -762,11 +819,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbRegistrarActionPerformed
-        // TODO add your handling code here:
-        agregarUsuario();
-    }//GEN-LAST:event_btbRegistrarActionPerformed
 
     private void lblIniciarSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblIniciarSKeyPressed
         // TODO add your handling code here:
@@ -835,10 +887,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
         if (!m.find()) {
             lblCorreo.setForeground(error);
             lblCorreo.setText("Ingrese un correo valido");
-            txtCorreo.setBorder(errorBorde);
+            txtCorreo.putClientProperty("Component.outlineWidth", 1);
+            txtCorreo.putClientProperty("JComponent.outline", "error");
         } else {
             lblCorreo.setText("");
-            txtCorreo.setBorder(correctoBorde);
+            txtCorreo.putClientProperty("Component.outlineWidth", 1);
+            txtCorreo.putClientProperty("JComponent.outline", "correct");
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
@@ -854,63 +908,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 boxKiosco.setEnabled(true);
                 boxKiosco.setVisible(true);
             }
-            
+
         } else {
             boxKiosco.setEnabled(false);
             boxKiosco.setVisible(false);
         }
     }//GEN-LAST:event_boxRolItemStateChanged
-
-    private void btnSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirActionPerformed
-        // TODO add your handling code here:
-        ruta = "";
-        JFileChooser archivos = new JFileChooser();
-        FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
-        archivos.setFileFilter(filtrado);
-        
-        int respuesta = archivos.showOpenDialog(this);
-        if (respuesta == archivos.APPROVE_OPTION) {
-            ruta = archivos.getSelectedFile().getPath();
-            /// Cargar la imagen original
-
-            ImageIcon originalImageIcon = new ImageIcon(ruta);
-            if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
-                ///htmls/factura.html
-                originalImageIcon = new ImageIcon("src\\img\\usuario.png");
-            }
-
-            // Obtener el tamaño original de la imagen
-            int originalImageWidth = originalImageIcon.getIconWidth();
-            int originalImageHeight = originalImageIcon.getIconHeight();
-
-            // Obtener el tamaño del JLabel
-            int labelWidth = lblimagen.getWidth();
-            int labelHeight = lblimagen.getHeight();
-
-            // Calcular la relación de aspecto de la imagen original y del JLabel
-            double originalImageAspectRatio = (double) originalImageWidth / originalImageHeight;
-            double labelAspectRatio = (double) labelWidth / labelHeight;
-
-            // Escalar la imagen si es necesario
-            ImageIcon scaledImageIcon;
-            if (originalImageAspectRatio > labelAspectRatio) {
-                // La imagen es más ancha que el JLabel
-                int scaledImageWidth = labelWidth;
-                int scaledImageHeight = (int) (scaledImageWidth / originalImageAspectRatio);
-                Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
-                scaledImageIcon = new ImageIcon(scaledImage);
-            } else {
-                // La imagen es más alta que el JLabel
-                int scaledImageHeight = labelHeight;
-                int scaledImageWidth = (int) (scaledImageHeight * originalImageAspectRatio);
-                Image scaledImage = originalImageIcon.getImage().getScaledInstance(scaledImageWidth, scaledImageHeight, Image.SCALE_SMOOTH);
-                scaledImageIcon = new ImageIcon(scaledImage);
-            }
-            // Establecer el ImageIcon escalado en el JLabel
-            lblimagen.setIcon(scaledImageIcon);
-            
-        }
-    }//GEN-LAST:event_btnSubirActionPerformed
 
     private void txtCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusGained
         // TODO add your handling code here:
@@ -919,7 +922,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
     private void txtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusLost
         // TODO add your handling code here:
-        //selected(txtCorreo, 1);
         txtCorreo.setBackground(new Color(40, 41, 52));
     }//GEN-LAST:event_txtCorreoFocusLost
 
@@ -1010,10 +1012,30 @@ public class agregarUsuarios extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtFechaKeyReleased
+
+    private void txtDPIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDPIFocusGained
+        // TODO add your handling code here:
+        selected(txtDPI, 0);
+    }//GEN-LAST:event_txtDPIFocusGained
+
+    private void txtDPIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDPIFocusLost
+        // TODO add your handling code here:
+        selected(txtDPI, 0);
+    }//GEN-LAST:event_txtDPIFocusLost
+
+    private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
+        // TODO add your handling code here:
+        agregarUsuario();
+    }//GEN-LAST:event_buttonRound1ActionPerformed
+
+    private void buttonRound2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound2ActionPerformed
+        // TODO add your handling code here:
+        cargarImagen();
+    }//GEN-LAST:event_buttonRound2ActionPerformed
     public void agregarUsuario() {
-        
+
         Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
-        
+
         String correo = txtCorreo.getText();
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
@@ -1022,7 +1044,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         String dpi = txtDPI.getText();
         int rol = boxRol.getSelectedIndex();
         String rolCompleto = boxRol.getSelectedItem().toString();
-        
+
         if (rol == 2 && kioscoItem != null) {
             rolCompleto = "";
             rolCompleto = "Kiosco," + kioscoItem.getCodigoKioco();
@@ -1065,24 +1087,24 @@ public class agregarUsuarios extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Tiene campos sin llenar");
         }
-        
+
     }
-    
+
     public void agregarBoxes() {
         boxGenero.addItem("Masculino");
         boxGenero.addItem("Femenino");
-        
+
         for (String nombres : nombrePaises) {
             boxNacionalidad.addItem(nombres);
         }
         boxRol.addItem("Usuario Individual");
         boxRol.addItem("Usuario Empresarial");
         boxRol.addItem("Kiosko");
-        
+
     }
 
     /**
@@ -1116,7 +1138,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new agregarUsuarios().setVisible(true);
-                
+
             }
         });
     }
@@ -1126,8 +1148,8 @@ public class agregarUsuarios extends javax.swing.JFrame {
     private javax.swing.JComboBox<Object> boxKiosco;
     private javax.swing.JComboBox<String> boxNacionalidad;
     private javax.swing.JComboBox<String> boxRol;
-    private javax.swing.JButton btbRegistrar;
-    private javax.swing.JButton btnSubir;
+    private Elementos.ButtonRound buttonRound1;
+    private Elementos.ButtonRound buttonRound2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1136,6 +1158,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

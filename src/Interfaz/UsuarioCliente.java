@@ -39,6 +39,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
     public UsuarioCliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         unselectedborder = BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(150, 157, 175));
         selectedborder = BorderFactory.createMatteBorder(0, 3, 0, 0, Color.WHITE);
         usert = new UsuarioTarjeta();

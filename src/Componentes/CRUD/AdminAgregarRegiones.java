@@ -32,7 +32,6 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         lblPrecioEstandar.setText("");
         tabla1.fixTable(jScrollPane2);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(30);
-        setBordes();
         cargarRegiones();
     }
 
@@ -49,20 +48,11 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         }
     }
 
-    public void setBordes() {
-        txtCodigo.setBorder(login.unselectedborder);
-        txtNombreR.setBorder(login.unselectedborder);
-        txtPrecioEspe.setBorder(login.unselectedborder);
-        txtPrecioEst.setBorder(login.unselectedborder);
-    }
-
     public static void selected(JTextField cambiar, int tipo) {
         if (tipo == 1) {
             cambiar.setBackground(new Color(50, 51, 64));
-            cambiar.setBorder(login.selectedborder);
         } else {
             cambiar.setBackground(new Color(40, 41, 52));
-            cambiar.setBorder(login.unselectedborder);
         }
     }
 
@@ -164,9 +154,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Codigo");
 
-        txtCodigo.setBackground(new java.awt.Color(40, 41, 52));
         txtCodigo.setForeground(new java.awt.Color(255, 255, 255));
-        txtCodigo.setBorder(null);
         txtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtCodigoFocusGained(evt);
@@ -180,9 +168,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre de la Región");
 
-        txtNombreR.setBackground(new java.awt.Color(40, 41, 52));
         txtNombreR.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombreR.setBorder(null);
         txtNombreR.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNombreRFocusGained(evt);
@@ -195,9 +181,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Precio Estandar");
 
-        txtPrecioEst.setBackground(new java.awt.Color(40, 41, 52));
         txtPrecioEst.setForeground(new java.awt.Color(255, 255, 255));
-        txtPrecioEst.setBorder(null);
         txtPrecioEst.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPrecioEstFocusGained(evt);
@@ -215,9 +199,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Precio Especial");
 
-        txtPrecioEspe.setBackground(new java.awt.Color(40, 41, 52));
         txtPrecioEspe.setForeground(new java.awt.Color(255, 255, 255));
-        txtPrecioEspe.setBorder(null);
         txtPrecioEspe.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPrecioEspeFocusGained(evt);
@@ -258,13 +240,13 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(224, 224, 224)
+                        .addGap(203, 203, 203)
                         .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)))
@@ -279,7 +261,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                             .addComponent(txtNombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                             .addComponent(txtPrecioEspe)
                             .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(24, 24, 24))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(panelRound2Layout.createSequentialGroup()
                 .addGap(254, 254, 254)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,27 +270,27 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(txtCodigo))
+                    .addComponent(txtNombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPrecioEspe, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                    .addComponent(txtPrecioEst))
+                    .addComponent(txtPrecioEspe, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtPrecioEst, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrecioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
@@ -316,7 +298,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         jScrollPane2.setBackground(new java.awt.Color(28, 170, 205));
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(28, 28, 36)));
 
-        tabla1.setBackground(new java.awt.Color(28, 28, 36));
+        tabla1.setBackground(new java.awt.Color(33, 37, 43));
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -346,8 +328,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,9 +338,9 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -384,12 +366,14 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtPrecioEst.setEditable(false);
-            txtPrecioEst.setBorder(login.errorBorde);
+            txtPrecioEst.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEst.putClientProperty("JComponent.outline", "error");
             lblPrecioEstandar.setText("Solo numeros");
             lblPrecioEstandar.setForeground(login.error);
         } else {
             txtPrecioEst.setEditable(true);
-            txtPrecioEst.setBorder(login.selectedborder);
+            txtPrecioEst.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEst.putClientProperty("JComponent.outline", "correct");
             lblPrecioEstandar.setText("");
             lblPrecioEstandar.setForeground(Color.WHITE);
         }
@@ -420,13 +404,15 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtPrecioEspe.setEditable(false);
-            txtPrecioEspe.setBorder(login.errorBorde);
+            txtPrecioEspe.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEspe.putClientProperty("JComponent.outline", "error");
             lblPrecioEspecial.setText("Solo numeros");
             lblPrecioEspecial.setForeground(login.error);
         } else {
             txtPrecioEspe.setEditable(true);
             lblPrecioEspecial.setText("");
-            txtPrecioEspe.setBorder(login.selectedborder);
+            txtPrecioEspe.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEspe.putClientProperty("JComponent.outline", "correct");
             lblPrecioEspecial.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_txtPrecioEspeKeyReleased

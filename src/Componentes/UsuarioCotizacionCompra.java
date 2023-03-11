@@ -68,6 +68,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         initComponents();
         this.setBounds(0, 0, 724, 520);
         depa = ctrlDepartamentos.getAllD();
+        radioEspecial.setVisible(false);
+        radioEstandar.setVisible(false);
         cargarCombos(boxDepartamentos);
         cargarCombos(boxDepartamentosD);
         size = new ButtonGroup();
@@ -91,23 +93,16 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         radioContra.setVisible(false);
         radioCuenta.setVisible(false);
         activarFondo1(panelPeque, lblP1, lblP2, lblP3);
-        activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
+        activarFondo2(panelEstandar, txtTotalEstandar, lblEstandar);
         activarFondo3(panelRound2, lblTitulo, lblDescripcion);
-        setBordes();
         txtNombreTarjeta.setText("");
         txtNombreFacturacion.setText("");
+        txtDireccionOrigen.putClientProperty("JTextField.placeholderText", "Dirección");
+        txtDireccionDestino.putClientProperty("JTextField.placeholderText", "Dirección");
     }
 
     public void test(Usuario user1) {
         this.user = user1;
-
-        //System.out.println("Estoy en el usuario Cotizacion");
-    }
-
-    public void setBordes() {
-        txtDireccionDestino.setBorder(login.unselectedborder);
-        txtDireccionOrigen.setBorder(login.unselectedborder);
-        txtNumeroPaquetes.setBorder(login.unselectedborder);
     }
 
     public void cargarDatosF() {
@@ -142,13 +137,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         texto3.setForeground(textact);
     }
 
-    public void activarFondo2(JPanel activar, JLabel texto1, JRadioButton texto2) {
+    public void activarFondo2(JPanel activar, JLabel texto1, JLabel texto2) {
         panelEspecial.setBackground(desactivado);
         panelEstandar.setBackground(desactivado);
-        txtTotalEstandar.setForeground(Color.WHITE);
+        lblEstandar.setForeground(Color.WHITE);
+        lblEspecial.setForeground(Color.WHITE);
         txtTotalEspecial.setForeground(Color.WHITE);
-        radioEstandar.setForeground(Color.WHITE);
-        radioEspecial.setForeground(Color.WHITE);
+        txtTotalEstandar.setForeground(Color.WHITE);
         activar.setBackground(act);
         texto1.setForeground(textact);
         texto2.setForeground(textact);
@@ -205,7 +200,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         boxMunicipios.setSelectedIndex(0);
         boxMunicipiosD.setSelectedIndex(0);
         txtTotalEstandar.setText("Total 0.00");
-        txtTotalEspecial.setText("Total 0.00");
+        lblEspecial.setText("Total 0.00");
     }
 
     public void saveCotizacion() {
@@ -538,8 +533,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelEstandar = new Elementos.PanelRound();
         radioEstandar = new javax.swing.JRadioButton();
         txtTotalEstandar = new javax.swing.JLabel();
+        lblEstandar = new javax.swing.JLabel();
         panelEspecial = new Elementos.PanelRound();
         radioEspecial = new javax.swing.JRadioButton();
+        lblEspecial = new javax.swing.JLabel();
         txtTotalEspecial = new javax.swing.JLabel();
         panelMediano = new Elementos.PanelRound();
         lblM1 = new javax.swing.JLabel();
@@ -598,7 +595,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(506, 532));
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotización");
 
@@ -610,10 +607,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelRound1.setRoundTopLeft(16);
         panelRound1.setRoundTopRight(16);
 
-        boxDepartamentos.setBackground(new java.awt.Color(40, 41, 52));
         boxDepartamentos.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentos.setForeground(new java.awt.Color(255, 255, 255));
-        boxDepartamentos.setBorder(null);
         boxDepartamentos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 boxDepartamentosItemStateChanged(evt);
@@ -625,15 +620,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
-        boxMunicipios.setBackground(new java.awt.Color(40, 41, 52));
         boxMunicipios.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxMunicipios.setForeground(new java.awt.Color(255, 255, 255));
-        boxMunicipios.setBorder(null);
 
         txtDireccionOrigen.setBackground(new java.awt.Color(40, 41, 52));
         txtDireccionOrigen.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDireccionOrigen.setForeground(new java.awt.Color(255, 255, 255));
-        txtDireccionOrigen.setBorder(null);
         txtDireccionOrigen.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDireccionOrigenFocusGained(evt);
@@ -648,22 +640,22 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -677,25 +669,20 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelRound11.setRoundTopLeft(16);
         panelRound11.setRoundTopRight(16);
 
-        boxDepartamentosD.setBackground(new java.awt.Color(40, 41, 52));
         boxDepartamentosD.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentosD.setForeground(new java.awt.Color(255, 255, 255));
-        boxDepartamentosD.setBorder(null);
         boxDepartamentosD.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 boxDepartamentosDItemStateChanged(evt);
             }
         });
 
-        boxMunicipiosD.setBackground(new java.awt.Color(40, 41, 52));
         boxMunicipiosD.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxMunicipiosD.setForeground(new java.awt.Color(255, 255, 255));
-        boxMunicipiosD.setBorder(null);
 
         txtDireccionDestino.setBackground(new java.awt.Color(40, 41, 52));
         txtDireccionDestino.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDireccionDestino.setForeground(new java.awt.Color(255, 255, 255));
-        txtDireccionDestino.setBorder(null);
         txtDireccionDestino.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDireccionDestinoFocusGained(evt);
@@ -710,22 +697,22 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelRound11Layout.setHorizontalGroup(
             panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound11Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound11Layout.setVerticalGroup(
             panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound11Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -740,22 +727,24 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelRound11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(0, 248, Short.MAX_VALUE))
+                    .addComponent(panelRound11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -768,7 +757,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtNumeroPaquetes.setBackground(new java.awt.Color(40, 41, 52));
         txtNumeroPaquetes.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNumeroPaquetes.setForeground(new java.awt.Color(255, 255, 255));
-        txtNumeroPaquetes.setBorder(null);
         txtNumeroPaquetes.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNumeroPaquetesFocusGained(evt);
@@ -783,7 +771,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Tamaño de paquetes");
 
@@ -800,19 +788,19 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelPeque.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblP1.setBackground(new java.awt.Color(40, 41, 52));
-        lblP1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        lblP1.setFont(new java.awt.Font("Montserrat", 1, 15)); // NOI18N
         lblP1.setForeground(new java.awt.Color(255, 255, 255));
         lblP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblP1.setText("Pequeño");
-        panelPeque.add(lblP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
+        panelPeque.add(lblP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 190, -1));
 
         lblP3.setBackground(new java.awt.Color(40, 41, 52));
-        lblP3.setFont(new java.awt.Font("Montserrat", 3, 13)); // NOI18N
+        lblP3.setFont(new java.awt.Font("Montserrat", 3, 14)); // NOI18N
         lblP3.setForeground(new java.awt.Color(255, 255, 255));
         lblP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblP3.setText("* 1.4");
         lblP3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelPeque.add(lblP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
+        panelPeque.add(lblP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, -1));
 
         radioPeque.setSelected(true);
         radioPeque.setOpaque(false);
@@ -821,15 +809,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 radioPequeItemStateChanged(evt);
             }
         });
-        panelPeque.add(radioPeque, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panelPeque.add(radioPeque, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 20));
 
         lblP2.setBackground(new java.awt.Color(40, 41, 52));
-        lblP2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblP2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         lblP2.setForeground(new java.awt.Color(255, 255, 255));
         lblP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblP2.setText("1lb - 10lb");
         lblP2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelPeque.add(lblP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
+        panelPeque.add(lblP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 190, -1));
 
         panelEstandar.setBackground(new java.awt.Color(168, 149, 244));
         panelEstandar.setRoundBottomLeft(18);
@@ -842,11 +830,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
-        radioEstandar.setBackground(new java.awt.Color(67, 63, 71));
         radioEstandar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         radioEstandar.setForeground(new java.awt.Color(255, 255, 255));
         radioEstandar.setSelected(true);
-        radioEstandar.setText("Servicio Estandar");
         radioEstandar.setOpaque(false);
         radioEstandar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -859,25 +845,38 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtTotalEstandar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtTotalEstandar.setText("Total 00.00");
 
+        lblEstandar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblEstandar.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstandar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblEstandar.setText("Servicio Estandar");
+
         javax.swing.GroupLayout panelEstandarLayout = new javax.swing.GroupLayout(panelEstandar);
         panelEstandar.setLayout(panelEstandarLayout);
         panelEstandarLayout.setHorizontalGroup(
             panelEstandarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEstandarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(radioEstandar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
-                .addComponent(txtTotalEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(radioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(lblEstandar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelEstandarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEstandarLayout.createSequentialGroup()
+                    .addContainerGap(464, Short.MAX_VALUE)
+                    .addComponent(txtTotalEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(11, 11, 11)))
         );
         panelEstandarLayout.setVerticalGroup(
             panelEstandarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEstandarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelEstandarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioEstandar)
-                    .addComponent(txtTotalEstandar))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addComponent(radioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lblEstandar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelEstandarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEstandarLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(txtTotalEstandar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         panelEspecial.setBackground(new java.awt.Color(34, 37, 47));
@@ -893,13 +892,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         radioEspecial.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         radioEspecial.setForeground(new java.awt.Color(255, 255, 255));
-        radioEspecial.setText("Servicio Especial");
         radioEspecial.setOpaque(false);
         radioEspecial.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 radioEspecialMouseClicked(evt);
             }
         });
+
+        lblEspecial.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblEspecial.setForeground(new java.awt.Color(255, 255, 255));
+        lblEspecial.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblEspecial.setText("Servicio Especial");
 
         txtTotalEspecial.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         txtTotalEspecial.setForeground(new java.awt.Color(255, 255, 255));
@@ -912,19 +915,24 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             panelEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEspecialLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(radioEspecial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTotalEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(radioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(lblEspecial)
+                .addContainerGap(453, Short.MAX_VALUE))
+            .addGroup(panelEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEspecialLayout.createSequentialGroup()
+                    .addContainerGap(459, Short.MAX_VALUE)
+                    .addComponent(txtTotalEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(11, 11, 11)))
         );
         panelEspecialLayout.setVerticalGroup(
             panelEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEspecialLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioEspecial)
-                    .addComponent(txtTotalEspecial))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(radioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(txtTotalEspecial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
         );
 
         panelMediano.setBackground(new java.awt.Color(34, 37, 47));
@@ -939,17 +947,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelMediano.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblM1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        lblM1.setFont(new java.awt.Font("Montserrat", 1, 15)); // NOI18N
         lblM1.setForeground(new java.awt.Color(255, 255, 255));
         lblM1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblM1.setText("Mediano");
-        panelMediano.add(lblM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
+        panelMediano.add(lblM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 190, -1));
 
-        lblM3.setFont(new java.awt.Font("Montserrat", 3, 13)); // NOI18N
+        lblM3.setFont(new java.awt.Font("Montserrat", 3, 14)); // NOI18N
         lblM3.setForeground(new java.awt.Color(255, 255, 255));
         lblM3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblM3.setText("* 1.7");
-        panelMediano.add(lblM3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
+        panelMediano.add(lblM3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, -1));
 
         radioMediano.setOpaque(false);
         radioMediano.addItemListener(new java.awt.event.ItemListener() {
@@ -957,13 +965,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 radioMedianoItemStateChanged(evt);
             }
         });
-        panelMediano.add(radioMediano, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panelMediano.add(radioMediano, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 10));
 
-        lblM2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblM2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         lblM2.setForeground(new java.awt.Color(255, 255, 255));
         lblM2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblM2.setText("1lb - 10lb");
-        panelMediano.add(lblM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
+        panelMediano.add(lblM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 190, -1));
 
         panelGrande.setBackground(new java.awt.Color(34, 37, 47));
         panelGrande.setRoundBottomLeft(20);
@@ -977,17 +985,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
         panelGrande.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblG1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        lblG1.setFont(new java.awt.Font("Montserrat", 1, 15)); // NOI18N
         lblG1.setForeground(new java.awt.Color(255, 255, 255));
         lblG1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblG1.setText("Grande");
-        panelGrande.add(lblG1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, -1));
+        panelGrande.add(lblG1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 190, -1));
 
-        lblG2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblG2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         lblG2.setForeground(new java.awt.Color(255, 255, 255));
         lblG2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblG2.setText("1lb - 10lb");
-        panelGrande.add(lblG2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 120, -1));
+        panelGrande.add(lblG2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 190, -1));
 
         RadioGrande.setOpaque(false);
         RadioGrande.addItemListener(new java.awt.event.ItemListener() {
@@ -995,13 +1003,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 RadioGrandeItemStateChanged(evt);
             }
         });
-        panelGrande.add(RadioGrande, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panelGrande.add(RadioGrande, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 20));
 
-        lblG3.setFont(new java.awt.Font("Montserrat", 3, 13)); // NOI18N
+        lblG3.setFont(new java.awt.Font("Montserrat", 3, 14)); // NOI18N
         lblG3.setForeground(new java.awt.Color(255, 255, 255));
         lblG3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblG3.setText("* 2");
-        panelGrande.add(lblG3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 120, -1));
+        panelGrande.add(lblG3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, -1));
 
         btnCotizar.setBorder(null);
         btnCotizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -1043,36 +1051,35 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panelEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelEstandar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(102, 102, 102)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(panelPeque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(37, 37, 37)
-                                        .addComponent(panelMediano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(panelGrande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnCotizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(249, 249, 249)
-                                .addComponent(jLabel6))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(panelEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(102, 102, 102)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnCotizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(panelEstandar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(panelPeque, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(panelMediano, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(panelGrande, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1080,17 +1087,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(txtNumeroPaquetes))
-                .addGap(18, 18, 18)
+                    .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelPeque, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(panelMediano, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1099,7 +1106,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 23, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(panelEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1119,7 +1126,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1142,7 +1149,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panelRound9.setRoundTopLeft(15);
         panelRound9.setRoundTopRight(15);
 
-        boxTarjetas.setBackground(new java.awt.Color(40, 41, 52));
         boxTarjetas.setForeground(new java.awt.Color(255, 255, 255));
         boxTarjetas.setEnabled(false);
         boxTarjetas.addItemListener(new java.awt.event.ItemListener() {
@@ -1184,7 +1190,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(boxTarjetas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxTarjetas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -1236,6 +1242,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         });
 
         radioContra.setSelected(true);
+        radioContra.setOpaque(false);
         radioContra.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 radioContraItemStateChanged(evt);
@@ -1259,21 +1266,19 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitulo)
                     .addComponent(lblDescripcion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(radioContra)
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(radioContra)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(lblTitulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDescripcion)))
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDescripcion)
                 .addGap(12, 12, 12))
+            .addComponent(radioContra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         panelRound3.setBackground(new java.awt.Color(34, 37, 47));
@@ -1287,6 +1292,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
+        radioCuenta.setOpaque(false);
         radioCuenta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 radioCuentaItemStateChanged(evt);
@@ -1308,27 +1314,21 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addComponent(lblDesc2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addComponent(lblTitulo2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(radioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                    .addComponent(lblDesc2)
+                    .addComponent(lblTitulo2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addGap(0, 7, Short.MAX_VALUE)
-                        .addComponent(lblTitulo2))
-                    .addComponent(radioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(lblTitulo2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDesc2)
                 .addGap(12, 12, 12))
+            .addComponent(radioCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         btnrRealizar.setBorder(null);
@@ -1380,7 +1380,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         txtNombreFacturacion.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreFacturacion.setText("jLabel7");
 
-        boxFacturacion.setBackground(new java.awt.Color(40, 41, 52));
         boxFacturacion.setForeground(new java.awt.Color(255, 255, 255));
         boxFacturacion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1412,7 +1411,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(boxFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(panelRound12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
@@ -1509,7 +1508,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 35, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1564,13 +1563,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelEspecialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEspecialMouseClicked
         // TODO add your handling code here:
-        activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
+        activarFondo2(panelEspecial, txtTotalEspecial, lblEspecial);
         radioEspecial.setSelected(true);
     }//GEN-LAST:event_panelEspecialMouseClicked
 
     private void panelEstandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstandarMouseClicked
         // TODO add your handling code here:
-        activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
+        activarFondo2(panelEstandar, txtTotalEstandar, lblEstandar);
         radioEstandar.setSelected(true);
     }//GEN-LAST:event_panelEstandarMouseClicked
 
@@ -1719,7 +1718,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 Logger.getLogger(UsuarioCotizacionCompra.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No se ha cotizado");
         }
 
@@ -1737,14 +1736,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private void radioEstandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioEstandarMouseClicked
         // TODO add your handling code here:
         radioEstandar.setSelected(true);
-        activarFondo2(panelEstandar, txtTotalEstandar, radioEstandar);
+        activarFondo2(panelEstandar, txtTotalEstandar, lblEstandar);
     }//GEN-LAST:event_radioEstandarMouseClicked
 
     private void radioEspecialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioEspecialMouseClicked
         // TODO add your handling code here:
-        activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
+        activarFondo2(panelEspecial, txtTotalEspecial, lblEspecial);
         radioEspecial.setSelected(true);
-        activarFondo2(panelEspecial, txtTotalEspecial, radioEspecial);
+        //activarFondo2(panelEspecial, lblEspecial, radioEspecial);
     }//GEN-LAST:event_radioEspecialMouseClicked
 
     private void txtNumeroPaquetesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroPaquetesKeyPressed
@@ -1752,10 +1751,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtNumeroPaquetes.setEditable(false);
-            txtNumeroPaquetes.setBorder(login.errorBorde);
+            txtNumeroPaquetes.putClientProperty("Component.outlineWidth", 1);
+            txtNumeroPaquetes.putClientProperty("JComponent.outline", "error");
+
             jLabel7.setText("Solo numeros");
         } else {
-            txtNumeroPaquetes.setBorder(login.selectedborder);
+            txtNumeroPaquetes.putClientProperty("Component.outlineWidth", 1);
+            txtNumeroPaquetes.putClientProperty("JComponent.outline", "correct");
             txtNumeroPaquetes.setEditable(true);
             jLabel7.setText("");
         }
@@ -1824,6 +1826,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDesc2;
     private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblEspecial;
+    private javax.swing.JLabel lblEstandar;
     private javax.swing.JLabel lblG1;
     private javax.swing.JLabel lblG2;
     private javax.swing.JLabel lblG3;
