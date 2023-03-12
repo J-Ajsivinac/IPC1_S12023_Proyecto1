@@ -141,8 +141,6 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 txtNuevoDepartamento.setText("");
                 cargarB();
                 //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error");
             }
         } else {
             JOptionPane.showMessageDialog(null, "No hay Departamentos ingresados");
@@ -239,8 +237,6 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 txtNuevoMunicipio.setText("");
                 cargarMunicipios(boxMuniUpdate);
                 //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error");
             }
         } else {
             JOptionPane.showMessageDialog(null, "No hay Departamentos/Municipios ingresados");
@@ -398,6 +394,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
         lblDepartamentoActual.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         lblDepartamentoActual.setForeground(new java.awt.Color(255, 255, 255));
+        lblDepartamentoActual.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -847,6 +844,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             String codDepartamento = depItem.getIdRegion();
             cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
         }
+        ActualizarDepartamento();
 
     }//GEN-LAST:event_boxRegionUpdateItemStateChanged
 

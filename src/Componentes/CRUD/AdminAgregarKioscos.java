@@ -4,11 +4,8 @@ import Administrador.Kioscos;
 import Administrador.Regiones;
 import Administrador.ctrlKioscos;
 import Administrador.ctrlRegiones;
-import Interfaz.login;
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**

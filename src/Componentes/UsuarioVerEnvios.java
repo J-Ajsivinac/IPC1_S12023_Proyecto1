@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -67,7 +68,8 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
         table1.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
         table1.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
-
+        //table1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        //table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     public void test(Usuario user1) {
@@ -87,7 +89,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
             System.out.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File directorio = new File(guardarComo.getSelectedFile().toString());
+            File directorio = new File(guardarComo.getSelectedFile().toString()+".html");
             if (!directorio.isFile() && !directorio.isDirectory()) {
                 String htmFilePath = "/htmls/factura.html";
                 InputStream inputStream = getClass().getResourceAsStream(htmFilePath);
@@ -101,6 +103,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 }
 
                 Document doc = Jsoup.parse(htmlContent);
+                Element dDireccionFacturacion = doc.getElementById("dDireccionFacturacion");
                 Element codigoPaquete = doc.getElementById("codigoPaquete");
                 Element NumeroFacura = doc.getElementById("fecha");
                 Element dOrigen = doc.getElementById("dOrigen");
@@ -112,10 +115,15 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 Element dSize = doc.getElementById("dSize");
                 Element dNumero = doc.getElementById("dNumero");
                 Element dTotal = doc.getElementById("dTotal");
+
+                Element dTarjetaCredito = doc.getElementById("dTarjetaCredito1");
+
                 Factura factura = envios.getFactura();
 
                 codigoPaquete.text("#" + factura.getNumFactura());
                 NumeroFacura.text(factura.getCodPaquete());
+
+                dDireccionFacturacion.text(factura.getDireccionFacturacion());
 
                 String[] datosO = factura.getOrigen().split(",");
 
@@ -127,7 +135,11 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 dDestino.text(datosD[0] + "," + datosD[1]);
                 dDireccionDestino.text(datosD[2]);
                 dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
-                dTipoPago.text(factura.getTipoPago());
+
+                String[] dTipos = factura.getTipoPago().split(",");
+                dTipoPago.text(dTipos[0]);
+                dTarjetaCredito.text(dTipos[1]);
+
                 dSize.text(envios.getGuia().getTamanoPaquete() + "");
                 dNumero.text(factura.getNumeropaquetes() + "");
                 dTotal.text(factura.getTotal() + "");
@@ -145,7 +157,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta");
+                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         //System.out.println(guardarComo.getSelectedFile().getName());
@@ -163,13 +175,13 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
             System.out.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File directorio = new File(guardarComo.getSelectedFile().toString());
+            File directorio = new File(guardarComo.getSelectedFile().toString()+".html");
             if (!directorio.isFile() && !directorio.isDirectory()) {
                 String htmFilePath = "/htmls/guia.html";
                 InputStream inputStream = getClass().getResourceAsStream(htmFilePath);
                 //File input = new File("src\\htmls\\factura.html");
 
-                String htmlContent = "";
+               String htmlContent = "";
                 try {
                     htmlContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
                 } catch (IOException ex) {
@@ -177,7 +189,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 }
 
                 Document doc = Jsoup.parse(htmlContent);
-
+                Element dDireccionFacturacion = doc.getElementById("dDireccionFacturacion");
                 Element codigoPaquete = doc.getElementById("codigoPaquete");
                 Element fecha = doc.getElementById("fecha");
                 Element dOrigen = doc.getElementById("dOrigen");
@@ -190,22 +202,25 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 Element dTarjeta = doc.getElementById("dTarjeta");
                 Element dTituloTarjeta = doc.getElementById("dTituloTarjeta");
                 Element dTotal = doc.getElementById("dTotal");
+                Element dTarjetaCredito = doc.getElementById("dTarjetaCredito");
 
                 Factura factura = envios.getFactura();
 
                 codigoPaquete.text("#" + factura.getNumFactura());
                 fecha.text(envios.getGuia().getFechaEnvio());
+                dDireccionFacturacion.text(factura.getDireccionFacturacion());
                 String[] datosO = factura.getOrigen().split(",");
-
                 dOrigen.text(datosO[0] + "," + datosO[1]);
                 dDireccionOrigen.text(datosO[2]);
-
                 String[] datosD = factura.getDestino().split(",");
-
                 dDestino.text(datosD[0] + "," + datosD[1]);
                 dDireccionDestino.text(datosD[2]);
                 dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
-                dTipoPago.text(factura.getTipoPago());
+
+                String[] dTipos = factura.getTipoPago().split(",");
+                dTipoPago.text(dTipos[0]);
+                dTarjetaCredito.text(dTipos[1]);
+
                 dTamano.text(envios.getGuia().getTamanoPaquete() + "");
                 dTarjeta.text("");
                 dTituloTarjeta.text("");
@@ -224,7 +239,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta");
+                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -232,7 +247,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
     public void cargarDatos() {
         modelo.setRowCount(0);
         if (user != null) {
-            
+
             ArrayList<Envios> envios = ctrlEnvios.verEnvios(login.credenciales.getIdUsuario());
             for (Envios envio : envios) {
                 Object datos[] = new Object[5];
@@ -298,9 +313,9 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         jScrollPane2.setViewportView(table1);
         if (table1.getColumnModel().getColumnCount() > 0) {
             table1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            table1.getColumnModel().getColumn(1).setPreferredWidth(46);
-            table1.getColumnModel().getColumn(3).setPreferredWidth(23);
-            table1.getColumnModel().getColumn(4).setPreferredWidth(32);
+            table1.getColumnModel().getColumn(1).setPreferredWidth(40);
+            table1.getColumnModel().getColumn(3).setPreferredWidth(20);
+            table1.getColumnModel().getColumn(4).setPreferredWidth(28);
         }
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);

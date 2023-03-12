@@ -1,7 +1,10 @@
 package Elementos.CutomTable;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.function.Function;
 
 /**
  *
@@ -14,6 +17,25 @@ public class PanelAction extends javax.swing.JPanel {
      */
     public PanelAction() {
         initComponents();
+        FlatSVGIcon svgBtn1 = new FlatSVGIcon("img/download.svg");
+        svgBtn1.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return new Color(38, 102, 222);
+            }
+
+        }));
+        cmdFactura.setIcon(svgBtn1);
+
+        FlatSVGIcon svgBtn2 = new FlatSVGIcon("img/download.svg");
+        svgBtn2.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return new Color(51, 141, 79);
+            }
+
+        }));
+        cmdGuia.setIcon(svgBtn2);
     }
 
     public void initEvent(TableActionEvent event, int row) {

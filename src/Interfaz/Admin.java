@@ -2,7 +2,9 @@ package Interfaz;
 
 import Componentes.*;
 import Componentes.CRUD.AdminAgregarDepMun;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.util.function.Function;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,7 +25,9 @@ public class Admin extends javax.swing.JFrame {
     public boolean activado;
     Border unselectedborder;
     Border selectedborder;
-    
+    private FlatSVGIcon svgIcono1;
+    private FlatSVGIcon.ColorFilter fl;
+
     /**
      * Creates new form Admin
      */
@@ -44,13 +48,47 @@ public class Admin extends javax.swing.JFrame {
         panelMainContainer.add(adRUsuario);
         panelMainContainer.add(adRTotales);
         menuClick(ad);
-        
+
         unselectedborder = BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(150, 157, 175));
-        selectedborder = BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(205, 233, 255));
+        selectedborder = BorderFactory.createMatteBorder(0, 4, 0, 0, new Color(197, 197, 252));
         panelRIngresos.setVisible(activado);
         panelRRegion.setVisible(activado);
-        bordeMenu(panelRegiones,txtRegion);
+
         panelRUsuario.setVisible(activado);
+
+        svgIcono1 = new FlatSVGIcon("img/imagenRegion.svg", 20, 20);
+        FlatSVGIcon svgIcono2 = new FlatSVGIcon("img/imagenDep.svg", 20, 20);
+        FlatSVGIcon svgIcono3 = new FlatSVGIcon("img/imagenKiosco1.svg", 20, 20);
+
+        FlatSVGIcon svgIcono4 = new FlatSVGIcon("img/imagenR.svg", 20, 20);
+        FlatSVGIcon svgIcono5 = new FlatSVGIcon("img/imagenR1.svg", 20, 20);
+        FlatSVGIcon svgIcono6 = new FlatSVGIcon("img/imageR2.svg", 20, 20);
+
+        FlatSVGIcon svgIcono7 = new FlatSVGIcon("img/imagenCerrar.svg", 20, 20);
+        
+        FlatSVGIcon adminLogo = new FlatSVGIcon("img/imagenAdmin.svg", 90, 90);
+        fl = new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return new Color(195, 197, 199);
+            }
+
+        });
+        //88,88,112
+        FlatSVGIcon.ColorFilter logo1 = new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return new Color(88,88,112);
+            }
+
+        });
+        svgIcono7.setColorFilter(fl);
+        adminLogo.setColorFilter(logo1);
+        jLabel1.setIcon(adminLogo);
+        imgR6.setIcon(svgIcono7);
+        bordeMenu(panelRegiones, txtRegion, imgR, 1);
+        menuReportes();
+
     }
 
     public void menuReportes() {
@@ -58,18 +96,22 @@ public class Admin extends javax.swing.JFrame {
             activado = false;
             panelRIngresos.setVisible(activado);
             panelRRegion.setVisible(activado);
-
             panelRUsuario.setVisible(activado);
+            FlatSVGIcon svgFlecha = new FlatSVGIcon("img/imagenFlecha.svg", 20, 20);
+            svgFlecha.setColorFilter(fl);
+            flechaR.setIcon(svgFlecha);
         } else {
             activado = true;
             panelRIngresos.setVisible(activado);
             panelRRegion.setVisible(activado);
-
             panelRUsuario.setVisible(activado);
+            
+            FlatSVGIcon svgFlecha = new FlatSVGIcon("img/imagenFlecha2.svg", 20, 20);
+            svgFlecha.setColorFilter(fl);
+            flechaR.setIcon(svgFlecha);
         }
     }
-    
-    
+
     public void hoverMenu(JPanel activar, int estado) {
         if (estado == 1) {
             activar.setBackground(new Color(19, 19, 26));
@@ -78,24 +120,85 @@ public class Admin extends javax.swing.JFrame {
         }
     }
 
-    public void bordeMenu(JPanel panel, JLabel texto) {
+    public void bordeMenu(JPanel panel, JLabel texto, JLabel imagen1, int op) {
+        Color desacti = new Color(28, 28, 36);
+        Color txt1 = new Color(195, 197, 199);
         panelRegiones.setBorder(unselectedborder);
         panelDepartamentos.setBorder(unselectedborder);
         panelKiosco.setBorder(unselectedborder);
         panelRRegion.setBorder(unselectedborder);
         panelRUsuario.setBorder(unselectedborder);
         panelRIngresos.setBorder(unselectedborder);
-        
-        txtRegion.setForeground(Color.WHITE);
-        txtDepartamentos.setForeground(Color.WHITE);
-        txtKiosco.setForeground(Color.WHITE);
-        txtDepartamentos.setForeground(Color.WHITE);
-        txtPorRegion.setForeground(Color.WHITE);
-        txtPorUsuario.setForeground(Color.WHITE);
-        txtTotal.setForeground(Color.WHITE);
+
+        txtRegion.setForeground(txt1);
+        txtDepartamentos.setForeground(txt1);
+        txtKiosco.setForeground(txt1);
+        txtDepartamentos.setForeground(txt1);
+        txtPorRegion.setForeground(txt1);
+        txtPorUsuario.setForeground(txt1);
+        txtTotal.setForeground(txt1);
         panel.setBorder(selectedborder);
-        texto.setForeground(new Color(205, 233, 255));
-        //panel.setForeground(new Color(205, 233, 255));
+
+        svgIcono1 = new FlatSVGIcon("img/imagenRegion.svg", 20, 20);
+        FlatSVGIcon svgIcono2 = new FlatSVGIcon("img/imagenDep.svg", 20, 20);
+        FlatSVGIcon svgIcono3 = new FlatSVGIcon("img/imagenKiosco1.svg", 20, 20);
+        FlatSVGIcon svgIcono4 = new FlatSVGIcon("img/imagenR.svg", 20, 20);
+        FlatSVGIcon svgIcono5 = new FlatSVGIcon("img/imagenR1.svg", 20, 20);
+        FlatSVGIcon svgIcono6 = new FlatSVGIcon("img/imageR2.svg", 20, 20);
+
+        svgIcono1.setColorFilter(fl);
+        svgIcono2.setColorFilter(fl);
+        svgIcono3.setColorFilter(fl);
+        svgIcono4.setColorFilter(fl);
+        svgIcono5.setColorFilter(fl);
+        svgIcono6.setColorFilter(fl);
+
+        imgR.setIcon(svgIcono1);
+        imgR1.setIcon(svgIcono2);
+        imgR2.setIcon(svgIcono3);
+        imgR3.setIcon(svgIcono4);
+        imgR4.setIcon(svgIcono5);
+        imgR5.setIcon(svgIcono6);
+
+        FlatSVGIcon.ColorFilter activado = new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return new Color(121, 121, 252);
+            }
+
+        });
+        //svgIcono1.setColorFilter(fl);
+        //imgR.setIcon(svgIcono1);
+
+        switch (op) {
+            case 1:
+                svgIcono1.setColorFilter(activado);
+                imagen1.setIcon(svgIcono1);
+                break;
+            case 2:
+                svgIcono2.setColorFilter(activado);
+                imagen1.setIcon(svgIcono2);
+                break;
+            case 3:
+                svgIcono3.setColorFilter(activado);
+                imagen1.setIcon(svgIcono3);
+                break;
+            case 4:
+                svgIcono4.setColorFilter(activado);
+                imagen1.setIcon(svgIcono4);
+                break;
+            case 5:
+                svgIcono5.setColorFilter(activado);
+                imagen1.setIcon(svgIcono5);
+                break;
+            case 6:
+                svgIcono6.setColorFilter(activado);
+                imagen1.setIcon(svgIcono6);
+                break;
+
+            default:
+        }
+        texto.setForeground(new Color(121, 121, 252));
     }
 
     /**
@@ -116,21 +219,29 @@ public class Admin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         panelRegiones = new javax.swing.JPanel();
         txtRegion = new javax.swing.JLabel();
+        imgR = new javax.swing.JLabel();
         panelDepartamentos = new javax.swing.JPanel();
         txtDepartamentos = new javax.swing.JLabel();
+        imgR1 = new javax.swing.JLabel();
         panelKiosco = new javax.swing.JPanel();
         txtKiosco = new javax.swing.JLabel();
+        imgR2 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        flechaR = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelRRegion = new javax.swing.JPanel();
         txtPorRegion = new javax.swing.JLabel();
+        imgR3 = new javax.swing.JLabel();
         panelRUsuario = new javax.swing.JPanel();
         txtPorUsuario = new javax.swing.JLabel();
+        imgR4 = new javax.swing.JLabel();
         panelRIngresos = new javax.swing.JPanel();
         txtTotal = new javax.swing.JLabel();
+        imgR5 = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        imgR6 = new javax.swing.JLabel();
         panelMainContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -139,6 +250,8 @@ public class Admin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(28, 28, 36));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
@@ -172,8 +285,11 @@ public class Admin extends javax.swing.JFrame {
 
         txtRegion.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         txtRegion.setForeground(new java.awt.Color(255, 255, 255));
-        txtRegion.setText("Regiones y Precios");
-        panelRegiones.add(txtRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        txtRegion.setText("Regiones");
+        panelRegiones.add(txtRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        imgR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelRegiones.add(imgR, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 35));
 
         panelDepartamentos.setBackground(new java.awt.Color(28, 28, 36));
         panelDepartamentos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,7 +308,10 @@ public class Admin extends javax.swing.JFrame {
         txtDepartamentos.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         txtDepartamentos.setForeground(new java.awt.Color(255, 255, 255));
         txtDepartamentos.setText("Departamentos y Municipios");
-        panelDepartamentos.add(txtDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        panelDepartamentos.add(txtDepartamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        imgR1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelDepartamentos.add(imgR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 35));
 
         panelKiosco.setBackground(new java.awt.Color(28, 28, 36));
         panelKiosco.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,7 +330,10 @@ public class Admin extends javax.swing.JFrame {
         txtKiosco.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         txtKiosco.setForeground(new java.awt.Color(255, 255, 255));
         txtKiosco.setText("Kioscos");
-        panelKiosco.add(txtKiosco, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        panelKiosco.add(txtKiosco, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        imgR2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelKiosco.add(imgR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 35));
 
         jPanel9.setBackground(new java.awt.Color(28, 28, 36));
         jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,8 +351,11 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("> Reportes");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jLabel7.setText("Reportes");
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        flechaR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel9.add(flechaR, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 35));
 
         jPanel3.setBackground(new java.awt.Color(28, 28, 36));
 
@@ -251,21 +376,28 @@ public class Admin extends javax.swing.JFrame {
         txtPorRegion.setForeground(new java.awt.Color(255, 255, 255));
         txtPorRegion.setText("Por Región");
 
+        imgR3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout panelRRegionLayout = new javax.swing.GroupLayout(panelRRegion);
         panelRRegion.setLayout(panelRRegionLayout);
         panelRRegionLayout.setHorizontalGroup(
             panelRRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRRegionLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
+                .addComponent(imgR3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPorRegion)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRRegionLayout.setVerticalGroup(
             panelRRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRRegionLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRRegionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(imgR3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRRegionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtPorRegion)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         panelRUsuario.setBackground(new java.awt.Color(28, 28, 36));
@@ -285,14 +417,18 @@ public class Admin extends javax.swing.JFrame {
         txtPorUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtPorUsuario.setText("Por Usuario");
 
+        imgR4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout panelRUsuarioLayout = new javax.swing.GroupLayout(panelRUsuario);
         panelRUsuario.setLayout(panelRUsuarioLayout);
         panelRUsuarioLayout.setHorizontalGroup(
             panelRUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRUsuarioLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
+                .addComponent(imgR4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPorUsuario)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRUsuarioLayout.setVerticalGroup(
             panelRUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,6 +436,9 @@ public class Admin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtPorUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelRUsuarioLayout.createSequentialGroup()
+                .addComponent(imgR4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelRIngresos.setBackground(new java.awt.Color(28, 28, 36));
@@ -319,14 +458,18 @@ public class Admin extends javax.swing.JFrame {
         txtTotal.setForeground(new java.awt.Color(255, 255, 255));
         txtTotal.setText("Totales");
 
+        imgR5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout panelRIngresosLayout = new javax.swing.GroupLayout(panelRIngresos);
         panelRIngresos.setLayout(panelRIngresosLayout);
         panelRIngresosLayout.setHorizontalGroup(
             panelRIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRIngresosLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
+                .addComponent(imgR5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTotal)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRIngresosLayout.setVerticalGroup(
             panelRIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,15 +477,20 @@ public class Admin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtTotal)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRIngresosLayout.createSequentialGroup()
+                .addComponent(imgR5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(panelRUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(panelRIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelRRegion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelRUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(panelRIngresos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,7 +520,10 @@ public class Admin extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Cerrar Sesión");
-        btnCerrarSesion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        btnCerrarSesion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+
+        imgR6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCerrarSesion.add(imgR6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 35));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -380,16 +531,16 @@ public class Admin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
             .addComponent(panelRegiones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelKiosco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,24 +561,22 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 540));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 540));
 
         panelMainContainer.setBackground(new java.awt.Color(204, 204, 204));
         panelMainContainer.setOpaque(false);
-        jPanel1.add(panelMainContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 720, 520));
+        jPanel1.add(panelMainContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 720, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,7 +590,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         menuClick(dm);
         dm.cargar1();
-        bordeMenu(panelDepartamentos,txtDepartamentos);
+        bordeMenu(panelDepartamentos, txtDepartamentos, imgR1, 2);
     }//GEN-LAST:event_panelDepartamentosMouseClicked
 
     private void panelRegionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegionesMouseClicked
@@ -449,7 +598,7 @@ public class Admin extends javax.swing.JFrame {
         ad.inicioModificar();
         ad.inicioAgregar();
         menuClick(ad);
-        bordeMenu(panelRegiones,txtRegion);
+        bordeMenu(panelRegiones, txtRegion, imgR, 1);
     }//GEN-LAST:event_panelRegionesMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
@@ -463,7 +612,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         menuClick(adK);
         adK.cargarK1();
-        bordeMenu(panelKiosco,txtKiosco);
+        bordeMenu(panelKiosco, txtKiosco, imgR2, 3);
     }//GEN-LAST:event_panelKioscoMouseClicked
 
     private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
@@ -474,21 +623,21 @@ public class Admin extends javax.swing.JFrame {
     private void panelRRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRRegionMouseClicked
         // TODO add your handling code here:
         menuClick(adRRegion);
-        bordeMenu(panelRRegion,txtPorRegion);
+        bordeMenu(panelRRegion, txtPorRegion, imgR3, 4);
         adRRegion.ordenarRegiones();
     }//GEN-LAST:event_panelRRegionMouseClicked
 
     private void panelRUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRUsuarioMouseClicked
         // TODO add your handling code here:
         menuClick(adRUsuario);
-        bordeMenu(panelRUsuario,txtPorUsuario);
+        bordeMenu(panelRUsuario, txtPorUsuario, imgR4, 5);
         adRUsuario.ordenarUsuarios();
     }//GEN-LAST:event_panelRUsuarioMouseClicked
 
     private void panelRIngresosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRIngresosMouseClicked
         // TODO add your handling code here:
         menuClick(adRTotales);
-        bordeMenu(panelRIngresos,txtTotal);
+        bordeMenu(panelRIngresos, txtTotal, imgR5, 6);
         adRTotales.totalPaquetes();
         adRTotales.ingresosTotales();
     }//GEN-LAST:event_panelRIngresosMouseClicked
@@ -620,6 +769,14 @@ public class Admin extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCerrarSesion;
+    private javax.swing.JLabel flechaR;
+    private javax.swing.JLabel imgR;
+    private javax.swing.JLabel imgR1;
+    private javax.swing.JLabel imgR2;
+    private javax.swing.JLabel imgR3;
+    private javax.swing.JLabel imgR4;
+    private javax.swing.JLabel imgR5;
+    private javax.swing.JLabel imgR6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

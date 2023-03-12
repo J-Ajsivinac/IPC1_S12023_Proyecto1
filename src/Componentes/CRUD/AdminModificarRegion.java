@@ -295,6 +295,11 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         boxRegion.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRegion.setForeground(new java.awt.Color(255, 255, 255));
+        boxRegion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxRegionItemStateChanged(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -535,6 +540,11 @@ public class AdminModificarRegion extends javax.swing.JPanel {
             txtNuevoNombre.setBackground(new Color(40, 41, 52));
         }
     }//GEN-LAST:event_txtNuevoNombreFocusLost
+
+    private void boxRegionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionItemStateChanged
+        // TODO add your handling code here:
+        mostrarDatos();
+    }//GEN-LAST:event_boxRegionItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

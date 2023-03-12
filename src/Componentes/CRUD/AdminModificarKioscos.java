@@ -151,6 +151,15 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         }
     }
 
+    public void cargarDatosActuales() {
+        Kioscos tItem = (Kioscos) boxDepartamentosUpdate.getSelectedItem();
+        if (tItem != null) {
+            jLabel5.setText(tItem.getNombreKiosco());
+        } else {
+            jLabel5.setText("");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,6 +238,11 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
         boxDepartamentosUpdate.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxDepartamentosUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        boxDepartamentosUpdate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxDepartamentosUpdateItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -263,6 +277,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -418,6 +433,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
     private void boxRegionUpdateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxRegionUpdateItemStateChanged
         // TODO add your handling code here:
         cargarKiosco();
+        cargarDatosActuales();
     }//GEN-LAST:event_boxRegionUpdateItemStateChanged
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -439,6 +455,11 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
         // TODO add your handling code here:
         AdminAgregarRegiones.selected(txtNuevoNombre, 0);
     }//GEN-LAST:event_txtNuevoNombreFocusLost
+
+    private void boxDepartamentosUpdateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxDepartamentosUpdateItemStateChanged
+        // TODO add your handling code here:
+        cargarDatosActuales();
+    }//GEN-LAST:event_boxDepartamentosUpdateItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

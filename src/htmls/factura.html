@@ -40,7 +40,7 @@
             transition: .5s;
             width: 55%;
             min-width: 600px;
-            height: 420px;
+            height: 470px;
             background-color: #fff;
             border-radius: 16px;
             box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
@@ -71,6 +71,68 @@
             color: #8febaa;
         }
 
+        .content .card .supmed {
+            width: 95%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            border-radius: 16px;
+            background-color: #fff;
+            margin-bottom: 15px;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+        }
+
+        /*---------*/
+        .content .card .supmed {
+            width: 95%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            border-radius: 16px;
+            background-color: #fff;
+            margin-bottom: 15px;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+        }
+
+        .content .card .supmed .datosGuia {
+            width: 100%;
+            height: 95%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content .card .supmed .datosGuia .contendedorD {
+            padding-left: 2%;
+            padding-right: 2%;
+            height: 25%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .content .card .supmed .datosGuia .contendedorD span .texto {
+            padding-left: 0.5vh;
+        }
+
+        .content .card .supmed .datosGuia .contendedorD span i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .content .card .supmed .datosGuia .contendedorD  .d1 {
+            width: 130px;
+            text-align: start;
+            padding-right: 0px;
+        }
+
+        
         .content .card .centro {
             width: 95%;
             display: flex;
@@ -198,10 +260,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="supmed">
+                <div class="datosGuia">
+                    <div class="contendedorD">
+                        <span class="d1">
+                            <i class="fa-solid fa-circle-user"></i>
+                            <span class="texto">Dirección</span>
+                        </span>
+                        <span id="dDireccionFacturacion">
+                            Direccion de los datos de Facturación 
+                        </span>
+                     </div>
+                </div>
+            </div>
+
             <div class="centro">
                 <div class="datosGuia">
                     <div class="contendedorD">
-
                         <span>
                             <i class="fa-solid fa-location-dot"></i>
                             <span class="texto">Origen</span>

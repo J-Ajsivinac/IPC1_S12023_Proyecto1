@@ -54,7 +54,7 @@ public class ctrlUsuarios {
                         JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "El correo ingresado ya esta regustrado");
+            JOptionPane.showMessageDialog(null, "El correo ingresado ya esta registrado");
         }
         return false;
     }

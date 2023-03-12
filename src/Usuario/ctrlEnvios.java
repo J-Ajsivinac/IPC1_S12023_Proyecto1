@@ -11,7 +11,7 @@ public class ctrlEnvios {
     private static int contadorFacuras = 1;
 
     public static boolean agregarEnvio(String id, String Nombre, String codRegion, String tipoServicio, String destinatario,
-            double totalEnvio, String tipoPago, String ori, String nit, int numerPaquetes, String tamaño) {
+            double totalEnvio, String tipoPago, String ori, String nit, int numerPaquetes, String tamaño, String dFacturacion) {
         if (!codRegion.equals("") && !destinatario.equals("")) {
             String codPaquete = "";
             while (true) {
@@ -22,9 +22,9 @@ public class ctrlEnvios {
             }
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDateTime now = LocalDateTime.now();
-            Factura facturaingresar = agregarFactura(codPaquete, ori, destinatario, nit, tipoPago, numerPaquetes,
+            Factura facturaingresar = agregarFactura(codPaquete, dFacturacion, ori, destinatario, nit, tipoPago, numerPaquetes,
                     totalEnvio);
-            Guia guiaIngresar = agregarGuia(codPaquete, ori, destinatario, tipoServicio, tamaño, numerPaquetes, dtf.format(now), totalEnvio);
+            Guia guiaIngresar = agregarGuia(codPaquete,dFacturacion, ori, destinatario, tipoServicio, tamaño, numerPaquetes, dtf.format(now), totalEnvio);
             envios.add(new Envios(id, Nombre, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, facturaingresar, guiaIngresar));
             System.out.println(codPaquete);
             return true;
@@ -32,16 +32,16 @@ public class ctrlEnvios {
         return false;
     }
 
-    public static Factura agregarFactura(String codPaquete, String Origen, String destino, String nit, String tipo,
+    public static Factura agregarFactura(String codPaquete,String direccionF ,String Origen, String destino, String nit, String tipo,
             int numeroPaquetes, double total) {
         String numeroFactura = String.format("%08d", contadorFacuras);
-        Factura newF = new Factura(numeroFactura, codPaquete, Origen, destino, nit, tipo, numeroPaquetes, total);
+        Factura newF = new Factura(numeroFactura, codPaquete, direccionF, Origen, destino, nit, tipo, numeroPaquetes, total);
         return newF;
     }
 
-    public static Guia agregarGuia(String codPaquete, String origen, String destino, String tipoPago, String tamano,
+    public static Guia agregarGuia(String codPaquete,String direccionF ,String origen, String destino, String tipoPago, String tamano,
             int numeropaquetes, String fecha, double total) {
-        Guia newG = new Guia(codPaquete, origen, destino, tipoPago, tamano, numeropaquetes, fecha, total);
+        Guia newG = new Guia(direccionF,codPaquete, origen, destino, tipoPago, tamano, numeropaquetes, fecha, total);
         return newG;
     }
 

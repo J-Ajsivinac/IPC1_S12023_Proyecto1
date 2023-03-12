@@ -105,7 +105,7 @@ public class AdminReporteUsuario extends javax.swing.JPanel {
 
             },
             new String [] {
-                "No.", "Nombre", "Apellido", "No. De paquetes"
+                "No.", "Nombre Completo", "No. De paquetes"
             }
         ));
         jScrollPane1.setViewportView(tableRU);

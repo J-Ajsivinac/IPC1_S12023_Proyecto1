@@ -191,6 +191,9 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
             }
         });
         txtPrecioEst.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioEstKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPrecioEstKeyReleased(evt);
             }
@@ -209,6 +212,9 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
             }
         });
         txtPrecioEspe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioEspeKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPrecioEspeKeyReleased(evt);
             }
@@ -361,22 +367,7 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonRound1ActionPerformed
 
     private void txtPrecioEstKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEstKeyReleased
-        // TODO add your handling code here:
-        //^[0-9]+[.,]{1,1}\[0]{2,2}$
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            txtPrecioEst.setEditable(false);
-            txtPrecioEst.putClientProperty("Component.outlineWidth", 1);
-            txtPrecioEst.putClientProperty("JComponent.outline", "error");
-            lblPrecioEstandar.setText("Solo numeros");
-            lblPrecioEstandar.setForeground(login.error);
-        } else {
-            txtPrecioEst.setEditable(true);
-            txtPrecioEst.putClientProperty("Component.outlineWidth", 1);
-            txtPrecioEst.putClientProperty("JComponent.outline", "correct");
-            lblPrecioEstandar.setText("");
-            lblPrecioEstandar.setForeground(Color.WHITE);
-        }
+        // TODO add your handling code here:    
     }//GEN-LAST:event_txtPrecioEstKeyReleased
 
     private void txtCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusGained
@@ -401,20 +392,6 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
 
     private void txtPrecioEspeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEspeKeyReleased
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            txtPrecioEspe.setEditable(false);
-            txtPrecioEspe.putClientProperty("Component.outlineWidth", 1);
-            txtPrecioEspe.putClientProperty("JComponent.outline", "error");
-            lblPrecioEspecial.setText("Solo numeros");
-            lblPrecioEspecial.setForeground(login.error);
-        } else {
-            txtPrecioEspe.setEditable(true);
-            lblPrecioEspecial.setText("");
-            txtPrecioEspe.putClientProperty("Component.outlineWidth", 1);
-            txtPrecioEspe.putClientProperty("JComponent.outline", "correct");
-            lblPrecioEspecial.setForeground(Color.WHITE);
-        }
     }//GEN-LAST:event_txtPrecioEspeKeyReleased
 
     private void txtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusLost
@@ -436,6 +413,42 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         // TODO add your handling code here:
         selected(txtPrecioEspe, 0);
     }//GEN-LAST:event_txtPrecioEspeFocusLost
+
+    private void txtPrecioEstKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEstKeyPressed
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtPrecioEst.setEditable(false);
+            txtPrecioEst.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEst.putClientProperty("JComponent.outline", "error");
+            lblPrecioEstandar.setText("Solo numeros");
+            lblPrecioEstandar.setForeground(login.error);
+        } else {
+            txtPrecioEst.setEditable(true);
+            txtPrecioEst.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEst.putClientProperty("JComponent.outline", "correct");
+            lblPrecioEstandar.setText("");
+            lblPrecioEstandar.setForeground(Color.WHITE);
+        }
+    }//GEN-LAST:event_txtPrecioEstKeyPressed
+
+    private void txtPrecioEspeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioEspeKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtPrecioEspe.setEditable(false);
+            txtPrecioEspe.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEspe.putClientProperty("JComponent.outline", "error");
+            lblPrecioEspecial.setText("Solo numeros");
+            lblPrecioEspecial.setForeground(login.error);
+        } else {
+            txtPrecioEspe.setEditable(true);
+            lblPrecioEspecial.setText("");
+            txtPrecioEspe.putClientProperty("Component.outlineWidth", 1);
+            txtPrecioEspe.putClientProperty("JComponent.outline", "correct");
+            lblPrecioEspecial.setForeground(Color.WHITE);
+        }
+    }//GEN-LAST:event_txtPrecioEspeKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

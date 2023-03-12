@@ -3,6 +3,7 @@ package Usuario;
 public class Guia {
 
     private String codPaquete;
+    private String direccionFacturacion;
     private String origen;
     private String destino;
     private String tipoPago;
@@ -12,9 +13,10 @@ public class Guia {
     private double multiplicadorServicio;
     private double total;
 
-    public Guia(String codPaquete, String origen, String destino, String tipoPago, String tamanoPaquete,
+    public Guia(String direccionF,String codPaquete, String origen, String destino, String tipoPago, String tamanoPaquete,
             int numeropaquetes, String fechaEnvio, double total) {
         super();
+        this.setDireccionFacturacion(direccionF);
         this.setCodPaquete(codPaquete);
         this.setOrigen(origen);
         this.setDestino(destino);
@@ -39,6 +41,16 @@ public class Guia {
     public void setCodPaquete(String codPaquete) {
         this.codPaquete = codPaquete;
     }
+
+    public String getDireccionFacturacion() {
+        return direccionFacturacion;
+    }
+
+    public void setDireccionFacturacion(String direccionFacturacion) {
+        this.direccionFacturacion = direccionFacturacion;
+    }
+    
+    
 
     public String getOrigen() {
         return origen;

@@ -4,6 +4,7 @@ public class Factura {
 
     private String numFactura;
     private String codPaquete;
+    private String direccionFacturacion;
     private String origen;
     private String destino;
     private String nit;
@@ -11,9 +12,10 @@ public class Factura {
     private int numeropaquetes;
     private double total;
 
-    public Factura(String numFactura, String codPaquete, String origen, String destino, String nit, String tipoPago,
+    public Factura(String numFactura, String codPaquete,String direccionF, String origen, String destino, String nit, String tipoPago,
             int numeropaquetes, double total) {
         super();
+        this.setDireccionFacturacion(direccionF);
         this.setNumFactura(numFactura);
         this.setCodPaquete(codPaquete);
         this.setOrigen(origen);
@@ -39,6 +41,16 @@ public class Factura {
     public void setCodPaquete(String codPaquete) {
         this.codPaquete = codPaquete;
     }
+
+    public String getDireccionFacturacion() {
+        return direccionFacturacion;
+    }
+
+    public void setDireccionFacturacion(String direccionFacturacion) {
+        this.direccionFacturacion = direccionFacturacion;
+    }
+    
+    
 
     public String getOrigen() {
         return origen;

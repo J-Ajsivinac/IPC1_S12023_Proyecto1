@@ -325,7 +325,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
         txtKiosco.setForeground(new java.awt.Color(255, 255, 255));
         txtKiosco.setText("Kiosco");
 
-        boxKiosco.setBackground(new java.awt.Color(34, 37, 47));
         boxKiosco.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxKiosco.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -484,19 +483,15 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Nacionalidad");
 
-        boxNacionalidad.setBackground(new java.awt.Color(34, 37, 47));
         boxNacionalidad.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxNacionalidad.setForeground(new java.awt.Color(255, 255, 255));
-        boxNacionalidad.setBorder(null);
 
         jLabel12.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Genero");
 
-        boxGenero.setBackground(new java.awt.Color(34, 37, 47));
         boxGenero.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxGenero.setForeground(new java.awt.Color(255, 255, 255));
-        boxGenero.setBorder(null);
 
         jLabel13.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -844,13 +839,18 @@ public class agregarUsuarios extends javax.swing.JFrame {
             if (m.find()) {
                 labels[i].setForeground(new Color(99, 220, 147));
                 //txtContra.setBorder(correctoBorde);
+                txtContra.putClientProperty("Component.outlineWidth", 1);
+                txtContra.putClientProperty("JComponent.outline", "correct");
             } else {
                 labels[i].setForeground(error);
                 //txtContra.setBorder(errorBorde);
+                txtContra.putClientProperty("Component.outlineWidth", 1);
+                txtContra.putClientProperty("JComponent.outline", "error");
             }
         }
         if (ctrlUsuarios.verificarPassword(String.valueOf(txtContra.getPassword()))) {
-            txtContra.setBorder(correctoBorde);
+            txtContra.putClientProperty("Component.outlineWidth", 1);
+            txtContra.putClientProperty("JComponent.outline", "correct");
         }
     }//GEN-LAST:event_txtContraKeyReleased
 
@@ -859,10 +859,26 @@ public class agregarUsuarios extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtTelefono.setEditable(false);
+            txtTelefono.putClientProperty("Component.outlineWidth", 1);
+            txtTelefono.putClientProperty("JComponent.outline", "error");
             lblTelefono.setText("Solo numeros");
         } else {
             txtTelefono.setEditable(true);
             lblTelefono.setText("");
+            txtTelefono.putClientProperty("Component.outlineWidth", 1);
+            txtTelefono.putClientProperty("JComponent.outline", "correct");
+        }
+        
+        if(txtTelefono.getText().toString().length() > 8){
+            txtTelefono.setEditable(false);
+            txtTelefono.putClientProperty("Component.outlineWidth", 1);
+            txtTelefono.putClientProperty("JComponent.outline", "error");
+            lblTelefono.setText("Solo numeros de 8 digitos");
+        }else{
+            txtTelefono.setEditable(true);
+            lblTelefono.setText("");
+            txtTelefono.putClientProperty("Component.outlineWidth", 1);
+            txtTelefono.putClientProperty("JComponent.outline", "correct");
         }
     }//GEN-LAST:event_txtTelefonoKeyPressed
 
@@ -871,10 +887,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtDPI.setEditable(false);
-            txtDPI.setBorder(errorBorde);
+            txtDPI.putClientProperty("Component.outlineWidth", 1);
+            txtDPI.putClientProperty("JComponent.outline", "error");
             lblDpi.setText("Solo numeros");
         } else {
-            txtDPI.setBorder(selectedborder);
+            txtDPI.putClientProperty("Component.outlineWidth", 1);
+            txtDPI.putClientProperty("JComponent.outline", "correct");
             txtDPI.setEditable(true);
             lblDpi.setText("");
         }
@@ -1003,11 +1021,13 @@ public class agregarUsuarios extends javax.swing.JFrame {
             lblFecha.setForeground(error);
             lblFecha.setText("Ingrese una fecha valida");
             validarFecha = false;
-            txtFecha.setBorder(errorBorde);
+            txtFecha.putClientProperty("Component.outlineWidth", 1);
+            txtFecha.putClientProperty("JComponent.outline", "error");
         } else {
             lblFecha.setForeground(Color.WHITE);
             lblFecha.setText("dd/mm/yyyy");
-            txtFecha.setBorder(correctoBorde);
+            txtFecha.putClientProperty("Component.outlineWidth", 1);
+            txtFecha.putClientProperty("JComponent.outline", "correct");
             validarFecha = true;
         }
 
@@ -1070,7 +1090,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                 if (ctrlUsuarios.nuevoUsuario(correo, nombre, apellido, contra, dpi, fecha, genero, nacionalidad, alias, n, rolCompleto, img)) {
                     lblimagen.setIcon(null);
 
-// Actualizar el JLabel para reflejar los cambios
+                    // Actualizar el JLabel para reflejar los cambios
                     lblimagen.revalidate();
                     lblimagen.repaint();
                     lblop1.setForeground(error);
@@ -1081,8 +1101,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Usuario Agregado");
                     limpiarTxt();
                     setBordes();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");

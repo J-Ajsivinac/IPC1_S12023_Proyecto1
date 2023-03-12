@@ -21,6 +21,8 @@ public class ctrlKioscos {
                     JOptionPane.showMessageDialog(null, "El Nombre de Kiosco ya existe");
                 }
 
+            }else{
+                JOptionPane.showMessageDialog(null, "El codigo del Kiosco ya existe");
             }
         }
         return false;

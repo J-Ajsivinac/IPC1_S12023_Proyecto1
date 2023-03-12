@@ -450,6 +450,11 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
 
         boxNumeroTarjeta.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxNumeroTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        boxNumeroTarjeta.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxNumeroTarjetaItemStateChanged(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -692,15 +697,23 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtNumero.setEditable(false);
+            txtNumero.putClientProperty("Component.outlineWidth", 1);
+            txtNumero.putClientProperty("JComponent.outline", "error");
             lblNumero.setText("Solo numeros");
         } else {
             txtNumero.setEditable(true);
             lblNumero.setText("");
+            txtNumero.putClientProperty("Component.outlineWidth", 1);
+            txtNumero.putClientProperty("JComponent.outline", "correct");
             if (txtNumero.getText().length() > 10) {
                 lblNumero.setText("");
                 validarNum = true;
+                txtNumero.putClientProperty("Component.outlineWidth", 1);
+                txtNumero.putClientProperty("JComponent.outline", "correct");
             } else {
-                lblNumero.setText("El numero no es válido");
+                lblNumero.setText("El numero de tarjeta es muy pequeño");
+                txtNumero.putClientProperty("Component.outlineWidth", 1);
+                txtNumero.putClientProperty("JComponent.outline", "error");
                 validarNum = false;
             }
         }
@@ -746,8 +759,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNuevoVKeyPressed
 
     private void txtNuevoVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoVKeyReleased
-        // TODO add your handling code here:
-        lblAdvertencia.setText("dd/mm/yyyy");
+        // TODO add your handling code here: 
         if ((boxCambiar.getSelectedIndex() + 1) == 3) {
             Pattern vCorreo = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
             Matcher m = vCorreo.matcher(txtNuevoV.getText());
@@ -769,6 +781,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
 
     private void boxCambiarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxCambiarItemStateChanged
         // TODO add your handling code here:
+        lblAdvertencia.setText("");
         cargarBoxOpcion();
     }//GEN-LAST:event_boxCambiarItemStateChanged
 
@@ -811,6 +824,12 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         // TODO add your handling code here:
         selected(txtNuevoV, 0);
     }//GEN-LAST:event_txtNuevoVFocusLost
+
+    private void boxNumeroTarjetaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxNumeroTarjetaItemStateChanged
+        // TODO add your handling code here:
+        lblAdvertencia.setText("");
+        cargarBoxOpcion();
+    }//GEN-LAST:event_boxNumeroTarjetaItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -636,9 +636,13 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         if (Character.isLetter(c)) {
             txtNit.setEditable(false);
             lblNit.setText("Solo numeros");
+            txtNit.putClientProperty("Component.outlineWidth", 1);
+            txtNit.putClientProperty("JComponent.outline", "error");
         } else {
             txtNit.setEditable(true);
             lblNit.setText("");
+            txtNit.putClientProperty("Component.outlineWidth", 1);
+            txtNit.putClientProperty("JComponent.outline", "correct");
         }
     }//GEN-LAST:event_txtNitKeyPressed
 
