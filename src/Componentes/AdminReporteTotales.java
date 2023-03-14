@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
 /**
  *
  * @author mesoi
@@ -34,12 +35,12 @@ public class AdminReporteTotales extends javax.swing.JPanel {
     public void ingresosTotales() {
         double totalPaqu = 0;
         ArrayList<Envios> enviosGet = ctrlEnvios.getAllEnvios();
-        if (enviosGet.size() > 0) {
-            for (Envios envio : enviosGet) {
-                totalPaqu += envio.getFactura().getTotal();
-            }
-            lblIngresosTotales.setText(totalPaqu + "");
+
+        for (Envios envio : enviosGet) {
+            totalPaqu += envio.getFactura().getTotal();
         }
+        lblIngresosTotales.setText(totalPaqu + "");
+
     }
 
     /**

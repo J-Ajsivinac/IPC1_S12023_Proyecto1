@@ -116,7 +116,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 Element dNumero = doc.getElementById("dNumero");
                 Element dTotal = doc.getElementById("dTotal");
 
-                Element dTarjetaCredito = doc.getElementById("dTarjetaCredito1");
+                Element dTarjetaCredito = doc.getElementById("dTarjetaCredito");
 
                 Factura factura = envios.getFactura();
 
@@ -134,7 +134,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
                 dDestino.text(datosD[0] + "," + datosD[1]);
                 dDireccionDestino.text(datosD[2]);
-                dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
+                dNumeroPaquetes.text(factura.getNit() + "");
 
                 String[] dTipos = factura.getTipoPago().split(",");
                 dTipoPago.text(dTipos[0]);
@@ -206,7 +206,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
                 Factura factura = envios.getFactura();
 
-                codigoPaquete.text("#" + factura.getNumFactura());
+                codigoPaquete.text(envios.getGuia().getCodPaquete());
                 fecha.text(envios.getGuia().getFechaEnvio());
                 dDireccionFacturacion.text(factura.getDireccionFacturacion());
                 String[] datosO = factura.getOrigen().split(",");
@@ -255,11 +255,11 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 datos[1] = envio.getTipoServicio();
 
                 String[] datosD = envio.getFactura().getDestino().split(",");
-
+                String[] tipoPago = envio.getFactura().getTipoPago().split(",");
                 String mostrarDestinatario = "<html>" + datosD[0] + "<br> " + datosD[1] + "<br> " + datosD[2] + "</html>";
                 datos[2] = mostrarDestinatario;
                 datos[3] = envio.getFactura().getTotal();
-                datos[4] = envio.getFactura().getTipoPago();
+                datos[4] = tipoPago[0];
                 modelo.addRow(datos);
             }
         }
@@ -312,10 +312,12 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         table1.setSelectionBackground(new java.awt.Color(98, 101, 128));
         jScrollPane2.setViewportView(table1);
         if (table1.getColumnModel().getColumnCount() > 0) {
-            table1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            table1.getColumnModel().getColumn(0).setPreferredWidth(40);
             table1.getColumnModel().getColumn(1).setPreferredWidth(40);
-            table1.getColumnModel().getColumn(3).setPreferredWidth(20);
+            table1.getColumnModel().getColumn(2).setPreferredWidth(80);
+            table1.getColumnModel().getColumn(3).setPreferredWidth(18);
             table1.getColumnModel().getColumn(4).setPreferredWidth(28);
+            table1.getColumnModel().getColumn(5).setPreferredWidth(70);
         }
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);

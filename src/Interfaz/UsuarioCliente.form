@@ -442,7 +442,7 @@
         <Container class="javax.swing.JPanel" name="menuContenido">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="24" green="1c" red="1c" type="rgb"/>
+              <Color blue="1a" green="13" red="13" type="rgb"/>
             </Property>
           </Properties>
 

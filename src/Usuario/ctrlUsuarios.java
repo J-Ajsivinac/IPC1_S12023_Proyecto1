@@ -346,7 +346,7 @@ public class ctrlUsuarios {
         Usuario u = usuarios.get(index);
         boolean regresar = false;
         boolean cambio = false;
-        String[] valores = {u.getNombre(), u.getApellido(), u.getFechaNacimiento(), u.getTelefono() + "", u.getNacionalidad(), u.getGenero(), u.getDpi()};
+        String[] valores = {u.getNombre(), u.getApellido(), u.getFechaNacimiento(), u.getTelefono() + "", u.getNacionalidad(), u.getGenero(), u.getDpi(), u.getAlias()};
         for (int i = 0; i < valores.length; i++) {
             if (!valores[i].equals(nuevosvalores[i])) {
                 switch (i) {
@@ -379,6 +379,10 @@ public class ctrlUsuarios {
                         break;
                     case 6:
                         usuarios.get(index).setDpi(nuevosvalores[i]);
+                        regresar = true;
+                        break;
+                    case 7:
+                        usuarios.get(index).setAlias(nuevosvalores[i]);
                         regresar = true;
                         break;
                     default:

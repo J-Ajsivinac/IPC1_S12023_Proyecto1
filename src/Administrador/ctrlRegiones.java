@@ -2,7 +2,6 @@ package Administrador;
 
 import static Administrador.ctrlDepartamentos.generarCodigos;
 import Usuario.ctrlEnvios;
-import static Usuario.ctrlUsuarios.verificarID;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ctrlRegiones {
             String codRegion = "";
             while (true) {
                 codRegion = generarCodigos("R");
-                if (!verificarID(codRegion)) {
+                if (!verficarIDRegion(codRegion)) {
                     break;
                 }
             }
@@ -34,6 +33,16 @@ public class ctrlRegiones {
             JOptionPane.showMessageDialog(null, "Llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
+        return false;
+    }
+    
+    public static boolean verficarIDRegion(String idR){
+        for (int i = 0; i < regiones.size(); i++) {
+            Regiones d = regiones.get(i);
+            if (d.getIdRegion().equals(idR)) {
+                return true;
+            }
+        }
         return false;
     }
 

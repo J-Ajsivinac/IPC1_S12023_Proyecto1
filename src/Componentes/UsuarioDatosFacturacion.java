@@ -41,19 +41,20 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 if (tabla2.isEditing()) {
                     tabla2.getCellEditor().stopCellEditing();
                 }
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar los Datos de Facturación?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
 
-                DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
+                    if (ctrlUsuarios.eliminarDatosF(login.credenciales.getCorreo(), login.posicionU, row)) {
+                        model.removeRow(row);
+                        cargarTablaNits();
+                        listarNit();
+                        cargarTablaNitsEliminar();
+                        cargarBoxOpcion();
 
-                if (ctrlUsuarios.eliminarDatosF(login.credenciales.getCorreo(), login.posicionU, row)) {
-                    model.removeRow(row);
-                    cargarTablaNits();
-                    listarNit();
-                    cargarTablaNitsEliminar();
-                    cargarBoxOpcion();
-
-                    JOptionPane.showMessageDialog(null, "Dato de Facturación eliminada correctamente");
+                        JOptionPane.showMessageDialog(null, "Datos de Facturación eliminada correctamente");
+                    }
                 }
-
             }
 
             @Override
@@ -334,23 +335,22 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(27, 27, 27)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(lblNit, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jScrollPane2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(lblNit, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNit, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)))
+                            .addComponent(txtNombreCompleto, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(234, 234, 234)
                         .addComponent(btnAgregarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,7 +388,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,23 +488,26 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                         .addComponent(lblValor, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
+                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(boxNit, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(boxCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8)
                             .addComponent(txtNuevoV)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelRound2Layout.createSequentialGroup()
+                                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(panelRound2Layout.createSequentialGroup()
                         .addGap(272, 272, 272)
                         .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,7 +577,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
@@ -596,16 +599,16 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
                     .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -621,7 +624,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -662,42 +665,42 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
 
     private void txtNombreCompletoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreCompletoFocusGained
         // TODO add your handling code here:
-         UsuarioTarjeta.selected(txtNombreCompleto,1);
+        UsuarioTarjeta.selected(txtNombreCompleto, 1);
     }//GEN-LAST:event_txtNombreCompletoFocusGained
 
     private void txtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusGained
         // TODO add your handling code here:
-        UsuarioTarjeta.selected(txtDireccion,1);
+        UsuarioTarjeta.selected(txtDireccion, 1);
     }//GEN-LAST:event_txtDireccionFocusGained
 
     private void txtNitFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNitFocusGained
         // TODO add your handling code here:
-        UsuarioTarjeta.selected(txtNit,1);
+        UsuarioTarjeta.selected(txtNit, 1);
     }//GEN-LAST:event_txtNitFocusGained
 
     private void txtNuevoVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoVFocusGained
         // TODO add your handling code here:
-        UsuarioTarjeta.selected(txtNuevoV,1);
+        UsuarioTarjeta.selected(txtNuevoV, 1);
     }//GEN-LAST:event_txtNuevoVFocusGained
 
     private void txtNombreCompletoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreCompletoFocusLost
         // TODO add your handling code here:
-        UsuarioTarjeta.selected(txtNombreCompleto,0);
+        UsuarioTarjeta.selected(txtNombreCompleto, 0);
     }//GEN-LAST:event_txtNombreCompletoFocusLost
 
     private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
         // TODO add your handling code here:
-         UsuarioTarjeta.selected(txtDireccion,0);
+        UsuarioTarjeta.selected(txtDireccion, 0);
     }//GEN-LAST:event_txtDireccionFocusLost
 
     private void txtNitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNitFocusLost
         // TODO add your handling code here:
-          UsuarioTarjeta.selected(txtNit,0);
+        UsuarioTarjeta.selected(txtNit, 0);
     }//GEN-LAST:event_txtNitFocusLost
 
     private void txtNuevoVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoVFocusLost
         // TODO add your handling code here:
-        UsuarioTarjeta.selected(txtNuevoV,0);
+        UsuarioTarjeta.selected(txtNuevoV, 0);
     }//GEN-LAST:event_txtNuevoVFocusLost
 
 

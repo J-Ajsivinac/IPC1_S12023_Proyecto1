@@ -51,7 +51,7 @@
                   <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="panelRound2" max="32767" attributes="0"/>
-                      <Component id="panelRound3" pref="0" max="32767" attributes="0"/>
+                      <Component id="panelRound3" pref="232" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="143" max="32767" attributes="0"/>
               </Group>

@@ -859,26 +859,32 @@ public class agregarUsuarios extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txtTelefono.setEditable(false);
+            lblTelefono.setText("Solo numeros");
             txtTelefono.putClientProperty("Component.outlineWidth", 1);
             txtTelefono.putClientProperty("JComponent.outline", "error");
-            lblTelefono.setText("Solo numeros");
+            if (txtTelefono.getText().toString().length() >= 9) {
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "error");
+                lblTelefono.setText("Solo numeros de 8 digitos");
+            } else {
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "correct");
+            }
+
         } else {
             txtTelefono.setEditable(true);
             lblTelefono.setText("");
             txtTelefono.putClientProperty("Component.outlineWidth", 1);
-            txtTelefono.putClientProperty("JComponent.outline", "correct");
-        }
-        
-        if(txtTelefono.getText().toString().length() > 8){
-            txtTelefono.setEditable(false);
-            txtTelefono.putClientProperty("Component.outlineWidth", 1);
-            txtTelefono.putClientProperty("JComponent.outline", "error");
-            lblTelefono.setText("Solo numeros de 8 digitos");
-        }else{
-            txtTelefono.setEditable(true);
-            lblTelefono.setText("");
-            txtTelefono.putClientProperty("Component.outlineWidth", 1);
-            txtTelefono.putClientProperty("JComponent.outline", "correct");
+            lblTelefono.putClientProperty("JComponent.outline", "correct");
+            if (txtTelefono.getText().toString().length() >= 9) {
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "error");
+                lblTelefono.setText("Solo numeros de 8 digitos");
+            } else {
+                lblTelefono.setText("");
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "correct");
+            }
         }
     }//GEN-LAST:event_txtTelefonoKeyPressed
 
@@ -1082,6 +1088,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La fecha no es válida");
             return;
         }
+
+        if (numero.length() > 8) {
+            JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
+            return;
+        }
+
         if (!correo.equals("") && !nombre.equals("") && !apellido.equals("") && !contra.equals("")
                 && !verificar.equals("") && !dpi.equals("") && !fecha.equals("")
                 && !nacionalidad.equals("") && !genero.equals("") && !genero.equals("") && !alias.equals("") && !numero.equals("")) {
@@ -1097,6 +1109,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                     lblop2.setForeground(error);
                     lblop3.setForeground(error);
                     lblop4.setForeground(error);
+                    
                     lblCorreo.setText("");
                     JOptionPane.showMessageDialog(null, "Usuario Agregado");
                     limpiarTxt();

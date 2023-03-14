@@ -74,6 +74,10 @@ public class UsuarioCliente extends javax.swing.JFrame {
         menuContenido.add(usuarioVer);
         menuContenido.add(usuarioCliente);
         menuClick(usert);
+
+        FlatSVGIcon svgLogout = new FlatSVGIcon("img/imagenCerrar.svg", 20, 20);
+        svgLogout.setColorFilter(fl);
+        imgR5.setIcon(svgLogout);
         bordeMenu(panelTarjetas, lblTarjeta, imgR, 1);
         verificar();
         cargarImg();
@@ -163,7 +167,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
             default:
         }
-        texto.setForeground(new Color(205, 233, 255));
+        texto.setForeground(new Color(121, 121, 252));
         //panel.setForeground(new Color(205, 233, 255));
     }
 
@@ -204,7 +208,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
     public static void cargarImg() {
         Usuario userA = ctrlUsuarios.getUsuarioIndice(login.posicionU);
         ImageIcon originalImageIcon = new ImageIcon(userA.getFotografia());
-        if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+        if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE || userA.getFotografia().equals("")) {
             ///htmls/factura.html
             originalImageIcon = new ImageIcon("src\\img\\usuario.png");
         }
@@ -471,7 +475,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        menuContenido.setBackground(new java.awt.Color(28, 28, 36));
+        menuContenido.setBackground(new java.awt.Color(19, 19, 26));
 
         javax.swing.GroupLayout menuContenidoLayout = new javax.swing.GroupLayout(menuContenido);
         menuContenido.setLayout(menuContenidoLayout);

@@ -49,17 +49,19 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 if (tabla2.isEditing()) {
                     tabla2.getCellEditor().stopCellEditing();
                 }
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la Tarjeta?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
 
-                DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
+                    if (ctrlUsuarios.eliminarTarjetas(login.credenciales.getCorreo(), login.posicionU, row)) {
+                        model.removeRow(row);
+                        cargarTablaTarjeta();
+                        listarTarjetas();
+                        cargarTablaTarjetaEliminar();
+                        cargarBoxOpcion();
 
-                if (ctrlUsuarios.eliminarTarjetas(login.credenciales.getCorreo(), login.posicionU, row)) {
-                    model.removeRow(row);
-                    cargarTablaTarjeta();
-                    listarTarjetas();
-                    cargarTablaTarjetaEliminar();
-                    cargarBoxOpcion();
-
-                    JOptionPane.showMessageDialog(null, "Tarjeta eliminada correctamente");
+                        JOptionPane.showMessageDialog(null, "Tarjeta eliminada correctamente");
+                    }
                 }
 
             }
@@ -241,6 +243,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
 
         jScrollPane1.setBackground(new java.awt.Color(19, 19, 26));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(19, 19, 26)));
+        jScrollPane1.setForeground(new java.awt.Color(19, 19, 26));
 
         jPanel1.setBackground(new java.awt.Color(19, 19, 26));
 
@@ -346,7 +349,6 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                         .addGap(16, 16, 16)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtNombreTarjeta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,7 +356,9 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                                         .addComponent(jLabel4)
                                         .addGap(487, 487, 487)))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                                        .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5)
@@ -679,15 +683,15 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
 
     private void txtNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyReleased
         // TODO add your handling code here:
-        if (txtNumero.isEditable() == true) {
-            if (txtNumero.getText().length() > 10) {
-                lblNumero.setText("");
-                validarNum = true;
-            } else {
-                lblNumero.setText("El numero no es válido");
-                validarNum = false;
-            }
-        }
+        //if (txtNumero.isEditable() == true) {
+           // if (txtNumero.getText().length() > 10) {
+             //   lblNumero.setText("");
+           //     validarNum = true;
+         //   } else {
+            //    lblNumero.setText("El numero no es válido");
+             //   validarNum = false;
+            //}
+     //   }
 
 
     }//GEN-LAST:event_txtNumeroKeyReleased
@@ -702,7 +706,6 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
             lblNumero.setText("Solo numeros");
         } else {
             txtNumero.setEditable(true);
-            lblNumero.setText("");
             txtNumero.putClientProperty("Component.outlineWidth", 1);
             txtNumero.putClientProperty("JComponent.outline", "correct");
             if (txtNumero.getText().length() > 10) {

@@ -47,15 +47,18 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 if (tabla1.isEditing()) {
                     tabla1.getCellEditor().stopCellEditing();
                 }
-                DefaultTableModel model = (DefaultTableModel) tabla1.getModel();
-                String codigo = String.valueOf(model.getValueAt(row, 0));
-                if (ctrlDepartamentos.eliminarDepartamento(codigo)) {
-                    model.removeRow(row);
-                    cargarB();
-                    cargarTabla1();
-                    cargarTabla2();
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar el Departamento?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    DefaultTableModel model = (DefaultTableModel) tabla1.getModel();
+                    String codigo = String.valueOf(model.getValueAt(row, 0));
+                    if (ctrlDepartamentos.eliminarDepartamento(codigo)) {
+                        model.removeRow(row);
+                        cargarB();
+                        cargarTabla1();
+                        cargarTabla2();
 
-                    JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+                        JOptionPane.showMessageDialog(null, "Departamento eliminado correctamente");
+                    }
                 }
             }
 
@@ -74,20 +77,23 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 if (tabla2.isEditing()) {
                     tabla2.getCellEditor().stopCellEditing();
                 }
-                Departamentos depItem = (Departamentos) boxDeparE.getSelectedItem();
-                if (depItem != null) {
-                    DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
-                    String codigoDepartamento = depItem.getCodigo();
-                    String codigo = String.valueOf(model.getValueAt(row, 0));
-                    if (ctrlDepartamentos.eliminarMunicipio(codigoDepartamento, codigo)) {
-                        model.removeRow(row);
-                        cargarB();
-                        cargarTabla1();
-                        cargarTabla2();
-                        JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar el Municipio?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    Departamentos depItem = (Departamentos) boxDeparE.getSelectedItem();
+                    if (depItem != null) {
+                        DefaultTableModel model = (DefaultTableModel) tabla2.getModel();
+                        String codigoDepartamento = depItem.getCodigo();
+                        String codigo = String.valueOf(model.getValueAt(row, 0));
+                        if (ctrlDepartamentos.eliminarMunicipio(codigoDepartamento, codigo)) {
+                            model.removeRow(row);
+                            cargarB();
+                            cargarTabla1();
+                            cargarTabla2();
+                            JOptionPane.showMessageDialog(null, "Municipio eliminado correctamente");
+                        }
                     }
                 }
-
             }
 
             @Override
@@ -429,7 +435,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Actualizar Nombres");
 
-        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(52, 52, 52));
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -522,9 +528,9 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addComponent(txtNuevoDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEditarDep, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -616,7 +622,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
                     .addComponent(boxDepartamentosM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(boxMuniUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -653,18 +659,19 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             }
         });
 
-        txtMunicipioActual.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtMunicipioActual.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         txtMunicipioActual.setForeground(new java.awt.Color(255, 255, 255));
+        txtMunicipioActual.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel14.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Nombre Actual:");
 
-        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator2.setForeground(new java.awt.Color(52, 52, 52));
 
         jLabel17.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Eliminar Departamentos");
+        jLabel17.setText("Eliminar Municipios");
 
         tabla2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -721,18 +728,18 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel10))
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMunicipioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
-                            .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtMunicipioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39))))
+                            .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelRound3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel10))
                     .addGroup(panelRound3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel17))
@@ -760,11 +767,11 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtMunicipioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMunicipioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNuevoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -805,9 +812,9 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -843,9 +850,8 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         if (depItem != null) {
             String codDepartamento = depItem.getIdRegion();
             cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
+            //ActualizarDepartamento();
         }
-        ActualizarDepartamento();
-
     }//GEN-LAST:event_boxRegionUpdateItemStateChanged
 
     private void btnEditarDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDepActionPerformed
@@ -905,7 +911,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
 
     private void txtNuevoDepartamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoDepartamentoFocusLost
         // TODO add your handling code here:
-        selected(txtNuevoMunicipio, 0);
+        selected(txtNuevoDepartamento, 0);
     }//GEN-LAST:event_txtNuevoDepartamentoFocusLost
 
     private void txtNuevoMunicipioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNuevoMunicipioFocusLost

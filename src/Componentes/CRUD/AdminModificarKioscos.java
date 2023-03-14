@@ -44,13 +44,17 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 if (tabla1.isEditing()) {
                     tabla1.getCellEditor().stopCellEditing();
                 }
-                DefaultTableModel model = (DefaultTableModel) tabla1.getModel();
-                String codigo = String.valueOf(model.getValueAt(row, 0));
-                if (ctrlKioscos.eliminarKiosco(codigo)) {
-                    model.removeRow(row);
-                    JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
-                    //cargarBoxRegiones();
-                    //cargarRegiones();
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar el Kiosco?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    DefaultTableModel model = (DefaultTableModel) tabla1.getModel();
+                    String codigo = String.valueOf(model.getValueAt(row, 0));
+                    if (ctrlKioscos.eliminarKiosco(codigo)) {
+                        model.removeRow(row);
+                        JOptionPane.showMessageDialog(null, "Region eliminada correctamente");
+                        cargarTabla1();
+                        cargarKiosco();
+                        cargarDatosActuales();
+                    }
                 }
 
             }
@@ -320,7 +324,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +348,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
@@ -387,17 +391,14 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boxRegionEliminar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel7)
                     .addComponent(jLabel1)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(boxRegionEliminar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(

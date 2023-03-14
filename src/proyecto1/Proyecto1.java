@@ -4,16 +4,13 @@ import Administrador.ctrlRegiones;
 import Interfaz.login;
 import Usuario.ctrlUsuarios;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
-import com.formdev.flatlaf.ui.FlatTextBorder;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
 
 public class Proyecto1 {
 

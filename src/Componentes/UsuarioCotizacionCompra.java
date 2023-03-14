@@ -59,7 +59,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private Usuario user;
     private Color desactivado = new Color(34, 37, 47);
     private Color act = new Color(200, 187, 250);
-    private Color textact = new Color(68, 68, 86);
+    private Color textact = new Color(19, 19, 26);
+    //[19,19,26]
+    private FlatSVGIcon.ColorFilter fl;
 
     /**
      * Creates new form UsuarioCotizacionCompra
@@ -108,10 +110,17 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         }));
         btnDGuia.setIcon(svgBtn2);
 
-        sVGImages1.setSvgImages("img/paqueteP.svg", 50, 50);
-        sVGImages2.setSvgImages("img/paqueteM.svg", 60, 60);
-        sVGImages3.setSvgImages("img/paqueteG2.svg", 60, 60);
+        //sVGImages1.setSvgImages("img/paqueteP.svg", 50, 50);
+        fl = new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return Color.WHITE;
+            }
 
+        });
+
+        //sVGImages2.setSvgImages("img/paqueteM.svg", 60, 60);
+        //sVGImages3.setSvgImages("img/paqueteG2.svg", 60, 60);
         ButtonGroup price = new ButtonGroup();
         price.add(radioEstandar);
         price.add(radioEspecial);
@@ -126,13 +135,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         radioPeque.setVisible(false);
         radioContra.setVisible(false);
         radioCuenta.setVisible(false);
-        activarFondo1(panelPeque, lblP1, lblP2, lblP3);
+        activarFondo1(panelPeque, lblP1, lblP2, lblP3, lblPequeSVG,1);
         activarFondo2(panelEstandar, txtTotalEstandar, lblEstandar);
         activarFondo3(panelRound2, lblTitulo, lblDescripcion);
         txtNombreTarjeta.setText("");
         txtNombreFacturacion.setText("");
-        txtDireccionOrigen.putClientProperty("JTextField.placeholderText", "Dirección");
-        txtDireccionDestino.putClientProperty("JTextField.placeholderText", "Dirección");
+        txtDireccionOrigen.putClientProperty("JTextField.placeholderText", "Dirección de Origen");
+        txtDireccionDestino.putClientProperty("JTextField.placeholderText", "Dirección de Destino");
     }
 
     public void test(Usuario user1) {
@@ -152,10 +161,21 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     }
 
-    public void activarFondo1(JPanel activar, JLabel texto1, JLabel texto2, JLabel texto3) {
+    public void activarFondo1(JPanel activar, JLabel texto1, JLabel texto2, JLabel texto3, JLabel imagen1, int op) {
         panelPeque.setBackground(desactivado);
         panelGrande.setBackground(desactivado);
         panelMediano.setBackground(desactivado);
+        FlatSVGIcon svgPeque = new FlatSVGIcon("img/paqueteP.svg", 50, 50);
+        svgPeque.setColorFilter(fl);
+        FlatSVGIcon svgMediano = new FlatSVGIcon("img/paqueteM.svg", 60, 60);
+        svgMediano.setColorFilter(fl);
+        FlatSVGIcon svgGrande = new FlatSVGIcon("img/paqueteG2.svg", 60, 60);
+        svgGrande.setColorFilter(fl);
+
+        lblPequeSVG.setIcon(svgPeque);
+        lblMedianoSVG.setIcon(svgMediano);
+        lblGrandeSVG.setIcon(svgGrande);
+
         lblP1.setForeground(Color.WHITE);
         lblP2.setForeground(Color.WHITE);
         lblP3.setForeground(Color.WHITE);
@@ -165,6 +185,32 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblG1.setForeground(Color.WHITE);
         lblG2.setForeground(Color.WHITE);
         lblG3.setForeground(Color.WHITE);
+
+        FlatSVGIcon.ColorFilter activado = new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return textact;
+            }
+
+        });
+        
+         switch (op) {
+            case 1:
+                svgPeque.setColorFilter(activado);
+                imagen1.setIcon(svgPeque);
+                break;
+            case 2:
+                svgMediano.setColorFilter(activado);
+                imagen1.setIcon(svgMediano);
+                break;
+            case 3:
+                svgGrande.setColorFilter(activado);
+                imagen1.setIcon(svgGrande);
+                break;
+
+            default:
+        }
+
         activar.setBackground(act);
         texto1.setForeground(textact);
         texto2.setForeground(textact);
@@ -234,7 +280,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         boxMunicipios.setSelectedIndex(0);
         boxMunicipiosD.setSelectedIndex(0);
         txtTotalEstandar.setText("Total 0.00");
-        lblEspecial.setText("Total 0.00");
+        txtTotalEspecial.setText("Total 0.00");
     }
 
     public void saveCotizacion() {
@@ -284,6 +330,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             txtTotalEspecial.setText("Total " + total2);
 
             JOptionPane.showMessageDialog(null, "Cotización exitosa");
+            JOptionPane.showMessageDialog(null, "Se le aconseja descargar la guia ahora\nDespués de realizar el envio la guia actual ya no podra ser descargada");
         } else {
             JOptionPane.showMessageDialog(null, "Llene todos los datos");
         }
@@ -362,7 +409,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
             if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete(), facturaItem.getDireccionF())) {
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
+                limpiarTxtCotizacion();
                 realizoEnvio = true;
+                guardarCotizacion = null;
                 total1 = 0;
                 total2 = 0;
             }
@@ -373,6 +422,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 limpiarTxtCotizacion();
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 realizoEnvio = true;
+                guardarCotizacion = null;
                 total1 = 0;
                 total2 = 0;
             }
@@ -392,7 +442,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             System.out.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File directorio = new File(guardarComo.getSelectedFile().toString()+".html");
+            File directorio = new File(guardarComo.getSelectedFile().toString() + ".html");
             if (!directorio.isFile() && !directorio.isDirectory()) {
                 String htmFilePath = "/htmls/factura.html";
                 InputStream inputStream = getClass().getResourceAsStream(htmFilePath);
@@ -437,7 +487,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
                 dDestino.text(datosD[0] + "," + datosD[1]);
                 dDireccionDestino.text(datosD[2]);
-                dNumeroPaquetes.text(factura.getNumeropaquetes() + "");
+                dNumeroPaquetes.text(factura.getNit()+ "");
 
                 String[] dTipos = factura.getTipoPago().split(",");
                 dTipoPago.text(dTipos[0]);
@@ -478,7 +528,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             System.out.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File directorio = new File(guardarComo.getSelectedFile().toString()+".html");
+            File directorio = new File(guardarComo.getSelectedFile().toString() + ".html");
             if (!directorio.isFile() && !directorio.isDirectory()) {
                 String htmFilePath = "/htmls/guia.html";
                 InputStream inputStream = getClass().getResourceAsStream(htmFilePath);
@@ -509,7 +559,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
                 Factura factura = envios.getFactura();
 
-                codigoPaquete.text("#" + factura.getNumFactura());
+                codigoPaquete.text(envios.getGuia().getCodPaquete());
                 fecha.text(envios.getGuia().getFechaEnvio());
                 dDireccionFacturacion.text(factura.getDireccionFacturacion());
                 String[] datosO = factura.getOrigen().split(",");
@@ -542,7 +592,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -584,7 +634,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblP3 = new javax.swing.JLabel();
         radioPeque = new javax.swing.JRadioButton();
         lblP2 = new javax.swing.JLabel();
-        sVGImages1 = new Elementos.SVGImages();
+        lblPequeSVG = new javax.swing.JLabel();
         panelEstandar = new Elementos.PanelRound();
         radioEstandar = new javax.swing.JRadioButton();
         txtTotalEstandar = new javax.swing.JLabel();
@@ -598,13 +648,13 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblM3 = new javax.swing.JLabel();
         radioMediano = new javax.swing.JRadioButton();
         lblM2 = new javax.swing.JLabel();
-        sVGImages2 = new Elementos.SVGImages();
+        lblMedianoSVG = new javax.swing.JLabel();
         panelGrande = new Elementos.PanelRound();
         lblG1 = new javax.swing.JLabel();
         lblG2 = new javax.swing.JLabel();
         RadioGrande = new javax.swing.JRadioButton();
         lblG3 = new javax.swing.JLabel();
-        sVGImages3 = new Elementos.SVGImages();
+        lblGrandeSVG = new javax.swing.JLabel();
         btnCotizar = new Elementos.ButtonRound();
         jLabel7 = new javax.swing.JLabel();
         btnGuardarCotizacion = new Elementos.ButtonRound();
@@ -652,7 +702,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(506, 532));
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotización");
 
@@ -692,33 +742,40 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Origen");
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(58, 58, 58))))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
-
-        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Origen");
 
         panelRound11.setBackground(new java.awt.Color(19, 19, 26));
         panelRound11.setRoundBottomLeft(16);
@@ -749,33 +806,37 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Destino");
+
         javax.swing.GroupLayout panelRound11Layout = new javax.swing.GroupLayout(panelRound11);
         panelRound11.setLayout(panelRound11Layout);
         panelRound11Layout.setHorizontalGroup(
             panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound11Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addGroup(panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
         panelRound11Layout.setVerticalGroup(
             panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound11Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound11Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(boxDepartamentosD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(boxMunicipiosD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(txtDireccionDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
-
-        jLabel13.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Destino");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -783,25 +844,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(0, 248, Short.MAX_VALUE))
-                    .addComponent(panelRound11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelRound11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -872,12 +923,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblP2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         lblP2.setForeground(new java.awt.Color(255, 255, 255));
         lblP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblP2.setText("1lb - 10lb");
+        lblP2.setText("1 lb - 10 lb");
         lblP2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panelPeque.add(lblP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 190, -1));
 
-        sVGImages1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelPeque.add(sVGImages1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 70));
+        lblPequeSVG.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelPeque.add(lblPequeSVG, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 70, 70));
 
         panelEstandar.setBackground(new java.awt.Color(168, 149, 244));
         panelEstandar.setRoundBottomLeft(18);
@@ -916,8 +967,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             panelEstandarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEstandarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(radioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(radioEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblEstandar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelEstandarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -976,9 +1027,9 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(panelEspecialLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(radioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(lblEspecial)
-                .addContainerGap(453, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEspecialLayout.createSequentialGroup()
                     .addContainerGap(459, Short.MAX_VALUE)
@@ -1030,11 +1081,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblM2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         lblM2.setForeground(new java.awt.Color(255, 255, 255));
         lblM2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblM2.setText("11lb - 50lb");
+        lblM2.setText("11 lb - 50 lb");
         panelMediano.add(lblM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 190, -1));
 
-        sVGImages2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelMediano.add(sVGImages2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 70));
+        lblMedianoSVG.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelMediano.add(lblMedianoSVG, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 70, 70));
 
         panelGrande.setBackground(new java.awt.Color(34, 37, 47));
         panelGrande.setRoundBottomLeft(20);
@@ -1057,7 +1108,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblG2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         lblG2.setForeground(new java.awt.Color(255, 255, 255));
         lblG2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblG2.setText("+ 51 libras");
+        lblG2.setText("+ 51 lb");
         panelGrande.add(lblG2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 190, -1));
 
         RadioGrande.setOpaque(false);
@@ -1074,8 +1125,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         lblG3.setText("* 2");
         panelGrande.add(lblG3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, -1));
 
-        sVGImages3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelGrande.add(sVGImages3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 70));
+        lblGrandeSVG.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelGrande.add(lblGrandeSVG, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 70, 70));
 
         btnCotizar.setBorder(null);
         btnCotizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -1116,36 +1167,39 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGap(0, 15, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(19, 19, 19)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(panelEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(panelEstandar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                    .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(panelPeque, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(panelMediano, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(panelGrande, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(panelGrande, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5)
+                        .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1158,10 +1212,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(txtNumeroPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1172,11 +1226,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(panelEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
@@ -1192,8 +1246,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelRound5.setBackground(new java.awt.Color(28, 28, 36));
@@ -1205,7 +1259,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         panel2.setBackground(new java.awt.Color(34, 34, 43));
         panel2.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Compra");
 
@@ -1567,14 +1621,14 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1607,7 +1661,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelGrandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelGrandeMouseClicked
         // TODO add your handling code here:
-        activarFondo1(panelGrande, lblG1, lblG2, lblG3);
+        activarFondo1(panelGrande, lblG1, lblG2, lblG3, lblGrandeSVG,3);
         RadioGrande.setSelected(true);
         sizePaquete = "Grande";
     }//GEN-LAST:event_panelGrandeMouseClicked
@@ -1618,7 +1672,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelMedianoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMedianoMouseClicked
         // TODO add your handling code here:
-        activarFondo1(panelMediano, lblM1, lblM2, lblM3);
+        activarFondo1(panelMediano, lblM1, lblM2, lblM3, lblMedianoSVG,2);
         radioMediano.setSelected(true);
         sizePaquete = "Mediano";
     }//GEN-LAST:event_panelMedianoMouseClicked
@@ -1641,7 +1695,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelPequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPequeMouseClicked
         // TODO add your handling code here:
-        activarFondo1(panelPeque, lblP1, lblP2, lblP3);
+        activarFondo1(panelPeque, lblP1, lblP2, lblP3, lblPequeSVG,1);
         radioPeque.setSelected(true);
         sizePaquete = "Pequeño";
     }//GEN-LAST:event_panelPequeMouseClicked
@@ -1739,7 +1793,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
 
             if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File directorio = new File(guardarComo.getSelectedFile().toString()+".html");
+                File directorio = new File(guardarComo.getSelectedFile().toString() + ".html");
                 if (!directorio.isFile() && !directorio.isDirectory()) {
                     File input = new File("src\\htmls\\cotizacion.html");
                     Document doc = null;
@@ -1781,7 +1835,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                         Logger.getLogger(UsuarioCotizacionCompra.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "El nombre del archivo ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "El nombre del archivo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -1898,12 +1952,15 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private javax.swing.JLabel lblG1;
     private javax.swing.JLabel lblG2;
     private javax.swing.JLabel lblG3;
+    private javax.swing.JLabel lblGrandeSVG;
     private javax.swing.JLabel lblM1;
     private javax.swing.JLabel lblM2;
     private javax.swing.JLabel lblM3;
+    private javax.swing.JLabel lblMedianoSVG;
     private javax.swing.JLabel lblP1;
     private javax.swing.JLabel lblP2;
     private javax.swing.JLabel lblP3;
+    private javax.swing.JLabel lblPequeSVG;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo2;
     private javax.swing.JPanel panel2;
@@ -1926,9 +1983,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     private javax.swing.JRadioButton radioEstandar;
     private javax.swing.JRadioButton radioMediano;
     private javax.swing.JRadioButton radioPeque;
-    private Elementos.SVGImages sVGImages1;
-    private Elementos.SVGImages sVGImages2;
-    private Elementos.SVGImages sVGImages3;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTextField txtDireccionDestino;
     private javax.swing.JTextField txtDireccionOrigen;
