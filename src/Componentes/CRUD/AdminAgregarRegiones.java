@@ -305,7 +305,6 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         jScrollPane2.setBackground(new java.awt.Color(28, 170, 205));
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(28, 28, 36)));
 
-        tabla1.setBackground(new java.awt.Color(33, 37, 43));
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

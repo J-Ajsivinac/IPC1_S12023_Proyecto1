@@ -21,7 +21,7 @@ public class ctrlKioscos {
                     JOptionPane.showMessageDialog(null, "El Nombre de Kiosco ya existe");
                 }
 
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "El codigo del Kiosco ya existe");
             }
         }
@@ -54,6 +54,18 @@ public class ctrlKioscos {
             Kioscos k = kioscos.get(i);
             if (k.getCodigoKioco().equals(Codigo)) {
                 regresar = i;
+                break;
+            }
+        }
+        return regresar;
+    }
+
+    public static String getKioscoNombre(String Codigo) {
+        String regresar = "";
+        for (int i = 0; i < kioscos.size(); i++) {
+            Kioscos k = kioscos.get(i);
+            if (k.getCodigoKioco().equals(Codigo)) {
+                regresar = k.getNombreKiosco();
                 break;
             }
         }

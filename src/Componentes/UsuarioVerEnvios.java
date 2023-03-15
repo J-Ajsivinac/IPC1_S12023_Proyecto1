@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -46,7 +45,6 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                //System.out.println("Edit row : " + row);
                 String dato = String.valueOf(modelo.getValueAt(row, 0));
                 DescargarFactura(dato);
             }
@@ -72,7 +70,6 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
     public void test(Usuario user1) {
         this.user = user1;
-        //System.out.println("Estoy en el usuario Cotizacion");
     }
 
     public void DescargarFactura(String dato) {
@@ -84,7 +81,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
             guardarComo.setDialogTitle("Guardar Factura");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
-            System.out.print(e);
+            System.err.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File directorio = new File(guardarComo.getSelectedFile().toString()+".html");
@@ -158,7 +155,6 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
-        //System.out.println(guardarComo.getSelectedFile().getName());
     }
 
     public void descargarGuia(String dato) {
@@ -170,7 +166,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
             guardarComo.setDialogTitle("Guardar Guia");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
-            System.out.print(e);
+            System.err.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File directorio = new File(guardarComo.getSelectedFile().toString()+".html");

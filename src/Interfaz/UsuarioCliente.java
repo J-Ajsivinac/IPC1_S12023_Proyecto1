@@ -85,8 +85,9 @@ public class UsuarioCliente extends javax.swing.JFrame {
 
     public void setUsuario(Usuario u) {
         this.usuarioC = u;
-        lblNombreUsuario.setText(usuarioC.getNombre());
-        lblTipoC.setText(usuarioC.getRol());
+        //lblNombreUsuario.setText(usuarioC.getNombre());
+        //lblTipoC.setText(usuarioC.getRol());
+        actualizarMenu();
         usert.test(usuarioC);
         userDatos.test(usuarioC);
         userCotiz.test(usuarioC);
@@ -96,7 +97,14 @@ public class UsuarioCliente extends javax.swing.JFrame {
     public static void actualizarMenu() {
         Usuario us = ctrlUsuarios.getUsuarioIndice(login.posicionU);
         lblNombreUsuario.setText(us.getNombre());
-        lblTipoC.setText(us.getRol());
+        String[] rolC = us.getRol().split(",");
+        if (rolC.length > 1) {
+            String Kiosco1 = ctrlKioscos.getKioscoNombre(rolC[1]);
+            lblTipoC.setText(rolC[0] + ", " + Kiosco1);
+        }else{
+            lblTipoC.setText(rolC[0]);
+        }
+
     }
 
     public void hoverMenu(JPanel activar, int estado) {
@@ -197,8 +205,7 @@ public class UsuarioCliente extends javax.swing.JFrame {
             if (!activar) {
                 String rolCompleto = "Usuario Individual";
                 if (ctrlUsuarios.cambiarRol(rolCompleto, login.posicionU)) {
-                    JOptionPane.showMessageDialog(null, "Se Kiosco no existe, su rol actual es: Usuario individual");
-                    JOptionPane.showMessageDialog(null, "Si lo desea cambiar dirigase a Cuenta");
+                    JOptionPane.showMessageDialog(null, "Su Kiosco no existe, su rol actual es: Usuario individual\nSi lo desea cambiar dirigase a Cuenta");
                 }
             }
 

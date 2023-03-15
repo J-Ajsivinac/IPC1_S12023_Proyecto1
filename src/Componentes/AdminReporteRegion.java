@@ -104,6 +104,8 @@ public class AdminReporteRegion extends javax.swing.JPanel {
                 "No.", "Region", "Numero de Envios"
             }
         ));
+        tableA.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tableA.setRowHeight(40);
         jScrollPane2.setViewportView(tableA);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);

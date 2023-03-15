@@ -1,16 +1,9 @@
 package Componentes;
 
-import Administrador.Departamentos;
-import Administrador.Municipios;
-import Administrador.Regiones;
-import Administrador.ctrlDepartamentos;
-import Administrador.ctrlRegiones;
 import Componentes.CRUD.AdminAgregarDepMun;
 import Componentes.CRUD.AdminModificarDepMun;
 import java.awt.Color;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 

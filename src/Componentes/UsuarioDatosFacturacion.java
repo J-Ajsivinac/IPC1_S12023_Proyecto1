@@ -324,6 +324,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
             }
         });
         tabla1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tabla1.setRowHeight(40);
         jScrollPane2.setViewportView(tabla1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -567,6 +568,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         });
         tabla2.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tabla2.setRowHeight(65);
+        tabla2.setSelectionBackground(new java.awt.Color(98, 101, 128));
         jScrollPane3.setViewportView(tabla2);
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);

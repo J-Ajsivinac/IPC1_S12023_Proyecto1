@@ -36,6 +36,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     public UsuarioCuenta() {
         initComponents();
         this.setBounds(0, 0, 724, 520);
+        lblCorreo.setText("");
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(28);
 
@@ -165,7 +166,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
             archivos.setFileFilter(filtrado);
         } catch (Exception e) {
-            System.out.println("--" + e);
+            System.err.println(e);
         }
 
         int respuesta = archivos.showOpenDialog(this);
@@ -215,7 +216,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Fotografía cambiada con éxito");
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                System.err.println(e);
             }
         }
     }
@@ -324,7 +325,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
         if (rol == 2 && kioscoItem != null) {
             rolCompleto = "";
-            rolCompleto = "Kiosco," + kioscoItem.getNombreKiosco();
+            rolCompleto = "Kiosco," + kioscoItem.getCodigoKioco();
         }
         if (ctrlUsuarios.cambiarRol(rolCompleto, login.posicionU)) {
             cargarDatosU();
@@ -504,8 +505,6 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                         .addComponent(lblop4))
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addComponent(lblop1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -514,14 +513,17 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addComponent(txtContra)
                                 .addGap(29, 29, 29)))
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addGap(30, 30, 30))))
+                        .addGap(30, 30, 30))
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lblCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -560,6 +562,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         );
 
         panelRound2.setBackground(new java.awt.Color(28, 28, 36));
+        panelRound2.setMaximumSize(new java.awt.Dimension(646, 435));
+        panelRound2.setPreferredSize(new java.awt.Dimension(646, 435));
         panelRound2.setRoundBottomLeft(15);
         panelRound2.setRoundBottomRight(15);
         panelRound2.setRoundTopLeft(15);
@@ -680,19 +684,19 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                                         .addComponent(lblDpi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtDpi, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(boxNacionalidad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                        .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                        .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
                                     .addComponent(jLabel22))
                                 .addGap(35, 35, 35)
                                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtApellido)
                                     .addComponent(txtTelefono)
                                     .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                                     .addComponent(txtAlias)
                                     .addComponent(boxGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(panelRound2Layout.createSequentialGroup()
@@ -907,6 +911,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         buttonRound5.setText("Eliminar Cuenta");
         buttonRound5.setBorderColor(new java.awt.Color(62, 63, 72));
         buttonRound5.setColor(new java.awt.Color(47, 49, 53));
+        buttonRound5.setColorClick(new java.awt.Color(45, 42, 64));
         buttonRound5.setColorOver(new java.awt.Color(47, 44, 64));
         buttonRound5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         buttonRound5.setRadius(15);
@@ -926,9 +931,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(panelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addComponent(buttonRound5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -966,7 +971,10 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
     private void buttonRound4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound4ActionPerformed
         // TODO add your handling code here:
-        actualizarRol();
+        int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar su Rol?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (confirm == JOptionPane.YES_OPTION) {
+            actualizarRol();
+        }
     }//GEN-LAST:event_buttonRound4ActionPerformed
 
     private void buttonRound2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound2ActionPerformed

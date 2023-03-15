@@ -60,6 +60,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         boxKiosco.setVisible(false);
         setBordes();
+        
 
     }
 
@@ -115,7 +116,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
                 ///htmls/factura.html
                 originalImageIcon = new ImageIcon("src\\img\\usuario.png");
-                JOptionPane.showMessageDialog(null, "Error al cargar la imagen \n se cargara una imagen por defecto","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error al cargar la imagen \n se cargara una imagen por defecto", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
             // Obtener el tamaño original de la imagen
@@ -220,12 +221,16 @@ public class agregarUsuarios extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 14, 170, -1));
 
         panelRound1.setBackground(new java.awt.Color(28, 28, 36));
+        panelRound1.setMaximumSize(new java.awt.Dimension(770, 410));
         panelRound1.setRoundTopLeft(15);
         panelRound1.setRoundTopRight(15);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setMaximumSize(new java.awt.Dimension(750, 389));
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.GridLayout(1, 2));
 
+        jPanel4.setMaximumSize(new java.awt.Dimension(375, 362));
         jPanel4.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
@@ -455,6 +460,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4);
 
+        jPanel5.setMaximumSize(new java.awt.Dimension(375, 389));
         jPanel5.setOpaque(false);
 
         jLabel10.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
@@ -524,6 +530,9 @@ public class agregarUsuarios extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTelefonoKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyReleased(evt);
+            }
         });
 
         lblTelefono.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -592,9 +601,9 @@ public class agregarUsuarios extends javax.swing.JFrame {
                                     .addComponent(txtTelefono)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 90, Short.MAX_VALUE))
+                                        .addGap(0, 98, Short.MAX_VALUE))
                                     .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(14, 14, 14))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -634,26 +643,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jPanel3.add(jPanel5);
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
-            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)))
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
-            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                    .addContainerGap(15, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
+        panelRound1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, 750, 389));
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 770, 410));
 
@@ -829,7 +819,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
         Pattern vMayus = Pattern.compile("^(?=.*[A-Z])");
         Pattern vMinus = Pattern.compile("^(?=.*[a-z])");
         Pattern vNum = Pattern.compile("^(?=.*[0-9])");
-        Pattern vEspecial = Pattern.compile("^(?=.*[!#%&@*$_-])");
+        Pattern vEspecial = Pattern.compile("^(?=.*[!#%&@*$_*+/.,-])");
         Pattern[] exp = {vMayus, vMinus, vNum, vEspecial};
         JLabel[] labels = {lblop1, lblop2, lblop3, lblop4};
         for (int i = 0; i < exp.length; i++) {
@@ -874,15 +864,6 @@ public class agregarUsuarios extends javax.swing.JFrame {
             lblTelefono.setText("");
             txtTelefono.putClientProperty("Component.outlineWidth", 1);
             lblTelefono.putClientProperty("JComponent.outline", "correct");
-            if (txtTelefono.getText().toString().length() > 8) {
-                txtTelefono.putClientProperty("Component.outlineWidth", 1);
-                txtTelefono.putClientProperty("JComponent.outline", "error");
-                lblTelefono.setText("Solo numeros de 8 digitos");
-            } else {
-                lblTelefono.setText("");
-                txtTelefono.putClientProperty("Component.outlineWidth", 1);
-                txtTelefono.putClientProperty("JComponent.outline", "correct");
-            }
         }
     }//GEN-LAST:event_txtTelefonoKeyPressed
 
@@ -1056,6 +1037,21 @@ public class agregarUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         cargarImagen();
     }//GEN-LAST:event_buttonRound2ActionPerformed
+
+    private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
+        // TODO add your handling code here:
+        if (txtTelefono.isEditable()) {
+            if (txtTelefono.getText().length() > 8) {
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "error");
+                lblTelefono.setText("Solo numeros de 8 digitos");
+            } else {
+                lblTelefono.setText("");
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "correct");
+            }
+        }
+    }//GEN-LAST:event_txtTelefonoKeyReleased
     public void agregarUsuario() {
 
         Kioscos kioscoItem = (Kioscos) boxKiosco.getSelectedItem();
@@ -1082,6 +1078,12 @@ public class agregarUsuarios extends javax.swing.JFrame {
         String genero = boxGenero.getSelectedItem().toString();
         String alias = txtAlias.getText();
         String numero = txtTelefono.getText();
+
+        if (!correo.matches("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(null, "El correo ingresado no es válido");
+            return;
+        }
+
         if (!validarFecha) {
             JOptionPane.showMessageDialog(null, "La fecha no es válida");
             return;
@@ -1091,17 +1093,17 @@ public class agregarUsuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
             return;
         }
-        
-        if(!numero.matches("[0-9]*")){
+
+        if (!numero.matches("[0-9]*")) {
             JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
             return;
         }
-        
-        if(dpi.trim().isEmpty() || correo.trim().isEmpty() || nombre.trim().isEmpty() || apellido.trim().isEmpty() || fecha.trim().isEmpty() || alias.trim().isEmpty() || numero.trim().isEmpty()){
+
+        if (dpi.trim().isEmpty() || correo.trim().isEmpty() || nombre.trim().isEmpty() || apellido.trim().isEmpty() || fecha.trim().isEmpty() || alias.trim().isEmpty() || numero.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Tiene campos sin llenar correctamente");
             return;
         }
-        
+
         if (!correo.equals("") && !nombre.equals("") && !apellido.equals("") && !contra.equals("")
                 && !verificar.equals("") && !dpi.equals("") && !fecha.equals("")
                 && !nacionalidad.equals("") && !genero.equals("") && !genero.equals("") && !alias.equals("") && !numero.equals("")) {
@@ -1117,7 +1119,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
                     lblop2.setForeground(error);
                     lblop3.setForeground(error);
                     lblop4.setForeground(error);
-                    
+
                     lblCorreo.setText("");
                     JOptionPane.showMessageDialog(null, "Usuario Agregado");
                     limpiarTxt();

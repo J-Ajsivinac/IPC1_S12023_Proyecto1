@@ -47,7 +47,6 @@ public class ctrlUsuarios {
                 }
                 usuarios.add(new Usuario(codUsuario, correo, nombre, apellido, contrasena, dpi, fnacimiento,
                         genero, nacionalidad, alias, telefono, rol, foto));
-                System.out.println("password: " + contrasena + "usuario_" + correo + "id_ " + codUsuario);
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "La contraseña no cumple con los requisitos", "Error",
@@ -60,16 +59,9 @@ public class ctrlUsuarios {
     }
 
     public static boolean verificarPassword(String password) {
-        Pattern patron = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!#%&@*$_-])");
+        Pattern patron = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!#%&@*$_*+/.,-])");
         Matcher m = patron.matcher(password);
-        boolean c = m.find();
-        return c;
-    }
-
-    public static void imprimir() {
-        for (int i = 0; i < usuarios.size(); i++) {
-            System.out.println(usuarios.get(i).getCorreo());
-        }
+        return m.find();
     }
 
     public static Usuario getUsuarioID(String correo) {
@@ -88,7 +80,7 @@ public class ctrlUsuarios {
     public static int iniciarSesion(String correo, String password) {
         int regresar = 0;
         if (!(correo.equals("") && password.equals(""))) {
-            if (correo.equals("ipc1") && password.equals("2022")) {
+            if (correo.equals("ipc1_202200135@ipc1delivery.com") && password.equals("202200135")) {
                 //Administrador
                 //JOptionPane.showMessageDialog(null, "NICE"); 
                 regresar = 1;
@@ -302,15 +294,16 @@ public class ctrlUsuarios {
         Usuario u = usuarios.get(index);
 
         if (opcion == 1) {
+            if (u.getCorreo().equals(nuevoCorreo)) {
+                JOptionPane.showMessageDialog(null, "Los datos enviados son los mismos a los registrados");
+                return false;
+            }
             if (!verifiarUsuarios(nuevoCorreo)) {
-                if (u.getCorreo().equals(nuevoCorreo)) {
-                    JOptionPane.showMessageDialog(null, "Los datos enviados son los mismos a los registrados");
-                    return false;
-                }
                 usuarios.get(index).setCorreo(nuevoCorreo);
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Este correo ya esta registrado");
+                return false;
             }
 
         } else if (opcion == 2) {
@@ -328,7 +321,7 @@ public class ctrlUsuarios {
                 }
             } else {
                 if (verificarPassword(nuevaContra)) {
-                    if(u.getContrasena().equals(nuevaContra)){
+                    if (u.getContrasena().equals(nuevaContra)) {
                         JOptionPane.showMessageDialog(null, "Los datos enviados son los mismos a los registrados");
                         return false;
                     }
@@ -400,6 +393,8 @@ public class ctrlUsuarios {
         if (!usuarios.get(index).getRol().equals(RolCompleto)) {
             usuarios.get(index).setRol(RolCompleto);
             return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El rol ingresado es el mismo al Rol anterior");
         }
         return false;
     }

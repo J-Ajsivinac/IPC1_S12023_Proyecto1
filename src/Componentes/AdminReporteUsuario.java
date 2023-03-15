@@ -108,6 +108,8 @@ public class AdminReporteUsuario extends javax.swing.JPanel {
                 "No.", "Nombre Completo", "No. De paquetes"
             }
         ));
+        tableRU.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tableRU.setRowHeight(40);
         jScrollPane1.setViewportView(tableRU);
         if (tableRU.getColumnModel().getColumnCount() > 0) {
             tableRU.getColumnModel().getColumn(0).setPreferredWidth(10);

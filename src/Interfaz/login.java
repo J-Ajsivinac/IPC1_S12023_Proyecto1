@@ -2,18 +2,10 @@ package Interfaz;
 
 import Usuario.Usuario;
 import Usuario.ctrlUsuarios;
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import java.awt.Color;
-import java.awt.Insets;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
-import javax.swing.plaf.ColorUIResource;
 
 /**
  *

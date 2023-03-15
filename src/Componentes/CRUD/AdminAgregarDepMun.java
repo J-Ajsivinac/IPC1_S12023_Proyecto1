@@ -63,7 +63,6 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         
         if (depItem != null) {
             String codDepartamento = depItem.getIdRegion();
-            System.out.println(codDepartamento);
             ArrayList<Departamentos> departamento = ctrlDepartamentos.getAllDepartamentosByCod(codDepartamento);
             for (int i = 0; i < departamento.size(); i++) {
                 if (departamento.get(i) != null) {
@@ -72,10 +71,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
                     boxDepartamento.addItem(new Departamentos(departamento.get(i).getIdRegion(), codeD, nombreMuni, departamento.get(i).getPrecioEstandar(), departamento.get(i).getPrecioEspecial(), departamento.get(i).getCodDepartamento(), departamento.get(i).getNombreDepartamento()));
                 }
             }
-        }else{
-            System.out.println("xd");
         }
-
     }
 
     public void limpiarBoxes(JComboBox eliminar) {

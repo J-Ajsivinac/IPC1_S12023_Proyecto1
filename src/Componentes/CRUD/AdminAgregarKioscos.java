@@ -188,9 +188,7 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtCodKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(176, 176, 176)))))
+                                .addComponent(jLabel5))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -232,14 +230,13 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        tabla1.setBackground(new java.awt.Color(40, 41, 52));
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null}
             },
             new String [] {
-                "Región", "Código del Kiosco", "Código de la región"
+                "Región", "Código del Kiosco", "Nombre del Kiosco"
             }
         ) {
             boolean[] canEdit = new boolean [] {

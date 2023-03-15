@@ -284,7 +284,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     }
 
     public void saveCotizacion() {
-        System.out.println(boxMunicipios.getSelectedIndex());
         //^\d+$
         Pattern vCorreo = Pattern.compile("^\\d+$");
         Matcher m = vCorreo.matcher(txtNumeroPaquetes.getText());
@@ -310,7 +309,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             guardarCotizacion = new Guia(origen, destino, sizePaquete, numeroPaquetes);
             double multi1 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 0);
             double multi2 = ctrlRegiones.getMultiplicador(depItemD.getCodigo(), 1);
-            System.out.println(multi1 + "---" + multi2);
             double tamano1 = 0;
             if (radioPeque.isSelected()) {
                 tamano1 = 1.4;
@@ -355,7 +353,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
     public void cargarDatosFacturacion() {
         limpiarBoxes(boxFacturacion);
         ArrayList<DatosFacturacion> Data = ctrlUsuarios.getAllDFacturacion(user.getCorreo());
-        System.out.println(Data.size());
         for (int i = 0; i < Data.size(); i++) {
             if (Data.get(i) != null) {
                 String nombreC = Data.get(i).getNombreCompletoF();
@@ -441,7 +438,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             guardarComo.setDialogTitle("Guardar Factura");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
-            System.out.print(e);
+            System.err.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File directorio = new File(guardarComo.getSelectedFile().toString() + ".html");
@@ -515,7 +512,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Ese nombre ya existe en la carpeta", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        //System.out.println(guardarComo.getSelectedFile().getName());
     }
 
     public void descargarGuia() {
@@ -527,7 +523,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             guardarComo.setDialogTitle("Guardar Guia");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
-            System.out.print(e);
+            System.err.print(e);
         }
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File directorio = new File(guardarComo.getSelectedFile().toString() + ".html");
@@ -1786,7 +1782,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 guardarComo.setDialogTitle("Guardar archivo");
                 userSelection = guardarComo.showSaveDialog(null);
             } catch (Exception e) {
-                System.out.print(e);
+                System.err.print(e);
             }
 
             if (userSelection == JFileChooser.APPROVE_OPTION) {

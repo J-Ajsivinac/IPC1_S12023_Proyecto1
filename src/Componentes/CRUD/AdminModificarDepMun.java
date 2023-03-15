@@ -693,6 +693,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             }
         });
         tabla2.setRowHeight(65);
+        tabla2.setSelectionBackground(new java.awt.Color(98, 101, 128));
         jScrollPane3.setViewportView(tabla2);
 
         jLabel19.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N

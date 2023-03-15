@@ -22,7 +22,8 @@ public class Proyecto1 {
         }
         UIManager.put("defaultFont", new Font("Montserrat", 0, 13));
         UIManager.put("Component.arrowType", "chevron");
-        UIManager.put("Component.focusedBorderColor", new Color(85, 89, 146));
+        //85/89/146
+        UIManager.put("Component.focusedBorderColor", new Color(129, 135, 222));
         UIManager.put("TextComponent.arc", 10);
         UIManager.put("Component.arc", 10);
         UIManager.put("List.selectionArc", 10);

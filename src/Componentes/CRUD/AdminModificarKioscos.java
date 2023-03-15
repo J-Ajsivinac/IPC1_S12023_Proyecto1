@@ -364,6 +364,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
             }
         ));
         tabla1.setRowHeight(65);
+        tabla1.setSelectionBackground(new java.awt.Color(98, 101, 128));
         jScrollPane2.setViewportView(tabla1);
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N

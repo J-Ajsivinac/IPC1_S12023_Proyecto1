@@ -1,7 +1,6 @@
 package Interfaz;
 
 import Componentes.*;
-import Componentes.CRUD.AdminAgregarDepMun;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.util.function.Function;
