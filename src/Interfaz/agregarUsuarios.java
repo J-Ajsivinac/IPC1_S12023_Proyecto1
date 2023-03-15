@@ -3,8 +3,6 @@ package Interfaz;
 import Administrador.Kioscos;
 import Administrador.ctrlKioscos;
 import Usuario.ctrlUsuarios;
-import com.formdev.flatlaf.ui.FlatBorder;
-import com.formdev.flatlaf.ui.FlatLineBorder;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.MediaTracker;
@@ -17,7 +15,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -232,7 +229,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Correo Electronico");
+        jLabel2.setText("Correo Electronico *");
 
         txtCorreo.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
@@ -256,7 +253,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Nombre");
+        jLabel4.setText("Nombre *");
 
         txtNombre.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -271,7 +268,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Apellido");
+        jLabel5.setText("Apellido *");
 
         txtApellido.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtApellido.setForeground(new java.awt.Color(255, 255, 255));
@@ -286,11 +283,11 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Contraseña");
+        jLabel6.setText("Contraseña *");
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Valida Contraseña");
+        jLabel7.setText("Valida Contraseña *");
 
         lblop1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         lblop1.setForeground(new java.awt.Color(255, 75, 76));
@@ -310,7 +307,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Rol");
+        jLabel8.setText("Rol *");
 
         boxRol.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxRol.setForeground(new java.awt.Color(255, 255, 255));
@@ -461,7 +458,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Fecha de Nacimiento");
+        jLabel10.setText("Fecha de Nacimiento *");
 
         txtFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
@@ -495,7 +492,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Sobrenombre (Alias)");
+        jLabel13.setText("Sobrenombre (Alias) *");
 
         txtAlias.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtAlias.setForeground(new java.awt.Color(255, 255, 255));
@@ -510,7 +507,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Telefono");
+        jLabel14.setText("Telefono *");
 
         txtTelefono.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
@@ -533,7 +530,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("DPI");
+        jLabel16.setText("DPI *");
 
         txtDPI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDPI.setForeground(new java.awt.Color(255, 255, 255));
@@ -876,7 +873,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             lblTelefono.setText("");
             txtTelefono.putClientProperty("Component.outlineWidth", 1);
             lblTelefono.putClientProperty("JComponent.outline", "correct");
-            if (txtTelefono.getText().toString().length() >= 9) {
+            if (txtTelefono.getText().toString().length() > 8) {
                 txtTelefono.putClientProperty("Component.outlineWidth", 1);
                 txtTelefono.putClientProperty("JComponent.outline", "error");
                 lblTelefono.setText("Solo numeros de 8 digitos");
@@ -1093,7 +1090,17 @@ public class agregarUsuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
             return;
         }
-
+        
+        if(!numero.matches("[0-9]*")){
+            JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
+            return;
+        }
+        
+        if(dpi.trim().isEmpty() || correo.trim().isEmpty() || nombre.trim().isEmpty() || apellido.trim().isEmpty() || fecha.trim().isEmpty() || alias.trim().isEmpty() || numero.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Tiene campos sin llenar correctamente");
+            return;
+        }
+        
         if (!correo.equals("") && !nombre.equals("") && !apellido.equals("") && !contra.equals("")
                 && !verificar.equals("") && !dpi.equals("") && !fecha.equals("")
                 && !nacionalidad.equals("") && !genero.equals("") && !genero.equals("") && !alias.equals("") && !numero.equals("")) {
@@ -1120,7 +1127,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Tiene campos sin llenar");
+            JOptionPane.showMessageDialog(null, "Tiene campos sin llenar correctamente");
         }
 
     }

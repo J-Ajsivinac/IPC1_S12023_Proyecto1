@@ -28,6 +28,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     private static String[] nombrePaises = {"Alemania", "Argentina", "Belice", "Brasil", "Canadá", "China",
         "El Salvador", "España", "Guatemala", "Honduras", "Japón", "México", "Portugal", "Uruguay"};
     private UsuarioCliente cliente;
+    private boolean validarFecha = false;
 
     /**
      * Creates new form UsuarioCuenta
@@ -230,10 +231,15 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         String correo = txtCorreo.getText();
         String ncontra = String.valueOf(txtContra.getPassword());
         String vcontra = String.valueOf(txtAnterior.getPassword());
-
-        if (!(ncontra.equals("") && vcontra.equals("") || correo.equals(""))) {
+        
+        if(!correo.matches("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$")){
+            JOptionPane.showMessageDialog(null, "El correo ingresado no es válido");
+            return;
+        }
+        
+        if (!(ncontra.equals("") && vcontra.equals("") || correo.equals("")) && (!ncontra.trim().isEmpty() && !vcontra.trim().isEmpty())) {
             if (vcontra.equals(actualizado.getContrasena())) {
-                int confirm = JOptionPane.showConfirmDialog(null, "Esta seguro de Actualizar los datos?");
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar sus datos Generales?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (confirm == JOptionPane.YES_OPTION) {
                     if (ctrlUsuarios.cambiarDGeneral(login.posicionU, correo, ncontra, 2)) {
                         JOptionPane.showMessageDialog(null, "Datos Actualizados correctamente");
@@ -249,7 +255,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             }
         } else {
             if (!correo.equals("")) {
-                int confirm = JOptionPane.showConfirmDialog(null, "Esta seguro de Actualizar?");
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar sus datos Generales?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (confirm == JOptionPane.YES_OPTION) {
                     if (ctrlUsuarios.cambiarDGeneral(login.posicionU, correo, ncontra, 1)) {
                         JOptionPane.showMessageDialog(null, "Datos Actualizados correctamente");
@@ -273,6 +279,28 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         String genero = boxGenero.getSelectedItem().toString();
         String dpi = txtDpi.getText();
         String alias = txtAlias.getText();
+
+        String numero = txtTelefono.getText();
+        if (!fecha.matches("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$")) {
+            JOptionPane.showMessageDialog(null, "La fecha no es válida");
+            return;
+        }
+
+        if (numero.length() > 8) {
+            JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
+            return;
+        }
+
+        if (!numero.matches("[0-9]*")) {
+            JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
+            return;
+        }
+        
+        if(nombre.trim().isEmpty() || apellido.trim().isEmpty() || fecha.trim().isEmpty() || telefono.trim().isEmpty() || dpi.trim().isEmpty() || alias.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Existen campos sin llenar");
+            return;
+        }
+
         if (!(nombre.equals("") && apellido.equals("") && fecha.equals("") && telefono.equals("") && dpi.equals("") && alias.equals(""))) {
             String[] valores = {nombre, apellido, fecha, telefono, nacionalidad, genero, dpi, alias};
             if (ctrlUsuarios.cambiarPerfil(valores, login.posicionU)) {
@@ -348,17 +376,17 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         txtApellido = new javax.swing.JTextField();
         txtFecha = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
+        lblTelefono = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         boxNacionalidad = new javax.swing.JComboBox<>();
         boxGenero = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         txtDpi = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
+        lblDpi = new javax.swing.JLabel();
         buttonRound3 = new Elementos.ButtonRound();
         jLabel28 = new javax.swing.JLabel();
         txtAlias = new javax.swing.JTextField();
@@ -553,13 +581,18 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
         txtFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
+        txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFechaKeyReleased(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Fecha de Nacimiento");
 
-        jLabel17.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        lblFecha.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
@@ -567,9 +600,14 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
         txtTelefono.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyPressed(evt);
+            }
+        });
 
-        jLabel19.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        lblTelefono.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblTelefono.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel20.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -591,9 +629,14 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
         txtDpi.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtDpi.setForeground(new java.awt.Color(255, 255, 255));
+        txtDpi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDpiKeyPressed(evt);
+            }
+        });
 
-        jLabel23.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        lblDpi.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        lblDpi.setForeground(new java.awt.Color(255, 255, 255));
 
         buttonRound3.setBorder(null);
         buttonRound3.setForeground(new java.awt.Color(255, 255, 255));
@@ -630,12 +673,12 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                             .addGroup(panelRound2Layout.createSequentialGroup()
                                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblDpi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtDpi, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(boxNacionalidad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                                         .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                                         .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -644,7 +687,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtApellido)
                                     .addComponent(txtTelefono)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtAlias)
                                     .addComponent(boxGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -682,8 +725,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
@@ -701,7 +744,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
                     .addComponent(txtDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAlias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblDpi, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
@@ -932,10 +975,7 @@ public class UsuarioCuenta extends javax.swing.JPanel {
 
     private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
         // TODO add your handling code here:
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea actualizar sus datos Generales?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            actualizarGeneral();
-        }
+        actualizarGeneral();
     }//GEN-LAST:event_buttonRound1ActionPerformed
 
     private void buttonRound3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound3ActionPerformed
@@ -1007,14 +1047,83 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         if (!m.find()) {
             lblCorreo.setForeground(login.error);
             lblCorreo.setText("Ingrese un correo valido");
-            lblCorreo.putClientProperty("Component.outlineWidth", 1);
-            lblCorreo.putClientProperty("JComponent.outline", "error");
+            txtCorreo.putClientProperty("Component.outlineWidth", 1);
+            txtCorreo.putClientProperty("JComponent.outline", "error");
         } else {
             lblCorreo.setText("");
-            lblCorreo.putClientProperty("Component.outlineWidth", 1);
-            lblCorreo.putClientProperty("JComponent.outline", "correct");
+            txtCorreo.putClientProperty("Component.outlineWidth", 1);
+            txtCorreo.putClientProperty("JComponent.outline", "correct");
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
+
+    private void txtFechaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyReleased
+        // TODO add your handling code here:
+        Pattern vCorreo = Pattern.compile("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
+        Matcher m = vCorreo.matcher(txtFecha.getText());
+        if (!m.find()) {
+            lblFecha.setForeground(login.error);
+            lblFecha.setText("Ingrese una fecha valida");
+            validarFecha = false;
+            txtFecha.putClientProperty("Component.outlineWidth", 1);
+            txtFecha.putClientProperty("JComponent.outline", "error");
+        } else {
+            lblFecha.setForeground(Color.WHITE);
+            lblFecha.setText("dd/mm/yyyy");
+            txtFecha.putClientProperty("Component.outlineWidth", 1);
+            txtFecha.putClientProperty("JComponent.outline", "correct");
+            validarFecha = true;
+        }
+    }//GEN-LAST:event_txtFechaKeyReleased
+
+    private void txtTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtTelefono.setEditable(false);
+            lblTelefono.setText("Solo numeros");
+            txtTelefono.putClientProperty("Component.outlineWidth", 1);
+            txtTelefono.putClientProperty("JComponent.outline", "error");
+            if (txtTelefono.getText().toString().length() >= 9) {
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "error");
+                lblTelefono.setText("Solo numeros de 8 digitos");
+            } else {
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "correct");
+            }
+
+        } else {
+            txtTelefono.setEditable(true);
+            lblTelefono.setText("");
+            txtTelefono.putClientProperty("Component.outlineWidth", 1);
+            lblTelefono.putClientProperty("JComponent.outline", "correct");
+            if (txtTelefono.getText().toString().length() >= 9) {
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "error");
+                lblTelefono.setText("Solo numeros de 8 digitos");
+            } else {
+                lblTelefono.setText("");
+                txtTelefono.putClientProperty("Component.outlineWidth", 1);
+                txtTelefono.putClientProperty("JComponent.outline", "correct");
+            }
+        }
+    }//GEN-LAST:event_txtTelefonoKeyPressed
+
+    private void txtDpiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDpiKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txtDpi.setEditable(false);
+            txtDpi.putClientProperty("Component.outlineWidth", 1);
+            txtDpi.putClientProperty("JComponent.outline", "error");
+            lblDpi.setText("Solo numeros");
+        } else {
+            txtDpi.putClientProperty("Component.outlineWidth", 1);
+            txtDpi.putClientProperty("JComponent.outline", "correct");
+            txtDpi.setEditable(true);
+            lblDpi.setText("");
+        }
+    }//GEN-LAST:event_txtDpiKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1034,14 +1143,11 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1052,6 +1158,9 @@ public class UsuarioCuenta extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblDpi;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblimagen;
     private javax.swing.JLabel lblop1;
     private javax.swing.JLabel lblop2;

@@ -13,6 +13,12 @@ public class ctrlRegiones {
 
     public static boolean nuevaRegion(String codigo, String nombre, double precioEstandar, double precioEspecial) {
         if (!codigo.equals("") && !nombre.equals("") && precioEstandar > 0 && precioEspecial > 0) {
+
+            if (verficarNombreRegion(nombre)) {
+                JOptionPane.showMessageDialog(null, "Este Nombre de Región ya existe");
+                return false;
+            }
+
             String codRegion = "";
             while (true) {
                 codRegion = generarCodigos("R");
@@ -25,7 +31,7 @@ public class ctrlRegiones {
             if (!verificarCodigoRegion(codigo)) {
                 regiones.add(new Regiones(codRegion, codigo, nombre, precioE.doubleValue(), precioEspe.doubleValue()));
                 return true;
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "El codigo de Region ya existe");
             }
 
@@ -35,11 +41,21 @@ public class ctrlRegiones {
 
         return false;
     }
-    
-    public static boolean verficarIDRegion(String idR){
+
+    public static boolean verficarIDRegion(String idR) {
         for (int i = 0; i < regiones.size(); i++) {
             Regiones d = regiones.get(i);
             if (d.getIdRegion().equals(idR)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean verficarNombreRegion(String NombreR) {
+        for (int i = 0; i < regiones.size(); i++) {
+            Regiones d = regiones.get(i);
+            if (d.getNombre().equals(NombreR)) {
                 return true;
             }
         }
@@ -59,16 +75,21 @@ public class ctrlRegiones {
                     return true;
                 } else if (opcion == 3) {
                     if (!nuevoNombre.equals("")) {
-                        reg.setNombre(nuevoNombre);
-                        ctrlEnvios.cambiarDatosR(codigo, nuevoNombre);
-                        return true;
+                        if (verficarNombreRegion(nuevoNombre)) {
+                            JOptionPane.showMessageDialog(null, "El nombre de Región ya existe");
+                            return false;
+                        } else {
+                            ctrlEnvios.cambiarDatosR(codigo, nuevoNombre);
+                            reg.setNombre(nuevoNombre);
+                            return true;
+                        }
                     }
                 } else if (opcion == 4) {
                     if (!nuevoNombre.equals("")) {
                         if (!verificarCodigoRegion(nuevoNombre)) {
                             reg.setCodigo(nuevoNombre);
                             return true;
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(null, "El codigo ya ha sido ingresado");
                         }
 

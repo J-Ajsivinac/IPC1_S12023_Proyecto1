@@ -9,7 +9,6 @@ import Elementos.CutomTable.TableActionCellEditorEliminar;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
 import Elementos.ScrollBarCustom;
-import Interfaz.login;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -135,7 +134,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         Departamentos dep = (Departamentos) boxDepartamentosUpdate.getSelectedItem();
         String codDepartamento = "";
         String nNombre = "";
-        if (txtNuevoDepartamento.getText().toString().equals("")) {
+        if (txtNuevoDepartamento.getText().toString().equals("") || txtNuevoDepartamento.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese un nuevo Nombre");
             return;
         }
@@ -231,7 +230,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
         //Departamentos dep = (Departamentos) boxRegionMuni.getSelectedItem();
         Municipios mun = (Municipios) boxMuniUpdate.getSelectedItem();
         //String codDepartamento = dep.getCodDepartamento();
-        if (txtNuevoMunicipio.getText().toString().equals("")) {
+        if (txtNuevoMunicipio.getText().toString().equals("") || txtNuevoMunicipio.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese un nuevo Nombre");
             return;
         }
@@ -240,6 +239,7 @@ public class AdminModificarDepMun extends javax.swing.JPanel {
             String nNombre = txtNuevoMunicipio.getText();
             if (ctrlDepartamentos.modificarNombreMun(mun.getCodigoDepartamento().toString(), mun.getCodigoMunicipio().toString(), nNombre)) {
                 JOptionPane.showMessageDialog(null, "Nombre Actualizado");
+                cargarB();
                 txtNuevoMunicipio.setText("");
                 cargarMunicipios(boxMuniUpdate);
                 //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);

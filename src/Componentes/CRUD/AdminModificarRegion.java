@@ -168,7 +168,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
         }
 
         if (opciones == 1 || opciones == 2) {
-            if (!txtNuevoPrecio.getText().toString().equals("")) {
+            if (!txtNuevoPrecio.getText().toString().equals("") && !txtNuevoPrecio.getText().trim().isEmpty()) {
                 Pattern vPrecio = Pattern.compile("^[0-9]+\\.?[0-9]*$");
                 Matcher m = vPrecio.matcher(txtNuevoPrecio.getText());
                 if (m.find()) {
@@ -184,7 +184,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
                 return;
             }
         } else {
-            if (txtNuevoNombre.getText().toString().equals("")) {
+            if (txtNuevoNombre.getText().toString().equals("") || txtNuevoNombre.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Escriba el nuevo Nombre");
                 return;
             }
@@ -307,7 +307,7 @@ public class AdminModificarRegion extends javax.swing.JPanel {
 
         boxPrecio.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         boxPrecio.setForeground(new java.awt.Color(255, 255, 255));
-        boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial", "Nombre", "Codigo" }));
+        boxPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Precio Estandar", "Precio Especial", "Nombre" }));
         boxPrecio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 boxPrecioItemStateChanged(evt);

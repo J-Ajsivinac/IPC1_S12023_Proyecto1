@@ -68,8 +68,6 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
 
         table1.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
         table1.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
-        //table1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        //table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     public void test(Usuario user1) {
@@ -83,7 +81,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         JFileChooser guardarComo = new JFileChooser();
         int userSelection = 0;
         try {
-            guardarComo.setDialogTitle("Guardar archivo");
+            guardarComo.setDialogTitle("Guardar Factura");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
             System.out.print(e);
@@ -169,7 +167,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
         JFileChooser guardarComo = new JFileChooser();
         int userSelection = 0;
         try {
-            guardarComo.setDialogTitle("Guardar archivo");
+            guardarComo.setDialogTitle("Guardar Guia");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
             System.out.print(e);
@@ -308,7 +306,7 @@ public class UsuarioVerEnvios extends javax.swing.JPanel {
             }
         });
         table1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        table1.setRowHeight(92);
+        table1.setRowHeight(100);
         table1.setSelectionBackground(new java.awt.Color(98, 101, 128));
         jScrollPane2.setViewportView(table1);
         if (table1.getColumnModel().getColumnCount() > 0) {

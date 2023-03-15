@@ -81,7 +81,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         String direccionDF = txtDireccion.getText();
         String nitDF = txtNit.getText();
         String correoEnviar = user.getCorreo();
-        if (!(nombreDF.equals("") && direccionDF.equals("") && nitDF.equals("")) && user != null) {
+        if (!(nombreDF.equals("") && direccionDF.equals("") && nitDF.equals("")) && user != null && !nombreDF.trim().isEmpty() && !direccionDF.trim().isEmpty() && !nitDF.trim().isEmpty()) {
             if (ctrlUsuarios.agregarDatosFacturacion(correoEnviar, nombreDF, direccionDF, nitDF, login.posicionU)) {
                 cargarTablaNits();
                 listarNit();
@@ -146,7 +146,7 @@ public class UsuarioDatosFacturacion extends javax.swing.JPanel {
         int posT = boxCambiar.getSelectedIndex() + 1;
         DatosFacturacion nitItem = (DatosFacturacion) boxNit.getSelectedItem();
         String nuevoV = txtNuevoV.getText();
-        if (!nuevoV.equals("") && nitItem != null) {
+        if (!nuevoV.equals("") && nitItem != null && !nuevoV.trim().isEmpty()) {
             if (ctrlUsuarios.cambiarDatosF(login.posicionU, posT, posicion, nuevoV)) {
                 listarNit();
                 cargarTablaNitsEliminar();

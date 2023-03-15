@@ -37,14 +37,16 @@ public class Proyecto1 {
         UIManager.put("CheckBox.icon.selectedBackground", new Color(0, 0, 0, 0));
         UIManager.put("CheckBox.icon.checkmarkColor", new Color(200, 187, 250));
         UIManager.put("Table.background", new Color(50, 51, 64));
-        
+        //#6D6F8C  TextField.selectionBackground
+        UIManager.put("TextField.selectionBackground", new Color(109, 111, 140));
+        UIManager.put("PasswordField.selectionBackground", new Color(109, 111, 140));
         ctrlRegiones.nuevaRegion("M", "Metropolitana", 35.00, 25.00);
         ctrlRegiones.nuevaRegion("NT", "Norte", 68.50, 45.55);
         ctrlRegiones.nuevaRegion("NO", "Nororiente", 58.68, 35.48);
         ctrlRegiones.nuevaRegion("SO", "Suroriente", 38.68, 32.48);
         ctrlRegiones.nuevaRegion("SOC", "Suroccidente", 34.00, 29.00);
         ctrlRegiones.nuevaRegion("NOC", "Noroccidente", 44.50, 40.00);
-        ctrlUsuarios.nuevoUsuario("a", "???", "____", "Ji#0", "20222254512", "12/02/2002", "Femenino", "Guatemala", "Hola", 1234567890, "Usuario Empresarial", "C:\\Users\\mesoi\\Downloads\\HTML5_Badge_256.png");
+        ctrlUsuarios.nuevoUsuario("a", "???", "____", "Ji#0", "7777770777777", "12/02/2002", "Femenino", "Guatemala", "Hola", 20202020, "Usuario Empresarial", "C:\\Users\\mesoi\\Downloads\\HTML5_Badge_256.png");
         login l = new login();
         l.setVisible(true);
     }

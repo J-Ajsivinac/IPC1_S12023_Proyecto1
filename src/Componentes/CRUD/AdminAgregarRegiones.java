@@ -61,7 +61,8 @@ public class AdminAgregarRegiones extends javax.swing.JPanel {
         Matcher m = vPrecio.matcher(txtPrecioEst.getText());
         Matcher m1 = vPrecio.matcher(txtPrecioEspe.getText());
 
-        if (!txtCodigo.getText().toString().equals("") && !txtNombreR.getText().toString().equals("") && !txtPrecioEspe.getText().toString().equals("") && !txtPrecioEst.getText().toString().equals("")) {
+        if (!txtCodigo.getText().toString().equals("") && !txtNombreR.getText().toString().equals("") && !txtPrecioEspe.getText().toString().equals("") && !txtPrecioEst.getText().toString().equals("")
+                && !txtCodigo.getText().trim().isEmpty() && !txtNombreR.getText().trim().isEmpty() && !txtPrecioEspe.getText().trim().isEmpty() && !txtPrecioEst.getText().trim().isEmpty()) {
             if (!m.find()) {
                 JOptionPane.showMessageDialog(null, "El precio Estandar no es un precio valido");
                 return;

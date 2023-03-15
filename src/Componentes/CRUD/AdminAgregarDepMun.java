@@ -6,12 +6,9 @@ import Administrador.Regiones;
 import Administrador.ctrlDepartamentos;
 import Administrador.ctrlRegiones;
 import Elementos.ScrollBarCustom;
-import Interfaz.login;
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -93,7 +90,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         Regiones regItem = (Regiones) boxRegion.getSelectedItem();
 
         String nombreDepartament = txtNombreDepartamento.getText();
-        if (!(nombreDepartament.equals("")) && regItem != null) {
+        if (!(nombreDepartament.equals("")) && regItem != null && !nombreDepartament.trim().isEmpty()) {
             String codigo = regItem.getIdRegion();
             if (ctrlDepartamentos.nuevoDepartamento(codigo, nombreDepartament)) {
                 JOptionPane.showMessageDialog(null, "Departamento ingresado Correctamente");
@@ -112,7 +109,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         Regiones region = (Regiones) boxRegion1.getSelectedItem();
         String codigo = "";
         String nombreMuni = txtNombreMunicipio.getText();
-        if (!(nombreMuni.equals("")) && departa != null && region != null) {
+        if (!(nombreMuni.equals("")) && departa != null && region != null && !nombreMuni.trim().isEmpty()) {
             codigo = departa.getCodDepartamento();
             if (ctrlDepartamentos.agregarMunicipios(codigo, nombreMuni)) {
                 cargarTablaMunicipios();
@@ -219,6 +216,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         buttonRound1.setBorderColor(new java.awt.Color(123, 127, 239));
         buttonRound1.setColor(new java.awt.Color(123, 127, 239));
         buttonRound1.setColorClick(new java.awt.Color(121, 118, 236));
+        buttonRound1.setColorOver(new java.awt.Color(121, 147, 251));
         buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         buttonRound1.setRadius(15);
         buttonRound1.addActionListener(new java.awt.event.ActionListener() {
@@ -338,6 +336,7 @@ public class AdminAgregarDepMun extends javax.swing.JPanel {
         buttonRound2.setBorderColor(new java.awt.Color(123, 127, 239));
         buttonRound2.setColor(new java.awt.Color(123, 127, 239));
         buttonRound2.setColorClick(new java.awt.Color(121, 118, 236));
+        buttonRound2.setColorOver(new java.awt.Color(121, 147, 251));
         buttonRound2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         buttonRound2.setRadius(15);
         buttonRound2.addActionListener(new java.awt.event.ActionListener() {

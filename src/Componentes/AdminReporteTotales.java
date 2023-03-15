@@ -3,6 +3,8 @@ package Componentes;
 import Usuario.Envios;
 import Usuario.ctrlEnvios;
 import java.awt.Image;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -39,6 +41,8 @@ public class AdminReporteTotales extends javax.swing.JPanel {
         for (Envios envio : enviosGet) {
             totalPaqu += envio.getFactura().getTotal();
         }
+        BigDecimal bd = new BigDecimal(totalPaqu).setScale(2, RoundingMode.HALF_UP);
+        totalPaqu = bd.doubleValue();
         lblIngresosTotales.setText(totalPaqu + "");
 
     }

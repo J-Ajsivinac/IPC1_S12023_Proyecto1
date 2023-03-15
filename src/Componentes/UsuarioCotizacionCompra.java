@@ -135,7 +135,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         radioPeque.setVisible(false);
         radioContra.setVisible(false);
         radioCuenta.setVisible(false);
-        activarFondo1(panelPeque, lblP1, lblP2, lblP3, lblPequeSVG,1);
+        activarFondo1(panelPeque, lblP1, lblP2, lblP3, lblPequeSVG, 1);
         activarFondo2(panelEstandar, txtTotalEstandar, lblEstandar);
         activarFondo3(panelRound2, lblTitulo, lblDescripcion);
         txtNombreTarjeta.setText("");
@@ -193,8 +193,8 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             }
 
         });
-        
-         switch (op) {
+
+        switch (op) {
             case 1:
                 svgPeque.setColorFilter(activado);
                 imagen1.setIcon(svgPeque);
@@ -404,10 +404,11 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         String nombre = actual.getNombre() + " " + actual.getApellido();
 
         if (radioEstandar.isSelected()) {
-            areaDetalles.setText("Servicio Especial \n" + "Total: " + total1);
+
             precio = "Estandar";
 
             if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete(), facturaItem.getDireccionF())) {
+                areaDetalles.setText("Servicio Especial \n" + "Total: " + ctrlEnvios.verUltimoEnvios().getFactura().getTotal() + "\nCodigo del Paquete: " + ctrlEnvios.verUltimoEnvios().getGuia().getCodPaquete());
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 limpiarTxtCotizacion();
                 realizoEnvio = true;
@@ -416,9 +417,10 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 total2 = 0;
             }
         } else if (radioEspecial.isSelected()) {
-            areaDetalles.setText("Servicio Especial \n" + "Total: " + total2);
+
             precio = "Especial";
             if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total2, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete(), facturaItem.getDireccionF())) {
+                areaDetalles.setText("Servicio Especial \n" + "Total: " + ctrlEnvios.verUltimoEnvios().getFactura().getTotal() + "\nCodigo del Paquete: " + ctrlEnvios.verUltimoEnvios().getGuia().getCodPaquete());
                 limpiarTxtCotizacion();
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 realizoEnvio = true;
@@ -436,7 +438,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         JFileChooser guardarComo = new JFileChooser();
         int userSelection = 0;
         try {
-            guardarComo.setDialogTitle("Guardar archivo");
+            guardarComo.setDialogTitle("Guardar Factura");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
             System.out.print(e);
@@ -487,7 +489,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
                 dDestino.text(datosD[0] + "," + datosD[1]);
                 dDireccionDestino.text(datosD[2]);
-                dNumeroPaquetes.text(factura.getNit()+ "");
+                dNumeroPaquetes.text(factura.getNit() + "");
 
                 String[] dTipos = factura.getTipoPago().split(",");
                 dTipoPago.text(dTipos[0]);
@@ -522,7 +524,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         JFileChooser guardarComo = new JFileChooser();
         int userSelection = 0;
         try {
-            guardarComo.setDialogTitle("Guardar archivo");
+            guardarComo.setDialogTitle("Guardar Guia");
             userSelection = guardarComo.showSaveDialog(null);
         } catch (Exception e) {
             System.out.print(e);
@@ -753,15 +755,12 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(58, 58, 58))))
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtDireccionOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxMunicipios, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
+                .addGap(20, 20, 20))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1145,7 +1144,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("jLabel7");
 
         btnGuardarCotizacion.setBorder(null);
         btnGuardarCotizacion.setForeground(new java.awt.Color(96, 77, 182));
@@ -1170,7 +1168,6 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGap(0, 15, Short.MAX_VALUE))
@@ -1336,7 +1333,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
         btnDGuia.setText("Descargar Guía");
         btnDGuia.setBorderColor(new java.awt.Color(193, 231, 206));
         btnDGuia.setColor(new java.awt.Color(193, 231, 206));
-        btnDGuia.setColorClick(new java.awt.Color(131, 218, 160));
+        btnDGuia.setColorClick(new java.awt.Color(149, 222, 173));
         btnDGuia.setColorOver(new java.awt.Color(176, 220, 192));
         btnDGuia.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnDGuia.setRadius(15);
@@ -1661,7 +1658,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelGrandeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelGrandeMouseClicked
         // TODO add your handling code here:
-        activarFondo1(panelGrande, lblG1, lblG2, lblG3, lblGrandeSVG,3);
+        activarFondo1(panelGrande, lblG1, lblG2, lblG3, lblGrandeSVG, 3);
         RadioGrande.setSelected(true);
         sizePaquete = "Grande";
     }//GEN-LAST:event_panelGrandeMouseClicked
@@ -1672,7 +1669,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelMedianoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMedianoMouseClicked
         // TODO add your handling code here:
-        activarFondo1(panelMediano, lblM1, lblM2, lblM3, lblMedianoSVG,2);
+        activarFondo1(panelMediano, lblM1, lblM2, lblM3, lblMedianoSVG, 2);
         radioMediano.setSelected(true);
         sizePaquete = "Mediano";
     }//GEN-LAST:event_panelMedianoMouseClicked
@@ -1695,7 +1692,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
 
     private void panelPequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPequeMouseClicked
         // TODO add your handling code here:
-        activarFondo1(panelPeque, lblP1, lblP2, lblP3, lblPequeSVG,1);
+        activarFondo1(panelPeque, lblP1, lblP2, lblP3, lblPequeSVG, 1);
         radioPeque.setSelected(true);
         sizePaquete = "Pequeño";
     }//GEN-LAST:event_panelPequeMouseClicked

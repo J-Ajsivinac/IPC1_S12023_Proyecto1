@@ -26,6 +26,7 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
     private DefaultTableModel modelo;
     private DefaultTableModel modelo2;
     private boolean validarNum = false;
+    private boolean validarNum1 = false;
 
     /**
      * Creates new form UsuarioTarjeta
@@ -99,13 +100,16 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         String tarjetaNumero = txtNumero.getText();
         String tarjetaVs = txtFecha.getText();
 
-        if (!(tarjetaNombre.equals("") && tarjetaNumero.equals("") && tarjetaVs.equals("")) && user != null && validarFecha && validarNum) {
+        if (!(tarjetaNombre.equals("") && tarjetaNumero.equals("") && tarjetaVs.equals("")) && user != null && validarFecha && validarNum
+                && !tarjetaNombre.trim().isEmpty() && !tarjetaNumero.trim().isEmpty() && !tarjetaVs.trim().isEmpty()) {
             if (ctrlUsuarios.agregaTarjeta(correoEnviar, tarjetaNombre, tarjetaNumero, tarjetaVs, login.posicionU)) {
                 cargarTablaTarjeta();
                 listarTarjetas();
                 cargarTablaTarjetaEliminar();
                 cargarBoxOpcion();
                 JOptionPane.showMessageDialog(null, "Tarjeta ingresado Correctamente");
+                validarNum = false;
+                validarFecha = false;
                 limpiarTxt();
             }
 
@@ -166,7 +170,22 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
         int posT = boxCambiar.getSelectedIndex() + 1;
         Tarjeta tarItem = (Tarjeta) boxNumeroTarjeta.getSelectedItem();
         String nuevoV = txtNuevoV.getText();
-        if (!nuevoV.equals("") && tarItem != null) {
+
+        if (posT == 3) {
+            if (!nuevoV.matches("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$")) {
+                JOptionPane.showMessageDialog(null, "La fecha no es válida");
+                return;
+            }
+        }
+
+        if (posT == 2) {
+            if (!validarNum1) {
+                JOptionPane.showMessageDialog(null, "El número de tarjeta no es válido");
+                return;
+            }
+        }
+
+        if (!nuevoV.equals("") && tarItem != null && !nuevoV.trim().isEmpty()) {
             if (ctrlUsuarios.cambiarTarjetas(login.posicionU, posT, posicion, nuevoV)) {
                 listarTarjetas();
                 cargarTablaTarjetaEliminar();
@@ -683,17 +702,6 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
 
     private void txtNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyReleased
         // TODO add your handling code here:
-        //if (txtNumero.isEditable() == true) {
-           // if (txtNumero.getText().length() > 10) {
-             //   lblNumero.setText("");
-           //     validarNum = true;
-         //   } else {
-            //    lblNumero.setText("El numero no es válido");
-             //   validarNum = false;
-            //}
-     //   }
-
-
     }//GEN-LAST:event_txtNumeroKeyReleased
 
     private void txtNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyPressed
@@ -753,10 +761,24 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
             char c = evt.getKeyChar();
             if (Character.isLetter(c)) {
                 txtNuevoV.setEditable(false);
+                txtNuevoV.putClientProperty("Component.outlineWidth", 1);
+                txtNuevoV.putClientProperty("JComponent.outline", "error");
                 lblAdvertencia.setText("Solo numeros");
             } else {
                 txtNuevoV.setEditable(true);
-                lblAdvertencia.setText("");
+                txtNuevoV.putClientProperty("Component.outlineWidth", 1);
+                txtNuevoV.putClientProperty("JComponent.outline", "correct");
+                if (txtNuevoV.getText().length() > 10) {
+                    lblAdvertencia.setText("");
+                    validarNum1 = true;
+                    txtNuevoV.putClientProperty("Component.outlineWidth", 1);
+                    txtNuevoV.putClientProperty("JComponent.outline", "correct");
+                } else {
+                    lblAdvertencia.setText("El numero de tarjeta es muy pequeño");
+                    txtNuevoV.putClientProperty("Component.outlineWidth", 1);
+                    txtNuevoV.putClientProperty("JComponent.outline", "error");
+                    validarNum1 = false;
+                }
             }
         }
     }//GEN-LAST:event_txtNuevoVKeyPressed
@@ -779,6 +801,10 @@ public class UsuarioTarjeta extends javax.swing.JPanel {
                 txtNuevoV.putClientProperty("JComponent.outline", "correct");
                 //validarFecha = true;
             }
+        }
+
+        if ((boxCambiar.getSelectedIndex() + 1) == 2) {
+
         }
     }//GEN-LAST:event_txtNuevoVKeyReleased
 

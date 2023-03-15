@@ -70,7 +70,7 @@ public class PanelAction extends javax.swing.JPanel {
         cmdGuia.setText("Guía");
         cmdGuia.setBorderColor(new java.awt.Color(193, 231, 206));
         cmdGuia.setColor(new java.awt.Color(193, 231, 206));
-        cmdGuia.setColorClick(new java.awt.Color(131, 218, 160));
+        cmdGuia.setColorClick(new java.awt.Color(149, 222, 173));
         cmdGuia.setColorOver(new java.awt.Color(176, 220, 192));
         cmdGuia.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         cmdGuia.setRadius(10);

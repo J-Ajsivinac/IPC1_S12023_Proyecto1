@@ -1,5 +1,9 @@
 package Usuario;
 
+import Administrador.Regiones;
+import Administrador.ctrlRegiones;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,13 +24,16 @@ public class ctrlEnvios {
                     break;
                 }
             }
+ 
+            BigDecimal bd = new BigDecimal(totalEnvio).setScale(2, RoundingMode.HALF_UP);
+            totalEnvio = bd.doubleValue();
+            
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDateTime now = LocalDateTime.now();
             Factura facturaingresar = agregarFactura(codPaquete, dFacturacion, ori, destinatario, nit, tipoPago, numerPaquetes,
                     totalEnvio);
             Guia guiaIngresar = agregarGuia(codPaquete,dFacturacion, ori, destinatario, tipoServicio, tamaño, numerPaquetes, dtf.format(now), totalEnvio);
             envios.add(new Envios(id, Nombre, codRegion, codPaquete, tipoServicio, destinatario, totalEnvio, facturaingresar, guiaIngresar));
-            System.out.println(codPaquete);
             return true;
         }
         return false;
@@ -123,9 +130,11 @@ public class ctrlEnvios {
     }
     
     public static boolean cambiarDatosR(String nombreRegion, String nuevoDato) {
+        String nombre = ctrlRegiones.getRegionCodigo(nombreRegion).getNombre();
+        
         for (Envios envio : envios) {
-            if (envio.getCodRegion().equals(nombreRegion)) {
-                envio.setNombreUsuario(nuevoDato);
+            if (envio.getCodRegion().equals(nombre)) {
+                envio.setCodRegion(nuevoDato);
             }
         }
         return false;

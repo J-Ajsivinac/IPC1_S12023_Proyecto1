@@ -379,12 +379,12 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jLabel23" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="lblDpi" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="txtDpi" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="boxNacionalidad" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="txtNombre" alignment="0" pref="280" max="32767" attributes="0"/>
                                                   <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel17" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="lblFecha" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="txtFecha" alignment="0" pref="280" max="32767" attributes="0"/>
                                                   <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel16" alignment="0" max="32767" attributes="0"/>
@@ -395,7 +395,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="txtApellido" max="32767" attributes="0"/>
                                               <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jLabel19" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lblTelefono" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jLabel18" alignment="0" max="32767" attributes="0"/>
                                               <Component id="txtAlias" max="32767" attributes="0"/>
                                               <Component id="boxGenero" alignment="0" max="32767" attributes="0"/>
@@ -447,8 +447,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel19" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel17" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="lblTelefono" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="lblFecha" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -471,7 +471,7 @@
                               <Component id="txtAlias" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel23" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="lblDpi" min="-2" pref="23" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="buttonRound3" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -542,6 +542,9 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFechaKeyReleased"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
@@ -554,7 +557,7 @@
                     <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel17">
+                <Component class="javax.swing.JLabel" name="lblFecha">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Montserrat" size="13" style="0"/>
@@ -584,8 +587,11 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefonoKeyPressed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel19">
+                <Component class="javax.swing.JLabel" name="lblTelefono">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Montserrat" size="13" style="0"/>
@@ -669,8 +675,11 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDpiKeyPressed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel23">
+                <Component class="javax.swing.JLabel" name="lblDpi">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Montserrat" size="13" style="0"/>

@@ -258,7 +258,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Correo Electronico"/>
+                        <Property name="text" type="java.lang.String" value="Correo Electronico *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtCorreo">
@@ -297,7 +297,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Nombre"/>
+                        <Property name="text" type="java.lang.String" value="Nombre *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtNombre">
@@ -322,7 +322,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Apellido"/>
+                        <Property name="text" type="java.lang.String" value="Apellido *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtApellido">
@@ -347,7 +347,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+                        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -358,7 +358,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Valida Contrase&#xf1;a"/>
+                        <Property name="text" type="java.lang.String" value="Valida Contrase&#xf1;a *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblop1">
@@ -413,7 +413,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Rol"/>
+                        <Property name="text" type="java.lang.String" value="Rol *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="boxRol">
@@ -598,7 +598,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
+                        <Property name="text" type="java.lang.String" value="Fecha de Nacimiento *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtFecha">
@@ -678,7 +678,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Sobrenombre (Alias)"/>
+                        <Property name="text" type="java.lang.String" value="Sobrenombre (Alias) *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtAlias">
@@ -703,7 +703,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Telefono"/>
+                        <Property name="text" type="java.lang.String" value="Telefono *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtTelefono">
@@ -739,7 +739,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="DPI"/>
+                        <Property name="text" type="java.lang.String" value="DPI *"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtDPI">

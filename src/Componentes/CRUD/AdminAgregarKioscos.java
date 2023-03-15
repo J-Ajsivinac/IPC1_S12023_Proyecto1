@@ -46,7 +46,7 @@ public class AdminAgregarKioscos extends javax.swing.JPanel {
         Regiones regItem = (Regiones) boxRegion.getSelectedItem();
         String nombreKiosco = "";
         String codK = "";
-        if (!(txtCodKiosco.getText().toString().equals("") && txtNombreKiosco.getText().toString().equals("")) && regItem!= null) {
+        if (!(txtCodKiosco.getText().toString().equals("") && txtNombreKiosco.getText().toString().equals("")) && regItem!= null && !txtCodKiosco.getText().trim().isEmpty()  && !txtNombreKiosco.getText().trim().isEmpty()) {
             nombreKiosco = txtNombreKiosco.getText();
             codK = txtCodKiosco.getText();
             if (ctrlKioscos.nuevoKiosco(regItem.getIdRegion(), codK, nombreKiosco)) {

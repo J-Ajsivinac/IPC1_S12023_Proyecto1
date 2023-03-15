@@ -1,16 +1,12 @@
 package Componentes.CRUD;
 
-import Administrador.Departamentos;
 import Administrador.Kioscos;
 import Administrador.Regiones;
-import Administrador.ctrlDepartamentos;
 import Administrador.ctrlKioscos;
 import Administrador.ctrlRegiones;
 import Elementos.CutomTable.TableActionCellEditorEliminar;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
-import Interfaz.login;
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -115,7 +111,7 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
     public void actualizarKiosco() {
         Kioscos dep = (Kioscos) boxDepartamentosUpdate.getSelectedItem();
 
-        if (dep != null && boxDepartamentosUpdate != null && !txtNuevoNombre.getText().toString().equals("")) {
+        if (dep != null && boxDepartamentosUpdate != null && !txtNuevoNombre.getText().toString().equals("") && !txtNuevoNombre.getText().trim().isEmpty()) {
             String codDepartamento = dep.getCodigoKioco();
             String nNombre = txtNuevoNombre.getText();
             if (ctrlKioscos.modificarNombreKiosco(codDepartamento, nNombre)) {
@@ -123,8 +119,6 @@ public class AdminModificarKioscos extends javax.swing.JPanel {
                 cargarB();
                 txtNuevoNombre.setText("");
                 //cargarDepartamentos(boxDepartamentosUpdate, codDepartamento);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Faltan datos para poder Actualizar");

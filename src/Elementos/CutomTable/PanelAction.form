@@ -55,7 +55,7 @@
           <Color blue="ce" green="e7" red="c1" type="rgb"/>
         </Property>
         <Property name="colorClick" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="a0" green="da" red="83" type="rgb"/>
+          <Color blue="ad" green="de" red="95" type="rgb"/>
         </Property>
         <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="c0" green="dc" red="b0" type="rgb"/>
