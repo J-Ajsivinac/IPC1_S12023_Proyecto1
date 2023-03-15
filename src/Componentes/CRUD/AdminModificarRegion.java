@@ -2,15 +2,11 @@ package Componentes.CRUD;
 
 import Administrador.Regiones;
 import Administrador.ctrlRegiones;
-import Elementos.CutomTable.TableActionCellEditor;
 import Elementos.CutomTable.TableActionCellEditorEliminar;
-import Elementos.CutomTable.TableActionCellRender;
 import Elementos.CutomTable.TableActionCellRenderEliminar;
 import Elementos.CutomTable.TableActionEvent;
 import Interfaz.login;
 import java.awt.Color;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
