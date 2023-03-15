@@ -115,6 +115,7 @@ public class agregarUsuarios extends javax.swing.JFrame {
             if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
                 ///htmls/factura.html
                 originalImageIcon = new ImageIcon("src\\img\\usuario.png");
+                JOptionPane.showMessageDialog(null, "Error al cargar la imagen \n se cargara una imagen por defecto","Error", JOptionPane.ERROR_MESSAGE);
             }
 
             // Obtener el tamaño original de la imagen

@@ -175,7 +175,11 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             try {
                 ruta = archivos.getSelectedFile().getPath();
                 ImageIcon originalImageIcon = new ImageIcon(ruta);
-
+                if (originalImageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                    ///htmls/factura.html
+                    originalImageIcon = new ImageIcon("src\\img\\usuario.png");
+                    JOptionPane.showMessageDialog(null, "Error al cargar la imagen \n se actualizara a una imagen por defecto", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 // Obtener el tamaño original de la imagen
                 int originalImageWidth = originalImageIcon.getIconWidth();
                 int originalImageHeight = originalImageIcon.getIconHeight();
@@ -231,12 +235,12 @@ public class UsuarioCuenta extends javax.swing.JPanel {
         String correo = txtCorreo.getText();
         String ncontra = String.valueOf(txtContra.getPassword());
         String vcontra = String.valueOf(txtAnterior.getPassword());
-        
-        if(!correo.matches("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$")){
+
+        if (!correo.matches("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$")) {
             JOptionPane.showMessageDialog(null, "El correo ingresado no es válido");
             return;
         }
-        
+
         if (!(ncontra.equals("") && vcontra.equals("") || correo.equals("")) && (!ncontra.trim().isEmpty() && !vcontra.trim().isEmpty())) {
             if (vcontra.equals(actualizado.getContrasena())) {
                 int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar sus datos Generales?", "Confiramción", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -295,8 +299,8 @@ public class UsuarioCuenta extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El número telefónico no es válido");
             return;
         }
-        
-        if(nombre.trim().isEmpty() || apellido.trim().isEmpty() || fecha.trim().isEmpty() || telefono.trim().isEmpty() || dpi.trim().isEmpty() || alias.trim().isEmpty()){
+
+        if (nombre.trim().isEmpty() || apellido.trim().isEmpty() || fecha.trim().isEmpty() || telefono.trim().isEmpty() || dpi.trim().isEmpty() || alias.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Existen campos sin llenar");
             return;
         }
