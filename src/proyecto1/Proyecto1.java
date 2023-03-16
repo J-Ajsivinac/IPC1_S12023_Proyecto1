@@ -38,7 +38,6 @@ public class Proyecto1 {
         UIManager.put("CheckBox.icon.selectedBackground", new Color(0, 0, 0, 0));
         UIManager.put("CheckBox.icon.checkmarkColor", new Color(200, 187, 250));
         UIManager.put("Table.background", new Color(50, 51, 64));
-        //#6D6F8C  TextField.selectionBackground
         UIManager.put("TextField.selectionBackground", new Color(109, 111, 140));
         UIManager.put("PasswordField.selectionBackground", new Color(109, 111, 140));
         
