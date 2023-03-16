@@ -102,7 +102,15 @@ public class AdminReporteUsuario extends javax.swing.JPanel {
             new String [] {
                 "No.", "Nombre Completo", "No. De paquetes"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableRU.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tableRU.setRowHeight(40);
         jScrollPane1.setViewportView(tableRU);

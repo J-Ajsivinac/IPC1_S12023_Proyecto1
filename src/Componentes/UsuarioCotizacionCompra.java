@@ -405,7 +405,7 @@ public class UsuarioCotizacionCompra extends javax.swing.JPanel {
             precio = "Estandar";
 
             if (ctrlEnvios.agregarEnvio(login.credenciales.getIdUsuario(), nombre, origenDatos[3], precio, guardarCotizacion.getDestino(), total1, tPago, guardarCotizacion.getOrigen(), facturaItem.getNit(), guardarCotizacion.getNumeropaquetes(), guardarCotizacion.getTamanoPaquete(), facturaItem.getDireccionF())) {
-                areaDetalles.setText("Servicio Especial \n" + "Total: " + ctrlEnvios.verUltimoEnvios().getFactura().getTotal() + "\nCodigo del Paquete: " + ctrlEnvios.verUltimoEnvios().getGuia().getCodPaquete());
+                areaDetalles.setText("Servicio Estandar \n" + "Total: " + ctrlEnvios.verUltimoEnvios().getFactura().getTotal() + "\nCodigo del Paquete: " + ctrlEnvios.verUltimoEnvios().getGuia().getCodPaquete());
                 JOptionPane.showMessageDialog(null, "La compra ha sido registrada Exitosamente");
                 limpiarTxtCotizacion();
                 realizoEnvio = true;

@@ -103,7 +103,15 @@ public class AdminReporteRegion extends javax.swing.JPanel {
             new String [] {
                 "No.", "Region", "Numero de Envios"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableA.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tableA.setRowHeight(40);
         jScrollPane2.setViewportView(tableA);
